@@ -5,7 +5,6 @@ import pytest
 from pipeline.entities.errors import ValidationError
 from pipeline.entities.models import (
     Filing,
-    Firm,
     Partner,
     Post,
     Signal,
@@ -24,19 +23,6 @@ from pipeline.entities.value_objects import (
 
 def _ts() -> Timestamp:
     return Timestamp.from_iso("2024-01-01T00:00:00Z")
-
-
-class TestFirm:
-    def test_requires_edgar_aliases(self) -> None:
-        with pytest.raises(ValidationError):
-            Firm(
-                name=FirmName.SEQUOIA,
-                website=Url("https://sequoiacap.com"),
-                people_page_url=Url("https://sequoiacap.com/people"),
-                portfolio_page_url=Url("https://sequoiacap.com/companies"),
-                blog_url=None,
-                edgar_aliases=(),
-            )
 
 
 class TestPartner:
@@ -89,7 +75,6 @@ class TestFiling:
                 cik=Cik(1),
                 issuer_name="",
                 raise_amount=1000,
-                named_investors=("Sequoia Capital",),
                 filing_date=_ts(),
                 form_type="D",
                 accession_number="0000000000-00-000000",
@@ -102,7 +87,6 @@ class TestFiling:
                 cik=Cik(1),
                 issuer_name="Acme Inc",
                 raise_amount=-5,
-                named_investors=(),
                 filing_date=_ts(),
                 form_type="D",
                 accession_number="0000000000-00-000000",

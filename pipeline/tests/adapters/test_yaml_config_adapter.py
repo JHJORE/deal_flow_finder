@@ -32,13 +32,11 @@ firms:
     people_page_url: https://sequoiacap.com/people
     portfolio_page_url: https://sequoiacap.com/companies
     blog_url: https://sequoiacap.com/perspective
-    edgar_aliases: ["Sequoia Capital"]
 """,
     )
     firms = _repo(tmp_path).load_firms()
     assert len(firms) == 1
     assert firms[0].name is FirmName.SEQUOIA
-    assert firms[0].edgar_aliases == ("Sequoia Capital",)
 
 
 def test_load_watchlist_skips_invalid_entries(tmp_path: Path) -> None:

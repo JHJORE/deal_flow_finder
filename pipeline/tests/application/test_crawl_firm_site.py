@@ -13,7 +13,6 @@ def _firm() -> Firm:
         people_page_url=Url("https://sequoiacap.com/people"),
         portfolio_page_url=Url("https://sequoiacap.com/companies"),
         blog_url=Url("https://sequoiacap.com/perspective"),
-        edgar_aliases=("Sequoia Capital",),
     )
 
 

@@ -4,34 +4,25 @@
 #   1. A FirmName enum value in pipeline/core/value_objects.py
 #   2. A FirmExtractor implementation in pipeline/application/use_cases/firm_extractors/
 #   3. A new entry below
+#
+# Phase 2 (EDGAR Form D) is driven by the scraped partner roster in
+# data/firm_graph.json, not by per-firm aliases — every scraped GP is
+# queried as a "Director" on Form D Item 3.
 firms:
   - name: sequoia
     website: https://www.sequoiacap.com
     people_page_url: https://www.sequoiacap.com/people/
     portfolio_page_url: https://www.sequoiacap.com/our-companies/
     blog_url: https://www.sequoiacap.com/perspective/
-    edgar_aliases:
-      - "Sequoia Capital"
-      - "Sequoia Capital Operations"
-      - "Sequoia Capital Global Growth"
-      - "Sequoia Capital US"
 
   - name: a16z
     website: https://a16z.com
     people_page_url: https://a16z.com/team/
     portfolio_page_url: https://a16z.com/portfolio/
     blog_url: https://a16z.com/news-content/
-    edgar_aliases:
-      - "Andreessen Horowitz"
-      - "AH Capital Management"
-      - "a16z"
 
   - name: ycombinator
     website: https://www.ycombinator.com
     people_page_url: https://www.ycombinator.com/people
     portfolio_page_url: https://www.ycombinator.com/companies
     blog_url: https://www.ycombinator.com/blog
-    edgar_aliases:
-      - "Y Combinator"
-      - "YC Continuity"
-      - "Y Combinator Management"
