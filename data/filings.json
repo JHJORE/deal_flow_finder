@@ -1,0 +1,39 @@
+{
+  "disclosed": [
+    {
+      "cik": 1318605,
+      "issuer_name": "Stripe Inc.",
+      "raise_amount": 6500000000,
+      "named_investors": ["Sequoia Capital"],
+      "filing_date": "2026-04-30T00:00:00+00:00",
+      "form_type": "D",
+      "accession_number": "0001318605-26-000017",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000131860526000017/0001318605-26-000017-index.html",
+      "disclosed_in_portfolio": true
+    }
+  ],
+  "undisclosed": [
+    {
+      "cik": 2078531,
+      "issuer_name": "Anchor Compute Inc.",
+      "raise_amount": 18000000,
+      "named_investors": ["Andreessen Horowitz", "Marc Andreessen"],
+      "filing_date": "2026-05-05T00:00:00+00:00",
+      "form_type": "D",
+      "accession_number": "0002078531-26-000003",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2078531/000207853126000003/0002078531-26-000003-index.html",
+      "disclosed_in_portfolio": false
+    },
+    {
+      "cik": 2089912,
+      "issuer_name": "Vellum Labs Inc.",
+      "raise_amount": 4500000,
+      "named_investors": ["Y Combinator"],
+      "filing_date": "2026-05-08T00:00:00+00:00",
+      "form_type": "D",
+      "accession_number": "0002089912-26-000001",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2089912/000208991226000001/0002089912-26-000001-index.html",
+      "disclosed_in_portfolio": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Manual overrides for the X-handle discovery step.
+#
+# DiscoverHandles consults this file FIRST. When a partner or founder
+# discovered during the firm crawl has no X handle visible on the firm's
+# page, add their canonical name (case-insensitive) here mapped to their
+# handle. The next pipeline run will pick it up — no code changes needed.
+#
+# Example:
+#   overrides:
+#     "Roelof Botha": roelofbotha
+#     "Patrick Collison": patrickc
+
+overrides: {}

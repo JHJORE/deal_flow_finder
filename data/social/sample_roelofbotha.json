@@ -1,0 +1,25 @@
+{
+  "handle": "roelofbotha",
+  "snapshot": {
+    "handle": "roelofbotha",
+    "captured_at": "2026-05-21T07:00:00+00:00",
+    "follower_count": 218400,
+    "following_count": 612,
+    "post_count_30d": 9,
+    "post_count_prior_30d": 21
+  },
+  "posts": [
+    {
+      "id": "1789012345678901234",
+      "author_handle": "roelofbotha",
+      "text": "We're early in the curve where AI shifts from tools to colleagues. The implication for hiring is upside-down from received wisdom.",
+      "timestamp": "2026-05-18T16:42:00+00:00",
+      "url": "https://x.com/roelofbotha/status/1789012345678901234",
+      "like_count": 1284,
+      "reply_count": 71,
+      "repost_count": 162
+    }
+  ],
+  "likes": [],
+  "replies": []
+}
