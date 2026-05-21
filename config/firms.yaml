@@ -1,0 +1,37 @@
+# Firms tracked by the LAUNCH pipeline.
+#
+# Adding a firm requires:
+#   1. A FirmName enum value in pipeline/core/value_objects.py
+#   2. A FirmExtractor implementation in pipeline/application/use_cases/firm_extractors/
+#   3. A new entry below
+firms:
+  - name: sequoia
+    website: https://www.sequoiacap.com
+    people_page_url: https://www.sequoiacap.com/people/
+    portfolio_page_url: https://www.sequoiacap.com/our-companies/
+    blog_url: https://www.sequoiacap.com/perspective/
+    edgar_aliases:
+      - "Sequoia Capital"
+      - "Sequoia Capital Operations"
+      - "Sequoia Capital Global Growth"
+      - "Sequoia Capital US"
+
+  - name: a16z
+    website: https://a16z.com
+    people_page_url: https://a16z.com/team/
+    portfolio_page_url: https://a16z.com/portfolio/
+    blog_url: https://a16z.com/news-content/
+    edgar_aliases:
+      - "Andreessen Horowitz"
+      - "AH Capital Management"
+      - "a16z"
+
+  - name: ycombinator
+    website: https://www.ycombinator.com
+    people_page_url: https://www.ycombinator.com/people
+    portfolio_page_url: https://www.ycombinator.com/companies
+    blog_url: https://www.ycombinator.com/blog
+    edgar_aliases:
+      - "Y Combinator"
+      - "YC Continuity"
+      - "Y Combinator Management"

@@ -1,0 +1,77 @@
+[project]
+name = "deal_flow_finder"
+version = "0.1.0"
+description = "LAUNCH deal-flow intelligence pipeline — discovery signals from Sequoia, a16z, YC"
+requires-python = ">=3.11,<3.13"
+# Tested on 3.11 (spec) and 3.12 (local dev). Pre-3.13 by choice — pydantic 2.9
+# pins keep us off 3.13 until the ecosystem catches up.
+authors = [{ name = "LAUNCH" }]
+
+dependencies = [
+    "firecrawl-py==1.6.4",
+    "httpx==0.27.2",
+    "anthropic==0.39.0",
+    "fastapi==0.115.4",
+    "uvicorn[standard]==0.32.0",
+    "python-dotenv==1.0.1",
+    "pyyaml==6.0.2",
+    "typer==0.12.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.3",
+    "pytest-asyncio==0.24.0",
+    "respx==0.21.1",
+    "mypy==1.13.0",
+    "ruff==0.7.2",
+    "black==24.10.0",
+    "pre-commit==4.0.1",
+    "types-PyYAML==6.0.12.20240917",
+]
+
+[project.scripts]
+deal-flow = "pipeline.main:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pipeline*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "RET", "RUF"]
+ignore = ["B008"]  # typer uses Depends-style defaults
+
+[tool.ruff.lint.per-file-ignores]
+"pipeline/tests/**" = ["N802"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_unimported = true
+# Adapters convert untyped third-party responses; the rest of the codebase stays Any-free.
+disallow_any_explicit = false
+files = ["pipeline"]
+
+[[tool.mypy.overrides]]
+module = ["firecrawl.*", "respx.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["pipeline/tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = ["error"]

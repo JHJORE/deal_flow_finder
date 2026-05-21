@@ -1,0 +1,110 @@
+{
+  "partners": [
+    {
+      "id": "p_001",
+      "name": "Roelof Botha",
+      "firm": "sequoia",
+      "role": "Senior Steward",
+      "x_handle": "roelofbotha",
+      "linkedin_url": "https://www.linkedin.com/in/roelofbotha/",
+      "blog_url": null,
+      "bio": "Sample fixture entry — replace with real-run output."
+    },
+    {
+      "id": "p_002",
+      "name": "Alfred Lin",
+      "firm": "sequoia",
+      "role": "Partner",
+      "x_handle": "Alfred_Lin",
+      "linkedin_url": "https://www.linkedin.com/in/alfredlin/",
+      "blog_url": null,
+      "bio": "Sample fixture entry — replace with real-run output."
+    },
+    {
+      "id": "p_003",
+      "name": "Marc Andreessen",
+      "firm": "a16z",
+      "role": "General Partner",
+      "x_handle": "pmarca",
+      "linkedin_url": "https://www.linkedin.com/in/mandreessen/",
+      "blog_url": null,
+      "bio": "Sample fixture entry — replace with real-run output."
+    },
+    {
+      "id": "p_004",
+      "name": "Chris Dixon",
+      "firm": "a16z",
+      "role": "General Partner",
+      "x_handle": "cdixon",
+      "linkedin_url": "https://www.linkedin.com/in/cdixon/",
+      "blog_url": "https://cdixon.org/",
+      "bio": "Sample fixture entry — replace with real-run output."
+    },
+    {
+      "id": "p_005",
+      "name": "Garry Tan",
+      "firm": "ycombinator",
+      "role": "President & CEO",
+      "x_handle": "garrytan",
+      "linkedin_url": "https://www.linkedin.com/in/garrytan/",
+      "blog_url": null,
+      "bio": "Sample fixture entry — replace with real-run output."
+    }
+  ],
+  "companies": [
+    {
+      "id": "c_001",
+      "name": "Stripe",
+      "website": "https://stripe.com",
+      "sector": "payments",
+      "stage": "growth",
+      "invested_by": ["sequoia"],
+      "founder_ids": ["f_001"],
+      "description": "Sample fixture entry.",
+      "linkedin_company_url": "https://www.linkedin.com/company/stripe/"
+    },
+    {
+      "id": "c_002",
+      "name": "Ramp",
+      "website": "https://ramp.com",
+      "sector": "fintech",
+      "stage": "series_b",
+      "invested_by": ["sequoia"],
+      "founder_ids": [],
+      "description": "Sample fixture entry.",
+      "linkedin_company_url": "https://www.linkedin.com/company/ramp/"
+    },
+    {
+      "id": "c_003",
+      "name": "Anthropic",
+      "website": "https://anthropic.com",
+      "sector": "ai",
+      "stage": "growth",
+      "invested_by": ["a16z"],
+      "founder_ids": [],
+      "description": "Sample fixture entry.",
+      "linkedin_company_url": "https://www.linkedin.com/company/anthropicresearch/"
+    },
+    {
+      "id": "c_004",
+      "name": "Cursor",
+      "website": "https://cursor.sh",
+      "sector": "developer tools",
+      "stage": "series_a",
+      "invested_by": ["a16z", "ycombinator"],
+      "founder_ids": [],
+      "description": "Sample fixture entry.",
+      "linkedin_company_url": null
+    }
+  ],
+  "blog_posts": [
+    {
+      "id": "b_001",
+      "author_partner_id": "p_004",
+      "title": "The Year Ahead in Crypto",
+      "body": "",
+      "published_at": "2026-04-12T00:00:00+00:00",
+      "source_url": "https://cdixon.org/the-year-ahead-in-crypto"
+    }
+  ]
+}
