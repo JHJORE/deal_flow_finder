@@ -82,10 +82,20 @@ class FakeLinkedInFetcher:
 
 @dataclass
 class FakeFilingFetcher:
-    filings_by_alias: dict[str, list[Filing]] = field(default_factory=dict)
+    """Looks up filings by (first_name, last_name) tuple.
 
-    def search_form_d(self, investor_alias: str, since: Timestamp) -> list[Filing]:
-        return list(self.filings_by_alias.get(investor_alias, []))
+    Also records every (first, last) called so tests can assert the
+    name-split policy (e.g. "Mary L. Meeker" → ("Mary", "Meeker")).
+    """
+
+    filings_by_name: dict[tuple[str, str], list[Filing]] = field(default_factory=dict)
+    calls: list[tuple[str, str]] = field(default_factory=list)
+
+    def search_form_d(
+        self, first_name: str, last_name: str, since: Timestamp
+    ) -> list[Filing]:
+        self.calls.append((first_name, last_name))
+        return list(self.filings_by_name.get((first_name, last_name), []))
 
 
 @dataclass

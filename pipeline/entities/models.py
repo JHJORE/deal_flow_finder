@@ -46,11 +46,6 @@ class Firm:
     people_page_url: Url
     portfolio_page_url: Url
     blog_url: Url | None
-    edgar_aliases: tuple[str, ...]
-
-    def __post_init__(self) -> None:
-        if not self.edgar_aliases:
-            raise ValidationError(f"Firm {self.name} must have at least one EDGAR alias")
 
 
 @dataclass(frozen=True, slots=True)
@@ -210,11 +205,12 @@ class Filing:
     cik: Cik
     issuer_name: str
     raise_amount: int | None
-    named_investors: tuple[str, ...]
     filing_date: Timestamp
     form_type: str
     accession_number: str
     source_url: Url
+    date_of_first_sale: Timestamp | None = None
+    executive_officers: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.issuer_name.strip():

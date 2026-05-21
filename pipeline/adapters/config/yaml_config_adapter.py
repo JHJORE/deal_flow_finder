@@ -50,7 +50,6 @@ class YamlConfigRepository:
                     people_page_url=Url(entry["people_page_url"]),
                     portfolio_page_url=Url(entry["portfolio_page_url"]),
                     blog_url=Url(entry["blog_url"]) if entry.get("blog_url") else None,
-                    edgar_aliases=tuple(entry.get("edgar_aliases") or ()),
                 )
             )
         return firms

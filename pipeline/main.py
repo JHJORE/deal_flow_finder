@@ -39,11 +39,12 @@ from pipeline.application.use_cases.reconcile_portfolio_with_filings import (
     ReconcilePortfolioWithFilings,
 )
 from pipeline.entities.errors import ValidationError
+from pipeline.application.use_cases.query_edgar_filings import PartnerFilingHit
 from pipeline.entities.models import (
     BlogPost,
     Company,
-    Filing,
     Firm,
+    Founder,
     Partner,
     WatchlistEntry,
 )
@@ -149,18 +150,18 @@ def run_phase_2(container: Container) -> dict[str, Any]:
     query = QueryEdgarFilings(filings=fetcher)
     reconciliation = ReconcilePortfolioWithFilings()
 
-    aliases: list[str] = []
-    for firm in container.firms:
-        aliases.extend(firm.edgar_aliases)
-    filings = query.execute(aliases)
-
     graph = container.repo.load("firm_graph") or {}
-    companies = _hydrate_companies(graph.get("companies", []) if isinstance(graph, dict) else [])
-    result = reconciliation.execute(filings, companies)
+    graph_dict = graph if isinstance(graph, dict) else {}
+    partners = _hydrate_partners(graph_dict.get("partners", []))
+    companies = _hydrate_companies(graph_dict.get("companies", []))
+    founders = _hydrate_founders(graph_dict.get("founders", []))
+
+    hits = query.execute(partners)
+    result = reconciliation.execute(hits, companies, founders)
 
     payload = {
-        "disclosed": [_serialise_filing(f, disclosed=True) for f in result.disclosed],
-        "undisclosed": [_serialise_filing(f, disclosed=False) for f in result.undisclosed],
+        "disclosed": [_serialise_hit(h, disclosed=True) for h in result.disclosed],
+        "undisclosed": [_serialise_hit(h, disclosed=False) for h in result.undisclosed],
     }
     container.repo.save("filings", payload)
     return {"disclosed": len(result.disclosed), "undisclosed": len(result.undisclosed)}
@@ -241,17 +242,26 @@ def _serialise_blog_post(b: BlogPost) -> dict[str, Any]:
     }
 
 
-def _serialise_filing(f: Filing, *, disclosed: bool) -> dict[str, Any]:
+def _serialise_hit(hit: PartnerFilingHit, *, disclosed: bool) -> dict[str, Any]:
+    f = hit.filing
     return {
         "cik": f.cik.value,
         "issuer_name": f.issuer_name,
         "raise_amount": f.raise_amount,
-        "named_investors": list(f.named_investors),
         "filing_date": f.filing_date.iso(),
+        "date_of_first_sale": (
+            f.date_of_first_sale.iso() if f.date_of_first_sale is not None else None
+        ),
+        "executive_officers": list(f.executive_officers),
         "form_type": f.form_type,
         "accession_number": f.accession_number,
         "source_url": f.source_url.value,
         "disclosed_in_portfolio": disclosed,
+        "surfaced_by_partner": {
+            "id": hit.partner.id,
+            "name": hit.partner.name,
+            "firm": hit.partner.firm.value,
+        },
     }
 
 
@@ -302,6 +312,30 @@ def _hydrate_companies(items: list[Any]) -> list[Company]:
                         Url(raw["linkedin_company_url"])
                         if raw.get("linkedin_company_url")
                         else None
+                    ),
+                )
+            )
+        except (KeyError, ValueError, ValidationError):
+            continue
+    return out
+
+
+def _hydrate_founders(items: list[Any]) -> list[Founder]:
+    out: list[Founder] = []
+    for raw in items:
+        if not isinstance(raw, dict):
+            continue
+        try:
+            out.append(
+                Founder(
+                    id=str(raw["id"]),
+                    name=str(raw["name"]),
+                    x_handle=Handle(raw["x_handle"]) if raw.get("x_handle") else None,
+                    linkedin_url=Url(raw["linkedin_url"]) if raw.get("linkedin_url") else None,
+                    company_id=str(raw["company_id"]) if raw.get("company_id") else None,
+                    role=str(raw.get("role", "")),
+                    prior_employer=(
+                        str(raw["prior_employer"]) if raw.get("prior_employer") else None
                     ),
                 )
             )
