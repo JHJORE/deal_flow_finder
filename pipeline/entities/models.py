@@ -57,6 +57,7 @@ class Partner:
     linkedin_url: Url | None
     blog_url: Url | None
     bio: str
+    team: str = ""
 
     def __post_init__(self) -> None:
         if not self.name.strip():
