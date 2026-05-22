@@ -1,51 +1,29 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
 *.egg-info/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
 .venv/
 venv/
-build/
-dist/
-
-# Env
-.env
-.env.local
-
-# Firecrawl raw output cache (verify_a16z.py and friends)
-.firecrawl/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 
 # Node / Next.js
 node_modules/
 .next/
 out/
-.turbo/
 *.tsbuildinfo
+next-env.d.ts
 
-# IDE
+# Env
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# OS / editors
+.DS_Store
 .idea/
 .vscode/
-.DS_Store
-
-# Data — sample files are committed explicitly below.
-data/*
-!data/.gitkeep
-!data/digest.json
-!data/firm_graph.json
-!data/filings.json
-!data/social/
-!data/linkedin/
-!data/content/
-data/social/*
-data/linkedin/*
-data/content/*
-data/snapshots/*
-!data/social/.gitkeep
-!data/linkedin/.gitkeep
-!data/content/.gitkeep
-!data/social/sample_*.json
-!data/linkedin/sample_*.json
-!data/content/sample_*.md
