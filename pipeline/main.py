@@ -23,25 +23,23 @@ from pipeline.adapters.filings.edgar_adapter import EdgarFilingFetcher
 from pipeline.adapters.linkedin.proxycurl_adapter import ProxycurlLinkedInFetcher
 from pipeline.adapters.social.twitter_api_io_adapter import TwitterApiIoSocialFetcher
 from pipeline.adapters.storage.json_repository import JsonFileRepository
-from pipeline.adapters.web.firecrawl_adapter import FirecrawlWebFetcher
 from pipeline.application.ports.config import ConfigRepository
-from pipeline.application.use_cases.collect_blog_content import CollectBlogContent
 from pipeline.application.use_cases.collect_linkedin_profiles import (
     CollectLinkedInProfiles,
 )
 from pipeline.application.use_cases.collect_social_activity import (
     CollectSocialActivity,
 )
-from pipeline.application.use_cases.crawl_firm_site import CrawlFirmSite
 from pipeline.application.use_cases.discover_handles import DiscoverHandles
-from pipeline.application.use_cases.query_edgar_filings import QueryEdgarFilings
+from pipeline.application.use_cases.query_edgar_filings import (
+    PartnerFilingHit,
+    QueryEdgarFilings,
+)
 from pipeline.application.use_cases.reconcile_portfolio_with_filings import (
     ReconcilePortfolioWithFilings,
 )
 from pipeline.entities.errors import ValidationError
-from pipeline.application.use_cases.query_edgar_filings import PartnerFilingHit
 from pipeline.entities.models import (
-    BlogPost,
     Company,
     Firm,
     Founder,
@@ -88,12 +86,6 @@ def build_container() -> Container:
     )
 
 
-def _build_web_fetcher() -> FirecrawlWebFetcher:
-    from pipeline.frameworks.firecrawl_client import build_firecrawl_client
-
-    return FirecrawlWebFetcher(build_firecrawl_client())
-
-
 def _build_social_fetcher() -> TwitterApiIoSocialFetcher:
     from pipeline.frameworks.twitter_api_io_client import build_twitter_api_io_client
 
@@ -115,33 +107,6 @@ def _build_filing_fetcher() -> EdgarFilingFetcher:
 # --------------------------------------------------------------------------- #
 # Phase runners (importable from scripts/ as well)
 # --------------------------------------------------------------------------- #
-
-
-def run_phase_1(container: Container) -> dict[str, Any]:
-    """Crawl every firm and persist the merged firm graph."""
-    web = _build_web_fetcher()
-    use_case = CrawlFirmSite(web=web)
-    all_partners: list[Partner] = []
-    all_companies: list[Company] = []
-    all_blog_posts: list[BlogPost] = []
-    for firm in container.firms:
-        logger.info("Phase 1: crawling %s", firm.name.value)
-        subgraph = use_case.execute(firm)
-        all_partners.extend(subgraph.partners)
-        all_companies.extend(subgraph.companies)
-        all_blog_posts.extend(subgraph.blog_posts)
-
-    payload = {
-        "partners": [_serialise_partner(p) for p in all_partners],
-        "companies": [_serialise_company(c) for c in all_companies],
-        "blog_posts": [_serialise_blog_post(b) for b in all_blog_posts],
-    }
-    container.repo.save("firm_graph", payload)
-    return {
-        "partners": len(all_partners),
-        "companies": len(all_companies),
-        "blog_posts": len(all_blog_posts),
-    }
 
 
 def run_phase_2(container: Container) -> dict[str, Any]:
@@ -180,21 +145,14 @@ def run_phase_3(container: Container) -> dict[str, Any]:
 
     social = CollectSocialActivity(social=_build_social_fetcher(), repo=container.repo)
     linkedin = CollectLinkedInProfiles(linkedin=_build_linkedin_fetcher(), repo=container.repo)
-    blog = CollectBlogContent(web=_build_web_fetcher(), repo=container.repo)
 
     social_results = social.execute(handles)
     linkedin_results = linkedin.execute(linkedin_urls)
-    blog_posts = [
-        _hydrate_blog_post(p)
-        for p in (graph.get("blog_posts", []) if isinstance(graph, dict) else [])
-    ]
-    blog_results = blog.execute([p for p in blog_posts if p is not None])
 
     return {
         "handles": len(handles),
         "social_collected": len(social_results),
         "linkedin_collected": len(linkedin_results),
-        "blog_posts_collected": len(blog_results),
         "unresolved_handles": list(resolved.unresolved_names),
     }
 
@@ -202,44 +160,6 @@ def run_phase_3(container: Container) -> dict[str, Any]:
 # --------------------------------------------------------------------------- #
 # Serialisation helpers (matched by the frontend's TypeScript types)
 # --------------------------------------------------------------------------- #
-
-
-def _serialise_partner(p: Partner) -> dict[str, Any]:
-    return {
-        "id": p.id,
-        "name": p.name,
-        "firm": p.firm.value,
-        "role": p.role,
-        "x_handle": p.x_handle.value if p.x_handle else None,
-        "linkedin_url": p.linkedin_url.value if p.linkedin_url else None,
-        "blog_url": p.blog_url.value if p.blog_url else None,
-        "bio": p.bio,
-    }
-
-
-def _serialise_company(c: Company) -> dict[str, Any]:
-    return {
-        "id": c.id,
-        "name": c.name,
-        "website": c.website.value if c.website else None,
-        "sector": c.sector.value if c.sector else None,
-        "stage": c.stage.value,
-        "invested_by": [f.value for f in c.invested_by],
-        "founder_ids": list(c.founder_ids),
-        "description": c.description,
-        "linkedin_company_url": c.linkedin_company_url.value if c.linkedin_company_url else None,
-    }
-
-
-def _serialise_blog_post(b: BlogPost) -> dict[str, Any]:
-    return {
-        "id": b.id,
-        "author_partner_id": b.author_partner_id,
-        "title": b.title,
-        "body": b.body,
-        "published_at": b.published_at.iso(),
-        "source_url": b.source_url.value,
-    }
 
 
 def _serialise_hit(hit: PartnerFilingHit, *, disclosed: bool) -> dict[str, Any]:
@@ -344,24 +264,6 @@ def _hydrate_founders(items: list[Any]) -> list[Founder]:
     return out
 
 
-def _hydrate_blog_post(raw: Any) -> BlogPost | None:
-    from pipeline.entities.value_objects import Timestamp
-
-    if not isinstance(raw, dict):
-        return None
-    try:
-        return BlogPost(
-            id=str(raw["id"]),
-            author_partner_id=str(raw.get("author_partner_id", "")),
-            title=str(raw.get("title", "")),
-            body=str(raw.get("body", "")),
-            published_at=Timestamp.from_iso(raw["published_at"]),
-            source_url=Url(raw["source_url"]),
-        )
-    except (KeyError, ValueError, ValidationError):
-        return None
-
-
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
@@ -377,9 +279,12 @@ def run(
     """Run a single pipeline phase."""
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
     container = build_container()
-    runners = {1: run_phase_1, 2: run_phase_2, 3: run_phase_3}
+    runners = {2: run_phase_2, 3: run_phase_3}
     if phase not in runners:
-        raise typer.BadParameter(f"phase must be 1, 2, or 3 (got {phase})")
+        raise typer.BadParameter(
+            f"phase must be 2 or 3 (got {phase}). "
+            "Phase 1 has moved to scripts/verify_a16z.py while VcFirmExtractor is being verified."
+        )
     result = runners[phase](container)
     typer.echo(f"Phase {phase} complete: {result}")
 

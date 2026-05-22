@@ -42,9 +42,8 @@ def new_id() -> str:
 @dataclass(frozen=True, slots=True)
 class Firm:
     name: FirmName
-    website: Url
-    people_page_url: Url
-    portfolio_page_url: Url
+    team_url: Url
+    portfolio_url: Url
     blog_url: Url | None
 
 
