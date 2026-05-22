@@ -27,16 +27,16 @@ def test_load_firms(tmp_path: Path) -> None:
         tmp_path / "firms.yaml",
         """
 firms:
-  - name: sequoia
-    website: https://sequoiacap.com
-    people_page_url: https://sequoiacap.com/people
-    portfolio_page_url: https://sequoiacap.com/companies
-    blog_url: https://sequoiacap.com/perspective
+  sequoia:
+    team: https://sequoiacap.com/people
+    portfolio: https://sequoiacap.com/companies
+    blog: https://sequoiacap.com/perspective
 """,
     )
     firms = _repo(tmp_path).load_firms()
     assert len(firms) == 1
     assert firms[0].name is FirmName.SEQUOIA
+    assert firms[0].team_url.value == "https://sequoiacap.com/people"
 
 
 def test_load_watchlist_skips_invalid_entries(tmp_path: Path) -> None:

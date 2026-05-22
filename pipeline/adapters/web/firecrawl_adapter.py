@@ -1,93 +1,160 @@
-"""Firecrawl adapter for the ``WebFetcher`` port.
+"""Firecrawl v2 adapter — structured JSON extraction only.
 
-Verified against firecrawl-py 1.6.4:
-- ``scrape_url`` returns the unwrapped ``data`` dict on success (it strips
-  the ``{"success", "data"}`` envelope before returning).
-- ``map_url`` returns the full envelope including ``links``.
-- Both raise ``requests.exceptions.HTTPError`` on non-200 status; the
-  message contains ``"Status code <n>"`` which is how we detect rate limits.
+The pipeline pays Firecrawl to do LLM-driven structured extraction; we never
+parse markdown ourselves. This adapter exposes two methods:
+
+* :meth:`fetch_structured` — single-URL JSON scrape against a Pydantic schema.
+* :meth:`fetch_structured_batch` — parallel batch scrape of many URLs against
+  the same schema, results returned in the input URL order.
+
+Coded against firecrawl-py v2 (``from firecrawl import Firecrawl``). Result
+shape is ``result.data.json`` per the v2 docs.
 """
 
 from __future__ import annotations
 
-import time
+import sys
 from typing import Any, Protocol
 
-import requests
+from pydantic import BaseModel
 
-from pipeline.entities.errors import FetchError, ParseError, RateLimitError
-from pipeline.entities.value_objects import Url
+from pipeline.entities.errors import FetchError
 
 
-class _FirecrawlClient(Protocol):
-    """Subset of the firecrawl-py client surface we depend on.
+class _FirecrawlV2Client(Protocol):
+    """Subset of the v2 SDK surface we depend on. Lets tests inject a fake."""
 
-    Defined here so we can inject a fake in tests without importing the real
-    SDK in test code.
-    """
+    def scrape(self, url: str, **kwargs: Any) -> Any: ...
 
-    def scrape_url(self, url: str, params: dict[str, Any] | None = None) -> dict[str, Any]: ...
+    def batch_scrape(self, urls: list[str], **kwargs: Any) -> Any: ...
 
-    def map_url(self, url: str, params: dict[str, Any] | None = None) -> dict[str, Any]: ...
+
+_DEFAULT_TIMEOUT_MS = 120_000
 
 
 class FirecrawlWebFetcher:
-    def __init__(self, client: _FirecrawlClient, *, backoff_seconds: float = 2.0) -> None:
+    """Adapter over a Firecrawl v2 ``Firecrawl`` client."""
+
+    def __init__(self, client: _FirecrawlV2Client) -> None:
         self._client = client
-        self._backoff = backoff_seconds
 
-    def fetch_markdown(self, url: Url) -> str:
-        response = self._call(lambda: self._client.scrape_url(url.value, {"formats": ["markdown"]}))
-        markdown = response.get("markdown")
-        if not isinstance(markdown, str):
-            raise ParseError(f"firecrawl returned no markdown for {url}: keys={list(response)}")
-        return markdown
-
-    def crawl_links_from(self, base_url: Url, link_selector_hint: str) -> list[Url]:
-        params: dict[str, Any] = {"limit": 200}
-        if link_selector_hint:
-            params["search"] = link_selector_hint
-        response = self._call(lambda: self._client.map_url(base_url.value, params))
-        raw_links = response.get("links") or []
-        out: list[Url] = []
-        for raw in raw_links:
-            if not isinstance(raw, str):
-                continue
-            try:
-                out.append(Url(raw))
-            except Exception:
-                continue
-        return out
-
-    def _call(self, fn: Any) -> dict[str, Any]:
+    def fetch_structured(
+        self, url: str, schema_cls: type[BaseModel], prompt: str
+    ) -> dict[str, Any]:
+        formats = [_json_format(schema_cls, prompt)]
+        _log(f"firecrawl scrape: {url}")
         try:
-            response = fn()
-        except requests.exceptions.HTTPError as exc:
-            if _is_rate_limit(exc):
-                time.sleep(self._backoff)
-                try:
-                    response = fn()
-                except requests.exceptions.HTTPError as retry_exc:
-                    if _is_rate_limit(retry_exc):
-                        raise RateLimitError(
-                            f"firecrawl rate limit persisted: {retry_exc}"
-                        ) from retry_exc
-                    raise FetchError(f"firecrawl http error on retry: {retry_exc}") from retry_exc
-            else:
-                raise FetchError(f"firecrawl http error: {exc}") from exc
+            result = self._client.scrape(
+                url,
+                formats=formats,
+                only_main_content=True,
+                timeout=_DEFAULT_TIMEOUT_MS,
+            )
         except Exception as exc:
-            # The SDK also raises bare ``Exception`` for API-level failures
-            # (e.g. ``response["success"] is False``). Treat as fetch errors.
-            raise FetchError(f"firecrawl error: {exc}") from exc
+            raise FetchError(f"firecrawl scrape failed for {url}: {exc}") from exc
 
-        if not isinstance(response, dict):
-            raise ParseError(f"unexpected firecrawl response type: {type(response).__name__}")
-        return response
+        return _extract_json(result, source_url=url)
+
+    def fetch_structured_batch(
+        self, urls: list[str], schema_cls: type[BaseModel], prompt: str
+    ) -> list[dict[str, Any]]:
+        if not urls:
+            return []
+        formats = [_json_format(schema_cls, prompt)]
+        for url in urls:
+            _log(f"firecrawl batch_scrape: {url}")
+        try:
+            result = self._client.batch_scrape(
+                urls,
+                formats=formats,
+                only_main_content=True,
+                timeout=_DEFAULT_TIMEOUT_MS,
+            )
+        except Exception as exc:
+            raise FetchError(f"firecrawl batch_scrape failed: {exc}") from exc
+
+        return _extract_batch_json(result, requested_urls=urls)
 
 
-def _is_rate_limit(exc: requests.exceptions.HTTPError) -> bool:
-    """SDK error messages format as 'Status code 429. ...'; also fall back to .response."""
-    if "Status code 429" in str(exc):
-        return True
-    response = getattr(exc, "response", None)
-    return response is not None and getattr(response, "status_code", None) == 429
+def _json_format(schema_cls: type[BaseModel], prompt: str) -> dict[str, Any]:
+    return {
+        "type": "json",
+        "schema": schema_cls.model_json_schema(),
+        "prompt": prompt,
+    }
+
+
+def _extract_json(result: Any, *, source_url: str) -> dict[str, Any]:
+    """Pull ``result.data.json`` out of a v2 scrape response.
+
+    Coded against the v2 docs — no defensive fallback chain. If the SDK shape
+    differs, we want a clear failure on first run, not a silent shim.
+    """
+    data = getattr(result, "data", None)
+    if data is None:
+        raise FetchError(f"firecrawl returned no .data for {source_url}: {result!r}")
+    payload = getattr(data, "json", None)
+    if payload is None:
+        raise FetchError(f"firecrawl returned no .data.json for {source_url}: {data!r}")
+    if not isinstance(payload, dict):
+        raise FetchError(
+            f"firecrawl .data.json for {source_url} is {type(payload).__name__}, expected dict"
+        )
+    return payload
+
+
+def _extract_batch_json(result: Any, *, requested_urls: list[str]) -> list[dict[str, Any]]:
+    """Pull per-URL JSON payloads from a v2 batch_scrape response, in input order.
+
+    v2 ``batch_scrape`` returns a job with ``.data`` as a list of documents;
+    each doc carries its source URL in ``doc.metadata.source_url`` (or
+    ``.url``). We index by URL and reorder against ``requested_urls`` so the
+    caller can zip results to inputs.
+    """
+    docs = getattr(result, "data", None)
+    if docs is None:
+        raise FetchError(f"firecrawl batch returned no .data: {result!r}")
+    if not isinstance(docs, list):
+        raise FetchError(f"firecrawl batch .data is {type(docs).__name__}, expected list")
+
+    by_url: dict[str, dict[str, Any]] = {}
+    for doc in docs:
+        metadata = getattr(doc, "metadata", None)
+        url = _doc_url(metadata)
+        payload = getattr(doc, "json", None)
+        if url is None:
+            raise FetchError(f"firecrawl batch doc missing source URL: {doc!r}")
+        if payload is None:
+            raise FetchError(f"firecrawl batch doc {url!r} missing .json: {doc!r}")
+        if not isinstance(payload, dict):
+            raise FetchError(
+                f"firecrawl batch doc {url!r} .json is {type(payload).__name__}, expected dict"
+            )
+        by_url[url] = payload
+
+    out: list[dict[str, Any]] = []
+    for url in requested_urls:
+        if url not in by_url:
+            raise FetchError(f"firecrawl batch missing result for requested URL: {url}")
+        out.append(by_url[url])
+    return out
+
+
+def _doc_url(metadata: Any) -> str | None:
+    """Read the source URL off a v2 Document's metadata.
+
+    Coded against the v2 docs: ``metadata.sourceURL`` (camelCase). Accepts
+    metadata as a dict or as an object with attribute access — that's a shape
+    variation in the SDK itself, not a value-key fallback.
+    """
+    if metadata is None:
+        return None
+    if isinstance(metadata, dict):
+        value = metadata.get("sourceURL")
+    else:
+        value = getattr(metadata, "sourceURL", None)
+    return value if isinstance(value, str) and value else None
+
+
+def _log(msg: str) -> None:
+    print(msg, file=sys.stderr, flush=True)

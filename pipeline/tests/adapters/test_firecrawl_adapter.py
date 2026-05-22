@@ -1,77 +1,114 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 import pytest
-import requests
+from pydantic import BaseModel
 
 from pipeline.adapters.web.firecrawl_adapter import FirecrawlWebFetcher
-from pipeline.entities.errors import FetchError, ParseError, RateLimitError
-from pipeline.entities.value_objects import Url
+from pipeline.entities.errors import FetchError
 
 
-def _http_error(status: int, message: str) -> requests.exceptions.HTTPError:
-    """Mirror the shape firecrawl-py raises: HTTPError with a status-coded message."""
-    response = requests.models.Response()
-    response.status_code = status
-    return requests.exceptions.HTTPError(message, response=response)
+class _Schema(BaseModel):
+    foo: str
 
 
-class FakeFirecrawl:
+@dataclass
+class _Doc:
+    json: Any
+    metadata: dict[str, Any]
+
+
+@dataclass
+class _ScrapeResult:
+    data: Any
+
+
+class FakeV2Client:
     def __init__(
-        self, scrape: dict[str, Any] | None = None, raises: Exception | None = None
+        self,
+        *,
+        scrape_result: Any = None,
+        batch_result: Any = None,
+        raises: Exception | None = None,
     ) -> None:
-        self._scrape: dict[str, Any] = scrape if scrape is not None else {}
+        self._scrape_result = scrape_result
+        self._batch_result = batch_result
         self._raises = raises
-        self.calls = 0
+        self.scrape_calls: list[tuple[str, dict[str, Any]]] = []
+        self.batch_calls: list[tuple[list[str], dict[str, Any]]] = []
 
-    def scrape_url(self, url: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        self.calls += 1
+    def scrape(self, url: str, **kwargs: Any) -> Any:
         if self._raises is not None:
             raise self._raises
-        return self._scrape
+        self.scrape_calls.append((url, kwargs))
+        return self._scrape_result
 
-    def map_url(self, url: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        return {"success": True, "links": ["https://stripe.com", "javascript:void"]}
-
-
-def test_returns_markdown() -> None:
-    adapter = FirecrawlWebFetcher(FakeFirecrawl(scrape={"markdown": "# Hi"}))
-    assert adapter.fetch_markdown(Url("https://example.com")) == "# Hi"
-
-
-def test_no_markdown_raises_parse_error() -> None:
-    adapter = FirecrawlWebFetcher(FakeFirecrawl(scrape={}))
-    with pytest.raises(ParseError):
-        adapter.fetch_markdown(Url("https://example.com"))
+    def batch_scrape(self, urls: list[str], **kwargs: Any) -> Any:
+        if self._raises is not None:
+            raise self._raises
+        self.batch_calls.append((urls, kwargs))
+        return self._batch_result
 
 
-def test_generic_error_becomes_fetch_error() -> None:
-    adapter = FirecrawlWebFetcher(FakeFirecrawl(raises=RuntimeError("boom")))
+def test_fetch_structured_returns_data_json() -> None:
+    result = _ScrapeResult(data=_Doc(json={"foo": "bar"}, metadata={}))
+    adapter = FirecrawlWebFetcher(FakeV2Client(scrape_result=result))
+    assert adapter.fetch_structured("https://example.com", _Schema, "prompt") == {"foo": "bar"}
+
+
+def test_fetch_structured_raises_when_json_missing() -> None:
+    result = _ScrapeResult(data=_Doc(json=None, metadata={}))
+    adapter = FirecrawlWebFetcher(FakeV2Client(scrape_result=result))
     with pytest.raises(FetchError):
-        adapter.fetch_markdown(Url("https://example.com"))
+        adapter.fetch_structured("https://example.com", _Schema, "prompt")
 
 
-def test_non_429_http_error_becomes_fetch_error_without_retry() -> None:
-    fake = FakeFirecrawl(raises=_http_error(500, "Internal Server Error: Status code 500"))
-    adapter = FirecrawlWebFetcher(fake, backoff_seconds=0)
-    with pytest.raises(FetchError):
-        adapter.fetch_markdown(Url("https://example.com"))
-    assert fake.calls == 1
+def test_fetch_structured_passes_json_format_and_options() -> None:
+    result = _ScrapeResult(data=_Doc(json={"foo": "bar"}, metadata={}))
+    fake = FakeV2Client(scrape_result=result)
+    FirecrawlWebFetcher(fake).fetch_structured("https://example.com", _Schema, "extract foo")
+    _, kwargs = fake.scrape_calls[0]
+    assert kwargs["only_main_content"] is True
+    assert kwargs["timeout"] == 120_000
+    formats = kwargs["formats"]
+    assert formats[0]["type"] == "json"
+    assert formats[0]["prompt"] == "extract foo"
+    assert formats[0]["schema"]["properties"]["foo"]["type"] == "string"
 
 
-def test_persistent_429_raises_rate_limit_error_after_one_retry() -> None:
-    fake = FakeFirecrawl(
-        raises=_http_error(429, "Unexpected error during scrape URL: Status code 429")
+def test_fetch_structured_batch_preserves_input_order() -> None:
+    docs = [
+        _Doc(json={"foo": "B"}, metadata={"sourceURL": "https://example.com/b"}),
+        _Doc(json={"foo": "A"}, metadata={"sourceURL": "https://example.com/a"}),
+    ]
+    result = _ScrapeResult(data=docs)
+    adapter = FirecrawlWebFetcher(FakeV2Client(batch_result=result))
+    out = adapter.fetch_structured_batch(
+        ["https://example.com/a", "https://example.com/b"], _Schema, "prompt"
     )
-    adapter = FirecrawlWebFetcher(fake, backoff_seconds=0)
-    with pytest.raises(RateLimitError):
-        adapter.fetch_markdown(Url("https://example.com"))
-    # One initial attempt + one retry.
-    assert fake.calls == 2
+    assert [d["foo"] for d in out] == ["A", "B"]
 
 
-def test_map_url_returns_valid_urls_only() -> None:
-    adapter = FirecrawlWebFetcher(FakeFirecrawl(scrape={}))
-    links = adapter.crawl_links_from(Url("https://example.com"), "")
-    assert [u.value for u in links] == ["https://stripe.com"]
+def test_fetch_structured_batch_raises_on_missing_url() -> None:
+    docs = [_Doc(json={"foo": "A"}, metadata={"sourceURL": "https://example.com/a"})]
+    result = _ScrapeResult(data=docs)
+    adapter = FirecrawlWebFetcher(FakeV2Client(batch_result=result))
+    with pytest.raises(FetchError):
+        adapter.fetch_structured_batch(
+            ["https://example.com/a", "https://example.com/b"], _Schema, "prompt"
+        )
+
+
+def test_fetch_structured_batch_empty_short_circuits() -> None:
+    fake = FakeV2Client()
+    adapter = FirecrawlWebFetcher(fake)
+    assert adapter.fetch_structured_batch([], _Schema, "prompt") == []
+    assert fake.batch_calls == []
+
+
+def test_sdk_exception_becomes_fetch_error() -> None:
+    adapter = FirecrawlWebFetcher(FakeV2Client(raises=RuntimeError("boom")))
+    with pytest.raises(FetchError):
+        adapter.fetch_structured("https://example.com", _Schema, "prompt")

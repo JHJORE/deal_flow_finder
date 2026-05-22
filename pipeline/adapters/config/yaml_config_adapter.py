@@ -34,22 +34,23 @@ class YamlConfigRepository:
     def load_firms(self) -> list[Firm]:
         raw = _load_yaml(self._firms_path)
         firms_raw = raw.get("firms")
-        if not isinstance(firms_raw, list):
-            raise ValidationError(f"{self._firms_path}: expected a 'firms' list")
+        if not isinstance(firms_raw, dict):
+            raise ValidationError(
+                f"{self._firms_path}: expected a 'firms' mapping keyed by firm name"
+            )
         firms: list[Firm] = []
-        for entry in firms_raw:
+        for slug, entry in firms_raw.items():
             if not isinstance(entry, dict):
                 raise ValidationError(
-                    f"{self._firms_path}: firm entry must be a mapping, "
+                    f"{self._firms_path}: firm {slug!r} must be a mapping, "
                     f"got {type(entry).__name__}"
                 )
             firms.append(
                 Firm(
-                    name=FirmName(entry["name"]),
-                    website=Url(entry["website"]),
-                    people_page_url=Url(entry["people_page_url"]),
-                    portfolio_page_url=Url(entry["portfolio_page_url"]),
-                    blog_url=Url(entry["blog_url"]) if entry.get("blog_url") else None,
+                    name=FirmName(slug),
+                    team_url=Url(entry["team"]),
+                    portfolio_url=Url(entry["portfolio"]),
+                    blog_url=Url(entry["blog"]) if entry.get("blog") else None,
                 )
             )
         return firms

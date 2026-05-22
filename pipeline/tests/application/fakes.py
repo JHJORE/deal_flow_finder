@@ -6,7 +6,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any
 
-from pipeline.entities.errors import FetchError, RateLimitError
+from pipeline.entities.errors import RateLimitError
 from pipeline.entities.models import (
     Engagement,
     Filing,
@@ -16,20 +16,6 @@ from pipeline.entities.models import (
     SocialSnapshot,
 )
 from pipeline.entities.value_objects import Handle, Timestamp, Url
-
-
-@dataclass
-class FakeWebFetcher:
-    pages: dict[str, str] = field(default_factory=dict)
-    fail_urls: set[str] = field(default_factory=set)
-
-    def fetch_markdown(self, url: Url) -> str:
-        if url.value in self.fail_urls:
-            raise FetchError(f"fake fetch failed for {url}")
-        return self.pages.get(url.value, "")
-
-    def crawl_links_from(self, base_url: Url, link_selector_hint: str) -> list[Url]:
-        return []
 
 
 @dataclass
