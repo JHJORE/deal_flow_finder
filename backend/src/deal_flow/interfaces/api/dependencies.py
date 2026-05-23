@@ -1,25 +1,42 @@
-"""Composition root.
+"""Composition root — the only module in `interfaces/` that imports
+`infrastructure`. Wires the WebExtractor port to its Firecrawl adapter and
+hands the use cases to FastAPI via Depends.
+"""
 
-This is the **only** module that may import from `deal_flow.infrastructure`.
-Wire concrete adapters (infrastructure) to abstract ports (application) here,
-and expose them as FastAPI `Depends(...)` providers consumed by route handlers.
+from functools import lru_cache
 
-Example pattern (uncomment when you have real ports + adapters):
+from fastapi import Depends
 
-    from functools import lru_cache
-    from fastapi import Depends
+from deal_flow.application.ports.services.web_extractor import WebExtractor
+from deal_flow.application.use_cases.extract_firm_blog_posts import ExtractFirmBlogPosts
+from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPartners
+from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
+from deal_flow.infrastructure.config.settings import Settings, get_settings
+from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 
-    from deal_flow.application.ports.repositories.deal_repository import DealRepository
-    from deal_flow.application.use_cases.find_deals import FindDeals
-    from deal_flow.infrastructure.config.settings import Settings, get_settings
-    from deal_flow.infrastructure.persistence.postgres_deal_repository import (
-        PostgresDealRepository,
+
+@lru_cache
+def get_web_extractor(settings: Settings = Depends(get_settings)) -> WebExtractor:
+    return FirecrawlExtractor(
+        api_key=settings.firecrawl_api_key,
+        cache_dir=settings.firecrawl_cache_dir,
+        refresh=settings.firecrawl_cache_refresh,
     )
 
-    @lru_cache
-    def get_deal_repository(settings: Settings = Depends(get_settings)) -> DealRepository:
-        return PostgresDealRepository(dsn=settings.postgres_dsn)
 
-    def get_find_deals(repo: DealRepository = Depends(get_deal_repository)) -> FindDeals:
-        return FindDeals(deals=repo)
-"""
+def get_extract_firm_partners(
+    extractor: WebExtractor = Depends(get_web_extractor),
+) -> ExtractFirmPartners:
+    return ExtractFirmPartners(extractor=extractor)
+
+
+def get_extract_firm_portfolio(
+    extractor: WebExtractor = Depends(get_web_extractor),
+) -> ExtractFirmPortfolio:
+    return ExtractFirmPortfolio(extractor=extractor)
+
+
+def get_extract_firm_blog_posts(
+    extractor: WebExtractor = Depends(get_web_extractor),
+) -> ExtractFirmBlogPosts:
+    return ExtractFirmBlogPosts(extractor=extractor)
