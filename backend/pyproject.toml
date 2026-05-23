@@ -9,6 +9,7 @@ description = "Deal-flow backend, Clean Architecture"
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115",
+  "firecrawl-py>=2.0.0",
   "pydantic>=2.7",
   "pydantic-settings>=2.3",
   "uvicorn[standard]>=0.30",
@@ -36,3 +37,5 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
+# B008: FastAPI's `Depends(...)` in argument defaults is the idiomatic pattern.
+ignore = ["B008"]

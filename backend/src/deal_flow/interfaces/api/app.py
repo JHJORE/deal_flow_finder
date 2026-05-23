@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 
+from deal_flow.interfaces.api.routes.firms import router as firms_router
+
 app = FastAPI(title="deal_flow")
+app.include_router(firms_router)
 
 
 @app.get("/health")
