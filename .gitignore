@@ -18,6 +18,9 @@ next-env.d.ts
 # Firecrawl response cache
 backend/.firecrawl/
 
+# EDGAR response cache
+backend/.edgar/
+
 # Env
 .env
 .env.local

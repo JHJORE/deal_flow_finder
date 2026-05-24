@@ -5,7 +5,7 @@ from typing import Any
 
 
 class FileCache:
-    """SHA256-keyed JSON file cache for Firecrawl responses."""
+    """SHA256-keyed JSON file cache for arbitrary external responses."""
 
     def __init__(self, cache_dir: Path) -> None:
         self._dir = cache_dir

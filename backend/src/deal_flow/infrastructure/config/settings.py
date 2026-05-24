@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     firecrawl_cache_dir: Path = _BACKEND_ROOT / ".firecrawl"
     firecrawl_cache_refresh: bool = False
 
+    sec_user_agent: str = ""
+    sec_cache_dir: Path = _BACKEND_ROOT / ".edgar"
+    sec_cache_refresh: bool = False
+
 
 @lru_cache
 def get_settings() -> Settings:
