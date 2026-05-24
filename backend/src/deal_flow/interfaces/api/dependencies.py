@@ -7,13 +7,18 @@ from functools import lru_cache
 
 from fastapi import Depends
 
+from deal_flow.application.ports.services.twitter_collector import TwitterCollector
 from deal_flow.application.ports.services.web_extractor import WebExtractor
+from deal_flow.application.use_cases.enrich_partner_with_twitter import (
+    EnrichPartnerWithTwitter,
+)
 from deal_flow.application.use_cases.extract_firm_blog_posts import ExtractFirmBlogPosts
 from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPartners
 from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
 from deal_flow.infrastructure.config.settings import Settings, get_settings
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
+from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
 
 
 @lru_cache
@@ -46,3 +51,18 @@ def get_extract_firm_blog_posts(
     extractor: WebExtractor = Depends(get_web_extractor),
 ) -> ExtractFirmBlogPosts:
     return ExtractFirmBlogPosts(extractor=extractor)
+
+
+@lru_cache
+def get_twitter_collector(settings: Settings = Depends(get_settings)) -> TwitterCollector:
+    return TwitterApiCollector(
+        api_key=settings.twitterapi_key,
+        cache_dir=settings.twitterapi_cache_dir,
+        refresh=settings.twitterapi_cache_refresh,
+    )
+
+
+def get_enrich_partner_with_twitter(
+    collector: TwitterCollector = Depends(get_twitter_collector),
+) -> EnrichPartnerWithTwitter:
+    return EnrichPartnerWithTwitter(collector=collector)
