@@ -8,7 +8,7 @@ from deal_flow.domain.entities.blog_post import BlogPost
 
 @dataclass(frozen=True)
 class ExtractFirmBlogPostsInput:
-    firm_domain: str
+    blog_url: str
     limit: int = 10
 
 
@@ -17,16 +17,11 @@ class ExtractFirmBlogPosts:
         self._extractor = extractor
 
     def execute(self, input: ExtractFirmBlogPostsInput) -> list[BlogPost]:
-        sections = self._extractor.discover_firm_sections(input.firm_domain)
-        blog_url = sections.get("blog")
-        if not blog_url:
-            return []
-
-        items = self._extractor.scrape_blog_posts(blog_url)[: input.limit]
+        items = self._extractor.scrape_blog_posts(input.blog_url)[: input.limit]
         return [
             BlogPost(
                 title=it.get("title") or "",
-                url=urljoin(blog_url, it["url"]) if it.get("url") else "",
+                url=urljoin(input.blog_url, it["url"]) if it.get("url") else "",
                 author=it.get("author"),
                 published_at=_parse_date(it.get("published_at")),
             )

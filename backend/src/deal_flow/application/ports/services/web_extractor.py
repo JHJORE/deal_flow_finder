@@ -11,10 +11,6 @@ class WebExtractor(ABC):
     """
 
     @abstractmethod
-    def discover_firm_sections(self, firm_domain: str) -> dict[str, str | None]:
-        """Return ``{"team": url|None, "portfolio": url|None, "blog": url|None}``."""
-
-    @abstractmethod
     def scrape_partner_listing(self, team_url: str) -> list[dict]:
         ...
 
