@@ -25,6 +25,7 @@ from deal_flow.application.use_cases.extract_firm_portfolio import (
 )
 from deal_flow.infrastructure.config.settings import get_settings
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
+from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
 
 
 def _dump(label: str, value) -> None:
@@ -34,6 +35,15 @@ def _dump(label: str, value) -> None:
     elif isinstance(value, list) and value and dataclasses.is_dataclass(value[0]):
         value = [dataclasses.asdict(v) for v in value]
     print(json.dumps(value, indent=2, default=str))
+
+
+def _resolve(firm: str) -> FirmSources:
+    registry = load_registry()
+    sources = registry.get(firm)
+    if sources is None:
+        print(f"firm '{firm}' not in backend/firms.yaml", file=sys.stderr)
+        sys.exit(3)
+    return sources
 
 
 def _build_extractor(refresh: bool) -> FirecrawlExtractor:
@@ -50,31 +60,37 @@ def _build_extractor(refresh: bool) -> FirecrawlExtractor:
 
 
 def step0(firm: str, refresh: bool) -> None:
-    """Discovery only — proves API key, SDK, /map, and cache work."""
+    """Smoke: load registry, print URLs, scrape the team listing."""
+    sources = _resolve(firm)
+    _dump(f"firm sources for {firm}", sources)
+    if not sources.team_url:
+        print("[step0] firm has no team_url; nothing to scrape.", file=sys.stderr)
+        return
     extractor = _build_extractor(refresh)
-    sections = extractor.discover_firm_sections(firm)
-    _dump(f"discovered sections for {firm}", sections)
-    if not sections.get("team"):
-        print("\n[step0] No team URL discovered; subsequent steps will return [].", file=sys.stderr)
+    listings = extractor.scrape_partner_listing(sources.team_url)[:10]
+    _dump(f"smoke listing — {len(listings)} partners", listings)
 
 
 def step1(firm: str, refresh: bool) -> None:
-    """Partners — listing only (skips the detail batch via a small monkeypatch)."""
-    extractor = _build_extractor(refresh)
-    sections = extractor.discover_firm_sections(firm)
-    _dump(f"sections for {firm}", sections)
-    team_url = sections.get("team")
-    if not team_url:
+    """Partners — listing only."""
+    sources = _resolve(firm)
+    if not sources.team_url:
+        print("[step1] firm has no team_url.", file=sys.stderr)
         return
-    listings = extractor.scrape_partner_listing(team_url)[:10]
+    extractor = _build_extractor(refresh)
+    listings = extractor.scrape_partner_listing(sources.team_url)[:10]
     _dump(f"partner listing — {len(listings)}", listings)
 
 
 def step2(firm: str, refresh: bool) -> None:
     """Partners — full two-stage (listing + detail batch + merge)."""
+    sources = _resolve(firm)
+    if not sources.team_url:
+        print("[step2] firm has no team_url.", file=sys.stderr)
+        return
     extractor = _build_extractor(refresh)
     partners = ExtractFirmPartners(extractor).execute(
-        ExtractFirmPartnersInput(firm_domain=firm, limit=10)
+        ExtractFirmPartnersInput(team_url=sources.team_url, limit=10)
     )
     socials = sum(1 for p in partners if p.linkedin_url or p.x_url)
     _dump(f"partners — {len(partners)}, {socials} with socials", partners)
@@ -85,9 +101,13 @@ def step2(firm: str, refresh: bool) -> None:
 
 def step3(firm: str, refresh: bool) -> None:
     """Portfolio — full two-stage."""
+    sources = _resolve(firm)
+    if not sources.portfolio_url:
+        print("[step3] firm has no portfolio_url.", file=sys.stderr)
+        return
     extractor = _build_extractor(refresh)
     companies = ExtractFirmPortfolio(extractor).execute(
-        ExtractFirmPortfolioInput(firm_domain=firm, limit=10)
+        ExtractFirmPortfolioInput(portfolio_url=sources.portfolio_url, limit=10)
     )
     socials = sum(1 for c in companies if c.linkedin_url)
     _dump(f"portfolio — {len(companies)}, {socials} with linkedin", companies)
@@ -95,9 +115,13 @@ def step3(firm: str, refresh: bool) -> None:
 
 def step4(firm: str, refresh: bool) -> None:
     """Blog — one-stage."""
+    sources = _resolve(firm)
+    if not sources.blog_url:
+        print("[step4] firm has no blog_url.", file=sys.stderr)
+        return
     extractor = _build_extractor(refresh)
     posts = ExtractFirmBlogPosts(extractor).execute(
-        ExtractFirmBlogPostsInput(firm_domain=firm, limit=10)
+        ExtractFirmBlogPostsInput(blog_url=sources.blog_url, limit=10)
     )
     _dump(f"blog posts — {len(posts)}", posts)
 
@@ -108,7 +132,11 @@ _STEPS = {0: step0, 1: step1, 2: step2, 3: step3, 4: step4}
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--step", type=int, required=True, choices=sorted(_STEPS))
-    p.add_argument("--firm", default="a16z.com")
+    p.add_argument(
+        "--firm",
+        default="sequoiacap.com",
+        help="firm domain key from backend/firms.yaml (default: sequoiacap.com)",
+    )
     p.add_argument("--refresh", action="store_true", help="bypass cache, force fresh API calls")
     args = p.parse_args()
     _STEPS[args.step](args.firm, args.refresh)

@@ -1,6 +1,6 @@
 """Composition root — the only module in `interfaces/` that imports
-`infrastructure`. Wires the WebExtractor port to its Firecrawl adapter and
-hands the use cases to FastAPI via Depends.
+`infrastructure`. Wires the WebExtractor port to its Firecrawl adapter, loads
+the firms registry, and hands the use cases to FastAPI via Depends.
 """
 
 from functools import lru_cache
@@ -13,6 +13,12 @@ from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPar
 from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
 from deal_flow.infrastructure.config.settings import Settings, get_settings
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
+from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
+
+
+@lru_cache
+def get_firms_registry() -> dict[str, FirmSources]:
+    return load_registry()
 
 
 @lru_cache
