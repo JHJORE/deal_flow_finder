@@ -1,12 +1,15 @@
 """Composition root — the only module in `interfaces/` that imports
-`infrastructure`. Wires the WebExtractor port to its Firecrawl adapter, loads
-the firms registry, and hands the use cases to FastAPI via Depends.
+`infrastructure`. Wires ports to concrete adapters and hands use cases to
+FastAPI via Depends.
 """
 
 from functools import lru_cache
 
 from fastapi import Depends
 
+from deal_flow.application.ports.services.sec_filing_searcher import (
+    SecFilingSearcher,
+)
 from deal_flow.application.ports.services.twitter_collector import TwitterCollector
 from deal_flow.application.ports.services.web_extractor import WebExtractor
 from deal_flow.application.use_cases.enrich_partner_with_twitter import (
@@ -15,7 +18,11 @@ from deal_flow.application.use_cases.enrich_partner_with_twitter import (
 from deal_flow.application.use_cases.extract_firm_blog_posts import ExtractFirmBlogPosts
 from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPartners
 from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
-from deal_flow.infrastructure.config.settings import Settings, get_settings
+from deal_flow.application.use_cases.search_partner_form_d_filings import (
+    SearchPartnerFormDFilings,
+)
+from deal_flow.infrastructure.config.settings import get_settings
+from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearcher
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
 from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
@@ -27,7 +34,8 @@ def get_firms_registry() -> dict[str, FirmSources]:
 
 
 @lru_cache
-def get_web_extractor(settings: Settings = Depends(get_settings)) -> WebExtractor:
+def get_web_extractor() -> WebExtractor:
+    settings = get_settings()
     return FirecrawlExtractor(
         api_key=settings.firecrawl_api_key,
         cache_dir=settings.firecrawl_cache_dir,
@@ -54,7 +62,24 @@ def get_extract_firm_blog_posts(
 
 
 @lru_cache
-def get_twitter_collector(settings: Settings = Depends(get_settings)) -> TwitterCollector:
+def get_sec_filing_searcher() -> SecFilingSearcher:
+    settings = get_settings()
+    return EdgarFullTextSearcher(
+        user_agent=settings.sec_user_agent,
+        cache_dir=settings.sec_cache_dir,
+        refresh=settings.sec_cache_refresh,
+    )
+
+
+def get_search_partner_form_d_filings(
+    searcher: SecFilingSearcher = Depends(get_sec_filing_searcher),
+) -> SearchPartnerFormDFilings:
+    return SearchPartnerFormDFilings(searcher=searcher)
+
+
+@lru_cache
+def get_twitter_collector() -> TwitterCollector:
+    settings = get_settings()
     return TwitterApiCollector(
         api_key=settings.twitterapi_key,
         cache_dir=settings.twitterapi_cache_dir,

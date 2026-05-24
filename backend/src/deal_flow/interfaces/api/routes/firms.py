@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from fastapi import APIRouter, Depends, HTTPException
 
 from deal_flow.application.use_cases.enrich_partner_with_twitter import (
@@ -17,9 +19,15 @@ from deal_flow.application.use_cases.extract_firm_portfolio import (
     ExtractFirmPortfolio,
     ExtractFirmPortfolioInput,
 )
+from deal_flow.application.use_cases.search_partner_form_d_filings import (
+    SearchPartnerFormDFilings,
+    SearchPartnerFormDFilingsInput,
+)
 from deal_flow.domain.entities.blog_post import BlogPost
 from deal_flow.domain.entities.partner import Partner
+from deal_flow.domain.entities.partner_form_d_signal import PartnerFormDSignal
 from deal_flow.domain.entities.portfolio_company import PortfolioCompany
+from deal_flow.domain.value_objects.date_range import DateRange
 from deal_flow.infrastructure.external.firms_registry import FirmSources
 from deal_flow.interfaces.api.dependencies import (
     get_enrich_partner_with_twitter,
@@ -27,6 +35,7 @@ from deal_flow.interfaces.api.dependencies import (
     get_extract_firm_partners,
     get_extract_firm_portfolio,
     get_firms_registry,
+    get_search_partner_form_d_filings,
 )
 
 router = APIRouter(prefix="/api/firms", tags=["firms"])
@@ -134,3 +143,31 @@ def list_blog_posts(
     return use_case.execute(
         ExtractFirmBlogPostsInput(blog_url=sources.blog_url, limit=limit)
     )
+
+
+@router.get("/{firm_domain}/edgar-signals")
+def list_edgar_signals(
+    firm_domain: str,
+    days: int = 90,
+    limit: int = 10,
+    registry: dict[str, FirmSources] = Depends(get_firms_registry),
+    extract_partners: ExtractFirmPartners = Depends(get_extract_firm_partners),
+    search_filings: SearchPartnerFormDFilings = Depends(
+        get_search_partner_form_d_filings
+    ),
+) -> list[PartnerFormDSignal]:
+    sources = _resolve(firm_domain, registry)
+    if not sources.team_url:
+        return []
+    partners = extract_partners.execute(
+        ExtractFirmPartnersInput(team_url=sources.team_url, limit=limit)
+    )
+    today = date.today()
+    window = DateRange(start=today - timedelta(days=days), end=today)
+    return [
+        search_filings.execute(
+            SearchPartnerFormDFilingsInput(partner_name=p.name, date_range=window)
+        )
+        for p in partners
+        if p.name
+    ]
