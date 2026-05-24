@@ -10,7 +10,11 @@ from fastapi import Depends
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
+from deal_flow.application.ports.services.twitter_collector import TwitterCollector
 from deal_flow.application.ports.services.web_extractor import WebExtractor
+from deal_flow.application.use_cases.enrich_partner_with_twitter import (
+    EnrichPartnerWithTwitter,
+)
 from deal_flow.application.use_cases.extract_firm_blog_posts import ExtractFirmBlogPosts
 from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPartners
 from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
@@ -21,6 +25,7 @@ from deal_flow.infrastructure.config.settings import get_settings
 from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearcher
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
+from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
 
 
 @lru_cache
@@ -70,3 +75,19 @@ def get_search_partner_form_d_filings(
     searcher: SecFilingSearcher = Depends(get_sec_filing_searcher),
 ) -> SearchPartnerFormDFilings:
     return SearchPartnerFormDFilings(searcher=searcher)
+
+
+@lru_cache
+def get_twitter_collector() -> TwitterCollector:
+    settings = get_settings()
+    return TwitterApiCollector(
+        api_key=settings.twitterapi_key,
+        cache_dir=settings.twitterapi_cache_dir,
+        refresh=settings.twitterapi_cache_refresh,
+    )
+
+
+def get_enrich_partner_with_twitter(
+    collector: TwitterCollector = Depends(get_twitter_collector),
+) -> EnrichPartnerWithTwitter:
+    return EnrichPartnerWithTwitter(collector=collector)

@@ -8,7 +8,7 @@ import httpx
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
-from deal_flow.infrastructure.external.file_cache import FileCache
+from deal_flow.infrastructure.cache.file_cache import FileCache
 
 _ENDPOINT = "https://efts.sec.gov/LATEST/search-index"
 _PAGE_SIZE = 100

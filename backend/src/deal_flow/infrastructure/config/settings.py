@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     sec_cache_dir: Path = _BACKEND_ROOT / ".edgar"
     sec_cache_refresh: bool = False
 
+    twitterapi_key: str = ""
+    twitterapi_cache_dir: Path = _BACKEND_ROOT / ".twitter"
+    twitterapi_cache_refresh: bool = False
+
 
 @lru_cache
 def get_settings() -> Settings:
