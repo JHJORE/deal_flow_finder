@@ -132,7 +132,11 @@ _STEPS = {0: step0, 1: step1, 2: step2, 3: step3, 4: step4}
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--step", type=int, required=True, choices=sorted(_STEPS))
-    p.add_argument("--firm", default="a16z.com")
+    p.add_argument(
+        "--firm",
+        default="sequoiacap.com",
+        help="firm domain key from backend/firms.yaml (default: sequoiacap.com)",
+    )
     p.add_argument("--refresh", action="store_true", help="bypass cache, force fresh API calls")
     args = p.parse_args()
     _STEPS[args.step](args.firm, args.refresh)
