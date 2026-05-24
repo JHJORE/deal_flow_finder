@@ -1,11 +1,14 @@
 a16z.com:
   team_url: https://a16z.com/team/
   portfolio_url: https://a16z.com/portfolio/
+  portfolio_html_json_url: https://a16z.com/portfolio/
+  portfolio_html_json_attribute: data-companies
   blog_url: https://a16z.com/news-content/
 
 sequoiacap.com:
   team_url: https://sequoiacap.com/our-team/
   portfolio_url: https://sequoiacap.com/our-companies/#all-panel
+  portfolio_sitemap_url: https://sequoiacap.com/company-sitemap.xml
   blog_url: https://sequoiacap.com/stories/
 
 ycombinator.com:

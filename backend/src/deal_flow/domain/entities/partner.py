@@ -11,6 +11,8 @@ class Partner:
     bio: str | None = None
     linkedin_url: str | None = None
     x_url: str | None = None
+    email: str | None = None
+    photo_url: str | None = None
     education: tuple[str, ...] = field(default_factory=tuple)
     prior_experience: tuple[str, ...] = field(default_factory=tuple)
     twitter: TwitterSnapshot | None = None

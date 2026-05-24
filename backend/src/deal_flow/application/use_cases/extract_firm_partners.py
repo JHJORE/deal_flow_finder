@@ -25,10 +25,9 @@ class ExtractFirmPartners:
                 item["profile_url"] = urljoin(input.team_url, item["profile_url"])
 
         detail_urls = [item["profile_url"] for item in listings if item.get("profile_url")]
-        details_by_url: dict[str, dict] = {}
-        if detail_urls:
-            payloads = self._extractor.scrape_partner_details(detail_urls)
-            details_by_url = dict(zip(detail_urls, payloads, strict=False))
+        details_by_url: dict[str, dict] = (
+            self._extractor.scrape_partner_details(detail_urls) if detail_urls else {}
+        )
 
         return [
             _to_partner(item, details_by_url.get(item.get("profile_url") or ""))
@@ -45,6 +44,8 @@ def _to_partner(listing: dict, detail: dict | None) -> Partner:
         bio=detail.get("bio"),
         linkedin_url=detail.get("linkedin_url") or listing.get("linkedin_url"),
         x_url=detail.get("x_url") or listing.get("x_url"),
+        email=detail.get("email"),
+        photo_url=detail.get("photo_url"),
         education=tuple(detail.get("education") or ()),
         prior_experience=tuple(detail.get("prior_experience") or ()),
     )

@@ -107,7 +107,13 @@ def step3(firm: str, refresh: bool) -> None:
         return
     extractor = _build_extractor(refresh)
     companies = ExtractFirmPortfolio(extractor).execute(
-        ExtractFirmPortfolioInput(portfolio_url=sources.portfolio_url, limit=10)
+        ExtractFirmPortfolioInput(
+            portfolio_url=sources.portfolio_url,
+            sitemap_url=sources.portfolio_sitemap_url,
+            html_json_url=sources.portfolio_html_json_url,
+            html_json_attribute=sources.portfolio_html_json_attribute,
+            limit=10,
+        )
     )
     socials = sum(1 for c in companies if c.linkedin_url)
     _dump(f"portfolio — {len(companies)}, {socials} with linkedin", companies)

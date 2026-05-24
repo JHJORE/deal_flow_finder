@@ -1,3 +1,562 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =========================================================
+   Dealflow Radar — refined editorial dark
+   Single warm accent. Tinted neutrals. Type carries hierarchy.
+   ========================================================= */
+
+:root {
+  /* surfaces — warm neutrals tinted toward amber */
+  --surface-0: oklch(13.5% 0.005 60);
+  --surface-1: oklch(16.5% 0.006 60);
+  --surface-2: oklch(20% 0.007 60);
+  --surface-3: oklch(24% 0.008 60);
+  --surface-raised: oklch(18% 0.007 60);
+
+  /* lines — same hue family, more chroma at the hard end */
+  --line-faint: oklch(22% 0.007 60);
+  --line: oklch(28% 0.010 60);
+  --line-hard: oklch(38% 0.012 60);
+
+  /* ink */
+  --ink: oklch(95% 0.008 75);
+  --ink-2: oklch(78% 0.010 70);
+  --ink-3: oklch(60% 0.010 65);
+  --ink-4: oklch(46% 0.010 60);
+
+  /* accent — a single ember, used surgically */
+  --accent: oklch(72% 0.155 50);
+  --accent-deep: oklch(58% 0.16 45);
+  --accent-soft: oklch(72% 0.155 50 / 0.14);
+  --accent-faint: oklch(72% 0.155 50 / 0.06);
+
+  /* signal colors — calmed */
+  --positive: oklch(74% 0.13 155);
+  --positive-soft: oklch(74% 0.13 155 / 0.12);
+  --caution: oklch(80% 0.13 85);
+  --negative: oklch(68% 0.16 25);
+  --negative-soft: oklch(68% 0.16 25 / 0.10);
+  --info: oklch(72% 0.10 240);
+
+  /* firm marks (kept distinct from accent) */
+  --firm-sequoia: oklch(60% 0.13 155);
+  --firm-a16z: oklch(58% 0.14 252);
+  --firm-yc: oklch(72% 0.155 50);
+
+  /* ============================================================
+     Typography
+     Three families, four weights each. Two scales:
+       - Prose:  eyebrow / meta / caption / body / lead         (1.25 ratio)
+       - Display: h-sm / h-md / h-lg / h-xl / h-2xl             (1.333 ratio)
+       - Numeric: num-sm / num-md / num-lg                      (KPI / stats)
+     Every token bundles size + line-height + tracking, so callsites
+     never have to reinvent the pairing.
+     ============================================================ */
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Fragment Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-normal: 1.35;
+  --leading-relaxed: 1.55;
+  --leading-loose: 1.65;
+
+  --tracking-display-xl: -0.035em;
+  --tracking-display-lg: -0.028em;
+  --tracking-display-md: -0.018em;
+  --tracking-display-sm: -0.008em;
+  --tracking-caps: 0.14em;
+
+  /* spacing scale (4pt) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+
+  /* radii */
+  --r-2: 4px;
+  --r-3: 6px;
+  --r-4: 10px;
+  --r-5: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: var(--surface-0);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px; /* base — children opt into rem-based scale */
+  font-feature-settings: "ss01", "cv11", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* respect user zoom: avoid font-size adjustments below the body line-height floor */
+body {
+  line-height: 1.5;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: oklch(15% 0.01 60);
+}
+
+button {
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== utility classes used across components ===== */
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.tabnum {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum", "lnum";
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1.4;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  font-weight: 600;
+}
+
+.eyebrow-accent {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* tiny mono caps used as datelines / serial numbers in mastheads.
+   smaller than .eyebrow, more spaced, neutral colour. */
+.t-mono-cap {
+  font-family: var(--font-mono);
+  font-size: 0.625rem; /* 10px */
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  font-weight: 400;
+}
+
+/* ============================================================
+   Prose scale — 5 steps
+   Each step bundles size + line-height + tracking.
+   ============================================================ */
+
+.t-meta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;        /* 12px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--ink-3);
+}
+
+.t-mono-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;        /* 12px */
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.t-caption {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;      /* 13px */
+  line-height: 1.55;
+  letter-spacing: 0;
+  color: var(--ink-2);
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;      /* 15px */
+  line-height: 1.65;
+  letter-spacing: 0;
+  color: var(--ink);
+  max-width: 65ch;
+}
+
+.t-lead {
+  font-family: var(--font-body);
+  font-size: 1rem;           /* 16px */
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+/* ============================================================
+   Display scale — 5 steps
+   ============================================================ */
+
+.t-h-sm {
+  font-family: var(--font-display);
+  font-size: 1rem;           /* 16px */
+  line-height: 1.3;
+  letter-spacing: var(--tracking-display-sm);
+  font-weight: 600;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+.t-h-md {
+  font-family: var(--font-display);
+  font-size: 1.1875rem;      /* 19px */
+  line-height: 1.25;
+  letter-spacing: var(--tracking-display-md);
+  font-weight: 600;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+.t-h-lg {
+  font-family: var(--font-display);
+  font-size: 1.5rem;         /* 24px */
+  line-height: 1.2;
+  letter-spacing: var(--tracking-display-md);
+  font-weight: 700;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+.t-h-xl {
+  font-family: var(--font-display);
+  font-size: 2.125rem;       /* 34px */
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display-lg);
+  font-weight: 700;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+.t-h-2xl {
+  font-family: var(--font-display);
+  font-size: 2.75rem;        /* 44px */
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display-xl);
+  font-weight: 700;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+/* ============================================================
+   Numeric scale — for stats / KPIs
+   Tabular nums, tight leading, optical-size aware.
+   ============================================================ */
+
+.n-sm {
+  font-family: var(--font-display);
+  font-size: 1.125rem;       /* 18px */
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.n-md {
+  font-family: var(--font-display);
+  font-size: 1.5rem;         /* 24px */
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.n-lg {
+  font-family: var(--font-display);
+  font-size: 2rem;           /* 32px */
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.panel {
+  background: var(--surface-1);
+  border: 1px solid var(--line-faint);
+  border-radius: var(--r-5);
+}
+
+.hr-dim {
+  height: 1px;
+  background: var(--line-faint);
+}
+
+/* a quiet scrollbar that fits the palette */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-hard);
+  border-radius: 8px;
+  border: 3px solid var(--surface-0);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Firefox equivalent */
+html {
+  scrollbar-color: var(--line-hard) transparent;
+  scrollbar-width: thin;
+}
+
+/* Prevent overscroll glow / bounce from leaking the page surface colour */
+body {
+  overscroll-behavior: none;
+}
+
+/* pulse used by the live scan indicator */
+@keyframes radar-pulse {
+  0% { box-shadow: 0 0 0 0 oklch(74% 0.13 155 / 0.55); }
+  70% { box-shadow: 0 0 0 7px oklch(74% 0.13 155 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(74% 0.13 155 / 0); }
+}
+
+.radar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--positive);
+  animation: radar-pulse 2.6s infinite;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Motion — refined, exponential easing only.
+   No bounce, no elastic. Things settle, they don't spring.
+   ============================================================ */
+
+/* fade-in used by view switching */
+@keyframes view-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.view-in {
+  animation: view-in 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* staggered entrance — used by the page header so eyebrow / title /
+   description / filter chips cascade in instead of arriving as one block */
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.stagger-in {
+  opacity: 0;
+  animation: stagger-in 540ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-1 { animation-delay: 60ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 280ms; }
+.stagger-4 { animation-delay: 420ms; }
+
+/* card hover lift — used on signal cards, partner cards, company cards.
+   Small vertical movement, soft ember-tinted shadow. */
+.card-lift {
+  transition:
+    transform 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.card-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -14px oklch(8% 0 0 / 0.7),
+              0 1px 0 0 oklch(72% 0.155 50 / 0.08) inset;
+}
+
+/* watch button toggle — clean scale-up + settle, no overshoot */
+@keyframes watch-pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.22); }
+  100% { transform: scale(1); }
+}
+.watch-pop {
+  display: inline-block;
+  animation: watch-pop 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* score bar — used on signal cards. Fills from 0 on mount. */
+.score-bar-fill {
+  transform-origin: left center;
+  animation: score-grow 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes score-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* drift chart line draw-in (parameterised by inline strokeDashoffset) */
+.line-draw {
+  transition: stroke-dashoffset 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Network graph motion — staggered assembly + hover traversal
+   ============================================================ */
+
+/* edges fade in from invisible. duration short, stagger longer. */
+@keyframes graph-edge-in {
+  from { opacity: 0; }
+  to   { opacity: var(--edge-opacity, 0.32); }
+}
+.graph-edge {
+  opacity: 0;
+  animation: graph-edge-in 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition:
+    opacity 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    stroke-width 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    stroke 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* nodes fade in. transitions cover the hover dim/bright behaviour. */
+@keyframes graph-node-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.graph-node {
+  opacity: 0;
+  animation: graph-node-in 460ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 200ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* labels arrive last */
+@keyframes graph-label-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.graph-label {
+  opacity: 0;
+  animation: graph-label-in 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 200ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* the busiest theme hub breathes slowly. transform-origin set inline because
+   SVG <circle> needs explicit coords for centred scaling. */
+@keyframes hub-breath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+.hub-breath {
+  animation: hub-breath 4200ms ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* click flash: brief opacity dip on the tapped node before navigation */
+@keyframes node-click-flash {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+.node-click-flash {
+  animation: node-click-flash 260ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* focus rings — restrained, accent-tinted */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* tooltip used in beliefs panel */
+.tip-wrap {
+  position: relative;
+  display: inline-flex;
+  cursor: help;
+}
+.tip-wrap > .tip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+  width: 280px;
+  background: var(--surface-3);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 30;
+  pointer-events: none;
+  box-shadow: 0 16px 40px oklch(0% 0 0 / 0.45);
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+.tip-wrap:hover > .tip,
+.tip-wrap:focus-visible > .tip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* very-thin one-line clamp helper for descriptive text */
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

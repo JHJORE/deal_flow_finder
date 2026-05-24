@@ -10,6 +10,9 @@ _REGISTRY_PATH = Path(__file__).resolve().parents[4] / "firms.yaml"
 class FirmSources:
     team_url: str | None = None
     portfolio_url: str | None = None
+    portfolio_sitemap_url: str | None = None
+    portfolio_html_json_url: str | None = None
+    portfolio_html_json_attribute: str | None = None
     blog_url: str | None = None
 
 

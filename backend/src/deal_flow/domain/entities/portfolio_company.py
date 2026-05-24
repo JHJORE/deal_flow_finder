@@ -11,4 +11,5 @@ class PortfolioCompany:
     sector: str | None = None
     description: str | None = None
     linkedin_url: str | None = None
+    photo_url: str | None = None
     founders: tuple[Founder, ...] = field(default_factory=tuple)

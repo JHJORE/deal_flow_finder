@@ -74,6 +74,15 @@ class PartnerDetail(BaseModel):
     )
     linkedin_url: str | None = Field(default=None, description=_LINKEDIN_HINT)
     x_url: str | None = Field(default=None, description=_X_HINT)
+    email: str | None = Field(
+        default=None,
+        description=(
+            "Direct contact email for this partner if shown on the profile "
+            "page — look in the bio text, a contact section, or near social "
+            "icons. Accept obfuscated forms like 'name [at] firm.com' and "
+            "normalise to a proper address. Return null if no email is shown."
+        ),
+    )
     education: list[str] = Field(
         default_factory=list,
         description=(
@@ -100,9 +109,11 @@ PARTNER_LISTING_PROMPT = (
 
 PARTNER_DETAIL_PROMPT = (
     "This is a single investment partner's profile page. Extract their job "
-    "title, full bio text, LinkedIn URL, X/Twitter URL, list of schools/"
-    "degrees, and list of prior companies. Socials are usually social icons "
-    "near the name — look carefully. Do not invent missing fields."
+    "title, full bio text, LinkedIn URL, X/Twitter URL, direct contact email "
+    "(if shown), list of schools/degrees, and list of prior companies. "
+    "Socials are usually social icons near the name — look carefully. Email "
+    "may appear in the bio, a contact section, or be obfuscated as "
+    "'name [at] firm.com'. Do not invent missing fields."
 )
 
 
