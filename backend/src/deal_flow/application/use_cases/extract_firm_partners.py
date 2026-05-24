@@ -7,28 +7,22 @@ from deal_flow.domain.entities.partner import Partner
 
 @dataclass(frozen=True)
 class ExtractFirmPartnersInput:
-    firm_domain: str
+    team_url: str
     limit: int = 10
 
 
 class ExtractFirmPartners:
-    """Discover the firm's team page, scrape the partner listing, then
-    batch-scrape each profile and merge the results into Partner entities."""
+    """Scrape the team listing, batch-scrape each profile, merge into Partners."""
 
     def __init__(self, extractor: WebExtractor) -> None:
         self._extractor = extractor
 
     def execute(self, input: ExtractFirmPartnersInput) -> list[Partner]:
-        sections = self._extractor.discover_firm_sections(input.firm_domain)
-        team_url = sections.get("team")
-        if not team_url:
-            return []
-
-        listings = self._extractor.scrape_partner_listing(team_url)[: input.limit]
+        listings = self._extractor.scrape_partner_listing(input.team_url)[: input.limit]
 
         for item in listings:
             if item.get("profile_url"):
-                item["profile_url"] = urljoin(team_url, item["profile_url"])
+                item["profile_url"] = urljoin(input.team_url, item["profile_url"])
 
         detail_urls = [item["profile_url"] for item in listings if item.get("profile_url")]
         details_by_url: dict[str, dict] = {}

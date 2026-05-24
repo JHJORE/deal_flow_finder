@@ -8,27 +8,22 @@ from deal_flow.domain.entities.portfolio_company import PortfolioCompany
 
 @dataclass(frozen=True)
 class ExtractFirmPortfolioInput:
-    firm_domain: str
+    portfolio_url: str
     limit: int = 10
 
 
 class ExtractFirmPortfolio:
-    """Discover, scrape listing, batch-scrape detail pages, merge into entities."""
+    """Scrape the portfolio listing, batch-scrape each detail page, merge."""
 
     def __init__(self, extractor: WebExtractor) -> None:
         self._extractor = extractor
 
     def execute(self, input: ExtractFirmPortfolioInput) -> list[PortfolioCompany]:
-        sections = self._extractor.discover_firm_sections(input.firm_domain)
-        portfolio_url = sections.get("portfolio")
-        if not portfolio_url:
-            return []
-
-        listings = self._extractor.scrape_portfolio_listing(portfolio_url)[: input.limit]
+        listings = self._extractor.scrape_portfolio_listing(input.portfolio_url)[: input.limit]
 
         for item in listings:
             if item.get("detail_url"):
-                item["detail_url"] = urljoin(portfolio_url, item["detail_url"])
+                item["detail_url"] = urljoin(input.portfolio_url, item["detail_url"])
 
         detail_urls = [item["detail_url"] for item in listings if item.get("detail_url")]
         details_by_url: dict[str, dict] = {}
