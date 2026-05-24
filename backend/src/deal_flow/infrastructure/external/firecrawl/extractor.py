@@ -4,7 +4,7 @@ from typing import Any
 from firecrawl import Firecrawl
 
 from deal_flow.application.ports.services.web_extractor import WebExtractor
-from deal_flow.infrastructure.external.firecrawl.cache import FileCache
+from deal_flow.infrastructure.cache.file_cache import FileCache
 from deal_flow.infrastructure.external.firecrawl.schemas import (
     BLOG_POSTS_PROMPT,
     PARTNER_DETAIL_PROMPT,

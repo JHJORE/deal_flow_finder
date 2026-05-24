@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 
+from deal_flow.domain.entities.twitter.twitter_snapshot import TwitterSnapshot
+
 
 @dataclass(frozen=True)
 class Partner:
@@ -11,3 +13,4 @@ class Partner:
     x_url: str | None = None
     education: tuple[str, ...] = field(default_factory=tuple)
     prior_experience: tuple[str, ...] = field(default_factory=tuple)
+    twitter: TwitterSnapshot | None = None

@@ -1,5 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 
+from deal_flow.application.use_cases.enrich_partner_with_twitter import (
+    EnrichPartnerWithTwitter,
+    EnrichPartnerWithTwitterInput,
+    handle_from_x_url,
+)
 from deal_flow.application.use_cases.extract_firm_blog_posts import (
     ExtractFirmBlogPosts,
     ExtractFirmBlogPostsInput,
@@ -17,6 +22,7 @@ from deal_flow.domain.entities.partner import Partner
 from deal_flow.domain.entities.portfolio_company import PortfolioCompany
 from deal_flow.infrastructure.external.firms_registry import FirmSources
 from deal_flow.interfaces.api.dependencies import (
+    get_enrich_partner_with_twitter,
     get_extract_firm_blog_posts,
     get_extract_firm_partners,
     get_extract_firm_portfolio,
@@ -63,6 +69,55 @@ def list_portfolio(
         return []
     return use_case.execute(
         ExtractFirmPortfolioInput(portfolio_url=sources.portfolio_url, limit=limit)
+    )
+
+
+@router.get("/{firm_domain}/partners/{handle}/twitter")
+def get_partner_with_twitter(
+    firm_domain: str,
+    handle: str,
+    max_tweets: int = 100,
+    max_followings: int = 200,
+    max_mentions: int = 40,
+    registry: dict[str, FirmSources] = Depends(get_firms_registry),
+    extract: ExtractFirmPartners = Depends(get_extract_firm_partners),
+    enrich: EnrichPartnerWithTwitter = Depends(get_enrich_partner_with_twitter),
+) -> Partner:
+    """Enrich one named partner with their raw Twitter signals.
+
+    The handle is matched against the partner's Firecrawl-extracted ``x_url``;
+    if no partner on the firm's team page has that handle, we 404 *before*
+    spending any twitterapi.io credits.
+    """
+    sources = _resolve(firm_domain, registry)
+    if not sources.team_url:
+        raise HTTPException(
+            status_code=404,
+            detail=f"firm '{firm_domain}' has no team_url in firms.yaml",
+        )
+    needle = handle.lower().lstrip("@")
+    partners = extract.execute(
+        ExtractFirmPartnersInput(team_url=sources.team_url, limit=50)
+    )
+    target = next(
+        (p for p in partners if handle_from_x_url(p.x_url) == needle),
+        None,
+    )
+    if target is None:
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"no partner with twitter handle '{handle}' found on "
+                f"{firm_domain}'s team page"
+            ),
+        )
+    return enrich.execute(
+        EnrichPartnerWithTwitterInput(
+            partner=target,
+            max_tweets=max_tweets,
+            max_followings=max_followings,
+            max_mentions=max_mentions,
+        )
     )
 
 
