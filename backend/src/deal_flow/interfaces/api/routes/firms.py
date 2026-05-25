@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from datetime import date, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -29,12 +30,14 @@ from deal_flow.domain.entities.partner_form_d_signal import PartnerFormDSignal
 from deal_flow.domain.entities.portfolio_company import PortfolioCompany
 from deal_flow.domain.value_objects.date_range import DateRange
 from deal_flow.infrastructure.external.firms_registry import FirmSources
+from deal_flow.infrastructure.persistence.output_store import OutputStore, slugify
 from deal_flow.interfaces.api.dependencies import (
     get_enrich_partner_with_twitter,
     get_extract_firm_blog_posts,
     get_extract_firm_partners,
     get_extract_firm_portfolio,
     get_firms_registry,
+    get_output_store,
     get_search_partner_form_d_filings,
 )
 
@@ -57,13 +60,20 @@ def list_partners(
     limit: int = 10,
     registry: dict[str, FirmSources] = Depends(get_firms_registry),
     use_case: ExtractFirmPartners = Depends(get_extract_firm_partners),
+    outputs: OutputStore = Depends(get_output_store),
 ) -> list[Partner]:
     sources = _resolve(firm_domain, registry)
     if not sources.team_url:
         return []
-    return use_case.execute(
-        ExtractFirmPartnersInput(team_url=sources.team_url, limit=limit)
+    partners = use_case.execute(
+        ExtractFirmPartnersInput(
+            team_url=sources.team_url,
+            limit=limit,
+            firm_name=firm_domain.split(".")[0],
+        )
     )
+    outputs.write([asdict(p) for p in partners], "firms", firm_domain, "partners.json")
+    return partners
 
 
 @router.get("/{firm_domain}/portfolio")
@@ -91,6 +101,7 @@ def get_partner_with_twitter(
     registry: dict[str, FirmSources] = Depends(get_firms_registry),
     extract: ExtractFirmPartners = Depends(get_extract_firm_partners),
     enrich: EnrichPartnerWithTwitter = Depends(get_enrich_partner_with_twitter),
+    outputs: OutputStore = Depends(get_output_store),
 ) -> Partner:
     """Enrich one named partner with their raw Twitter signals.
 
@@ -106,7 +117,11 @@ def get_partner_with_twitter(
         )
     needle = handle.lower().lstrip("@")
     partners = extract.execute(
-        ExtractFirmPartnersInput(team_url=sources.team_url, limit=50)
+        ExtractFirmPartnersInput(
+            team_url=sources.team_url,
+            limit=50,
+            firm_name=firm_domain.split(".")[0],
+        )
     )
     target = next(
         (p for p in partners if handle_from_x_url(p.x_url) == needle),
@@ -120,7 +135,7 @@ def get_partner_with_twitter(
                 f"{firm_domain}'s team page"
             ),
         )
-    return enrich.execute(
+    enriched = enrich.execute(
         EnrichPartnerWithTwitterInput(
             partner=target,
             max_tweets=max_tweets,
@@ -128,6 +143,11 @@ def get_partner_with_twitter(
             max_mentions=max_mentions,
         )
     )
+    outputs.write(
+        asdict(enriched),
+        "firms", firm_domain, "partners", slugify(target.name or handle), "twitter.json",
+    )
+    return enriched
 
 
 @router.get("/{firm_domain}/blog-posts")
@@ -155,19 +175,30 @@ def list_edgar_signals(
     search_filings: SearchPartnerFormDFilings = Depends(
         get_search_partner_form_d_filings
     ),
+    outputs: OutputStore = Depends(get_output_store),
 ) -> list[PartnerFormDSignal]:
     sources = _resolve(firm_domain, registry)
     if not sources.team_url:
         return []
     partners = extract_partners.execute(
-        ExtractFirmPartnersInput(team_url=sources.team_url, limit=limit)
+        ExtractFirmPartnersInput(
+            team_url=sources.team_url,
+            limit=limit,
+            firm_name=firm_domain.split(".")[0],
+        )
     )
     today = date.today()
     window = DateRange(start=today - timedelta(days=days), end=today)
-    return [
-        search_filings.execute(
+    signals: list[PartnerFormDSignal] = []
+    for p in partners:
+        if not p.name:
+            continue
+        sig = search_filings.execute(
             SearchPartnerFormDFilingsInput(partner_name=p.name, date_range=window)
         )
-        for p in partners
-        if p.name
-    ]
+        outputs.write(
+            asdict(sig),
+            "firms", firm_domain, "partners", slugify(p.name), "edgar.json",
+        )
+        signals.append(sig)
+    return signals

@@ -51,3 +51,11 @@ class WebExtractor(ABC):
     @abstractmethod
     def scrape_blog_posts(self, blog_url: str) -> list[dict]:
         ...
+
+    @abstractmethod
+    def search_x_profile(self, firm_name: str, partner_name: str) -> str | None:
+        """Find the partner's X/Twitter profile URL via web search.
+
+        Returns the full ``https://x.com/<handle>`` URL on success, ``None`` if
+        no plausible match. Used as a fallback when the team-page scrape didn't
+        pick up an X link for the partner."""
