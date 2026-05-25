@@ -31,6 +31,36 @@ npm run dev
 ```
 → `http://localhost:3000`
 
+## Environment
+
+Copy the example files and fill in keys. The backend reads `backend/.env`; the frontend reads `frontend/.env.local`.
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env.local
+```
+
+**Backend** (`backend/.env`) — all keys are optional; routes that need a missing key return an error at request time.
+
+| Key | Purpose | Where to get it |
+|---|---|---|
+| `APP_ENV` | `development` or `production` | — |
+| `FIRECRAWL_API_KEY` | Scrape firm team pages | https://www.firecrawl.dev/ → Dashboard → API Keys |
+| `SEC_USER_AGENT` | Identifies you to SEC EDGAR. Format: `Name email@domain.com` | Required by [SEC fair-access policy](https://www.sec.gov/os/accessing-edgar-data) — no signup |
+| `TWITTERAPI_IO_KEY` | Partner X/Twitter activity | https://twitterapi.io/ → Dashboard |
+| `APIFY_API_TOKEN` | Partner LinkedIn activity (via `harvestapi~linkedin-profile-posts` actor) | https://console.apify.com/settings/integrations |
+| `APIFY_LINKEDIN_ACTOR_ID` | Override the LinkedIn actor (default: `harvestapi~linkedin-profile-posts`) | — |
+| `GEMINI_API_KEY` | LLM summarization for `/firms/{domain}/partner-profiles?summarize=true` | https://aistudio.google.com/apikey |
+| `DATABASE_URL` | Postgres connection string (reserved; not yet wired) | — |
+| `*_CACHE_DIR` / `*_CACHE_REFRESH` | Per-provider on-disk cache location and force-refresh flag | — |
+| `PARTNER_DATA_DIR` / `OUTPUT_DIR` / `BACKEND_ROOT` | Path overrides; defaults resolve relative to `backend/` | — |
+
+**Frontend** (`frontend/.env.local`):
+
+| Key | Purpose |
+|---|---|
+| `NEXT_PUBLIC_API_BASE_URL` | Backend base URL. Defaults to `/api` (Vercel routes it to the Python function). Set to `http://127.0.0.1:8000` for local dev against `uvicorn`. |
+
 ## Test
 
 ```bash

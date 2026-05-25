@@ -58,7 +58,10 @@ from deal_flow.application.use_cases.search_partner_form_d_filings import (
 )
 from deal_flow.application.use_cases.summarize_partner_bio import SummarizePartnerBio
 from deal_flow.application.use_cases.thematize_items import ThematizeItems
+import psycopg
+
 from deal_flow.infrastructure.config.settings import get_settings
+from deal_flow.infrastructure.db.connection import get_connection
 from deal_flow.infrastructure.external.apify.linkedin_posts_collector import (
     HarvestApiLinkedInCollector,
 )
@@ -71,13 +74,13 @@ from deal_flow.infrastructure.persistence.file_board_seat_log import FileBoardSe
 from deal_flow.infrastructure.persistence.file_partner_directory import (
     FilePartnerDirectory,
 )
-from deal_flow.infrastructure.persistence.file_partner_profile_repository import (
-    FilePartnerProfileRepository,
-)
-from deal_flow.infrastructure.persistence.file_portfolio_company_repository import (
-    FilePortfolioCompanyRepository,
-)
 from deal_flow.infrastructure.persistence.output_store import OutputStore
+from deal_flow.infrastructure.persistence.postgres_partner_profile_repository import (
+    PostgresPartnerProfileRepository,
+)
+from deal_flow.infrastructure.persistence.postgres_portfolio_company_repository import (
+    PostgresPortfolioCompanyRepository,
+)
 
 
 @lru_cache
@@ -201,9 +204,10 @@ def get_llm_structured_output() -> LlmStructuredOutput:
     )
 
 
-@lru_cache
-def get_partner_profile_repository() -> PartnerProfileRepository:
-    return FilePartnerProfileRepository(data_dir=get_settings().partner_data_dir)
+def get_partner_profile_repository(
+    conn: psycopg.Connection = Depends(get_connection),
+) -> PartnerProfileRepository:
+    return PostgresPartnerProfileRepository(conn=conn)
 
 
 def get_summarize_partner_bio(
@@ -244,9 +248,10 @@ def get_load_firm_partner_profiles(
     return LoadFirmPartnerProfiles(repo=repo)
 
 
-@lru_cache
-def get_portfolio_company_repository() -> PortfolioCompanyRepository:
-    return FilePortfolioCompanyRepository(data_dir=get_settings().partner_data_dir)
+def get_portfolio_company_repository(
+    conn: psycopg.Connection = Depends(get_connection),
+) -> PortfolioCompanyRepository:
+    return PostgresPortfolioCompanyRepository(conn=conn)
 
 
 def get_load_firm_portfolio_companies(

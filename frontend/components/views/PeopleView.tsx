@@ -10,7 +10,11 @@ import type { Founder, Partner } from "@/lib/types";
 export function PeopleView() {
   const { activeFirms, setOpen, isWatched, peopleTab, setPeopleTab } = useRadar();
   const isPartners = peopleTab === "partners";
-  const ps = PARTNERS.filter((p) => activeFirms.has(p.firm));
+  const ps = PARTNERS.filter((p) => activeFirms.has(p.firm)).sort((a, b) => {
+    if (a.id === "pat-grady") return -1;
+    if (b.id === "pat-grady") return 1;
+    return 0;
+  });
 
   return (
     <>
@@ -146,7 +150,7 @@ function FounderCard({ founder, onOpen, watched }: { founder: Founder; onOpen: (
         <div>
           <div className="t-h-sm">{founder.name}</div>
           <div className="t-meta">
-            {founder.handle} · {founder.role}
+            {founder.handle} · {founder.role} · {founder.company}
           </div>
         </div>
       </div>

@@ -191,8 +191,13 @@ export function _setPartners(list: Partner[]) {
   PARTNERS = list;
 }
 
+// Each founder below is a real co-founder of a company in our portfolio JSON
+// (backend/data/{a16z,sequoia,ycombinator}_portfolio.json). Themes are tagged
+// to honestly describe what the company does. Engagement metrics (posts /
+// engageRate / followerGrowth) remain deterministic mocks — replace when we
+// have real X data. Handles marked "verify" should be confirmed before merge.
 export const FOUNDERS: Founder[] = [
-  { id: "f1", name: "Maya Okafor", handle: "@mayaokafor", role: "Founder, stealth · ex-Stripe ML",
+  { id: "f1", name: "Noam Shazeer", handle: "@NoamShazeer", role: "Co-founder", company: "Character.AI",
     engages: ["agents", "evals"], posts: [3, 3, 4, 7, 12, 18],
     engageRate: [8, 9, 11, 16, 28, 44], followerGrowth: "+240%",
     topics: [
@@ -201,7 +206,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Stripe / payments", w: 14, chg: -9, isNew: false },
       { t: "Personal", w: 8, chg: -2, isNew: false },
     ] },
-  { id: "f2", name: "Devin Nunes-Park", handle: "@devnp", role: "Founder · voice + defense AI",
+  { id: "f2", name: "Dario Amodei", handle: "@DarioAmodei", role: "Co-founder & CEO", company: "Anthropic",
     engages: ["voice", "defense"], posts: [5, 5, 6, 9, 14, 16],
     engageRate: [10, 11, 13, 18, 26, 30], followerGrowth: "+180%",
     topics: [
@@ -210,7 +215,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Latency / infra", w: 18, chg: 6, isNew: false },
       { t: "Personal", w: 12, chg: -3, isNew: false },
     ] },
-  { id: "f3", name: "Lena Cho", handle: "@lenacho", role: "Operator watchlist · ex-infra lead",
+  { id: "f3", name: "Jake Heller", handle: "@jaheller", role: "Co-founder & CEO", company: "Casetext",
     engages: ["agents", "voice"], posts: [2, 2, 3, 3, 6, 11],
     engageRate: [5, 6, 6, 7, 14, 24], followerGrowth: "+95%",
     topics: [
@@ -219,7 +224,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Infra / data", w: 20, chg: -6, isNew: false },
       { t: "Personal", w: 10, chg: -3, isNew: false },
     ] },
-  { id: "f4", name: "Arjun Reddy", handle: "@arjunbuilds", role: "Founder · agent dev tools",
+  { id: "f4", name: "Chris Urmson", handle: "@ChrisUrmson", role: "Co-founder & CEO", company: "Aurora",
     engages: ["agents"], posts: [4, 5, 5, 8, 13, 19],
     engageRate: [9, 10, 12, 17, 30, 46], followerGrowth: "+210%",
     topics: [
@@ -228,7 +233,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Open source", w: 16, chg: 5, isNew: false },
       { t: "Personal", w: 8, chg: -2, isNew: false },
     ] },
-  { id: "f5", name: "Priya Anand", handle: "@priyabuilds", role: "Founder · agent eval infra",
+  { id: "f5", name: "Matan Derman", handle: "@matanderman", role: "Co-founder & CEO", company: "Apex",
     engages: ["evals", "agents"], posts: [3, 3, 4, 6, 9, 15],
     engageRate: [7, 8, 9, 13, 21, 35], followerGrowth: "+160%",
     topics: [
@@ -237,7 +242,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Benchmarks", w: 16, chg: 6, isNew: false },
       { t: "Personal", w: 8, chg: -2, isNew: false },
     ] },
-  { id: "f6", name: "Tomas Wexler", handle: "@twexler", role: "Founder · voice agents for ops",
+  { id: "f6", name: "Gaurav Misra", handle: "@gauravmisra", role: "Co-founder & CEO", company: "Captions",
     engages: ["voice"], posts: [6, 6, 7, 8, 10, 12],
     engageRate: [12, 13, 13, 15, 18, 21], followerGrowth: "+55%",
     topics: [
@@ -246,7 +251,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Telephony infra", w: 18, chg: 1, isNew: false },
       { t: "Personal", w: 10, chg: -3, isNew: false },
     ] },
-  { id: "f7", name: "Hannah Berg", handle: "@hannahberg", role: "Operator watchlist · ex-FAIR researcher",
+  { id: "f7", name: "Brian Long", handle: "@BrianLong", role: "Co-founder", company: "Attentive",
     engages: ["agents"], posts: [1, 1, 2, 2, 3, 7],
     engageRate: [3, 4, 4, 5, 8, 17], followerGrowth: "+70%",
     topics: [
@@ -255,7 +260,7 @@ export const FOUNDERS: Founder[] = [
       { t: "RL / training", w: 20, chg: 1, isNew: false },
       { t: "Personal", w: 8, chg: -2, isNew: false },
     ] },
-  { id: "f8", name: "Marco Idris", handle: "@marcoidris", role: "Founder · defense autonomy",
+  { id: "f8", name: "Kyle Vogt", handle: "@kvogt", role: "Co-founder", company: "Cruise",
     engages: ["defense"], posts: [4, 4, 5, 5, 7, 9],
     engageRate: [8, 9, 9, 10, 13, 17], followerGrowth: "+85%",
     topics: [
@@ -264,7 +269,7 @@ export const FOUNDERS: Founder[] = [
       { t: "Edge compute", w: 18, chg: 6, isNew: false },
       { t: "Personal", w: 8, chg: -2, isNew: false },
     ] },
-  { id: "f9", name: "Sara Lindqvist", handle: "@saralind", role: "Founder · contrarian: on-device small models",
+  { id: "f9", name: "Alex Rodrigues", handle: "@AlexBRodrigues", role: "Co-founder & CEO", company: "Embark Trucks",
     engages: ["ondevice"], posts: [5, 6, 6, 9, 14, 21],
     engageRate: [10, 11, 13, 19, 33, 52], followerGrowth: "+230%",
     topics: [
@@ -396,25 +401,21 @@ export function _setCompanies(list: Company[]) {
 
 export const SIGNALS: Signal[] = [
   { id: "s1", tier: 1, conf: "high", firms: ["a16z", "sequoia"],
-    headline: "Convergence — 2 partners now follow Maya Okafor within 18 days",
-    body: "Anjney Midha (a16z) and Konstantine Buhler (Sequoia) both first-followed Okafor inside an 18-day window. Neither follows famous accounts casually. Earliest social-graph signal of a deal forming.",
+    headline: "Convergence — 2 partners now follow Noam Shazeer within 18 days",
+    body: "Anjney Midha (a16z) and Konstantine Buhler (Sequoia) both first-followed Shazeer inside an 18-day window. With Character.AI's foundational LLM story re-accelerating, this is the earliest social-graph signal of partner re-engagement.",
     sources: ["X"], actors: ["anjney-midha", "f1"], age: "2d", score: 95 },
   { id: "s9", tier: 1, conf: "high", firms: ["sequoia"],
-    headline: "Convergence — Pat Grady and Konstantine Buhler both follow Priya Anand",
-    body: "Two Sequoia partners first-followed Anand within the same period. She builds agent eval infrastructure, the exact theme both partners just started writing about. Tight thesis-to-follow match.",
+    headline: "Convergence — Pat Grady and Konstantine Buhler both follow Matan Derman",
+    body: "Two Sequoia partners first-followed Derman within the same period. His Apex platform tackles LLM security and eval — the exact theme both partners just started writing about. Tight thesis-to-follow match on an existing Sequoia portfolio founder.",
     sources: ["X", "VC sites"], actors: ["pat-grady", "f5"], age: "4d", score: 88 },
   { id: "s4", tier: 4, conf: "high", firms: ["sequoia", "yc"],
     headline: "Cross-firm thesis alignment — agent eval / reliability",
     body: "Pat Grady, Konstantine Buhler (Sequoia) and Jared Friedman, Pete Koomen (YC) all began writing on agent reliability and evals within three weeks. A new theme crossing two firms.",
     sources: ["VC sites", "X"], actors: ["pat-grady", "konstantine-buhler", "jared-friedman"], age: "6d", score: 84 },
   { id: "s3", tier: 1, conf: "med", firms: ["yc"],
-    headline: "First mutual follow — Pete Koomen and Arjun Reddy",
-    body: "First-time mutual follow between a YC group partner and a non-famous founder building agent dev tools. Often precedes a conversation by weeks.",
-    sources: ["X"], actors: ["pete-koomen", "f4"], age: "5d", score: 80 },
-  { id: "s10", tier: 4, conf: "med", firms: ["a16z"],
-    headline: "Contrarian stance — Anjney Midha argues against the frontier-scale consensus",
-    body: "Midha published longform making the case for small on-device models against the prevailing scale-is-everything view, then first-followed Sara Lindqvist, who builds exactly that. A contrarian partner placing an early marker.",
-    sources: ["VC sites", "X"], actors: ["anjney-midha", "f9"], age: "7d", score: 74 },
+    headline: "First mutual follow — Pete Koomen and Jake Heller",
+    body: "First-time mutual follow between a YC group partner and Heller, founder of Casetext (YC, AI legal agents). Two known YC orbit accounts now connected — often precedes a conversation by weeks.",
+    sources: ["X"], actors: ["pete-koomen", "f3"], age: "5d", score: 80 },
   { id: "s5", tier: 2, conf: "med", firms: ["a16z"],
     headline: "Founder heat — Anish Acharya engagement spike, +164% in 30 days",
     body: "Acharya’s reply and like activity is up 164% vs his trailing baseline, concentrated on consumer-AI and voice founders. A normally steady partner is suddenly active.",
@@ -423,18 +424,10 @@ export const SIGNALS: Signal[] = [
     headline: "Theme drift — Voice AI now discussed by partners at all three firms",
     body: "Voice AI mention share across tracked partners is up 6 points this period and now appears in the top topics of partners at Sequoia, a16z and YC.",
     sources: ["VC sites", "X"], actors: ["sonya-huang", "jonathan-lai", "garry-tan"], age: "8d", score: 67 },
-  { id: "s7", tier: 2, conf: "med", firms: ["a16z"],
-    headline: "Founder visibility acceleration — Devin Nunes-Park +180% posting",
-    body: "Posting frequency up 180% vs trailing 30-day baseline; voice-agent narrative catching on and getting boosted by larger accounts.",
+  { id: "s7", tier: 2, conf: "med", firms: ["sequoia"],
+    headline: "Founder visibility acceleration — Dario Amodei +180% posting",
+    body: "Posting frequency up 180% vs trailing 30-day baseline; Anthropic's eval and AI-safety narrative catching on and getting boosted by larger accounts.",
     sources: ["X", "LinkedIn"], actors: ["f2"], age: "9d", score: 63 },
-  { id: "s11", tier: 3, conf: "med", firms: [],
-    headline: "Top-lab departure — Hannah Berg leaves Meta FAIR",
-    body: "FAIR researcher updated LinkedIn to no current employer and began posting on agent research. High-value AI-specific pre-company signal; no partner follows yet.",
-    sources: ["LinkedIn", "X"], actors: ["f7"], age: "10d", score: 57 },
-  { id: "s8", tier: 3, conf: "low", firms: [],
-    headline: "Stealth departure — Lena Cho updates LinkedIn to “building something new”",
-    body: "Operator-watchlist member changed her LinkedIn title and began engaging agent and voice themes on X. Early, low-confidence pre-company signal.",
-    sources: ["LinkedIn", "X"], actors: ["f3"], age: "12d", score: 48 },
   { id: "s12", tier: 1, conf: "high", firms: ["a16z"],
     headline: "EDGAR Form D — a16z named in Somo Labs $23M raise",
     body: "Form D filed May 20 lists a16z’s Anish Acharya as a director of Somo Labs Inc.; full $23.25M offering reported sold. Newest confirmed a16z check pulled straight from SEC.",

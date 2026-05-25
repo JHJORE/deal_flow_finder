@@ -33,6 +33,8 @@ class Settings(BaseSettings):
 
     app_env: str = "development"
 
+    database_url: str = ""
+
     firecrawl_api_key: str = ""
     firecrawl_cache_dir: Path = _BACKEND_ROOT / ".firecrawl"
     firecrawl_cache_refresh: bool = False

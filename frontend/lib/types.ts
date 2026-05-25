@@ -67,6 +67,7 @@ export type Founder = {
   name: string;
   handle: string;
   role: string;
+  company: string;
   engages: ThemeKey[];
   posts: number[];
   engageRate: number[];
