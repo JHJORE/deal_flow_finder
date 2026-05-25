@@ -5,8 +5,9 @@ from typing import Any
 import yaml
 
 from deal_flow.application.dtos.team_url import TeamUrl
+from deal_flow.infrastructure.config.settings import _BACKEND_ROOT
 
-_REGISTRY_PATH = Path(__file__).resolve().parents[4] / "firms.yaml"
+_REGISTRY_PATH = _BACKEND_ROOT / "firms.yaml"
 
 
 @dataclass(frozen=True)

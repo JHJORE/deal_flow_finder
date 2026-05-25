@@ -1,9 +1,31 @@
+import os
 from functools import lru_cache
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-_BACKEND_ROOT = Path(__file__).resolve().parents[4]
+
+def _find_backend_root() -> Path:
+    """Locate the backend dir that contains firms.yaml and data/.
+
+    Local dev keeps source and data files together under backend/, but Vercel
+    pip-installs the package into site-packages — separate from the bundled
+    firms.yaml and data/ files. A fixed parents[N] climb only works in one of
+    those layouts. We try several strategies, anchored on firms.yaml.
+    """
+    if env := os.environ.get("BACKEND_ROOT"):
+        return Path(env)
+    cwd = Path.cwd()
+    if (cwd / "firms.yaml").exists():
+        return cwd
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if (parent / "firms.yaml").exists():
+            return parent
+    return Path(__file__).resolve().parents[4]
+
+
+_BACKEND_ROOT = _find_backend_root()
 
 
 class Settings(BaseSettings):
