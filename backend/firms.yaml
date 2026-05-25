@@ -1,17 +1,24 @@
 a16z.com:
-  team_url: https://a16z.com/team/
+  team_payload_url: https://a16z.com/team/
+  team_payload_attribute: data-payload
+  team_payload_role_filter: Investing
   portfolio_url: https://a16z.com/portfolio/
   portfolio_html_json_url: https://a16z.com/portfolio/
   portfolio_html_json_attribute: data-companies
   blog_url: https://a16z.com/news-content/
 
 sequoiacap.com:
-  team_url: https://sequoiacap.com/our-team/
+  team_urls:
+    - url: https://sequoiacap.com/our-team/?_role=seed-early
+      focus_areas: [Seed/Early]
+    - url: https://sequoiacap.com/our-team/?_role=growth
+      focus_areas: [Growth]
   portfolio_url: https://sequoiacap.com/our-companies/#all-panel
   portfolio_sitemap_url: https://sequoiacap.com/company-sitemap.xml
   blog_url: https://sequoiacap.com/stories/
 
 ycombinator.com:
-  team_url: https://www.ycombinator.com/partners
+  team_urls:
+    - https://www.ycombinator.com/partners
   portfolio_url: https://www.ycombinator.com/companies
   blog_url: https://www.ycombinator.com/blog

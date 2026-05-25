@@ -53,9 +53,10 @@ class _PartnerListing(BaseModel):
 class PartnerListingPage(BaseModel):
     partners: list[_PartnerListing] = Field(
         description=(
-            "Every investment partner shown on the team page (general partner, "
-            "partner, investment partner). EXCLUDE operating staff, recruiters, "
-            "marketing, comms, EAs. Return at most 10."
+            "EVERY investment partner shown on the team page (general partner, "
+            "partner, investment partner, growth partner, scout partner, "
+            "venture partner). Do not cap or truncate the list — include all "
+            "of them. EXCLUDE operating staff, recruiters, marketing, comms, EAs."
         )
     )
 
@@ -102,9 +103,11 @@ class PartnerDetail(BaseModel):
 
 
 PARTNER_LISTING_PROMPT = (
-    "Extract every investment partner on this team page. Include each "
-    "partner's profile URL (may be relative) and any LinkedIn/X links "
-    "visible on the card or in a social-icon strip. Return at most 10."
+    "Extract EVERY investment partner on this team page. Do not cap or "
+    "truncate the list — include every single person whose role is "
+    "investment-side. Include each partner's profile URL (may be relative) "
+    "and any LinkedIn/X links visible on the card or in a social-icon strip. "
+    "Exclude operating staff, recruiters, marketing, comms, and EAs."
 )
 
 PARTNER_DETAIL_PROMPT = (

@@ -93,10 +93,15 @@ def get_sec_filing_searcher() -> SecFilingSearcher:
     )
 
 
-@lru_cache
-def get_board_seat_log() -> BoardSeatLog:
+def get_board_seat_log(firm_domain: str) -> BoardSeatLog:
+    """Per-firm log so each firm gets its own curated output file at
+    ``.outputs/firms/{firm_domain}/board_seats.json``. ``firm_domain`` is
+    pulled from the route's path params by FastAPI.
+    """
     settings = get_settings()
-    return FileBoardSeatLog(path=settings.sec_cache_dir / "board_seats.json")
+    return FileBoardSeatLog(
+        path=settings.output_dir / "firms" / firm_domain / "board_seats.json",
+    )
 
 
 def get_search_partner_form_d_filings(
