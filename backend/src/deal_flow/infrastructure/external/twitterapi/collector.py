@@ -51,9 +51,9 @@ class TwitterApiCollector(TwitterCollector):
             hit = self._cache.read(key)
             if hit is not None:
                 return hit["payload"]
-        payload, raw = fetch()
+        payload, _raw = fetch()
         self._cache.write(
-            key, {"op": op, "inputs": key_inputs, "raw": raw, "payload": payload}
+            key, {"op": op, "inputs": key_inputs, "payload": payload}
         )
         return payload
 

@@ -100,8 +100,8 @@ class FirecrawlExtractor(WebExtractor):
             hit = self._cache.read(key)
             if hit is not None:
                 return hit["payload"]
-        payload, raw = fetch()
-        self._cache.write(key, {"op": op, "inputs": key_inputs, "raw": raw, "payload": payload})
+        payload, _raw = fetch()
+        self._cache.write(key, {"op": op, "inputs": key_inputs, "payload": payload})
         return payload
 
     def _scrape(
@@ -284,3 +284,53 @@ class FirecrawlExtractor(WebExtractor):
             wait_for=5000,
         )
         return payload.get("posts") or []
+
+    def search_x_profile(self, firm_name: str, partner_name: str) -> str | None:
+        """Find a partner's X profile URL via Firecrawl's web search.
+
+        Used as a fallback when the firm's team page didn't surface an X link.
+        Returns canonical ``https://x.com/<handle>`` or ``None``.
+        """
+        def fetch() -> tuple[str | None, Any]:
+            result = self._app.search(
+                query=f'"{partner_name}" {firm_name} (site:x.com OR site:twitter.com)',
+                limit=10,
+                include_domains=["x.com", "twitter.com"],
+            )
+            raw = _to_dict(result)
+            for item in raw.get("web") or []:
+                normalized = _validate_x_profile_url(_to_dict(item).get("url") or "")
+                if normalized:
+                    return normalized, raw
+            return None, raw
+
+        return self._cached(
+            "search_x_profile",
+            {"firm_name": firm_name, "partner_name": partner_name},
+            fetch,
+        )
+
+
+_TWITTER_HOSTS = {"x.com", "www.x.com", "twitter.com", "www.twitter.com"}
+_HANDLE_RE = re.compile(r"^[A-Za-z0-9_]{1,15}$")
+_RESERVED_X_PATHS = {
+    "home", "explore", "notifications", "messages", "search", "i", "intent",
+    "share", "compose", "settings", "login", "signup", "tos", "privacy",
+    "about", "status",
+}
+
+
+def _validate_x_profile_url(url: str) -> str | None:
+    """Canonicalize ``url`` to ``https://x.com/<handle>`` if it's a real X
+    profile, else ``None``. Filters search/intent/status pages and reserved
+    usernames."""
+    if not url:
+        return None
+    from urllib.parse import urlparse
+    parsed = urlparse(url.strip())
+    if (parsed.netloc or "").lower() not in _TWITTER_HOSTS:
+        return None
+    parts = [p for p in parsed.path.split("/") if p]
+    if not parts or not _HANDLE_RE.match(parts[0]) or parts[0].lower() in _RESERVED_X_PATHS:
+        return None
+    return f"https://x.com/{parts[0]}"

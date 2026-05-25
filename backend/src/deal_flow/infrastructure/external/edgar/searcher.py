@@ -1,4 +1,5 @@
 import time
+import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -49,6 +50,29 @@ class EdgarFullTextSearcher(SecFilingSearcher):
         self._cache.write(key, {"hits": hits})
         return hits
 
+    def fetch_primary_doc(self, accession_number: str, cik: str) -> dict:
+        """Fetch and parse a Form D primary_doc.xml. Cached like search."""
+        if not accession_number or not cik:
+            return _empty_primary_doc()
+        key = FileCache.key_for(
+            "edgar.primary_doc", adsh=accession_number, cik=cik
+        )
+        if not self._refresh:
+            cached = self._cache.read(key)
+            if cached is not None:
+                return cached["payload"]
+
+        url = (
+            f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/"
+            f"{accession_number.replace('-', '')}/primary_doc.xml"
+        )
+        resp = self._client.get(url, headers={"Accept": "application/xml"})
+        resp.raise_for_status()
+        time.sleep(_INTER_PAGE_DELAY_S)
+        parsed = _parse_primary_doc(resp.text)
+        self._cache.write(key, {"payload": parsed})
+        return parsed
+
     def _fetch_all(self, query: str, start: date, end: date) -> list[dict]:
         collected: list[dict] = []
         offset = 0
@@ -78,6 +102,45 @@ class EdgarFullTextSearcher(SecFilingSearcher):
         )
         response.raise_for_status()
         return response.json()
+
+
+def _empty_primary_doc() -> dict:
+    return {
+        "issuer_name": "",
+        "related_persons": [],
+        "industry_group": None,
+        "is_pooled_investment_fund": False,
+    }
+
+
+def _parse_primary_doc(xml_text: str) -> dict:
+    """Parse Form D primary_doc.xml (schema X0708, no namespace)."""
+    root = ET.fromstring(xml_text)
+    related: list[dict] = []
+    for info in root.findall("relatedPersonsList/relatedPersonInfo"):
+        related.append({
+            "first_name": _text(info, "relatedPersonName/firstName"),
+            "last_name": _text(info, "relatedPersonName/lastName"),
+            "relationships": [
+                (r.text or "").strip()
+                for r in info.findall("relatedPersonRelationshipList/relationship")
+                if r.text
+            ],
+            "relationship_clarification": _text(info, "relationshipClarification") or None,
+        })
+    return {
+        "issuer_name": _text(root, "primaryIssuer/entityName"),
+        "related_persons": related,
+        "industry_group": _text(root, "offeringData/industryGroup/industryGroupType") or None,
+        "is_pooled_investment_fund": _text(
+            root, "offeringData/typesOfSecuritiesOffered/isPooledInvestmentFundType"
+        ).lower() == "true",
+    }
+
+
+def _text(node: ET.Element, path: str) -> str:
+    found = node.find(path)
+    return (found.text or "").strip() if found is not None and found.text else ""
 
 
 def _normalize(raw_hit: dict) -> dict:

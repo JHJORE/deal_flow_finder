@@ -26,11 +26,17 @@ from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearch
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
 from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
+from deal_flow.infrastructure.persistence.output_store import OutputStore
 
 
 @lru_cache
 def get_firms_registry() -> dict[str, FirmSources]:
     return load_registry()
+
+
+@lru_cache
+def get_output_store() -> OutputStore:
+    return OutputStore(get_settings().output_dir)
 
 
 @lru_cache

@@ -96,6 +96,46 @@ def test_paginates_until_exhausted(tmp_path, monkeypatch):
     assert offsets == ["0", "100"]
 
 
+def test_fetch_primary_doc_parses_related_persons(tmp_path):
+    xml = """<?xml version="1.0"?>
+<edgarSubmission>
+  <primaryIssuer><entityName>AH 2026 Fund, L.P.</entityName></primaryIssuer>
+  <relatedPersonsList>
+    <relatedPersonInfo>
+      <relatedPersonName><firstName>Marc</firstName><lastName>Andreessen</lastName></relatedPersonName>
+      <relatedPersonRelationshipList>
+        <relationship>Executive Officer</relationship>
+      </relatedPersonRelationshipList>
+      <relationshipClarification>Managing member of GP</relationshipClarification>
+    </relatedPersonInfo>
+  </relatedPersonsList>
+  <offeringData>
+    <industryGroup><industryGroupType>Pooled Investment Fund</industryGroupType></industryGroup>
+    <typesOfSecuritiesOffered><isPooledInvestmentFundType>true</isPooledInvestmentFundType></typesOfSecuritiesOffered>
+  </offeringData>
+</edgarSubmission>"""
+
+    def handler(request):
+        return httpx.Response(200, text=xml)
+
+    doc = _build(tmp_path, handler).fetch_primary_doc(
+        accession_number="0001104659-26-002089", cik="0002084463"
+    )
+    assert doc == {
+        "issuer_name": "AH 2026 Fund, L.P.",
+        "related_persons": [
+            {
+                "first_name": "Marc",
+                "last_name": "Andreessen",
+                "relationships": ["Executive Officer"],
+                "relationship_clarification": "Managing member of GP",
+            }
+        ],
+        "industry_group": "Pooled Investment Fund",
+        "is_pooled_investment_fund": True,
+    }
+
+
 def test_cache_hit_skips_network(tmp_path):
     calls = {"n": 0}
 

@@ -1,5 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
+
+from deal_flow.domain.value_objects.form_d_related_person import FormDRelatedPerson
 
 
 @dataclass(frozen=True)
@@ -9,3 +11,6 @@ class FormDFiling:
     issuer_cik: str
     filed_at: date
     url: str
+    related_persons: tuple[FormDRelatedPerson, ...] = field(default_factory=tuple)
+    is_pooled_investment_fund: bool = False
+    industry_group: str | None = None

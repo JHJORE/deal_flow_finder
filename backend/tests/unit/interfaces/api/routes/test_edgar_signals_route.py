@@ -4,11 +4,21 @@ from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
 from deal_flow.domain.entities.partner import Partner
+from deal_flow.infrastructure.persistence.output_store import OutputStore
 from deal_flow.interfaces.api.app import app
 from deal_flow.interfaces.api.dependencies import (
     get_extract_firm_partners,
+    get_output_store,
     get_sec_filing_searcher,
 )
+
+
+class _NoopStore(OutputStore):
+    def __init__(self) -> None:  # bypass mkdir
+        pass
+
+    def write(self, payload, *parts):  # type: ignore[override]
+        return None
 
 
 class _FakePartners:
@@ -28,10 +38,21 @@ class _FakeSearcher(SecFilingSearcher):
             }
         ]
 
+    def fetch_primary_doc(self, accession_number: str, cik: str) -> dict:
+        return {
+            "issuer_name": "Superhuman Platform Inc.",
+            "related_persons": [
+                {"first_name": "Reid", "last_name": "Hoffman", "relationships": ["Director"]}
+            ],
+            "industry_group": None,
+            "is_pooled_investment_fund": False,
+        }
+
 
 def test_edgar_signals_route_returns_filings_for_each_partner():
     app.dependency_overrides[get_extract_firm_partners] = lambda: _FakePartners()
     app.dependency_overrides[get_sec_filing_searcher] = lambda: _FakeSearcher()
+    app.dependency_overrides[get_output_store] = lambda: _NoopStore()
     try:
         with TestClient(app) as client:
             response = client.get(
@@ -52,6 +73,7 @@ def test_edgar_signals_route_returns_filings_for_each_partner():
 def test_edgar_signals_route_returns_404_for_unknown_firm():
     app.dependency_overrides[get_extract_firm_partners] = lambda: _FakePartners()
     app.dependency_overrides[get_sec_filing_searcher] = lambda: _FakeSearcher()
+    app.dependency_overrides[get_output_store] = lambda: _NoopStore()
     try:
         with TestClient(app) as client:
             response = client.get("/api/firms/unknown.example/edgar-signals")
