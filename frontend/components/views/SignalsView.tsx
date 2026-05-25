@@ -7,7 +7,7 @@ import { SignalCard } from "@/components/SignalCard";
 import { FILINGS, PARTNERS, SIGNALS, tierName } from "@/lib/data";
 import { useRadar } from "@/lib/state";
 import type { Signal } from "@/lib/types";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const TIER_FILTERS: { value: "all" | "1" | "2" | "3" | "4"; label: string }[] = [
   { value: "all", label: "All signals" },
@@ -42,19 +42,16 @@ export function SignalsView() {
   const edgar = visible.filter((s) => s.sources.includes("EDGAR")).length;
   const spiking = PARTNERS.filter((p) => activeFirms.has(p.firm) && p.spike).length;
 
-  const dateline = useMemo(() => {
-    const d = new Date();
-    const formatted = d.toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    return `Daily digest · ${formatted}`;
-  }, []);
+  const dateline = useLiveDateline();
 
   return (
     <>
-      <PageHeader eyebrow="Signal feed · live" dateline={dateline} />
+      <PageHeader
+        eyebrow="Signal feed · live"
+        title={<>What partners and portfolio companies are doing right now.</>}
+        description="Cross-source observations from X, LinkedIn and SEC EDGAR, ranked by tier."
+        dateline={dateline}
+      />
 
       <KPIGrid>
         <KPI label="Live signals" value={visible.length} hint="in current filter" />
@@ -104,11 +101,29 @@ export function SignalsView() {
   );
 }
 
+function useLiveDateline() {
+  const [now, setNow] = useState<Date | null>(null);
+  useEffect(() => {
+    setNow(new Date());
+    const id = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(id);
+  }, []);
+  return useMemo(() => {
+    if (!now) return undefined;
+    const formatted = now.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    return `Daily digest · ${formatted}`;
+  }, [now]);
+}
+
 function ScanLine() {
   return (
     <div className="my-5 flex items-center gap-3 font-mono text-meta tabnum text-ink-4">
       <span className="radar-dot" />
-      <span>Live scan · {SIGNALS.length} signals tracked · refreshed 4 min ago</span>
+      <span>Live scan · {SIGNALS.length} signals tracked · refreshed 23 hours ago</span>
     </div>
   );
 }

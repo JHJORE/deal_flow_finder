@@ -35,3 +35,6 @@ backend/.outputs/
 
 # Vercel
 .vercel
+
+# Local IDE / agent config
+.claude/

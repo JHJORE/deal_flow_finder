@@ -1,0 +1,2117 @@
+{
+  "firm": "a16z.com",
+  "team_url": "https://a16z.com/team/",
+  "count": 90,
+  "partners": [
+    {
+      "name": "Alex Immerman",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/alex-immerman/",
+      "linkedin_url": "https://www.linkedin.com/in/immerman/",
+      "x_url": "https://twitter.com/aleximm",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Alex-Immerman-300x300.png",
+      "bio": "Alex Immerman is a general partner at Andreessen Horowitz, where he leads growth-stage investments in companies at the intersection of AI, consumer, B2B, crypto, and the physical world. He has spearheaded investments in ElevenLabs, EliseAI, Flock Safety, Hebbia, Kalshi, Revolut, Sardine, Stripe, and Waymo. Alex has also worked closely with Anduril, Coinbase, OpenAI, Robinhood, Roblox, and Wise, among others. Prior to joining Andreessen Horowitz, Alex was at General Atlantic, where he invested in and partnered with growth-stage technology companies. Before GA, Alex was an investment banker at Allen & Co. Alex has also served in chief of staff roles for the CFO of Facebook and CEO of Gainsight. Alex graduated summa cum laude from The Wharton School at the University of Pennsylvania and earned his MBA with distinction from Harvard Business School. He grew up in New Jersey and lives in San Francisco, but likes traveling to Park City, Utah, to visit his parents, ski, and snowboard.",
+      "education": [
+        "The Wharton School at the University of Pennsylvania",
+        "Harvard Business School"
+      ],
+      "prior_experience": [
+        "Andreessen Horowitz - General Partner",
+        "General Atlantic - Investor",
+        "Allen & Co. - Investment Banker",
+        "CFO of Facebook - Chief of Staff",
+        "CEO of Gainsight - Chief of Staff"
+      ]
+    },
+    {
+      "name": "Alex Rampell",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Fintech",
+        "Enterprise"
+      ],
+      "profile_url": "https://a16z.com/author/alex-rampell/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/arampell",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Alex Rampell is a general partner at Andreessen Horowitz, where he leads the firm’s $1 billion Apps practice. A serial entrepreneur who started writing software at age 10, Alex now invests across a wide range of B2B and B2C startup sectors and stages. He currently serves on the boards of Branch, Brightside, Capitolis, Descript, Divvy Homes, Earnin, Flock Homes, FlyHomes, Loft, Point, Propel, Rocket Companies (NYSE:RKT), Sentilink, Super Evil Megacorp, VGS, and Wise (WISE:LSE). Alex additionally led the firm’s investments in Mercury, OpenDoor (NASDAQ:OPEN), OpenInvest (acquired by JP Morgan Chase), Plaid, Quantopian (acquired by Robinhood), and Rival (acquired by LiveNation). Prior to joining Andreessen Horowitz, Alex co-founded multiple companies including Affirm (NASDAQ:AFRM), which he co-founded with Max Levchin, FraudEliminator (acquired by McAfee in 2006), Point, TrialPay (acquired by Visa in 2015), TXN (acquired by Envestnet in 2019), and Yub (acquired by Coupons.com in 2013). He holds a BA in Applied Mathematics and Computer Science from Harvard University, where he also played on the squash team. He now serves on The John A. Paulson School of Engineering and Applied Sciences Dean’s Advisory Cabinet at Harvard. Alex additionally serves on the board of the Steadman Philippon Research Institute, a leading orthopedic research center, in Vail, Colorado. Alex is a supporter of math education programs, is an avid runner and cyclist and speaks Russian and Japanese.",
+      "education": [
+        "BA in Applied Mathematics and Computer Science from Harvard University"
+      ],
+      "prior_experience": [
+        "General Partner at Andreessen Horowitz",
+        "Co-founder of Affirm (NASDAQ:AFRM)",
+        "Co-founder of FraudEliminator (acquired by McAfee in 2006)",
+        "Co-founder of Point",
+        "Co-founder of TrialPay (acquired by Visa in 2015)",
+        "Co-founder of TXN (acquired by Envestnet in 2019)",
+        "Co-founder of Yub (acquired by Coupons.com in 2013)"
+      ]
+    },
+    {
+      "name": "Ali Yahya",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16z.com/author/ali-yahya/",
+      "linkedin_url": "https://www.linkedin.com/in/ali01",
+      "x_url": "https://twitter.com/alive_eth",
+      "farcaster_url": "https://farcaster.xyz/alive.eth",
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Ali-Yahya-2-300x300.png",
+      "bio": "Ali Yahya is a general partner at Andreessen Horowitz where he invests in crypto. Ali works with numerous portfolio companies, including Alchemy, Aleo, Aztec, EigenLayer, Espresso, Gensyn, LayerZero, Solana, Sound.xyz, XMTP, and zkSync. Before Andreessen Horowitz, he was a software engineer and researcher at Google X, where he worked on the Everyday Robot project, which aims to build a robot that is smart and affordable enough to be viable as a consumer product for the home. He also worked at Google Brain, Google’s Artificial Intelligence lab, where he was a core developer on TensorFlow, Google’s primary library for machine learning. Ali began his career as a student and researcher at Stanford University, where he focused on the intersection of Computer Security, Distributed Systems, and Computer Networking. He first discovered the Bitcoin whitepaper in 2010 while doing research at Stanford Computer Security Lab, and has followed the space closely ever since.",
+      "education": [
+        "Stanford University"
+      ],
+      "prior_experience": [
+        "Software Engineer and Researcher at Google X",
+        "Core Developer on TensorFlow at Google Brain"
+      ]
+    },
+    {
+      "name": "Andrew Chen",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/andrew-chen/",
+      "linkedin_url": "https://www.linkedin.com/in/andrewchen/",
+      "x_url": "https://twitter.com/andrewchen",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Andrew-Chen-300x300.png",
+      "bio": "Andrew Chen is a general partner at Andreessen Horowitz. He is focused on tech, entertainment, and AI via the a16z speedrun initiative.\n\nAndrew is a prolific writer and over the past decade has written hundreds of essays at andrewchen.com on the topics of startups and user growth. He is the author of the best-selling business book THE COLD START PROBLEM, published by Harper Business, which explores how new startups launch and scale by leveraging network effects. Prior to joining a16z, Andrew led the Rider Growth teams at Uber, and worked at a number of venture-backed startups.",
+      "education": [
+        "B.S. in Applied Mathematics from the University of Washington"
+      ],
+      "prior_experience": [
+        "Led the Rider Growth teams at Uber",
+        "Worked at a number of venture-backed startups"
+      ]
+    },
+    {
+      "name": "Andy McCall",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism",
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/andy-mccall/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Andy McCall is a general partner at Andreessen Horowitz.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Angela Strange",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Fintech",
+        "Enterprise"
+      ],
+      "profile_url": "https://a16z.com/author/angela-strange/",
+      "linkedin_url": "https://www.linkedin.com/in/angelastrange/",
+      "x_url": "https://twitter.com/astrange",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Angela_Strange-300x300.png",
+      "bio": "Angela Strange is a general partner at Andreessen Horowitz, where she focuses on AI Applications and Fintech/Insurance. Today, Angela serves on the boards of Addi, Cygnvs, hyperexponential, Jeeves, Moov, Sardine, Valon, and Vesta and more. Angela also coined the idea that 'Every Company Will Be a Fintech Company' — the now widely cited observation that companies will increasingly derive a significant portion of their revenue from financial services driven by the influx of new, transformative financial infrastructure tools. Prior to joining a16z, Angela was a product manager at Google where she launched and grew Chrome for Android and Chrome for iOS into two of Google's most successful mobile products. She has also served as director of product management and business development at Ruba.com (acquired by Google), a senior associate partner at Bay Partners focusing on the consumer internet sector, and a consultant at Mercer Management Consulting in Toronto. Angela helped launch and was co-chair of C100, a non-profit that bridges Canadian entrepreneurs with Silicon Valley, and on the Canadian Finance Minister Morneau's Economic Growth Council. She earned her Mechanical Engineering degree from Queen's University in Canada and an MBA from Stanford. Angela is also a world-class athlete, having spent two years training professionally as a runner; she has won several marathons and achieved a seventh-place national ranking in Canada.",
+      "education": [
+        "Mechanical Engineering degree from Queen's University in Canada",
+        "MBA from Stanford"
+      ],
+      "prior_experience": [
+        "Product Manager at Google",
+        "Director of Product Management and Business Development at Ruba.com (acquired by Google)",
+        "Senior Associate Partner at Bay Partners focusing on the consumer internet sector",
+        "Consultant at Mercer Management Consulting in Toronto"
+      ]
+    },
+    {
+      "name": "Anish Acharya",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech",
+        "Consumer"
+      ],
+      "profile_url": "https://a16z.com/author/anish-acharya/",
+      "linkedin_url": "https://www.linkedin.com/in/anishacharya",
+      "x_url": "https://twitter.com/illscience",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Anish Acharya is an entrepreneur and general partner at Andreessen Horowitz. At a16z, he focuses on consumer investing, including AI-native products and companies that will help usher in a new era of abundance. Anish first joined the firm in 2019 with a focus on fintech, often investing in B2C technologies. He currently serves on the boards of Clutch, Deel, HappyRobot, Mosaic, Method, The Coterie, and Titan. He is also a board observer at Arc, Carbonated, and [untitled]. Prior to joining Andreessen Horowitz, Anish founded and sold two consumer companies, successfully navigating multiple technology platform shifts. In 2014, Anish founded Snowball, a universal inbox for Facebook Messenger, WhatsApp, SMS, and other mobile messaging clients to help consumers rethink how they communicate online. After Snowball was acquired by Credit Karma in 2015, he served as GM of Core Consumer and GM of Cards. He helped scale the U.S. Card to over 100 million members and nearly $1 billion in 2019 revenue. In 2008, Anish co-founded SocialDeck. As an “anywhere, anytime, anyone” social gaming company, SocialDeck enabled simultaneous game play across multiple mobile devices and social networks. The company was acquired by Google in 2010. At Google, Anish led various mobile product efforts and invested for Google Ventures. Anish graduated from the University of Waterloo and lives in the Bay Area with his family. He has a passion for music and mixes tracks in his spare time.",
+      "education": [
+        "University of Waterloo"
+      ],
+      "prior_experience": [
+        "Founder of Snowball",
+        "GM of Core Consumer at Credit Karma",
+        "GM of Cards at Credit Karma",
+        "Co-Founder of SocialDeck",
+        "Led various mobile product efforts at Google",
+        "Investor at Google Ventures"
+      ]
+    },
+    {
+      "name": "Anjney Midha",
+      "role": "Venture Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/anjney-midha/",
+      "linkedin_url": "https://www.linkedin.com/in/anjney/",
+      "x_url": "https://twitter.com/AnjneyMidha",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/07/Anjney-Midha-1-300x300.png",
+      "bio": "Anjney Midha is a Venture Partner at Andreessen Horowitz where he serves on the boards of Black Forest Labs, Luma AI, Mistral AI, Sesame AI, LMArena, OpenRouter, and Periodic Labs.\n\nA former founder and CEO, Anjney joined the firm in 2023. Immediately prior, Anjney was vice president of platform ecosystem at Discord where he oversaw all developer products for the company’s 200 million+ users. In this role, Anjney set up Discord’s first dedicated developer platform organization, launched its partnership with Midjourney, and helped it scale to one of the world’s fastest growing generative AI businesses. Anjney joined Discord via the acquisition of Ubiquity6, a pioneering computer vision and multiplayer technology company serving millions of users globally, where he was cofounder and CEO. Before that, Anjney was a partner at Kleiner Perkins, where he led the formation of the firm’s first dedicated seed fund and invested in companies across venture and growth stages.\n\nAs an angel investor, Anjney’s investments included Anthropic, Eleven Labs, Infinitus AI, Luma AI, Mashgin, Ideogram, as well as several other AI companies.\n\nOriginally from India and Singapore, Anjney pursued his undergraduate and graduate degrees at Stanford University, and now lives in San Francisco. When he’s not submitting/merging PRs on open source repos, Anj loves surfing along the California coast.",
+      "education": [
+        "Stanford University"
+      ],
+      "prior_experience": [
+        "vice president of platform ecosystem at Discord",
+        "cofounder and CEO at Ubiquity6",
+        "partner at Kleiner Perkins"
+      ]
+    },
+    {
+      "name": "Asaf Ezra",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/asaf-ezra/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/Asaf-Ezra-300x300.png",
+      "bio": "Asaf Ezra is an investing partner on the Infrastructure team at Andreessen Horowitz.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Ben Horowitz",
+      "role": "Cofounder and General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health",
+        "Growth",
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/ben-horowitz/",
+      "linkedin_url": "https://www.linkedin.com/in/behorowitz/",
+      "x_url": "https://twitter.com/bhorowitz",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Ben Horowitz is a cofounder and general partner at the venture capital firm Andreessen Horowitz. He is the author of the New York Times bestsellers, The Hard Thing About Hard Things and What You Do Is Who You Are. He also created the a16z Cultural Leadership Fund to connect the greatest cultural leaders to the best new technology companies, and enable more young African Americans to enter the technology industry.\n\nPrior to a16z, Ben was cofounder and CEO of Opsware (formerly Loudcloud), which was acquired by Hewlett-Packard for $1.6 billion in 2007, and was appointed vice president and general manager of Business Technology Optimization for Software at HP. Earlier, he was vice president and general manager of America Online’s E-commerce Platform division, where he oversaw development of the company’s flagship Shop@AOL service. Previously, Ben ran several product divisions at Netscape Communications. He also served as vice president of Netscape’s widely acclaimed Directory and Security product line. Before joining Netscape in July 1995, he held various senior product marketing positions at Lotus Development Corporation.\n\nBen has an MS and a BA in computer science from UCLA and Columbia University, respectively.\n\nBen serves on the board of Anyscale, Databricks, Mayvenn, NationBuilder, Navan, and UnitedMasters.",
+      "education": [
+        "MS in Computer Science from UCLA",
+        "BA in Computer Science from Columbia University"
+      ],
+      "prior_experience": [
+        "Cofounder and CEO of Opsware (formerly Loudcloud)",
+        "Vice President and General Manager of Business Technology Optimization for Software at HP",
+        "Vice President and General Manager of America Online’s E-commerce Platform division",
+        "Various senior product marketing positions at Lotus Development Corporation",
+        "Vice President at Netscape Communications"
+      ]
+    },
+    {
+      "name": "Ben Portney",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/ben-portney/",
+      "linkedin_url": "https://www.linkedin.com/in/ben-portney/",
+      "x_url": "https://twitter.com/BenPortney",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Ben-Portney-2-300x300.png",
+      "bio": "Ben Portney, PhD, is an investing partner on the Bio + Health team. He is a scientist and entrepreneur with a focus on investing in early stage companies building platforms for novel therapeutic discovery and development. He is involved with companies including: Orbital Therapeutics, insitro, BigHat Biosciences, Rezo Therapeutics, and Octant Bio.\n\nBefore joining Andreessen Horowitz, Ben was a Senior Associate at Flagship Pioneering, where he worked as part of a venture-creation team to found and grow several biotechnology companies. Prior to Flagship, Ben received his PhD in Biochemistry and Molecular Biology from the University of Maryland, Baltimore, studying the role of epigenetics in cancer plasticity. His graduate work resulted in publication in multiple peer-reviewed journals and several pending patents.\n\nBen holds a PhD in Biochemistry and Molecular Biology from the University of Maryland, Baltimore and a BS in Biology from the University of Maryland, College Park. He is a proud native of Baltimore and passionately believes that the Wire is the best TV Series of all time.",
+      "education": [
+        "PhD in Biochemistry and Molecular Biology from the University of Maryland, Baltimore",
+        "BS in Biology from the University of Maryland, College Park"
+      ],
+      "prior_experience": [
+        "Senior Associate at Flagship Pioneering"
+      ]
+    },
+    {
+      "name": "Bing Wong",
+      "role": "Investment Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Perennial"
+      ],
+      "profile_url": "https://a16z.com/author/bing-wong/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Bing Wong is a private equity partner on a16z's Perennial team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Brian Roberts",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Consumer",
+        "Enterprise",
+        "Fintech",
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/brian-roberts/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/Brian-Roberts-300x300.png",
+      "bio": "Brian Roberts is a general partner at Andreessen Horowitz, where he works with the American Dynamism and AI Apps funds.\n\nHe has more than 30 years of experience, including executive leadership roles at some of the most-recognized technology and consumer companies. As CFO, he took Lyft public at a $24 billion valuation, and later as CFO of Splunk, he played an integral role in the company's $28 billion acquisition by Cisco. He also led corporate development at Microsoft and Walmart eCommerce, and spent 12 years as an investment banker, most recently as Senior Managing Director at Evercore.",
+      "education": [
+        "B.A. from the University of California, Berkeley",
+        "M.B.A. from Harvard Business School"
+      ],
+      "prior_experience": [
+        "CFO at Lyft",
+        "CFO at Splunk",
+        "Led corporate development at Microsoft",
+        "Led corporate development at Walmart eCommerce",
+        "Senior Managing Director at Evercore"
+      ]
+    },
+    {
+      "name": "Bryan Faust",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/bryan-faust/",
+      "linkedin_url": "https://www.linkedin.com/in/bryanfaust/",
+      "x_url": "https://twitter.com/Bryan__Faust",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Bryan-Faust-2-300x300.png",
+      "bio": "Bryan Faust, PhD, is an investing partner on the Bio + Health team, focused on life science investment opportunities. Prior to joining Andreessen Horowitz, he spent time as an investment fellow at 5AM Ventures while completing his PhD in Biophysics at the University of California, San Francisco (UCSF). At UCSF, Bryan studied the various ways antibodies can manipulate protein conformation in pathology and for therapeutic pharmacology and separately defined signaling-selective mechanisms of G protein-coupled receptor activity. His work has been published in Nature, Science, and Cell. He has also held R&D roles in protein chemistry and antibody biophysics at Genentech and Abbvie Stemcentrx, respectively. When not thinking about proteins, Bryan can be found on a surfboard, in the kitchen roasting coffee, or in search of the perfect tacos al pastor.",
+      "education": [
+        "PhD in Biophysics at the University of California, San Francisco (UCSF)"
+      ],
+      "prior_experience": [
+        "investment fellow at 5AM Ventures",
+        "R&D roles in protein chemistry at Genentech",
+        "R&D roles in antibody biophysics at Abbvie Stemcentrx"
+      ]
+    },
+    {
+      "name": "Bryan Kim",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Consumer"
+      ],
+      "profile_url": "https://a16z.com/author/bryan-kim/",
+      "linkedin_url": "https://www.linkedin.com/in/kirbyman/",
+      "x_url": "https://twitter.com/kirbyman01",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Bryan-Kim-1-300x300.png",
+      "bio": "Bryan Kim (“BK”) is a partner at Andreessen Horowitz, where he invests primarily in consumer AI applications. He is particularly interested in how AI is reshaping consumer experiences across core themes such as productivity (ElevenLabs, Cluely, Raspberry), consumer health (Function Health, Slingshot AI), creation (Captions, Civit.ai, Glif, Viggle), and connection (BeReal, Partiful). He is also actively exploring new categories and behaviors emerging at the frontier of consumer AI. BK serves on the boards of Captions and Partiful, and as a board observer at ElevenLabs and Function Health. Prior to joining a16z, BK spent several years at Snap, where he helped scale the company through its hyper-growth and IPO. He built and led the growth and product operations teams, driving user expansion globally. He also scaled the finance team from zero to 70+ people and led several key milestones, including the IPO. As a founding member of the strategy team, he sourced and integrated major acquisitions such as Looksery (which powers Snap AR Lenses) and Bitmoji. Earlier in his career, Bryan was CFO at Bungalow and a founding General Partner at Uncommon Projects, an operator-led seed fund. He began his career in investment banking at Credit Suisse, advising technology companies on M&A and capital markets transactions.",
+      "education": [
+        "BA in Economics and International Relations from Carleton College",
+        "MBA from Columbia Business School"
+      ],
+      "prior_experience": [
+        "Partner at Andreessen Horowitz",
+        "Spent several years at Snap",
+        "CFO at Bungalow",
+        "Founding General Partner at Uncommon Projects",
+        "Investment banking at Credit Suisse"
+      ]
+    },
+    {
+      "name": "Caroline Goggins",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/caroline-goggins/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Caroline-Goggins-2-300x300.png",
+      "bio": "Caroline Goggins is an investing partner on the Growth team. Before joining Andreessen Horowitz, she was at Bain Capital, where she invested in growth-stage application software businesses. Caroline holds a bachelor of engineering from Dartmouth College, where she studied environmental and mechanical engineering. She grew up in Richmond, Virginia and now lives in the Bay Area. She is an avid runner and biker, and you can find her exploring local trails on the weekend.",
+      "education": [
+        "Bachelor of Engineering from Dartmouth College, studied environmental and mechanical engineering"
+      ],
+      "prior_experience": [
+        "Bain Capital"
+      ]
+    },
+    {
+      "name": "Chris Dixon",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16z.com/author/chris-dixon/",
+      "linkedin_url": "https://www.linkedin.com/in/chris-dixon-9599b127b/",
+      "x_url": "https://twitter.com/cdixon",
+      "farcaster_url": "https://farcaster.xyz/cdixon.eth",
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Chris-Dixon-1-300x300.png",
+      "bio": "Chris Dixon is a general partner and has been at Andreessen Horowitz since 2012. He founded and leads a16z crypto, which invests in web3 technologies through four dedicated funds with more than $7 billion under management. Chris is the author of _Read Write Own_: Building the Next Era of the Internet (Random House, January 2024). Previously, Chris was the cofounder and CEO of two startups, SiteAdvisor and Hunch. SiteAdvisor was an internet security company that warned web users of security threats. The company was acquired by McAfee in 2006. Hunch was a recommendation technology company that was acquired by eBay in 2011. Chris has been a prolific seed investor, cofounding Founder Collective, a seed venture fund, and making a number of personal angel investments in various technology companies. Chris started programming as a kid, and was a professional programmer after college at the high-speed options trading firm, Arbitrade. He has a BA and MA in Philosophy from Columbia and an MBA from Harvard. Chris writes about his theories and experiences as an entrepreneur and investor on Substack, and before that on Medium and at cdixon.org. He is also a frequent guest on the 'web3 with a16z' podcast.",
+      "education": [
+        "BA in Philosophy from Columbia",
+        "MA in Philosophy from Columbia",
+        "MBA from Harvard"
+      ],
+      "prior_experience": [
+        "Cofounder and CEO of SiteAdvisor",
+        "Cofounder and CEO of Hunch",
+        "Professional programmer at Arbitrade",
+        "Cofounder of Founder Collective"
+      ]
+    },
+    {
+      "name": "Chris Schnabl",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Fintech",
+        "Enterprise"
+      ],
+      "profile_url": "https://a16z.com/author/chris-schnabl/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/Christoph-Schnabl-300x300.png",
+      "bio": "Chris Schnabl is an Investing Partner at Andreessen Horowitz, investing in AI applications across the U.S. and Europe. Prior to joining Andreessen Horowitz, Chris worked on quantitative trading at Optiver, pricing models at QuantCo, and marketplaces at Willhaben, and has published research in AI security.",
+      "education": [
+        "M.Phil. with Distinction from the University of Cambridge"
+      ],
+      "prior_experience": [
+        "quantitative trading at Optiver",
+        "pricing models at QuantCo",
+        "marketplaces at Willhaben"
+      ]
+    },
+    {
+      "name": "Christian Keil",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/christian-keil/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/pronounced_kyle",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/12/Christian-Keil-300x300.png",
+      "bio": "Christian Keil is a partner at Andreessen Horowitz, where he invests as part of the firm’s American Dynamism practice.\n\nPrior to joining a16z, Christian was an executive at Astranis, where he built and launched geostationary communications satellites — making him perhaps the only venture capitalist ever to buy a dedicated Falcon 9 rocket. Christian led finance, government relations, marketing, recruiting, and other business functions as the company scaled from $0 to over $1 billion in sales, from 50 to 500 people, and from an R&D shop to an aerospace-grade factory.\n\nChristian spent his early career as a management consultant at Deloitte, and earned degrees from the University of Michigan and the University of California, Berkeley. Christian lives in San Francisco with his wife and two children, who both want to be astronauts when they grow up.",
+      "education": [
+        "University of Michigan",
+        "University of California, Berkeley"
+      ],
+      "prior_experience": [
+        "Partner at Andreessen Horowitz",
+        "Executive at Astranis",
+        "Management Consultant at Deloitte"
+      ]
+    },
+    {
+      "name": "Connie Chan",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Consumer",
+        "Seed"
+      ],
+      "profile_url": "https://a16z.com/author/connie-chan/",
+      "linkedin_url": "https://www.linkedin.com/in/conniechan/",
+      "x_url": "https://twitter.com/conniechan",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Connie-Chan-300x300.png",
+      "bio": "Connie Chan is a General Partner at Andreessen Horowitz where she focuses on investing in consumer technology. Connie joined the firm in 2011 as a deal partner on the investment team before becoming a general partner in 2018. She serves on the boards of Cider, Whatnot, and KoBold. Before joining Andreessen Horowitz, Connie worked at HP leading its webOS efforts in China. She started her career as a private equity investor at Elevation Partners, investing in media and entertainment. Connie is well-known across Silicon Valley for her deep knowledge of the Chinese consumer technology landscape and is often tapped as an expert to translate how trends may move from Asia to the west. Connie won a Sidney award for her writing on WeChat and is a Young Global Leader at the World Economic Forum. She received her B.A. in Economics and M.S. in Management Science and Engineering from Stanford University.",
+      "education": [
+        "B.A. in Economics",
+        "M.S. in Management Science and Engineering from Stanford University"
+      ],
+      "prior_experience": [
+        "HP leading its webOS efforts in China",
+        "private equity investor at Elevation Partners"
+      ]
+    },
+    {
+      "name": "Daisy Wolf",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/daisy-wolf/",
+      "linkedin_url": "https://www.linkedin.com/in/daisydwolf/",
+      "x_url": "https://twitter.com/daisydwolf",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Daisy-Wolf-1-300x300.png",
+      "bio": "Daisy Wolf is an investing partner at Andreessen Horowitz, where she specializes in healthcare technology. In particular, she focuses on healthcare AI and software, consumer health, and the intersection of healthcare and fintech. Prior to joining Andreessen Horowitz, Daisy worked at Meta in the Global Business Group, where she led company growth efforts within government and politics. In addition, Daisy has held various roles at multiple startups and covered technology at a hedge fund.",
+      "education": [
+        "JD from Yale Law School",
+        "MBA from the Stanford Graduate School of Business",
+        "BA, Phi Beta Kappa from Yale College"
+      ],
+      "prior_experience": [
+        "Worked at Meta in the Global Business Group",
+        "Held various roles at multiple startups",
+        "Covered technology at a hedge fund"
+      ]
+    },
+    {
+      "name": "Daniel Penny",
+      "role": "Deal Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/daniel-penny/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/02/Daniel-Penny-300x300.png",
+      "bio": "Daniel Penny is a Deal Partner supporting a16z's American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Daren Matsuoka",
+      "role": "Partner, Crypto Investment Team",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16zcrypto.com/team/daren-matsuoka",
+      "linkedin_url": "https://www.linkedin.com/in/darenmatsuoka/",
+      "x_url": "https://twitter.com/DarenMatsuoka",
+      "farcaster_url": "https://farcaster.xyz/darenmatsuoka",
+      "email": null,
+      "photo_url": "https://dwt2zme5yrom6.cloudfront.net/uploads/2023/01/daren-matsuoka-headofdataandfundstrategy-68cae83f7099b.webp",
+      "bio": "Daren Matsuoka is a partner on the crypto investment team at a16z, where he supports deal flow and portfolio companies by extracting data from public blockchains.",
+      "education": [
+        "B.S. in Economics and Computer Science from UC Davis"
+      ],
+      "prior_experience": [
+        "Data Scientist at SVB Capital",
+        "Financial training programs at Morgan Stanley",
+        "Financial training programs at State Street"
+      ]
+    },
+    {
+      "name": "David George",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/david-george/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/DavidGeorge83",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/David-George-300x300.png",
+      "bio": "David George is a general partner at Andreessen Horowitz, where he leads the firm’s Growth investing team and has led many of the firm’s growth investments.",
+      "education": [
+        "University of Notre Dame - summa cum laude",
+        "Stanford Graduate School of Business - MBA"
+      ],
+      "prior_experience": [
+        "General Atlantic - Led and partnered on numerous consumer internet and enterprise software growth investments",
+        "FFL Partners - Investment Associate",
+        "William Blair & Company - Investment Banking Analyst"
+      ]
+    },
+    {
+      "name": "David Haber",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/david-haber/",
+      "linkedin_url": "https://www.linkedin.com/in/haber",
+      "x_url": "https://twitter.com/dhaber",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "David Haber is a general partner at Andreessen Horowitz, where he focuses on technology investments in B2B software and financial services. He serves on the boards of Camber, Crux, Eve, Moment, Rutter, Setpoint, and Tennr.\n\nDavid was previously a senior executive in Firmwide Strategy at Goldman Sachs where he helped lead partnerships, new ventures, and M&A. Before joining the firm, David was the Founder and CEO of Bond Street, which aimed to transform small business lending through technology, data, and design. Bond Street was acquired by Goldman Sachs in October 2017 as part of the firm’s digital finance business. Previously, David was a venture investor at Spark Capital and a founding associate of Locus Analytics, a start-up asset management firm.\n\nDavid graduated from Harvard University with a degree in Biochemical Sciences.",
+      "education": [
+        "Harvard University, Biochemical Sciences"
+      ],
+      "prior_experience": [
+        "Senior Executive in Firmwide Strategy, Goldman Sachs",
+        "Founder and CEO, Bond Street",
+        "Venture Investor, Spark Capital",
+        "Founding Associate, Locus Analytics"
+      ]
+    },
+    {
+      "name": "David Ulevitch",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Seed",
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/david-ulevitch/",
+      "linkedin_url": "https://www.linkedin.com/in/davidu",
+      "x_url": "https://twitter.com/davidu",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/David-Ulevitch-300x300.png",
+      "bio": "David Ulevitch is an entrepreneur and investor. As a general partner at Andreessen Horowitz, he leads the firm’s American Dynamism practice, which focuses on investing in companies advancing American interests — including supporting builders in areas such as housing, education, logistics, national security, aerospace, and public safety. Additionally, David invests in enterprise and SaaS software. He has led investments in Anduril, AnyRoad, CX2, Flock Safety, Skydio, Superhuman, Supermove, Vitally, Wingspan, and others.\n\nDavid was previously the founder and CEO of OpenDNS, a cloud-delivered security service that was acquired by Cisco in 2015 for $635 million. While at Cisco, David was Senior Vice President and General Manager of Cisco Security — a $2.4 billion annual revenue business with more than 5,000 team members — where he oversaw the company’s global cybersecurity strategy, product portfolio, and business. Prior to OpenDNS, David founded EveryDNS, an authoritative DNS service, and grew it into the world’s largest free DNS service. He sold it to Dyn (now Oracle) in 2010.\n\nDavid holds a BA in Anthropology from Washington University in St. Louis (which turned out to be way more useful than he expected) and he currently serves on the university’s Board of Trustees. Additionally, David spent several years on the board of the Tony Hawk Foundation and is passionate about creating safe after-school activities (including skateboarding) for at-risk youth in the United States and abroad.\n\nDavid lives in New York City with his family.",
+      "education": [
+        "BA in Anthropology from Washington University in St. Louis"
+      ],
+      "prior_experience": [
+        "Founder and CEO of OpenDNS",
+        "Senior Vice President and General Manager of Cisco Security",
+        "Founder of EveryDNS"
+      ]
+    },
+    {
+      "name": "Eddy Lazzarin",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16z.com/author/eddy-lazzarin/",
+      "linkedin_url": "https://www.linkedin.com/in/eddy-lazzarin-66059749/",
+      "x_url": "https://twitter.com/eddylazzarin",
+      "farcaster_url": "https://farcaster.xyz/eddy",
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Eddy_Lazzarin-300x300.png",
+      "bio": "Eddy Lazzarin is a general partner for a16z crypto. He oversees the engineering, research, and security teams, which support the investing process and collaborate with portfolio companies to build the future of the internet. Before a16z crypto, Eddy was a software engineer at Netflix working on data ingestion systems, and a data engineer at Facebook working on growth analytics and modeling for Messenger. Eddy has a B.A. in Philosophy-Neuroscience-Psychology and an M.S. in Computer Science (concentrating in Statistical Computing) from Washington University in St. Louis, where he researched behavioral economics and game theory with Leonard Green.",
+      "education": [
+        "B.A. in Philosophy-Neuroscience-Psychology",
+        "M.S. in Computer Science (concentrating in Statistical Computing) from Washington University in St. Louis"
+      ],
+      "prior_experience": [
+        "Software Engineer at Netflix working on data ingestion systems",
+        "Data Engineer at Facebook working on growth analytics and modeling for Messenger"
+      ]
+    },
+    {
+      "name": "Elizabeth Harkavy",
+      "role": "Investment Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16zcrypto.com/team/elizabeth-harkavy",
+      "linkedin_url": "https://www.linkedin.com/in/elizabeth-harkavy-322bba177/",
+      "x_url": "https://twitter.com/liz_harkavy",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://dwt2zme5yrom6.cloudfront.net/uploads/2023/01/elizabeth-harkavy-investmentpartner-68cae841a5ca6.webp",
+      "bio": "Liz is a partner on the a16z crypto investment team. Liz focuses on web 2.5 / picks and shovels as well as decentralized infrastructure. Prior to joining a16z crypto, Liz was a founding engineer at Corsali (now Vana), a venture backed full stack machine learning platform that is powered by highly educated workers labeling data to earn crypto from their phones. Prior to that she spent time at Facebook and JPL, where she performed research on utilizing reinforcement learning to optimize a delay tolerant network node that she presented at the IEEE Aerospace conference.",
+      "education": [
+        "Bachelor's in Physics",
+        "Bachelor's in Computer Science",
+        "Master's in Computer Science at MIT"
+      ],
+      "prior_experience": [
+        "Founding engineer at Corsali (now Vana)",
+        "Worked at Facebook",
+        "Worked at JPL"
+      ]
+    },
+    {
+      "name": "Emily Bennett",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/emily-bennett/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/09/Emily_Bennett-300x300.png",
+      "bio": "Emily Bennett is an investing partner for a16z speedrun.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Emma Cooper",
+      "role": "Deal Analyst and Chief of Staff",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/emma-cooper/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/Emma-Cooper-1-300x300.png",
+      "bio": "Emma Cooper is a Deal Analyst and Chief of Staff at Andreessen Horowitz.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Eric Alby",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Perennial"
+      ],
+      "profile_url": "https://a16z.com/author/eric-alby/",
+      "linkedin_url": "https://www.linkedin.com/in/eric-alby-35a24b13b/",
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Eric Alby is a partner on the a16z Perennial team focused on diversifying investments, including credit investments, and designing quantitative strategies, including structuring derivatives across multiple asset classes. Prior to joining a16z, Eric was a managing director at Macquarie Bank responsible for the quantitative investment strategies business in the United States. Before that, Eric was a managing director at Morgan Stanley where he was most recently head of financial engineering and structuring for derivative products within the bank’s Institutional Equities Division. Eric was also a senior structurer within the CLO and Structured Credit groups for Morgan Stanley in London and Hong Kong. Eric graduated with an MS in engineering economic systems and operations research from Stanford University and an engineering degree from École Polytechnique in Paris. Eric lives in New York City, but was born in France and during his career worked in London and Hong Kong. He enjoys playing the piano and tennis in his free time.",
+      "education": [
+        "MS in engineering economic systems and operations research from Stanford University",
+        "Engineering degree from École Polytechnique in Paris"
+      ],
+      "prior_experience": [
+        "Managing Director at Macquarie Bank",
+        "Managing Director at Morgan Stanley, head of financial engineering and structuring for derivative products",
+        "Senior Structurer within the CLO and Structured Credit groups at Morgan Stanley in London and Hong Kong"
+      ]
+    },
+    {
+      "name": "Eric Zhou",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/eric-zhou/",
+      "linkedin_url": "https://www.linkedin.com/in/ericzhou27/",
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/07/Eric-Zhou-300x300.png",
+      "bio": "Eric Zhou is a partner at Andreessen Horowitz, where he focuses on companies building at the application layer in Generative AI. Prior to joining Andreessen Horowitz, Eric was a software engineer at Warp, where he worked on building a modern, AI-first terminal. Before that, Eric founded two companies; the first sold software to political campaigns, and the second, which was acquired by Beacons.ai, offered community management software to content creators.",
+      "education": [
+        "Stanford University, BS in Computer Science",
+        "Stanford University, MS in Computer Science"
+      ],
+      "prior_experience": [
+        "Software Engineer at Warp",
+        "Founder of a company selling software to political campaigns",
+        "Founder of a company acquired by Beacons.ai offering community management software to content creators"
+      ]
+    },
+    {
+      "name": "Erik Torenberg",
+      "role": "General Partner",
+      "role_display": "Marketing, Investing",
+      "focus_areas": [],
+      "profile_url": "https://a16z.com/author/erik-torenberg/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Erik Torenberg is a general partner at Andreessen Horowitz, where he focuses on investing and running our marketing & ecosystem orgs to support portfolio companies and deepen the firm’s engagement across the startup ecosystem. Prior to joining Andreessen Horowitz, Erik founded On Deck, Turpentine, and Village Global. He also seed invested in Scale AI, Applied Intuition, Pave, Lattice, and Rappi.",
+      "education": [],
+      "prior_experience": [
+        "Founded On Deck",
+        "Founded Turpentine",
+        "Founded Village Global",
+        "Seed invested in Scale AI",
+        "Seed invested in Applied Intuition",
+        "Seed invested in Pave",
+        "Seed invested in Lattice",
+        "Seed invested in Rappi"
+      ]
+    },
+    {
+      "name": "Erin Price-Wright",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/erin-price-wright/",
+      "linkedin_url": "https://www.linkedin.com/in/linkedin.com/erin-price-wright-2a573727/",
+      "x_url": "https://twitter.com/espricewright",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/04/Erin-Price-Wright-1-300x300.png",
+      "bio": "Erin Price-Wright is a general partner at Andreessen Horowitz where she invests in companies that promote American Dynamism, with an emphasis on teams building AI for the physical world. Her investment focus spans robotics, energy, manufacturing, industrials, and defense. She has led investments in companies like Base Power, Mariana Minerals, Diode Computing, and Swan Technologies. She also runs the team’s Engineering Fellows program to help get top technical talent excited about building American Dynamism.  \n\nShe was previously a partner at Index Ventures focused on software infrastructure and applied AI, where she invested in companies like Clickhouse, BRINC Drones, and Phaidra. Before investing, Erin spent most of her career at Palantir. She started as a Forward Deployed Engineer and helped build the Industrials business, working with customers across energy, natural resources, manufacturing, and chemicals. She later helped build and run Palantir’s Product organization, and was Head of Product for Palantir’s data analytics and machine learning platform.  \n\nShe holds an MSc from the University of Oxford in Mathematics and Computer Science, and a BS in Engineering from Stanford University. Originally from Arizona, she lives with her family in the SF Bay Area.",
+      "education": [
+        "MSc from the University of Oxford in Mathematics and Computer Science",
+        "BS in Engineering from Stanford University"
+      ],
+      "prior_experience": [
+        "Partner at Index Ventures focused on software infrastructure and applied AI",
+        "Forward Deployed Engineer at Palantir",
+        "Head of Product for Palantir’s data analytics and machine learning platform"
+      ]
+    },
+    {
+      "name": "Eva Steinman",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/eva-steinman/",
+      "linkedin_url": "https://www.linkedin.com/in/eva-steinman/",
+      "x_url": "https://twitter.com/eva_steinman",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/05/Eva-Steinman-4-300x300.png",
+      "bio": "Eva Steinman is an Investing Partner on the Bio + Health team at Andreessen Horowitz, where she focuses on healthcare technology. Prior to joining Andreessen Horowitz, Eva was an investor at Left Lane Capital, where she partnered with early-stage founders across the healthcare, technology, and consumer sectors. She began her career at Morgan Stanley as an analyst in the investment banking and trading groups. Eva graduated from Columbia with a BA in Financial Economics.",
+      "education": [
+        "Columbia, BA in Financial Economics"
+      ],
+      "prior_experience": [
+        "Left Lane Capital, Investor",
+        "Morgan Stanley, Analyst"
+      ]
+    },
+    {
+      "name": "Fabrizio Serafini",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/fabrizio-serafini/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Fabrizio Serafini is an investment partner at Andreessen Horowitz where he focuses on AI application investments.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Gabriel Vasquez",
+      "role": "Investment Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Fintech",
+        "Enterprise"
+      ],
+      "profile_url": "https://a16z.com/author/gabriel-vasquez/",
+      "linkedin_url": "https://www.linkedin.com/in/gabriel-vasquez-49392580/",
+      "x_url": "https://twitter.com/GEVS94",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Gabriel-Vasquez-3-300x300.png",
+      "bio": "Gabriel Vasquez is an investment partner at Andreessen Horowitz where he focuses on AI application investments in the U.S., Europe, and Latin America. Prior to joining a16z, Gabriel was part of the pricing strategy team at Oscar Health, where he was responsible for pricing Oscar's products across the United States. He also led negotiations for Oscar's ancillary insurance offerings when partnering with other healthcare insurance companies. Before Oscar Health, Gabriel was an investment banker at J.P. Morgan in the technology group, where he earned the launching leaders scholarship.",
+      "education": [
+        "B.A. in Economics",
+        "Minor in Computer Science from The University of Texas at Austin"
+      ],
+      "prior_experience": [
+        "Pricing strategy team at Oscar Health",
+        "Investment banker at J.P. Morgan in the technology group"
+      ]
+    },
+    {
+      "name": "Gio Ahern",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/gio-ahern/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/09/Gio-Ahern-1-300x300.png",
+      "bio": "Gio Ahern is a partner on the Growth investing team. Before joining Andreessen Horowitz, he was at Bain Capital, where he invested in later-stage HCIT, enterprise application, and infrastructure technology businesses. Gio graduated from MIT with degrees in Mathematics and Computer Science. He grew up in Illinois, is an avid Cubs fan, and loves to run in his spare time.",
+      "education": [
+        "MIT with degrees in Mathematics and Computer Science"
+      ],
+      "prior_experience": [
+        "Bain Capital"
+      ]
+    },
+    {
+      "name": "Guido Appenzeller",
+      "role": "Investor",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/guido-appenzeller/",
+      "linkedin_url": "https://www.linkedin.com/in/appenz/",
+      "x_url": "https://twitter.com/appenz",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Guido-Appenzeller-2-300x300.png",
+      "bio": "Guido Appenzeller is an investor at Andreessen Horowitz, where he focuses on AI, infrastructure, open source technology, and silicon.\n\nHe previously was the chief technology officer for Intel’s Data Platforms Group (DPG), where he was responsible for technical direction and pathfinding across the data platforms portfolio.\n\nPrior to joining Intel, Guido was chief product officer at Yubico, where he focused on product development and strategy. Guido was previously the CTO, Cloud & Networking at VMware, where he helped define VMware’s multi-cloud strategy and was part of the team that grew NSX to a $1 billion product line. Before VMware, he co-founded Big Switch Networks (acquired by Arista) and Voltage Security (acquired by HP), leading those companies as CEO and CTO, respectively.\n\nGuido received a Test of Time Award from SIGCOMM. He was named to the MIT TR35, with Voltage Security was named a Technology Pioneer by the World Economic Forum and one of the 100 Most Intriguing Entrepreneurs by Goldman Sachs.\n\nFrom 2008 to 2010 Guido was a Consulting Assistant Professor at Stanford University. Guido holds a PhD from Stanford University and MS (Diplom) in Physics from the Karlsruhe Institute of Technology.",
+      "education": [
+        "PhD from Stanford University",
+        "MS (Diplom) in Physics from the Karlsruhe Institute of Technology"
+      ],
+      "prior_experience": [
+        "Chief Technology Officer at Intel’s Data Platforms Group",
+        "Chief Product Officer at Yubico",
+        "CTO, Cloud & Networking at VMware",
+        "Co-founder and CEO at Big Switch Networks",
+        "Co-founder and CTO at Voltage Security"
+      ]
+    },
+    {
+      "name": "Guy Wuollet",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16z.com/author/guy-wuollet/",
+      "linkedin_url": "https://www.linkedin.com/in/gdw/",
+      "x_url": "https://twitter.com/guywuolletjr",
+      "farcaster_url": "https://farcaster.xyz/guy",
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Guy-Wuollet-1-300x300.png",
+      "bio": "Guy Wuollet is a general partner at Andreessen Horowitz, focusing on infrastructure and application layer investments across crypto. He believes decentralized networks can better align incentives on the Internet and enable the future of commerce and communication. Prior to joining a16z, he worked on independent research in concert with Protocol Labs. His work focused on building decentralized networking protocols and upgrading Internet infrastructure.",
+      "education": [
+        "B.S. in Computer Science from Stanford University"
+      ],
+      "prior_experience": [
+        "Independent research with Protocol Labs"
+      ]
+    },
+    {
+      "name": "Jacob Zietek",
+      "role": "Engineering Fellow",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/jacob-zietek/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/11/Jacob-Zietek-300x300.png",
+      "bio": "Jacob Zietek is an Engineering Fellow on a16z’s American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "James da Costa",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/james-da-costa/",
+      "linkedin_url": "https://www.linkedin.com/in/jamesdacosta/",
+      "x_url": "https://twitter.com/dacostajam",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "James da Costa is a partner at Andreessen Horowitz, where he focuses on investing in B2B software and financial services. Prior to joining a16z, James was a Y Combinator-backed fintech founder. Previously, James served as an engagement manager at McKinsey & Company. James holds an MBA from Stanford University. While at Stanford, James was a researcher in Stanford’s Human Centered AI Lab, where he focused on the economic implications of AI. James is also a published author. Originally from the UK, James is based in San Francisco. He is an avid racket sports fan.",
+      "education": [
+        "MBA from Stanford University"
+      ],
+      "prior_experience": [
+        "Y Combinator-backed fintech founder",
+        "Engagement manager at McKinsey & Company"
+      ]
+    },
+    {
+      "name": "Jamie Sullivan",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/jamie-sullivan/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jamie-Sullivan-1-300x300.png",
+      "bio": "Jamie Sullivan is a partner on the Growth investing team. Prior to joining Andreessen Horowitz, he worked at Leonard Green & Partners, a Los Angeles-based private equity firm. Jamie is a CFA charterholder and graduated summa cum laude from the University of Notre Dame, where he studied finance and theology. He lives in San Francisco where, on the weekends, you can find him playing tennis, strumming a guitar, or racing in triathlons.",
+      "education": [
+        "University of Notre Dame - finance and theology (summa cum laude)"
+      ],
+      "prior_experience": [
+        "Leonard Green & Partners"
+      ]
+    },
+    {
+      "name": "Jane Rhee",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/jane-rhee/",
+      "linkedin_url": "https://www.linkedin.com/in/janeywrhee/",
+      "x_url": "https://twitter.com/janerheetweets",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/05/Jane-Rhee-1-300x300.png",
+      "bio": "Jane Rhee is a partner at Andreessen Horowitz investing in AI applications, with a focus on enterprise and healthcare. Prior to joining a16z, Jane was an investor at General Atlantic where she focused on investing in growth and late-stage technology companies. Jane graduated from Harvard College with a degree in economics. She grew up in New York City.",
+      "education": [
+        "Harvard College, degree in economics"
+      ],
+      "prior_experience": [
+        "Investor at General Atlantic, focused on growth and late-stage technology companies"
+      ]
+    },
+    {
+      "name": "Jason Cui",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/jason-cui/",
+      "linkedin_url": "https://www.linkedin.com/in/jasonscui/",
+      "x_url": "https://twitter.com/JasonSCui",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/09/Jason-Cui-300x300.png",
+      "bio": "Jason Cui is a partner at Andreessen Horowitz, where he invests in infrastructure and AI. Previously, Jason was a product management lead at Databricks, where he built and scaled products across developer experience and serverless compute. Earlier, he founded Jemi, a commerce infrastructure platform backed by Y Combinator, General Catalyst, and Kleiner Perkins, which was acquired in 2023. Jason earned a degree in Computer Science from Harvard University.",
+      "education": [
+        "Computer Science from Harvard University"
+      ],
+      "prior_experience": [
+        "Product management lead at Databricks",
+        "Founded Jemi, a commerce infrastructure platform"
+      ]
+    },
+    {
+      "name": "Jay Rughani",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/jay-rughani/",
+      "linkedin_url": "https://www.linkedin.com/in/jay-rughani/",
+      "x_url": "https://twitter.com/JayRughani",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jay-Rughani-300x300.png",
+      "bio": "Jay Rughani is a partner at Andreessen Horowitz, where he leads investments in health technology companies.\n\nOver the past 7 years, Jay has helped build the a16z Bio + Health practice and helped lead a16z’s investments in numerous ambitious companies, including Alchemy, Alleviate, Aradigm, Counsel, Ferry, Gravity, Inductive, Komodo, Leona, Midstream, Orchestra, Pearl, Tennr, Thatch, Thyme, Turquoise, and Valar.\n\nPrior to joining a16z in 2018, Jay was an early team member at Flatiron, an electronic health record and real-world evidence company acquired by Roche for ~$2B. There, he helped to build some of the company’s first healthcare software and data products and later led numerous commercial partnerships through the company’s period of hypergrowth. Before Flatiron, he consulted for large healthcare and technology companies around the world at Deloitte, worked at Dealermatch (a seed-stage B2B marketplace later acquired by Cox Enterprises), and co-founded an unsuccessful startup with his college roommate.\n\nJay graduated from Emory University with a degree in Mathematics & Economics and grew up mostly in Tampa Bay, FL, apart from a three-year stint in boarding school in London, UK.",
+      "education": [
+        "Emory University (Mathematics & Economics)"
+      ],
+      "prior_experience": [
+        "Andreessen Horowitz, Partner",
+        "Flatiron, Early Team Member",
+        "Deloitte, Consultant",
+        "Dealermatch, Team Member",
+        "Startup Co-Founder"
+      ]
+    },
+    {
+      "name": "Jeff Bramel",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Perennial"
+      ],
+      "profile_url": "https://a16z.com/author/jeff-bramel/",
+      "linkedin_url": "https://www.linkedin.com/in/jeffbramel/",
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Jeff Bramel is a partner on the a16z Perennial team focused on real assets. Prior to joining a16z, Jeff was managing director and head of taxable real assets at UBS Asset Management, a large global financial institution with approximately $1 trillion in AUM including about $150 billion in private real assets. Prior to UBS, Jeff was head of real assets at Jordan Park, a multi-family office managing approximately $18 billion of taxable and tax-exempt, global multi-asset portfolios. Jeff was previously a senior portfolio manager of alternative investments at Spring Creek Investment Management, Sequoia Heritage Fund, and Jasper Ridge Partners. He started his investment career as a proprietary options trader and has 25 years of investment and portfolio management experience. Jeff earned a BS with a double major in mechanical engineering and economics from Caltech and his MS in management science and engineering from Stanford. In his spare time, Jeff enjoys being a father, building things, making music, and outdoor sports like hiking, skiing, kayaking, and rock climbing.",
+      "education": [
+        "BS with a double major in mechanical engineering and economics from Caltech",
+        "MS in management science and engineering from Stanford"
+      ],
+      "prior_experience": [
+        "Managing director and head of taxable real assets at UBS Asset Management",
+        "Head of real assets at Jordan Park",
+        "Senior portfolio manager of alternative investments at Spring Creek Investment Management",
+        "Senior portfolio manager at Sequoia Heritage Fund",
+        "Senior portfolio manager at Jasper Ridge Partners",
+        "Proprietary options trader"
+      ]
+    },
+    {
+      "name": "Jeff Jordan",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Consumer",
+        "Seed"
+      ],
+      "profile_url": "https://a16z.com/author/jeff-jordan/",
+      "linkedin_url": "https://www.linkedin.com/in/jeffjordan1/",
+      "x_url": "https://twitter.com/jeff_jordan",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jeff-Jordan-300x300.png",
+      "bio": "Jeff Jordan is a General Partner at Andreessen Horowitz where he serves on the boards of Airbnb (NASDAQ:ABNB), Codi, Incredible Health, Infinite Athlete, Foodology, Lookout, OfferUp, PrismsVR, Shef, and Wonderschool. He led the firm’s early investments in and served on the boards of Accolade (previously: NASDAQ:ACCD), Pinterest (NYSE: PINS) and Instacart (NASDAQ: CART). He was previously CEO and then executive chairman of OpenTable, where he led the company during a period of accelerated domestic and international growth and oversaw its initial public offering during one of the longest tech IPO droughts in recent history. Prior to OpenTable, Jeff was Senior Vice President and General Manager of eBay North America where he oversaw eBay's early growth into one of the Internet's leading commerce brands. In this role, he drove the successful acquisitions of PayPal and Half.com and went on to become President of PayPal, where he was responsible for establishing the company as the global standard for online payments. Before joining eBay, Jeff was chief financial officer of Hollywood Entertainment and president of Reel.com. He also worked as Senior Vice President of finance for The Disney Stores at The Walt Disney Company, and prior held various positions at the Boston Consulting Group. Jeff holds an MBA from the Stanford University Graduate School of Business and a BA in Political Science and Psychology from Amherst College. Jeff is an active mentor and leader in the Bay Area community. He serves on the boards of the DAPER Investment Fund, The GSB Trust, and the Stanford Engineering Leadership Council. He also runs a regular basketball game that connects young people and established tech industry vets.",
+      "education": [
+        "MBA from the Stanford University Graduate School of Business",
+        "BA in Political Science and Psychology from Amherst College"
+      ],
+      "prior_experience": [
+        "CEO and executive chairman of OpenTable",
+        "Senior Vice President and General Manager of eBay North America",
+        "President of PayPal",
+        "Chief Financial Officer of Hollywood Entertainment",
+        "President of Reel.com",
+        "Senior Vice President of finance for The Disney Stores at The Walt Disney Company",
+        "Various positions at the Boston Consulting Group"
+      ]
+    },
+    {
+      "name": "Jennifer Li",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/jennifer-li/",
+      "linkedin_url": "https://www.linkedin.com/in/jenniferhli/",
+      "x_url": "https://twitter.com/jenniferhli",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jennifer-Li-1-300x300.png",
+      "bio": "Jennifer Li is a general partner at Andreessen Horowitz, where she leads infrastructure investments with an eye on data systems, developer tools and AI. She has a soft spot for open source and a hard bias toward products that take gnarly technical problems and turn them into elegant and simple solutions. She serves on the boards of ElevenLabs, fal, Mintlify, Mux, Pylon, Rasa, Reducto, Stainless and Stacker, and is a board observer at Fivetran, Ideogram, Motherduck, NX and Vantage. Before a16z, Jennifer led product at Solvvy (acquired by Zoom), building conversational AI for customer experience, and earlier ran self-service and analytics products at AppDynamics (acquired by Cisco for $3.7B). She was a Kleiner Perkins Product Fellow in 2016. Born and raised in northern China, Jennifer moved to the U.S. for school and never stopped building. She holds an MS in Software Engineering from Carnegie Mellon and an MS in Technology Management from RPI. When she’s not partnering with founders or mapping tomorrow’s platforms, Jennifer is often found traveling with her family, reading, or tending her garden — usually with a mental sideline on the next platform shift.",
+      "education": [
+        "MS in Software Engineering from Carnegie Mellon",
+        "MS in Technology Management from RPI"
+      ],
+      "prior_experience": [
+        "General Partner at Andreessen Horowitz",
+        "Led product at Solvvy (acquired by Zoom)",
+        "Ran self-service and analytics products at AppDynamics (acquired by Cisco for $3.7B)",
+        "Kleiner Perkins Product Fellow in 2016"
+      ]
+    },
+    {
+      "name": "Jessica Leao",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/jessica-leao/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/Jessica-Leao-300x300.png",
+      "bio": "Jessica Leao is an investing partner on a16z's American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Joe Schmidt",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/joe-schmidt/",
+      "linkedin_url": "https://www.linkedin.com/in/joeschmidtiv",
+      "x_url": "https://twitter.com/joeschmidtiv",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Joe-Schmidt-1-300x300.png",
+      "bio": "Joe Schmidt is a partner at Andreessen Horowitz, where he focuses on software, fintech, and insurtech investments. Prior to joining a16z, Joe was the VP of Business Development at Ethos, a life insurance company offering families simple, affordable life insurance. While at Ethos, he started and scaled the agent business to millions in monthly revenue, while also leading sales and managing carrier and reinsurance partnerships. Before Ethos, Joe was an investor at Accel and worked for the Notre Dame Investment Office. Joe graduated from the University of Notre Dame where he was a Buser Fellow in the Investment Office as well as captain and most valuable player of the football team.",
+      "education": [
+        "University of Notre Dame"
+      ],
+      "prior_experience": [
+        "VP of Business Development at Ethos",
+        "Investor at Accel",
+        "Worked for the Notre Dame Investment Office"
+      ]
+    },
+    {
+      "name": "Joel de la Garza",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/joel-de-la-garza/",
+      "linkedin_url": "https://www.linkedin.com/in/3448827723723234/",
+      "x_url": "https://x.com/",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Joel-de-la-Garza-1-300x300.png",
+      "bio": "Joel de la Garza is a partner focused on information security related investments and other chaos adjacent businesses. He believes information security is getting better with security products that combine usability and security, the move to the cloud, the rise of hardware-based multi-factor authentication, and other trends. Joel works closely with Adaptive Security, Socket, Doppel, Lumos, Eclypsium, Truffle Security and others.",
+      "education": [
+        "Stanford University - Computer Science",
+        "Stanford University - German"
+      ],
+      "prior_experience": [
+        "Chief Security Officer at Box",
+        "Global Head of Threat Management and Cyber Intelligence for Citigroup",
+        "Incident Response for Deutsche Bank"
+      ]
+    },
+    {
+      "name": "John Aguillard",
+      "role": "Engineering Fellow",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/john-aguillard/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/11/John-Aguillard-1-300x300.png",
+      "bio": "John Aguillard is an Engineering Fellow on a16z’s American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Jonathan Lai",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/jonathan-lai/",
+      "linkedin_url": "https://www.linkedin.com/in/jlai84/",
+      "x_url": "https://twitter.com/Tocelot",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jon-Lai-1-300x300.png",
+      "bio": "Jonathan Lai is a general partner at Andreessen Horowitz, focused on a16z speedrun. Jon invests in early-stage teams building tomorrow’s AI x creative landscape—from developer tools to 3D simulations, vertical agents, and novel storytelling formats across video, games, audio, and more. Before joining a16z, Jon led the North America games investments team at Tencent. Previously, Jon was a senior product manager at Riot Games, the developers of League of Legends, where he shipped the Riot Games API before the company was acquired by Tencent. He started his career in investment banking for Morgan Stanley. Jon graduated from Harvard University with an MBA and BA in Economics, and lives in the Bay Area with his family.",
+      "education": [
+        "Harvard University - MBA",
+        "Harvard University - BA in Economics"
+      ],
+      "prior_experience": [
+        "General Partner at Andreessen Horowitz",
+        "Led North America games investments team at Tencent",
+        "Senior Product Manager at Riot Games",
+        "Investment Banking at Morgan Stanley"
+      ]
+    },
+    {
+      "name": "Jorge Conde",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/jorge-conde/",
+      "linkedin_url": "https://www.linkedin.com/in/jorge-conde-4099225/",
+      "x_url": "https://twitter.com/jorgecondebio",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Jorge-Conde-300x300.png",
+      "bio": "Jorge Conde is a general partner on the Bio + Health team, where he focuses on life sciences and healthcare investments across therapeutics, diagnostics, tools, and software. Jorge currently serves on the boards of Asimov, Cartography, Dyno, Earli, Komodo Health, and Octant Bio. He has also served on the boards of portfolio companies through their acquisitions including EQRx (by Revolution Medicines), IDRx (by GSK), and Tmunity (by Gilead/Kite).\n\nPrior to joining Andreessen Horowitz, Jorge served as Chief Strategy Officer, Chief Financial Officer, and Chief Product Officer for Syros. Jorge was also cofounder and Chief Executive Officer of Knome, a human genome interpretation company acquired by Tute Genomics in 2015. Before that, Jorge worked in marketing and operations at MedImmune and as a biotechnology investment banker at Morgan Stanley.\n\nJorge holds an MBA from Harvard Business School, an MS from the Harvard-MIT Division of Health Sciences and Technology, and a BA in biology from Johns Hopkins University. Jorge was named one of the top 35 young innovators in the world by the MIT Technology Review and is a Henry Crown Fellow of the Aspen Institute and a member of the Aspen Global Leadership Network. He previously served on the board of the Museum of Science, Boston.\n\nBorn and raised in Miami by Cuban and Peruvian parents, and married to a Madrileña, Jorge and his family live in California. The family cheers for Real Madrid, the Boston Red Sox, and the Miami Dolphins.",
+      "education": [
+        "MBA from Harvard Business School",
+        "MS from the Harvard-MIT Division of Health Sciences and Technology",
+        "BA in biology from Johns Hopkins University"
+      ],
+      "prior_experience": [
+        "Chief Strategy Officer, Chief Financial Officer, and Chief Product Officer for Syros",
+        "Cofounder and Chief Executive Officer of Knome, acquired by Tute Genomics in 2015",
+        "Worked in marketing and operations at MedImmune",
+        "Biotechnology investment banker at Morgan Stanley"
+      ]
+    },
+    {
+      "name": "Joshua Lu",
+      "role": "Investment Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/joshua-lu/",
+      "linkedin_url": "https://www.linkedin.com/in/joshualu/",
+      "x_url": "https://twitter.com/JoshLu",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Josh-Lu-1-300x300.png",
+      "bio": "Josh Lu is an Investment Partner at Andreessen Horowitz for a16z speedrun. a16z speedrun supports entrepreneurs building in tech, entertainment, and AI. In his role, he’s focused on studios and the intersection between games and social applications.\nPrior to joining Andreessen Horowitz, Josh was the Product Group Lead and Product Management Director for Horizon Worlds at Meta and oversaw the launch of their flagship metaverse product. Before Meta, Josh spent more than a decade in the games industry, most recently as VP Product/Publishing/Analytics at Blizzard Entertainment and Head of Product Management at Zynga.\nJosh holds a dual BA in Economics and Diplomacy & World Affairs from Occidental College. He enjoys spending time working with education-focused nonprofits by serving on the Board of Advisors for Carina Initiatives and as the Board Chair at Astra. He’s also an avid cook/baker, basketball player, and lucky dad of two girls.",
+      "education": [
+        "Dual BA in Economics and Diplomacy & World Affairs from Occidental College"
+      ],
+      "prior_experience": [
+        "Product Group Lead and Product Management Director for Horizon Worlds at Meta",
+        "VP Product/Publishing/Analytics at Blizzard Entertainment",
+        "Head of Product Management at Zynga"
+      ]
+    },
+    {
+      "name": "Julie Yoo",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/julie-yoo/",
+      "linkedin_url": "https://www.linkedin.com/in/juliekyoo/",
+      "x_url": "https://twitter.com/julesyoo",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Julie-Yoo-2-300x300.png",
+      "bio": "Julie Yoo is a general partner on the Bio + Health team, where she leads investments into companies that are transforming how we access, pay for, and experience healthcare. Her portfolio includes AKASA, Alchemy, Ambience, Aradigm, Counsel, Fortuna, Hippocratic AI, Leona, Sprinter Health, Thatch Health, and Turquoise Health.\n\nPrior to joining Andreessen Horowitz, Julie was Co-Founder and Chief Product Officer of Kyruus, a VC-backed healthtech company where she helped build and scale the business from 0 to 20M patients and over 225,000 healthcare providers across the US using their platform (acquired by RevSpring). Before that, Julie was VP of Product at Generation Health (acquired by CVS Health) and a Product Manager at Knome. Julie’s tech career began as an early member of the software engineering and sales engineering team at Endeca Technologies, which was acquired by Oracle.\n\nJulie studied computer science and pre-medicine as an undergrad at MIT and obtained an MS in genomics from Harvard-MIT HST and an MBA from MIT Sloan. Julie is a Young Global Leader with the World Economic Forum and has been recognized through numerous awards and honors from Midas Brink List, Becker’s Hospital Review, Modern Healthcare, Health Data Management, MedTech Boston, and Rock Health.",
+      "education": [
+        "computer science and pre-medicine from MIT",
+        "MS in genomics from Harvard-MIT HST",
+        "MBA from MIT Sloan"
+      ],
+      "prior_experience": [
+        "Co-Founder and Chief Product Officer of Kyruus",
+        "VP of Product at Generation Health",
+        "Product Manager at Knome",
+        "Software engineer and sales engineering team member at Endeca Technologies"
+      ]
+    },
+    {
+      "name": "Justin Kahl",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/justin-kahl/",
+      "linkedin_url": "https://www.linkedin.com/in/justinkahl/",
+      "x_url": "https://twitter.com/Justin_Kahl",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Justin-Kahl-1-300x300.png",
+      "bio": "Justin Kahl is a partner on the Growth investing team. Prior to joining Andreessen Horowitz, Justin was at Bain Capital, where he invested in later-stage software and consumer internet businesses. Justin holds a BS with distinction from Stanford University, where he played on the varsity soccer team and studied management science and engineering as well as economics. He grew up in Charlotte, North Carolina.",
+      "education": [
+        "BS with distinction from Stanford University, studied management science and engineering as well as economics"
+      ],
+      "prior_experience": [
+        "Bain Capital"
+      ]
+    },
+    {
+      "name": "Justine Moore",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/justine-moore/",
+      "linkedin_url": "https://www.linkedin.com/in/justinemoore94/",
+      "x_url": "https://twitter.com/venturetwins",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Justine_Moore-300x300.png",
+      "bio": "Justine Moore is a partner on the investing team at Andreessen Horowitz, where she focuses on AI — both foundation models and applications. She’s helped lead investments including ElevenLabs, Krea, Wabi, Black Forest Labs, Hedra, Mirelo, WaveForms AI, and Viggle, among others. Prior to joining a16z, Justine was an early stage investor at CRV, where she invested in companies building tech for consumers and SMBs. Before CRV, she worked at Goldman Sachs on the firm’s Private Equity team. Justine graduated from Stanford with a BA in Economics and an MBA. In her free time, she enjoys reading, walking with her dog Tilly, and experimenting with AI creative tools.",
+      "education": [
+        "BA in Economics from Stanford",
+        "MBA from Stanford"
+      ],
+      "prior_experience": [
+        "Partner at Andreessen Horowitz",
+        "Early stage investor at CRV",
+        "Worked at Goldman Sachs on the firm’s Private Equity team"
+      ]
+    },
+    {
+      "name": "Katherine Boyle",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism",
+        "Seed"
+      ],
+      "profile_url": "https://a16z.com/author/katherine-boyle/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/KTmBoyle",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Katherine-Boyle-1-300x300.png",
+      "bio": "Katherine Boyle is a general partner at Andreessen Horowitz and cofounder of the firm’s American Dynamism practice, which invests in companies supporting the national interest across aerospace, defense, manufacturing, energy, logistics, and critical infrastructure. She sits on the boards of Apex Space and Hadrian Automation and is a board observer for Saronic Technologies and Castelion.\n\nShe was previously a partner at General Catalyst, where she co-led the firm’s seed practice and invested in the inception rounds of defense technology companies including Anduril Industries and Vannevar Labs. Prior to General Catalyst, she was a general assignment reporter at The Washington Post. Katherine holds a BA in Government from Georgetown University, an MBA from Stanford and a Masters of Public Advocacy from the National University of Ireland, Galway.\n\nKatherine believes that free speech is essential to promoting American Dynamism. She is a proud champion of new media companies and academic centers that promote free speech and free thought. She serves on the boards of The Free Press and the Mercatus Center at George Mason University.",
+      "education": [
+        "BA in Government from Georgetown University",
+        "MBA from Stanford",
+        "Masters of Public Advocacy from the National University of Ireland, Galway"
+      ],
+      "prior_experience": [
+        "Partner at General Catalyst",
+        "General assignment reporter at The Washington Post"
+      ]
+    },
+    {
+      "name": "Kenan Saleh",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/kenan-saleh/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/10/Kenan-Saleh-300x300.png",
+      "bio": "Kenan Saleh is an investing partner at Andreessen Horowitz for a16z speedrun.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Kimberly Tan",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise"
+      ],
+      "profile_url": "https://a16z.com/author/kimberly-tan/",
+      "linkedin_url": "https://linkedin.com/in/kimberlywtan/",
+      "x_url": "https://twitter.com/kimberlywtan",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Kimberly-Tan-1-300x300.png",
+      "bio": "Kimberly Tan is an Investing Partner at Andreessen Horowitz. She joined in 2019. Kimberly is particularly excited about companies that leverage data or AI in compelling ways to pioneer novel user experiences or reshape large, legacy markets. She represents the firm on the board of Decagon.ai — where a16z invested at company inception — as well as at Mem, Pave, Prepared911, Rutter, Saronic, Supermove, Vesta, and Vitally.",
+      "education": [
+        "Stanford University"
+      ],
+      "prior_experience": []
+    },
+    {
+      "name": "Lejla Johnsen",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/lejla-johnsen/",
+      "linkedin_url": "https://www.linkedin.com/in/lejla-custo/",
+      "x_url": "https://twitter.com/custo_lejla",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/05/Lejla-Custo-300x300.png",
+      "bio": "Lejla Johnsen is an investing partner at Andreessen Horowitz for a16z speedrun.\n\nPrior to joining a16z, Lejla worked on Wall Street. She began her career in investment banking at Goldman Sachs, where she focused on financial institutions. She later spent four years on the buy side, investing across industries, capital structure, and the life cycles of companies.\n\nLejla moved to the U.S. from Bosnia and Herzegovina when she was 16 to attend Deerfield Academy. Lejla holds a BA in Economics from Harvard with a minor in History and Spanish. Having lived in a post-communist society, Lejla is passionate about why the U.S. must lead with strength for a free and safe world. In her free time, Lejla loves spending time with her niece and nephew and is an avid swimmer and skier.",
+      "education": [
+        "BA in Economics from Harvard with a minor in History and Spanish",
+        "Deerfield Academy"
+      ],
+      "prior_experience": [
+        "Goldman Sachs (Investment Banking)",
+        "Buy side investing across industries, capital structure, and life cycles of companies"
+      ]
+    },
+    {
+      "name": "Lisha Li",
+      "role": "Investment Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/lisha-li/",
+      "linkedin_url": "https://www.linkedin.com/in/lisha-li-700985a/",
+      "x_url": "https://twitter.com/https://x.com/lishali88",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/03/Lisha-Li-300x300.png",
+      "bio": "Lisha joined Andreessen Horowitz as an investment partner after eight years as the founder of Rosebud AI, an AI coding platform for games. You can read her reflections on being a founder in generative AI since 2018 here. At a16z she spends most of her time on frontier AI models and the infra that supports them. She’s also interested in AI for science and AI for creative applications. Prior to a16z she was an active angel investor, with seed checks into fal, Periodic Labs, Exa, and others. For founders building now, model progress is both the tailwind and the threat. It opens room to overtake incumbents, but it can also absorb a startup’s roadmap overnight. The founders who succeed have the imagination and grit to build in this fast moving world. She has a lot of respect for the people taking it on and is excited to back them. Lisha came to the Bay Area in 2011 to pursue her PhD at UC Berkeley. She started in logic and the foundations of mathematics, then pivoted to deep learning around the time AlphaGo achieved superhuman performance in Go. The game has been revered as a cerebral and creative pursuit for millennia, so this was her first true “sparks of AGI” moment. In defiance of American autocorrect, Lisha continues to spell colour and flavour the right way, though she has sadly lost her Canadian o accent. She occasionally makes TikToks about physics and looks forward to a day when AI can finally unify quantum mechanics and general relativity, solve the Millennium problems, and help us understand the structure of reality as we never could before.",
+      "education": [
+        "UC Berkeley - PhD"
+      ],
+      "prior_experience": [
+        "Founder of Rosebud AI",
+        "Active Angel Investor"
+      ]
+    },
+    {
+      "name": "Marc Andreessen",
+      "role": "Cofounder and General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism",
+        "Consumer",
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/marc-andreessen/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/pmarca",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Marc Andreessen is a cofounder and general partner at the venture capital firm Andreessen Horowitz. He is an innovator and creator, one of the few to pioneer a software category used by more than a billion people and one of the few to establish multiple billion-dollar companies.\n\nMarc co-created the highly influential Mosaic internet browser and co-founded Netscape, which later sold to AOL for $4.2 billion. He also co-founded Loudcloud, which as Opsware, sold to Hewlett-Packard for $1.6 billion. He later served on the board of Hewlett-Packard from 2008 to 2018.\n\nMarc holds a BS in computer science from the University of Illinois at Urbana-Champaign.",
+      "education": [
+        "BS in computer science from the University of Illinois at Urbana-Champaign"
+      ],
+      "prior_experience": [
+        "Cofounder and General Partner at Andreessen Horowitz",
+        "Co-created Mosaic internet browser",
+        "Cofounded Netscape",
+        "Co-founded Loudcloud (Opsware)",
+        "Board member at Hewlett-Packard from 2008 to 2018"
+      ]
+    },
+    {
+      "name": "Marcus Segal",
+      "role": "Venture Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/marcus-segal/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/09/Marcus-Segal-300x300.png",
+      "bio": "Marcus Segal is a venture partner for a16z speedrun.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Martin Casado",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/martin-casado/",
+      "linkedin_url": "https://www.linkedin.com/in/martincasado",
+      "x_url": "https://twitter.com/martin_casado",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Martin-Casado-2-300x300.png",
+      "bio": "Martin Casado is a general partner at Andreessen Horowitz, where he leads the firm’s infrastructure practice. He first joined the firm in 2016 and currently serves on the boards of Ambient.ai, Astranis, Braintrust, Coactive, Convex, Cursor, Distributional, Fivetran, Ideogram, Imply, Kong, Material Security, Netlify, Pindrop Security, Preset, Truffle Security, and World Labs. He previously served on the boards of dbt Labs (acquired by Fivetran), DeepMap.ai (acquired by NVIDIA), Isovalent (acquired by Cisco), Metronome (acquired by Stripe), Orbit (acquired by Postman), Parsec Gaming (acquired by Unity), Tabular (acquired by Databricks) and Yubico (IPO $YUBICO). Martin was previously the cofounder and chief technology officer at Nicira, which was acquired by VMware for $1.26 billion in 2012. While at VMware, Martin was a fellow and served as a senior vice president and general manager of the networking and security business unit, which he scaled to a $600 million run-rate business by the time he left VMware in 2016. Martin started his career at Lawrence Livermore National Laboratory where he worked on large-scale simulations for the Department of Defense before moving over to work with the intelligence community on networking and cybersecurity. These experiences inspired his work at Stanford where he helped pioneer the software-defined networking (SDN) movement. While at Stanford he also co-founded Illuminics Systems, an IP analytics company, which was acquired by Quova Inc. in 2006. For his work, Martin was awarded both the ACM Grace Murray Hopper award and the NEC C&C award, and he’s an inductee of the Lawrence Livermore Lab’s Entrepreneur’s Hall of Fame. He holds both a PhD and Masters degree in Computer Science from Stanford University.",
+      "education": [
+        "PhD in Computer Science from Stanford University",
+        "Masters degree in Computer Science from Stanford University"
+      ],
+      "prior_experience": [
+        "Cofounder and Chief Technology Officer at Nicira",
+        "Senior Vice President and General Manager of the Networking and Security Business Unit at VMware",
+        "Worked at Lawrence Livermore National Laboratory"
+      ]
+    },
+    {
+      "name": "Matt Bornstein",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/matt-bornstein/",
+      "linkedin_url": "https://www.linkedin.com/in/mattbornstein/",
+      "x_url": "https://twitter.com/BornsteinMatt",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Matt-Bornstein-1-300x300.png",
+      "bio": "Matt Bornstein is a general partner at Andreessen Horowitz focused on AI and data systems. His current investments include Cursor, Unconventional AI, Hex, Svix, Hedra, and Labelbox. Prior investments include Tabular (acquired by Databricks), Replicate (acquired by Cloudflare), and Character.ai (acquired by Google). Prior to a16z, Matt was a member of seed-stage venture capital firm Blumberg Capital, worked on the biz ops team at LinkedIn, and co-founded two (very small) bootstrapped startups.",
+      "education": [
+        "MBA from Harvard Business School",
+        "BS in mathematics from Brown University"
+      ],
+      "prior_experience": [
+        "General Partner at Andreessen Horowitz",
+        "Member of seed-stage venture capital firm Blumberg Capital",
+        "Worked on the biz ops team at LinkedIn",
+        "Co-founded two bootstrapped startups"
+      ]
+    },
+    {
+      "name": "Michael Cialone",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/michael-cialone/",
+      "linkedin_url": "https://www.linkedin.com/in/michael-cialone/",
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/02/Michael-Cialone-2-300x300.png",
+      "bio": "Michael Cialone is an investing partner on the Bio + Health team, focused on biotech. Michael supports the life sciences portfolio with financing and business development strategy, planning, and execution. Prior to joining a16z, Michael co-led Wilson Sonsini’s Life Sciences Business Advisory practice supporting biotech and pharma clients across a broad range of corporate development, fundraising, and other strategic priorities. Prior to Wilson Sonsini, Michael held various corporate strategy roles at Sumitovant Biopharma and Pfizer. Michael is based out of Manhattan. Michael graduated from The University of Vermont where he studied Finance and Pharmacology. Michael is a triplet (3 boys) and dreams of one day opening up an Italian restaurant.",
+      "education": [
+        "The University of Vermont - Finance and Pharmacology"
+      ],
+      "prior_experience": [
+        "Wilson Sonsini – Life Sciences Business Advisory practice",
+        "Sumitovant Biopharma – Corporate strategy roles",
+        "Pfizer – Corporate strategy roles"
+      ]
+    },
+    {
+      "name": "Michel Del Buono",
+      "role": "Chief Investment Officer",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Perennial"
+      ],
+      "profile_url": "https://a16z.com/author/michel-del-buono/",
+      "linkedin_url": "https://www.linkedin.com/in/mdelbuono/",
+      "x_url": "https://twitter.com/",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Michel Del Buono is an operating partner and the chief investment officer for a16z Perennial.\n\nMichel leads the a16z Perennial team. Prior to joining a16z, Michel was the founding chief investment officer of Jordan Park, a multi-family office managing approximately $18 billion of taxable and tax-exempt global multi-asset class portfolios. Before that, Michel was a managing director and global strategist at Makena Capital Management, an endowment-style investment firm managing approximately $19 billion for endowments, foundations, family offices, pensions, and sovereign wealth funds, where he oversaw global investment strategy, portfolio construction, and risk management. Prior to Makena, he worked as the sole investment analyst at Scion Capital, the hedge fund that pioneered the use of various credit instruments prior to the global financial crisis. Michel was also an engagement manager at McKinsey & Co, where he assisted private equity clients with their due diligence and valuation work. He serves on the Investment Committee for CommonSpirit Health.\n\nMichel graduated with a BSc in systems engineering with high honors from the University of Virginia, a MSc in engineering-economic systems and operations research from Stanford, and a MPhil in economics from Girton College, Cambridge. He earned his PhD in management science and engineering with a focus in applied economics from Stanford University where he was a DARPA fellow.",
+      "education": [
+        "BSc in systems engineering with high honors from the University of Virginia",
+        "MSc in engineering-economic systems and operations research from Stanford",
+        "MPhil in economics from Girton College, Cambridge",
+        "PhD in management science and engineering with a focus in applied economics from Stanford University"
+      ],
+      "prior_experience": [
+        "Founding chief investment officer of Jordan Park",
+        "Managing director and global strategist at Makena Capital Management",
+        "Sole investment analyst at Scion Capital",
+        "Engagement manager at McKinsey & Co"
+      ]
+    },
+    {
+      "name": "Mindy Isenstein",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Perennial"
+      ],
+      "profile_url": "https://a16z.com/author/mindy-isenstein/",
+      "linkedin_url": "https://www.linkedin.com/in/mindy-isenstein/",
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Mindy Isenstein is a partner at a16z Perennial where she leads the venture capital fund. Mindy’s career spans investing, research, entrepreneurship, and institutional finance. She brings a deep understanding of the venture capital ecosystem, technology markets, and emerging innovation. With experience in both fund and direct investing, she has consistently identified high-potential managers and companies. In addition to her investing career, Mindy is a founder and began her career in technology risk consulting. Prior to joining a16z, Mindy was a principal at TrueBridge Capital Partners, a venture capital fund-of-funds and direct investment firm where she contributed across the full investment process. Earlier in her career, Mindy was a vice president at Goldman Sachs, where she worked in the Equities and Global Investment Research divisions, covering the IT software and hardware industries.",
+      "education": [
+        "BS in Systems and Information Engineering, concentration in Management Information Systems, University of Virginia"
+      ],
+      "prior_experience": [
+        "Principal at TrueBridge Capital Partners",
+        "Vice President at Goldman Sachs"
+      ]
+    },
+    {
+      "name": "Nathan Abramoff",
+      "role": "Engineering Fellow",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/nathan-abramoff/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/Nathan-Abramoff-300x300.png",
+      "bio": "Nathan Abramoff is an Engineering Fellow on a16z’s American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Noah Levine",
+      "role": "Investing Partner, Crypto",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Crypto"
+      ],
+      "profile_url": "https://a16zcrypto.com/team/noah-levine/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://dwt2zme5yrom6.cloudfront.net/uploads/2026/02/Noah-Levine.jpg",
+      "bio": null,
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Oliver Hsu",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/oliver-hsu/",
+      "linkedin_url": "https://www.linkedin.com/in/ohsu/",
+      "x_url": "https://twitter.com/oyhsu",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Oliver-Hsu-2-300x300.png",
+      "bio": "Oliver Hsu is a partner on the American Dynamism investing team at a16z, where he focuses on emerging computing platforms and applications for the physical world.\n\nOliver was previously an early product hire and chief of staff at Mos, an education financing startup. There, he led multiple business operations functions and launched new products for the company. He has also spent time building out developer ecosystems in Africa at Andela and as a fellow investing in seed-stage companies with Susa Ventures.\n\nOliver holds an AB magna cum laude from Princeton University, where he studied public and international affairs and played on the rugby team.",
+      "education": [
+        "AB magna cum laude from Princeton University, where he studied public and international affairs"
+      ],
+      "prior_experience": [
+        "early product hire and chief of staff at Mos",
+        "building out developer ecosystems in Africa at Andela",
+        "fellow investing in seed-stage companies with Susa Ventures"
+      ]
+    },
+    {
+      "name": "Olivia Moore",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Consumer"
+      ],
+      "profile_url": "https://a16z.com/author/olivia-moore/",
+      "linkedin_url": "https://www.linkedin.com/in/oliviamoore94/",
+      "x_url": "https://twitter.com/omooretweets",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Olivia_Moore-300x300.png",
+      "bio": "Olivia Moore is a partner on the investing team at Andreessen Horowitz, where she focuses on AI. She’s helped lead investments including Happyrobot, Salient, Toma, Krea, Scribenote, among others. Prior to joining a16z, Olivia was an early stage investor at CRV, where she invested in and partnered with companies building tech for consumers and SMBs. Before CRV, she worked at Goldman Sachs on the firm’s Alternative Investments and Manager Selection team. Olivia graduated from Stanford with an undergraduate degree in Economics (with Honors and Distinction), and from the Stanford Graduate School of Business with an MBA. While in college, she co-founded Cardinal Ventures, the school’s premiere on-campus incubator that has graduated hundreds of startups.",
+      "education": [
+        "Stanford, Undergraduate degree in Economics (with Honors and Distinction)",
+        "Stanford Graduate School of Business, MBA"
+      ],
+      "prior_experience": [
+        "Early stage investor at CRV, invested in tech for consumers and SMBs",
+        "Worked at Goldman Sachs on the firm’s Alternative Investments and Manager Selection team"
+      ]
+    },
+    {
+      "name": "Peter Levine",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/peter-levine/",
+      "linkedin_url": "https://www.linkedin.com/in/peter-levine-681386172",
+      "x_url": "https://twitter.com/PeterL4e",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Peter Levine is a general partner at Andreessen Horowitz where he focuses on AI and infrastructure investing. Peter serves on the board of Apollo GraphQL, GitButler, Kodex, Labelbox, Lumos, Mixpanel, Backstory, PlanetScale, Pinecone, and Shield AI. Additionally, he led the firm's investment in Figma ($FIG), GitHub (acquired by Microsoft) and DigitalOcean ($DOCN), among others. He previously served on the board of Stack Overflow (acquired by Prosus), Udacity (acquired by Accenture), and Mesosphere/D2iQ (acquired by Nutanix).\n\nPrior to joining the firm in 2011, he was previously senior vice president and general manager of the Data Center and Cloud Division at Citrix where he was responsible for revenue, product management, business development, and strategic direction. Peter joined Citrix in 2007 through its $500 million acquisition of XenSource, the leading provider of enterprise-class open source virtualization software, where he served as CEO.\n\nPrior to XenSource, Peter was a general partner at the Mayfield Fund. Before Mayfield, he was an early employee of VERITAS Software. During his 11-year tenure with the company, he helped to grow the organization to over 5,000 employees and more than $1.5 billion in revenue. Peter served as executive vice president and was responsible for worldwide marketing, OEM sales, business development, and several product divisions. He began his career as a software engineer at MIT’s Project Athena.\n\nPeter holds a BS in Engineering from Boston University and attended the Sloan School of Management at MIT. He is currently an adjunct professor at the Tuck School of Business at Dartmouth and a former entrepreneurship lecturer at Stanford and MIT.",
+      "education": [
+        "BS in Engineering from Boston University",
+        "attended the Sloan School of Management at MIT"
+      ],
+      "prior_experience": [
+        "General Partner at Mayfield Fund",
+        "Senior Vice President and General Manager at Citrix",
+        "CEO at XenSource",
+        "Early employee of VERITAS Software"
+      ]
+    },
+    {
+      "name": "Raghu Raghuram",
+      "role": "Managing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra",
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/raghu-raghuram/",
+      "linkedin_url": "https://www.linkedin.com/in/raghuraghuram/",
+      "x_url": "https://twitter.com/RaghuRaghuram",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": [
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9",
+        "https://substackcdn.com/image/fetch/$s_!dpPh!,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fa16z.substack.com%2Ftwitter%2Fsubscribe-card.jpg%3Fv%3D2144370941%26version%3D9"
+      ],
+      "bio": "Raghu Raghuram is a managing partner at Andreessen Horowitz as well as a general partner on the Growth and Infrastructure investing teams.\n\nPrior to joining a16z, he spent two decades at VMware in product and company leadership. He was instrumental in transforming VMware from a startup to a global cloud infrastructure platform company with a portfolio of several billion-dollar products, over $13B in revenue, and more than 300,000 customers in 60+ countries.\n\nDuring his time at VMware, he held various leadership roles, including VP of Products, General Manager of the Software-Defined Datacenter business, and Chief Operating Officer. He then served as CEO of the company for three years—when he led the company’s spinout from Dell and ran it as an independent public company until its $69B acquisition by Broadcom.\n\nBefore VMware, he held product management roles at Netscape, AOL, and Bang Networks. He holds a Masters in Physics from the Indian Institute of Technology, Madras, a Masters in Electrical Engineering from the Indian Institute of Technology, Bombay, and an MBA from the Wharton School of Business, University of Pennsylvania.",
+      "education": [
+        "Masters in Physics from the Indian Institute of Technology, Madras",
+        "Masters in Electrical Engineering from the Indian Institute of Technology, Bombay",
+        "MBA from the Wharton School of Business, University of Pennsylvania"
+      ],
+      "prior_experience": [
+        "VP of Products at VMware",
+        "General Manager of the Software-Defined Datacenter at VMware",
+        "Chief Operating Officer at VMware",
+        "CEO at VMware",
+        "Product Management roles at Netscape",
+        "Product Management roles at AOL",
+        "Product Management roles at Bang Networks"
+      ]
+    },
+    {
+      "name": "Ryan McEntush",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/ryan-mcentush/",
+      "linkedin_url": "https://www.linkedin.com/in/ryanmcentush/",
+      "x_url": "https://twitter.com/rmcentush",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Ryan-McEntush-2-300x300.png",
+      "bio": "Ryan McEntush is an investing partner at a16z, focusing on companies that promote American Dynamism.\n\nPreviously, Ryan worked at Teleport, an infrastructure cybersecurity company. During his time there, Ryan began in sales, before transitioning into operations where he led planning and go-to-market initiatives.\n\nRyan attended the University of California, Santa Barbara and received a degree in Economics. He (reluctantly) graduated early to move to San Francisco, but hopes to live on the beach again someday soon.\n\nOutside of work, Ryan writes on topics ranging from lunar colonization and Arctic trade routes to industrial policy and maritime history. His essays can be found on his blog, _Ryanomics_.",
+      "education": [
+        "University of California, Santa Barbara - Economics"
+      ],
+      "prior_experience": [
+        "Teleport - Sales",
+        "Teleport - Operations"
+      ]
+    },
+    {
+      "name": "Santiago Rodriguez",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/santiago-rodriguez-lebrija/",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/santiago__rdz",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Santiago-Rodriguez-1-300x300.png",
+      "bio": "Santiago Rodriguez is a partner on the Growth investing team, focused on fintech, consumer, and crypto technology companies.\n\nBefore joining Andreessen Horowitz, he was at Bain Capital, where he invested in later-stage consumer, financial services, and industrial businesses.\n\nSantiago graduated from Stanford University with a degree in chemical engineering. He grew up in Mexico City, is an avid sports fan, and loves to visit new countries.",
+      "education": [
+        "Stanford University - Chemical Engineering"
+      ],
+      "prior_experience": [
+        "Bain Capital - Invested in later-stage consumer, financial services, and industrial businesses"
+      ]
+    },
+    {
+      "name": "Sarah Wang",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/sarah-wang/",
+      "linkedin_url": "https://www.linkedin.com/in/sarah-wang-59b96a7/",
+      "x_url": "https://twitter.com/SarahDingWang",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Sarah-Wang-v2-300x300.png",
+      "bio": "Sarah Wang is a general partner at Andreessen Horowitz, where she leads growth-stage investments across AI, enterprise applications, and infrastructure. She’s backed companies shaping the next wave of innovation, including Gamma, Cursor, Decagon, Thinking Machines Lab, Character.ai, Wiz, Hex, Crossbeam, and Sourcegraph. Sarah also works closely with a16z’s growth investments in OpenAI, SSI, Databricks, SpaceX, Samsara, and Figma, among others.\n\nBefore joining a16z in 2019, Sarah was a Vice President at TA Associates, where she focused on growth-stage investments and served on the board of ZoomInfo (Nasdaq: GTM). She began her career at Morgan Stanley and Boston Consulting Group.\n\nSarah earned her MBA from the Stanford Graduate School of Business, where she was a Siebel Scholar and Arjay Miller Scholar, and holds an undergraduate degree from Harvard University, where she graduated Phi Beta Kappa and was named a John Harvard Scholar.\n\nOriginally from Fargo and Chicago, Sarah now calls California home and when she’s not meeting founders, she’s likely with her kids, Teddy and Poppy, exploring the outdoors or chasing good dumplings.",
+      "education": [
+        "MBA from the Stanford Graduate School of Business",
+        "Undergraduate degree from Harvard University"
+      ],
+      "prior_experience": [
+        "Vice President at TA Associates",
+        "Board member at ZoomInfo",
+        "Morgan Stanley",
+        "Boston Consulting Group"
+      ]
+    },
+    {
+      "name": "Seema Amble",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Enterprise",
+        "Fintech"
+      ],
+      "profile_url": "https://a16z.com/author/seema-amble/",
+      "linkedin_url": "https://www.linkedin.com/in/seema-amble-b404126/",
+      "x_url": "https://twitter.com/seema_amble",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/04/Seema-Amble-300x300.png",
+      "bio": "Seema Amble is a partner focused on early stage SaaS and B2B fintech investments globally. She joined the firm in 2019.\n\nPrior to joining Andreessen Horowitz, Seema had been investing in software for over a decade. She was a vice president at Goldman Sachs Investment Partners, a venture growth fund, where she focused on leading investments in software and fintech. Previously, she worked at LeapFrog Investments and Altamont Capital Partners. She began her career at Blackstone. Seema also worked at the Consumer Financial Protection Bureau while in law school.",
+      "education": [
+        "BA in Economics, magna cum laude",
+        "JD/MBA from Harvard University, where she was a Baker Scholar."
+      ],
+      "prior_experience": [
+        "Vice President at Goldman Sachs Investment Partners",
+        "LeapFrog Investments",
+        "Altamont Capital Partners",
+        "Blackstone",
+        "Consumer Financial Protection Bureau"
+      ]
+    },
+    {
+      "name": "Shangda Xu",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/shangda-xu/",
+      "linkedin_url": "https://www.linkedin.com/in/shangdaxu",
+      "x_url": "https://twitter.com/shangdaxu",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Shangda-Xu-2026-300x300.png",
+      "bio": "Shangda Xu is a partner on the Growth team focused on AI models and infrastructure, AI hardware, and enterprise applications. Before joining Andreessen Horowitz, Shangda was an investor at Warburg Pincus, working with later-stage software, tech-enabled services, and industrial companies. Shangda graduated summa cum laude from Harvard University. He grew up in Connecticut and enjoys exploring new cities and beautiful nature, getting competitive about strategy and board games, and finding great new restaurants.",
+      "education": [
+        "Harvard University"
+      ],
+      "prior_experience": [
+        "Investor at Warburg Pincus"
+      ]
+    },
+    {
+      "name": "Stephenie Zhang",
+      "role": "Partner on the Growth investing team",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Growth"
+      ],
+      "profile_url": "https://a16z.com/author/stephenie-zhang/",
+      "linkedin_url": "https://www.linkedin.com/in/steph-zhang-9b5bb3a9/",
+      "x_url": "https://twitter.com/steph_zhang",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Stephanie-Zhang-300x300.png",
+      "bio": "Stephenie Zhang is a partner on the Growth investing team, focused on enterprise technology companies. Prior to joining Andreessen Horowitz, Steph was at Warburg Pincus, a global private equity firm with over $80B AUM, where she focused on investing in growth and late-stage technology companies. Steph holds a BS, Phi Beta Kappa in computer science from MIT, and grew up in Palo Alto, CA. In her spare time, you can find her at local cycling, boxing, or pilates classes.",
+      "education": [
+        "BS, Phi Beta Kappa in computer science from MIT"
+      ],
+      "prior_experience": [
+        "Warburg Pincus, focused on investing in growth and late-stage technology companies"
+      ]
+    },
+    {
+      "name": "Troy Kirwin",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Speedrun"
+      ],
+      "profile_url": "https://a16z.com/author/troy-kirwin/",
+      "linkedin_url": "https://www.linkedin.com/in/troykirwin/",
+      "x_url": "https://twitter.com/tkexpress11",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/04/Troy-Kirwin-300x300.png",
+      "bio": "Troy is an investing partner at Andreessen Horowitz. As a Cohort Lead for a16z speedrun, Troy invests in B2B AI and creative tech companies—next-gen storytelling and design tools, marketing tech, 3D simulations, vertical AI agents and more. Troy’s investments include K-ID, Hedra, Backflip, Nunu.ai, Genway, Quago, Intangible, Schemata, Deep Prediction, Nexad, and more. Before joining Andreessen Horowitz, Troy was a Senior Manager at Unity on the Corporate Strategy and Development team where he led over 20 acquisitions (incl. Parsec and IronSource) and spearheaded numerous strategic growth initiatives. He started his career in investment banking at Jefferies supporting media and tech clients. Troy holds a B.S. in Commerce from the McIntire School of Commerce at The University of Virginia. He lives in San Francisco but is a native New Yorker. He loves skiing, tennis, and exploring new places.",
+      "education": [
+        "B.S. in Commerce from the McIntire School of Commerce at The University of Virginia"
+      ],
+      "prior_experience": [
+        "Senior Manager at Unity on the Corporate Strategy and Development team",
+        "Investment banking at Jefferies supporting media and tech clients"
+      ]
+    },
+    {
+      "name": "Vineeta Agarwala",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/vineeta-agarwala/",
+      "linkedin_url": "https://www.linkedin.com/in/vineeta-agarwala-md-phd-674a591/",
+      "x_url": "https://twitter.com/vintweeta",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Vineeta-Agarwala-1-300x300.png",
+      "bio": "Vineeta Agarwala, MD, PhD is a general partner at Andreessen Horowitz (a16z) where she leads investments for the firm’s bio + health fund across biotech, life sciences software, and digital health, with a focus on companies leveraging unique technologies and datasets to advance drug development, personalized medicine, and innovation in patient care delivery. Prior to joining a16z, Vineeta held many different roles in the healthcare space: as a physician taking care of patients; as an operator at healthtech startups; and as a venture investor on the GV (Google Ventures) life sciences team. She has been a data scientist; a management consultant for biotech, pharmaceutical, and medical device clients at McKinsey & Co; and a Director of Product Management at Flatiron Health (acquired by Roche), where she led the company’s partnership with Foundation Medicine to integrate real-world clinical and genomic data into national-scale data products to accelerate research and development in oncology. She has conducted academic research at Cold Spring Harbor Laboratory, Lawrence Livermore National Laboratory, and the Broad Institute, where she did graduate work in computational biology and human genetics. Vineeta holds a B.S. in biophysics from Stanford University, and MD and PhD degrees from Harvard Medical School / MIT. She completed her clinical residency at Stanford, and is board certified in internal medicine. Vineeta continues to see patients at Stanford as an adjunct clinical professor in the Division of Primary Care and Population Health. Vineeta serves on several portfolio company boards, including Amber Bio, BigHat Biosciences, Gate Bio, GC Therapeutics, knownwell, Orbital Therapeutics, Pearl Health, Pomelo Care, Rezo Therapeutics, Thyme Care, and Waymark. She also serves on the board of Tenet Healthcare and is currently Board Chair at the National Venture Capital Association (NVCA).",
+      "education": [
+        "B.S. in biophysics from Stanford University",
+        "MD and PhD degrees from Harvard Medical School / MIT"
+      ],
+      "prior_experience": [
+        "Physician taking care of patients",
+        "Operator at healthtech startups",
+        "Venture investor on the GV (Google Ventures) life sciences team",
+        "Data scientist",
+        "Management consultant for biotech, pharmaceutical, and medical device clients at McKinsey & Co",
+        "Director of Product Management at Flatiron Health",
+        "Conducted academic research at Cold Spring Harbor Laboratory",
+        "Conducted academic research at Lawrence Livermore National Laboratory",
+        "Conducted academic research at the Broad Institute."
+      ]
+    },
+    {
+      "name": "Will Bitsky",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/will-bitsky/",
+      "linkedin_url": null,
+      "x_url": null,
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/03/Will-Bitsky-300x300.png",
+      "bio": "Will Bitsky is an investing partner supporting a16z's American Dynamism team.",
+      "education": [],
+      "prior_experience": []
+    },
+    {
+      "name": "Yoko Li",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/yoko-li/",
+      "linkedin_url": "https://www.linkedin.com/in/yokoli/",
+      "x_url": "https://twitter.com/stuffyokodraws",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Yoko-Li-2-300x300.png",
+      "bio": "Yoko Li is a partner at Andreessen Horowitz, where she focuses on developer tools, infrastructure, AI, and creative tools. She is on the boards of Resend, Relace and is a board observer at Mintlify, Clerk, Phota Labs and Inngest.\n\nYoko is an engineer by trade: before joining a16z, she was an engineer at AppDynamics, a founding engineer/PM at Transposit, and led product at Hashicorp (Terraform Cloud). She remains an active open source developer, maintainer, and contributor, and has built projects like AI-town, AI-tamago, companion app, and local-ai-stack.\n\nAside from venture and app building, Yoko is an active cartoonist and has a passion for explaining technical concepts (as well as making fun of them) in her cartoons.",
+      "education": [],
+      "prior_experience": [
+        "Engineer at AppDynamics",
+        "Founding Engineer/PM at Transposit",
+        "Product Lead at Hashicorp (Terraform Cloud)"
+      ]
+    },
+    {
+      "name": "Zabie Elmgren",
+      "role": "Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "American Dynamism"
+      ],
+      "profile_url": "https://a16z.com/author/zabie-elmgren/",
+      "linkedin_url": "https://www.linkedin.com/in/elizabethelmgren/",
+      "x_url": "https://twitter.com/zabie_e",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/Zabie-Elmgren-300x300.png",
+      "bio": "Zabie Elmgren is a partner at Andreessen Horowitz where she backs founders building companies that strengthen critical infrastructure, public safety, and more. Previously, Zabie was a partner at Index Ventures, where she led early-stage investments and helped launch a future founders initiative. Before Index, she joined the founding team at Human Capital while studying engineering at Harvard and helped build it from an engineering recruiting firm into a $600M+ AUM venture fund, working with companies including Anduril, Applied Intuition, Verkada, and others. She rowed in the Harvard-Radcliffe 1V boat and competed skiing on the Freeride Tour.",
+      "education": [
+        "Harvard"
+      ],
+      "prior_experience": [
+        "Partner at Andreessen Horowitz",
+        "Partner at Index Ventures",
+        "Founding team at Human Capital"
+      ]
+    },
+    {
+      "name": "Zak Doric",
+      "role": "Investing Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Bio + Health"
+      ],
+      "profile_url": "https://a16z.com/author/zak-doric/",
+      "linkedin_url": "https://www.linkedin.com/in/zakdoric/",
+      "x_url": "https://twitter.com/zakdoric",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Zak-Doric-1-300x300.png",
+      "bio": "Zak Doric, PhD, is an investing partner on the Bio + Health team, focused on biotechnology companies. Prior to joining Andreessen Horowitz, he completed the Fellowship program at Flagship Pioneering, where he created venture hypotheses for new biotech company creation efforts. Zak holds a PhD in neuroscience from University of California, San Francisco (UCSF), where he was a Hillblom Graduate Fellow. His research focused on elucidating the molecular mechanisms responsible for causing familial forms of Parkinson’s disease. His work has resulted in several peer-reviewed publications, including articles in Science Advances and Nature Communications. He also holds a BSc in Neuroscience from McGill University. Zak was born and raised in Quebec City, Canada, after his family immigrated from Bosnia to start a new life. When not at his desk, he can be found riding his bike around Marin County, playing soccer, or watching a Montreal Canadiens hockey game.",
+      "education": [
+        "PhD in Neuroscience from University of California, San Francisco (UCSF)",
+        "BSc in Neuroscience from McGill University"
+      ],
+      "prior_experience": [
+        "Fellowship program at Flagship Pioneering"
+      ]
+    },
+    {
+      "name": "Zane Lackey",
+      "role": "General Partner",
+      "role_display": "Investing",
+      "focus_areas": [
+        "Infra"
+      ],
+      "profile_url": "https://a16z.com/author/zane-lackey/",
+      "linkedin_url": "https://www.linkedin.com/in/zane-lackey-66a3404",
+      "x_url": "https://twitter.com/zanelackey",
+      "farcaster_url": null,
+      "email": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/04/Zane-Lackey-1-300x300.png",
+      "bio": "Zane Lackey is a general partner at Andreessen Horowitz, where he focuses on DevOps, cybersecurity, and enterprise infrastructure. He serves on the board of Doppel, Sprig, and Socket. He is a board observer at Arcjet, Beeps, Promptfoo, Adaptive Security, Keycard Labs, North Pole Security, and Tenex AI. Zane was previously the cofounder and chief security officer of Signal Sciences, which was acquired by Fastly for $775 million in 2020. Prior to Signal Sciences, he led security and infrastructure teams as the CISO of Etsy and started his career as an early security consultant at iSEC Partners. He is also the author of _Building a Modern Security Program_.",
+      "education": [
+        "BA in Economics with a minor in Computer Science from UC Davis"
+      ],
+      "prior_experience": [
+        "cofounder and chief security officer of Signal Sciences",
+        "CISO of Etsy",
+        "early security consultant at iSEC Partners"
+      ]
+    }
+  ]
+}

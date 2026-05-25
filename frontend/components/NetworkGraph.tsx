@@ -191,7 +191,8 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
                 fontSize="12.5"
                 fontWeight={600}
                 fill={themeColor(t)}
-                style={{ pointerEvents: "none" }}
+                opacity={dim ? 0 : 1}
+                style={{ pointerEvents: "none", transition: "opacity 180ms ease" }}
               >
                 {t.label}
               </text>
@@ -257,6 +258,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
                 text={p.name}
                 subtle={false}
                 delay={LABEL_BASE_MS + i * NODE_STEP_MS}
+                hidden={!!dim}
               />
             </g>
           );
@@ -318,6 +320,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
                 text={f.name}
                 subtle={false}
                 delay={LABEL_BASE_MS + (i + 8) * NODE_STEP_MS}
+                hidden={!!dim}
               />
             </g>
           );
@@ -332,18 +335,28 @@ function NodeLabel({
   text,
   subtle,
   delay = 0,
+  hidden = false,
 }: {
   x: number;
   y: number;
   text: string;
   subtle: boolean;
   delay?: number;
+  hidden?: boolean;
 }) {
   const fs = 10.5;
   const w = text.length * fs * 0.55 + 12;
   const h = fs + 8;
   return (
-    <g className="graph-label" style={{ animationDelay: `${delay}ms` }}>
+    <g
+      className="graph-label"
+      style={{
+        animationDelay: `${delay}ms`,
+        opacity: hidden ? 0 : 1,
+        ["--label-opacity" as any]: hidden ? 0 : 1,
+        transition: "opacity 200ms cubic-bezier(0.25, 1, 0.5, 1)",
+      }}
+    >
       <rect
         x={x - w / 2}
         y={y - h / 2}

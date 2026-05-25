@@ -467,10 +467,12 @@ body {
   transition: opacity 200ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* labels arrive last */
+/* labels arrive last. mount animation interpolates to var(--label-opacity)
+   so the hover-driven hide (which sets that var inline) wins the cascade
+   even after the animation's filled state — same trick as .graph-edge. */
 @keyframes graph-label-in {
   from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to   { opacity: var(--label-opacity, 1); transform: translateY(0); }
 }
 .graph-label {
   opacity: 0;

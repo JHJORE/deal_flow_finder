@@ -71,7 +71,10 @@ export function PeopleView() {
 function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: () => void; watched: boolean }) {
   const er = partner.engageRate;
   const base = (er[0] + er[1] + er[2]) / 3;
-  const lift = Math.round(((er[er.length - 1] - base) / base) * 100);
+  const hasActivity = base > 0;
+  const lift = hasActivity ? Math.round(((er[er.length - 1] - base) / base) * 100) : 0;
+  const liftDisplay = hasActivity ? `${lift > 0 ? "+" : ""}${lift}%` : "—";
+  const postsDisplay = hasActivity ? partner.posts[partner.posts.length - 1] : "—";
   return (
     <button
       onClick={onOpen}
@@ -93,7 +96,9 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
         </div>
       </div>
 
-      <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">{partner.focus}</p>
+      <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">
+        {partner.focus || (partner.stage ? "Focus not yet tracked." : "")}
+      </p>
 
       {partner.newTopic ? (
         <div className="font-mono text-meta tabnum text-accent">
@@ -104,11 +109,11 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
       )}
 
       <div className="mt-1 grid grid-cols-3 gap-4 border-t border-line-faint pt-4">
-        <Stat label="posts / mo" value={partner.posts[partner.posts.length - 1]} />
+        <Stat label="posts / mo" value={postsDisplay} />
         <Stat
           label="engage vs base"
-          value={`${lift > 0 ? "+" : ""}${lift}%`}
-          tone={lift > 40 ? "warn" : "default"}
+          value={liftDisplay}
+          tone={hasActivity && lift > 40 ? "warn" : "default"}
         />
         <Stat label="spiking" value={partner.spike ? "Yes" : "No"} tone={partner.spike ? "warn" : "default"} />
       </div>

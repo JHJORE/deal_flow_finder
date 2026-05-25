@@ -8,6 +8,7 @@ import type {
   Founder,
   Partner,
   PartnerBeliefs,
+  PartnerStage,
   Signal,
   Theme,
   ThemeKey,
@@ -37,8 +38,33 @@ export const themeColor = (t: Theme) =>
   `oklch(72% ${t.chroma ?? 0.14} ${t.hue})`;
 
 // ---------- partners ----------
+const STAGE_ROLE: Record<PartnerStage, string> = {
+  early: "Partner · Seed/Early",
+  growth: "Partner · Growth",
+  both: "Partner · Seed/Early + Growth",
+};
+
+function stubSequoia(
+  rows: { id: string; name: string; stage: PartnerStage }[]
+): Omit<Partner, "contact" | "about" | "checkSize">[] {
+  return rows.map((r) => ({
+    id: r.id,
+    name: r.name,
+    firm: "sequoia",
+    role: STAGE_ROLE[r.stage],
+    focus: "",
+    stage: r.stage,
+    posts: [0, 0, 0, 0, 0, 0],
+    engageRate: [0, 0, 0, 0, 0, 0],
+    spike: false,
+    engages: [],
+    newTopic: null,
+    topics: [],
+  }));
+}
+
 const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
-  { id: "p1", name: "Pat Grady", firm: "sequoia", role: "Co-steward · growth",
+  { id: "p1", name: "Pat Grady", firm: "sequoia", role: "Co-steward · growth", stage: "growth",
     focus: "AI, enterprise software. Led OpenAI, Harvey, Snowflake.",
     posts: [14, 12, 15, 13, 28, 41], engageRate: [20, 22, 19, 24, 55, 78], spike: true,
     engages: ["agents", "evals"], newTopic: "Agent eval / reliability",
@@ -48,7 +74,7 @@ const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
       { t: "Enterprise software", w: 18, chg: -11, isNew: false },
       { t: "Voice AI", w: 12, chg: 5, isNew: false },
     ] },
-  { id: "p2", name: "Sonya Huang", firm: "sequoia", role: "Partner · AI infrastructure",
+  { id: "p2", name: "Sonya Huang", firm: "sequoia", role: "Partner · AI infrastructure", stage: "growth",
     focus: "AI infra and apps. Author of Sequoia AI market maps.",
     posts: [18, 17, 20, 22, 24, 26], engageRate: [30, 32, 34, 33, 38, 44], spike: false,
     engages: ["agents", "voice"], newTopic: null,
@@ -58,7 +84,7 @@ const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
       { t: "Voice AI", w: 20, chg: 9, isNew: false },
       { t: "Open models", w: 12, chg: -7, isNew: false },
     ] },
-  { id: "p3", name: "Shaun Maguire", firm: "sequoia", role: "Partner · deep tech",
+  { id: "p3", name: "Shaun Maguire", firm: "sequoia", role: "Partner · deep tech", stage: "early",
     focus: "Defense and deep tech. Backed Anduril, SpaceX.",
     posts: [22, 20, 19, 21, 23, 20], engageRate: [40, 38, 42, 41, 44, 43], spike: false,
     engages: ["defense"], newTopic: null,
@@ -68,7 +94,7 @@ const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
       { t: "Hardware", w: 18, chg: 3, isNew: false },
       { t: "AI agents", w: 12, chg: 5, isNew: false },
     ] },
-  { id: "p4", name: "Alfred Lin", firm: "sequoia", role: "Co-steward · consumer",
+  { id: "p4", name: "Alfred Lin", firm: "sequoia", role: "Co-steward · consumer", stage: "early",
     focus: "Consumer and marketplaces. Led Airbnb, DoorDash.",
     posts: [8, 7, 9, 8, 10, 9], engageRate: [14, 15, 13, 16, 18, 17], spike: false,
     engages: ["agents"], newTopic: null,
@@ -78,7 +104,7 @@ const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
       { t: "Fintech", w: 18, chg: -5, isNew: false },
       { t: "AI agents", w: 12, chg: 6, isNew: false },
     ] },
-  { id: "p5", name: "Konstantine Buhler", firm: "sequoia", role: "Partner · AI",
+  { id: "p5", name: "Konstantine Buhler", firm: "sequoia", role: "Partner · AI", stage: "early",
     focus: "AI and data. Writes Sequoia AI ascent essays.",
     posts: [11, 10, 13, 16, 21, 29], engageRate: [24, 25, 28, 33, 46, 61], spike: true,
     engages: ["agents", "evals", "voice"], newTopic: "Agent eval / reliability",
@@ -188,6 +214,34 @@ const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
       { t: "Agent eval / reliability", w: 16, chg: 13, isNew: true },
       { t: "SaaS", w: 10, chg: -6, isNew: false },
     ] },
+  ...stubSequoia([
+    { id: "p16", name: "Bogomil Balkansky", stage: "early" },
+    { id: "p17", name: "Julien Bek", stage: "early" },
+    { id: "p18", name: "Roelof Botha", stage: "both" },
+    { id: "p19", name: "Josephine Chen", stage: "early" },
+    { id: "p20", name: "Liam Corrigan", stage: "early" },
+    { id: "p21", name: "Bill Coughran", stage: "early" },
+    { id: "p22", name: "Jim Goetz", stage: "both" },
+    { id: "p23", name: "Jess Lee", stage: "early" },
+    { id: "p24", name: "Doug Leone", stage: "both" },
+    { id: "p25", name: "Luciana Lixandru", stage: "both" },
+    { id: "p26", name: "Dean Meyer", stage: "early" },
+    { id: "p27", name: "Lauren Reeder", stage: "early" },
+    { id: "p28", name: "George Robson", stage: "early" },
+    { id: "p29", name: "Bryan Schreier", stage: "early" },
+    { id: "p30", name: "Stephanie Zhan", stage: "early" },
+    { id: "p31", name: "Anas Biad", stage: "growth" },
+    { id: "p32", name: "Isaiah Boone", stage: "growth" },
+    { id: "p33", name: "David Cahn", stage: "growth" },
+    { id: "p34", name: "Carl Eschenbach", stage: "growth" },
+    { id: "p35", name: "James Flynn", stage: "growth" },
+    { id: "p36", name: "Ravi Gupta", stage: "growth" },
+    { id: "p37", name: "Brian Halligan", stage: "growth" },
+    { id: "p38", name: "Abhishek Malani", stage: "growth" },
+    { id: "p39", name: "Cole Pergament", stage: "growth" },
+    { id: "p40", name: "Andrew Reed", stage: "growth" },
+    { id: "p41", name: "Sonali Singh", stage: "growth" },
+  ]),
 ];
 
 export const FOUNDERS: Founder[] = [
@@ -645,12 +699,22 @@ export const PARTNERS: Partner[] = PARTNERS_RAW.map((p) => {
   const nm = firstLast(p.name);
   const themeLabels = p.engages.map((k) => themeByKey(k).label);
   const article = /^[AEIOU]/.test(p.role) ? "an " : "a ";
+  const focusSentence = p.focus ? ` ${p.focus}` : "";
+  const themeSentence = themeLabels.length
+    ? ` Recent investing attention has centred on ${themeLabels.slice(0, 3).join(", ")}.`
+    : "";
   const about =
-    `${p.name} is ${article}${p.role.replace(/ · /g, ", ")} at ${FIRMS[p.firm].name}. ` +
-    `${p.focus} Recent investing attention has centred on ${themeLabels.slice(0, 3).join(", ")}.`;
+    `${p.name} is ${article}${p.role.replace(/ · /g, ", ")} at ${FIRMS[p.firm].name}.${focusSentence}${themeSentence}`;
+  const stageCheckSize: Record<PartnerStage, string> = {
+    early: "Seed through Series B; typically leads or co-leads.",
+    growth: "Growth and late-stage; leads Series C and beyond.",
+    both: "Seed through growth; leads at any stage.",
+  };
   const checkSize =
     p.firm === "yc"
       ? "Pre-seed and seed; standard YC terms plus follow-on."
+      : p.stage
+      ? stageCheckSize[p.stage]
       : p.role.toLowerCase().includes("growth")
       ? "Growth and late-stage; leads Series C and beyond."
       : "Seed through Series B; typically leads or co-leads.";

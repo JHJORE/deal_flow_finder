@@ -40,12 +40,15 @@ export type Contact = {
   site?: string;
 };
 
+export type PartnerStage = "early" | "growth" | "both";
+
 export type Partner = {
   id: string;
   name: string;
   firm: FirmId;
   role: string;
   focus: string;
+  stage?: PartnerStage;
   posts: number[];
   engageRate: number[];
   spike: boolean;

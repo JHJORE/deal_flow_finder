@@ -41,9 +41,9 @@ export function PartnerProfileView({ id }: { id: string }) {
   const posts = entity.posts;
   const er = entity.engageRate;
   const baseP = (posts[0] + posts[1] + posts[2]) / 3;
-  const liftP = Math.round(((posts[posts.length - 1] - baseP) / baseP) * 100);
   const baseE = (er[0] + er[1] + er[2]) / 3;
-  const liftE = Math.round(((er[er.length - 1] - baseE) / baseE) * 100);
+  const liftP = baseP > 0 ? Math.round(((posts[posts.length - 1] - baseP) / baseP) * 100) : 0;
+  const liftE = baseE > 0 ? Math.round(((er[er.length - 1] - baseE) / baseE) * 100) : 0;
 
   return (
     <div className="view-in">
@@ -128,12 +128,15 @@ function PartnerStats({
       : pred!.pct >= 40
       ? "warn"
       : "down";
+    const er = partner!.engageRate;
+    const baseE = (er[0] + er[1] + er[2]) / 3;
+    const hasActivity = baseE > 0;
     return (
       <StatRow>
         <Stat label="Predictability" value={predDisplay} hint={pred?.hasDeals ? "thesis-to-deals match" : "no led deals yet"} tone={predTone} />
-        <Stat label="Posts / month" value={partner!.posts[partner!.posts.length - 1]} hint="latest period" />
-        <Stat label="Engagement vs base" value={`${liftE > 0 ? "+" : ""}${liftE}%`} hint="reply + like rate" tone={liftE > 40 ? "warn" : "default"} />
-        <Stat label="Activity" value={partner!.spike ? "Spiking" : "Steady"} hint="vs trailing baseline" tone={partner!.spike ? "warn" : "default"} />
+        <Stat label="Posts / month" value={hasActivity ? partner!.posts[partner!.posts.length - 1] : "—"} hint={hasActivity ? "latest period" : "not yet tracked"} />
+        <Stat label="Engagement vs base" value={hasActivity ? `${liftE > 0 ? "+" : ""}${liftE}%` : "—"} hint="reply + like rate" tone={hasActivity && liftE > 40 ? "warn" : "default"} />
+        <Stat label="Activity" value={partner!.spike ? "Spiking" : hasActivity ? "Steady" : "—"} hint="vs trailing baseline" tone={partner!.spike ? "warn" : "default"} />
       </StatRow>
     );
   }
@@ -186,6 +189,15 @@ function Interpretation({
   const partner = partnerById(partnerId);
   const founder = founderById(partnerId);
   if (partner) {
+    const er = partner.engageRate;
+    const baseE = (er[0] + er[1] + er[2]) / 3;
+    if (baseE === 0) {
+      return (
+        <>
+          {`${partner.name} is on the ${partner.stage === "growth" ? "growth" : partner.stage === "both" ? "seed/early and growth" : "seed/early"} team. Posting and engagement aren't tracked yet, so there's no behavioural signal to interpret.`}
+        </>
+      );
+    }
     if (partner.spike) {
       const newTopicLine = partner.newTopic
         ? ` The shift to watch: ${partner.name} has started talking about "${partner.newTopic}" this period, a topic absent from their feed before. A new topic entering a partner feed is the leading indicator of where they want to deploy next.`

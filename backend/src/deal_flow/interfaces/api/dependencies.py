@@ -7,6 +7,7 @@ from functools import lru_cache
 
 from fastapi import Depends
 
+from deal_flow.application.ports.repositories.board_seat_log import BoardSeatLog
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
@@ -26,6 +27,7 @@ from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearch
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
 from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
+from deal_flow.infrastructure.persistence.file_board_seat_log import FileBoardSeatLog
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 
 
@@ -72,22 +74,29 @@ def get_sec_filing_searcher() -> SecFilingSearcher:
     settings = get_settings()
     return EdgarFullTextSearcher(
         user_agent=settings.sec_user_agent,
-        cache_dir=settings.sec_cache_dir,
+        cache_dir=settings.sec_cache_dir / ".cache",
         refresh=settings.sec_cache_refresh,
     )
 
 
+@lru_cache
+def get_board_seat_log() -> BoardSeatLog:
+    settings = get_settings()
+    return FileBoardSeatLog(path=settings.sec_cache_dir / "board_seats.json")
+
+
 def get_search_partner_form_d_filings(
     searcher: SecFilingSearcher = Depends(get_sec_filing_searcher),
+    log: BoardSeatLog = Depends(get_board_seat_log),
 ) -> SearchPartnerFormDFilings:
-    return SearchPartnerFormDFilings(searcher=searcher)
+    return SearchPartnerFormDFilings(searcher=searcher, log=log)
 
 
 @lru_cache
 def get_twitter_collector() -> TwitterCollector:
     settings = get_settings()
     return TwitterApiCollector(
-        api_key=settings.twitterapi_key,
+        api_key=settings.twitterapi_io_key,
         cache_dir=settings.twitterapi_cache_dir,
         refresh=settings.twitterapi_cache_refresh,
     )

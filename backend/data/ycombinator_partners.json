@@ -1,0 +1,276 @@
+{
+  "firm": "ycombinator.com",
+  "team_url": "https://www.ycombinator.com/partners",
+  "count": 16,
+  "partners": [
+    {
+      "name": "Aaron Epstein",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/aaron-epstein",
+      "linkedin_url": "https://www.linkedin.com/in/aaron-epstein-a97105",
+      "x_url": "https://twitter.com/aaron_epstein",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/c4f553b962e3706616d14acf8112b713d869f85b.jpg?1606324055",
+      "bio": "Aaron Epstein is a General Partner at YC. He was co-founder of Creative Market (YC W10), a marketplace for graphic design assets, which he sold to Autodesk in 2014 and spun out as an independent startup again in 2017. Aaron founded the company to make beautiful design simple and accessible to everyone, and has since helped generate more than $100M in sales for independent creators around the world. He has a BS in Business from the University of Maryland.",
+      "education": [
+        "BS in Business from the University of Maryland"
+      ],
+      "prior_experience": [
+        "Co-founder of Creative Market"
+      ]
+    },
+    {
+      "name": "Andrew Miklas",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/andrew-miklas",
+      "linkedin_url": "https://www.linkedin.com/in/amiklas",
+      "x_url": "https://twitter.com/agmiklas",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/cf1d31c61d8aa0712171e07025a4d4f23d65e5a3.jpg?1692122912",
+      "bio": "Andrew is a General Partner at YC. Previously, he co-founded PagerDuty (YC S10, NYSE:PD), which became the backbone of digital operations for thousands of businesses. As founding CTO, he designed the original product and its high-availability architecture, and scaled the engineering team to 70+ people. After PagerDuty, he became an early-stage investor at s28 Capital, supporting companies like Clerk, CaptivateIQ, and Teleport. Andrew brings deep experience in building resilient systems and scaling engineering teams from zero to impact.",
+      "education": [],
+      "prior_experience": [
+        "Co-founded PagerDuty (YC S10, NYSE:PD)",
+        "Early-stage investor at s28 Capital"
+      ]
+    },
+    {
+      "name": "Ankit Gupta",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/ankit-gupta",
+      "linkedin_url": "https://www.linkedin.com/in/ankitvgupta",
+      "x_url": "https://twitter.com/agupta",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/44d78f3fa59c47849b2622c0db40acb2d83e57d3.jpg?1741543141",
+      "bio": "Ankit Gupta is a General Partner at Y Combinator. He was the co-founder of Reverie Labs, which developed machine learning models for drug discovery, and ultimately advanced its own medicines to the clinic. Reverie was acquired by Ginkgo Bioworks in 2024. Prior to Reverie, Ankit was a deep learning researcher and has published at conferences like ICML.",
+      "education": [
+        "BA in Computer Science from Harvard",
+        "MS in Computer Science from Harvard"
+      ],
+      "prior_experience": [
+        "Co-founder of Reverie Labs",
+        "Deep learning researcher"
+      ]
+    },
+    {
+      "name": "Brad Flora",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/brad-flora",
+      "linkedin_url": "https://www.linkedin.com/in/bradflora",
+      "x_url": "https://twitter.com/bradflora",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/b80b1786df98079214a5924c8d51ac0078811c95.jpg?1606325269",
+      "bio": "Brad Flora is a General Partner at YC. He was co-founder and CEO of Perfect Audience, an ad network funded by Y Combinator in 2011, acquired by Marin Software in 2014 and used by companies like Eventbrite, Atlassian, and New Relic to market to more than a billion people. He is an active angel investor, occasional contributor for Slate.com and lives in San Francisco with his wife and three children.",
+      "education": [
+        "BA from Princeton University in English",
+        "MS in Journalism from Northwestern"
+      ],
+      "prior_experience": [
+        "co-founder and CEO of Perfect Audience"
+      ]
+    },
+    {
+      "name": "David Lieb",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/david-lieb",
+      "linkedin_url": "https://www.linkedin.com/in/davidlieb",
+      "x_url": "https://twitter.com/dflieb",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/bc67d3452ba64bfed92186bf0f4ca3c13577d8d1.jpg?1650649240",
+      "bio": "David Lieb is a General Partner at YC. He was previously the co-founder and CEO of Bump (S09), a mobile app used by more than 150M people to share photos and contact info by bumping their phones together. Bump was acquired by Google in 2013, and an unreleased photo-sharing app they were building became the foundation of Google Photos. Before Bump, Dave was a researcher in the Stanford AI Lab and a software engineer at Texas Instruments. He holds EE/CS degrees from Princeton and Stanford and finished half an MBA at Chicago Booth before dropping out to start Bump.",
+      "education": [
+        "EE/CS degrees from Princeton",
+        "EE/CS degrees from Stanford",
+        "half an MBA at Chicago Booth"
+      ],
+      "prior_experience": [
+        "co-founder and CEO of Bump",
+        "researcher in the Stanford AI Lab",
+        "software engineer at Texas Instruments"
+      ]
+    },
+    {
+      "name": "Diana Hu",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/diana-hu",
+      "linkedin_url": "https://www.linkedin.com/in/sdianahu",
+      "x_url": "https://twitter.com/sdianahu",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/36477564f07b2f9314a051cebc0237a9c117e07a.jpg?1617298669",
+      "bio": "Diana Hu is a General Partner at YC. She was co-founder and CTO of Escher Reality (YC S17), an Augmented Reality Backend company that was acquired by Niantic (makers of Pokémon Go). At Niantic, she was the head of the AR platform. Previously, she led data science at OnCue TV that was sold to Verizon. Originally from Chile, Diana graduated from Carnegie Mellon University with a BS and MS in Electrical and Computer Engineering with a focus in computer vision and machine learning.",
+      "education": [
+        "Carnegie Mellon University - BS in Electrical and Computer Engineering",
+        "Carnegie Mellon University - MS in Electrical and Computer Engineering"
+      ],
+      "prior_experience": [
+        "Co-founder and CTO of Escher Reality (acquired by Niantic)",
+        "Head of AR platform at Niantic",
+        "Led data science at OnCue TV (sold to Verizon)"
+      ]
+    },
+    {
+      "name": "Garry Tan",
+      "role": "President and CEO",
+      "profile_url": "https://www.ycombinator.com/people/garry-tan",
+      "linkedin_url": "https://www.linkedin.com/in/garrytan",
+      "x_url": "https://twitter.com/garrytan",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/a6cc9253e166b0a3d01381925958e112ec0c781f.jpg?1616220339",
+      "bio": "Garry Tan is president and CEO of Y Combinator and a General Partner. He was a partner at Y Combinator from 2011 to 2015, where he built key parts of the YC experience for founders including Bookface and the Demo Day website. Garry is the co-founder of Initialized Capital and Posterous (YC S08), a blog platform acquired by Twitter, and prior to that, he was an early designer and engineering manager at Palantir (NYSE:PLTR), where he designed the company logo. Garry holds a BS in Computer Systems Engineering from Stanford.",
+      "education": [
+        "BS in Computer Systems Engineering from Stanford"
+      ],
+      "prior_experience": [
+        "Partner at Y Combinator (2011-2015)",
+        "Co-founder of Initialized Capital",
+        "Co-founder of Posterous",
+        "Early designer and engineering manager at Palantir"
+      ]
+    },
+    {
+      "name": "Gustaf Alströmer",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/gustaf-alstromer",
+      "linkedin_url": "https://www.linkedin.com/in/gustafalstromer",
+      "x_url": "https://twitter.com/gustaf",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/4f928989bed2a19d272b3d15d1ea79e8079bb02a.jpg?1738962698",
+      "bio": "Gustaf Alströmer is a General Partner at YC. He spent 4.5 years at Airbnb where he worked as a Product Lead on the Growth team, a team he helped start in 2012. Prior to Airbnb, Gustaf was Head of Growth at Voxer, and before that, he was CEO & co-founder of Heysan, which was part of the YC W07 batch.",
+      "education": [],
+      "prior_experience": [
+        "Product Lead at Airbnb",
+        "Head of Growth at Voxer",
+        "CEO & Co-founder of Heysan"
+      ]
+    },
+    {
+      "name": "Harj Taggar",
+      "role": "Managing Partner",
+      "profile_url": "https://www.ycombinator.com/people/harj-taggar",
+      "linkedin_url": "https://www.linkedin.com/in/harjtaggar",
+      "x_url": "https://twitter.com/harjtaggar",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/ce6a6797a16d7a99006897e386f36f46b96ed37b.jpg?1606325891",
+      "bio": "Harj Taggar is a Managing Partner at YC. He was previously founder and CEO of Triplebyte (YC S15) and Auctomatic (YC W07), which was acquired by Live Current Media in 2008. He first joined YC as a partner in 2010, leaving in 2014 to start Triplebyte and rejoining in 2020.",
+      "education": [
+        "Oxford, Jurisprudence - 2006"
+      ],
+      "prior_experience": [
+        "Founder and CEO of Triplebyte (YC S15)",
+        "Founder and CEO of Auctomatic (YC W07)"
+      ]
+    },
+    {
+      "name": "Harshita Arora",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/harshita-arora",
+      "linkedin_url": "https://www.linkedin.com/in/harshita-arora11",
+      "x_url": "https://twitter.com/aroraharshita33",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/42b2318d4334342764e121c6261d7a6e84dbade7.jpg?1758561959",
+      "bio": "Harshita Arora is a General Partner at YC. Previously, she co-founded AtoB (YC S20), a Series C company building financial infrastructure for the trucking industry. Often described as \"Stripe for Trucking,\" AtoB offers fleet cards, instant payouts, and modern financial tools to over 30,000 fleets across the US. Before AtoB, she built Crypto Price Tracker, a portfolio management app that was featured by Apple and subsequently acquired—earning her India's Bal Shakti Puraskar, one of the country's highest honors for young achievers.",
+      "education": [],
+      "prior_experience": [
+        "Co-founded AtoB",
+        "Built Crypto Price Tracker"
+      ]
+    },
+    {
+      "name": "Jared Friedman",
+      "role": "Managing Director, Software and General Partner",
+      "profile_url": "https://www.ycombinator.com/people/jared-friedman",
+      "linkedin_url": "https://www.linkedin.com/in/jaredfriedman",
+      "x_url": "https://twitter.com/snowmaker",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/a927622876e01908a36dcfd139c2e80b730f8fcf.jpg?1748977182",
+      "bio": "Jared Friedman is Managing Director, Software and General Partner at YC. He was co-founder of Scribd, which was funded by Y Combinator in 2006 and grew to be one of the top 100 sites on the web. Jared previously worked at a pioneering AI company and studied computer science at Harvard.",
+      "education": [
+        "computer science at Harvard"
+      ],
+      "prior_experience": [
+        "co-founder of Scribd",
+        "worked at a pioneering AI company"
+      ]
+    },
+    {
+      "name": "Jon Xu",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/jon-xu",
+      "linkedin_url": "https://www.linkedin.com/in/xujon",
+      "x_url": "https://twitter.com/xuster",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/4e5616b84afd6f567d64bb69deaa861c087e5a1a.jpg?1713220273",
+      "bio": "Jon is a General Partner at YC. Previously he was the co-founder and former CTO of FutureAdvisor (YC S10), one of the first robo-advisors to make quality investment management accessible to a broader consumer audience. After the company was acquired by BlackRock in 2015, Jon continued to lead product and engineering, building an enterprise-grade robo-advisor platform for large financial institutions. His background gives him unique expertise both in building high-trust consumer products and B2B platforms for regulated industries.",
+      "education": [
+        "Computer Science from MIT"
+      ],
+      "prior_experience": [
+        "co-founder and former CTO of FutureAdvisor"
+      ]
+    },
+    {
+      "name": "Nicolas Dessaigne",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/nicolas-dessaigne",
+      "linkedin_url": "https://www.linkedin.com/in/nicolasdessaigne",
+      "x_url": "https://twitter.com/dessaigne",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/5253ee21e2f3d017ba0651543b6298204a34b573.jpg?1606324053",
+      "bio": "Nicolas Dessaigne is a General Partner at YC. He was the co-founder of Algolia (YC W14), a growth stage Search API used by millions of developers. He led the company as CEO up to 350 people before hiring a successor in 2020. He has a PhD in Computer Science from the University of Nantes.",
+      "education": [
+        "PhD in Computer Science from the University of Nantes"
+      ],
+      "prior_experience": [
+        "Co-founder of Algolia, CEO"
+      ]
+    },
+    {
+      "name": "Pete Koomen",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/pete-koomen",
+      "linkedin_url": "https://www.linkedin.com/in/petekoomen",
+      "x_url": "https://twitter.com/koomen",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/3b71d3b3291400d1a59332c328d503155ba7f29a.jpg?1741753990",
+      "bio": "Pete Koomen is a General Partner at YC. He co-founded Optimizely (W10) which helps companies run experiments on their websites and apps. He helped Optimizely grow from inception, to $100M+ in ARR to, ultimately, its acquisition in 2020. Pete holds a Master's degree in Computer Science from the University of Illinois at Urbana Champaign.",
+      "education": [
+        "Master's degree in Computer Science from the University of Illinois at Urbana Champaign"
+      ],
+      "prior_experience": [
+        "Co-founder of Optimizely"
+      ]
+    },
+    {
+      "name": "Tom Blomfield",
+      "role": "General Partner",
+      "profile_url": "https://www.ycombinator.com/people/tom-blomfield",
+      "linkedin_url": "https://www.linkedin.com/in/tomblomfield",
+      "x_url": "https://twitter.com/t_blom",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/42a6b32151f7a837870b642740069a54064e05fd.jpg?1678905548",
+      "bio": "Tom Blomfield is a General Partner at YC. He was co-founder of Monzo, one of the first app-based challenger banks in the UK. Monzo raised more than £500m, counts 10% of the UK population as customers, and was the #1 recommended brand in the UK for two years running. Previously, he founded GoCardless (YC S11), an online payments processor for the Direct Debit system. In 2019, he was awarded an OBE for increasing competition in the banking sector.",
+      "education": [],
+      "prior_experience": [
+        "Co-founder of Monzo",
+        "Founded GoCardless"
+      ]
+    },
+    {
+      "name": "Tyler Bosmeny",
+      "role": "Co-founder and CEO",
+      "profile_url": "https://www.ycombinator.com/people/tyler-bosmeny",
+      "linkedin_url": null,
+      "x_url": "https://twitter.com/bosmeny",
+      "email": null,
+      "photo_url": "https://bookface-images.s3.amazonaws.com/avatars/d27d955ba970b9f2f6af1f13dd8ec52f7e2707b2.jpg?1699638311",
+      "bio": "Tyler Bosmeny was the co-founder and CEO of Clever (S12), a single sign on portal used by 50% of all K-12 students in the US. In 2021, Clever was acquired for $500M.",
+      "education": [
+        "Harvard, BA in Applied Math",
+        "Harvard, MA in Statistics"
+      ],
+      "prior_experience": [
+        "Co-founder and CEO of Clever"
+      ]
+    }
+  ]
+}

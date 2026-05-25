@@ -9,7 +9,8 @@ import {
   founderById,
 } from "@/lib/data";
 import { useRadar } from "@/lib/state";
-import type { Signal } from "@/lib/types";
+import type { Partner, Signal } from "@/lib/types";
+import { Fragment, useState, type ReactNode } from "react";
 
 type Props = { signals: Signal[] };
 
@@ -42,15 +43,7 @@ export function Briefing({ signals }: Props) {
               aria-hidden
               className="mt-[0.6rem] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
             />
-            <span
-              className="t-body !max-w-none"
-              dangerouslySetInnerHTML={{
-                __html: l.replace(
-                  /<strong>(.+?)<\/strong>/g,
-                  '<span style="color:var(--accent);font-weight:600;">$1</span>'
-                ),
-              }}
-            />
+            <span className="t-body !max-w-none">{l}</span>
           </li>
         ))}
       </ul>
@@ -58,12 +51,61 @@ export function Briefing({ signals }: Props) {
   );
 }
 
+function Accent({ children }: { children: ReactNode }) {
+  return <span style={{ color: "var(--accent)", fontWeight: 600 }}>{children}</span>;
+}
+
+function NewTopicLine({ partners }: { partners: Partner[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const hiddenCount = Math.max(0, partners.length - 3);
+  const visible = expanded ? partners : partners.slice(0, 3);
+  return (
+    <>
+      <Accent>
+        {partners.length} partner{partners.length === 1 ? "" : "s"}
+      </Accent>{" "}
+      opened a new topic this period —{" "}
+      {visible.map((p, i) => (
+        <Fragment key={p.id}>
+          {i > 0 && ", "}
+          {p.name}
+        </Fragment>
+      ))}
+      {hiddenCount > 0 && !expanded && (
+        <>
+          {" "}
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="font-medium text-accent underline-offset-2 hover:underline"
+          >
+            +{hiddenCount} more
+          </button>
+        </>
+      )}
+      {hiddenCount > 0 && expanded && (
+        <>
+          {" "}
+          <button
+            type="button"
+            onClick={() => setExpanded(false)}
+            className="font-medium text-ink-3 underline-offset-2 hover:underline"
+          >
+            show less
+          </button>
+        </>
+      )}
+      .
+    </>
+  );
+}
+
 function computeBriefing(
   sigs: Signal[],
   isWatched: (id: string) => boolean,
   activeFirms: Set<string>
-): string[] {
-  const lines: string[] = [];
+): ReactNode[] {
+  const lines: ReactNode[] = [];
 
   for (const s of sigs.filter((x) => x.sources.includes("EDGAR"))) {
     const fil = s.filing ? FILINGS[s.filing] : undefined;
@@ -71,9 +113,12 @@ function computeBriefing(
     const formLabel = fil.formType.split(" — ")[0];
     const firmNames = s.firms.map((f) => FIRMS[f].name).join(" & ");
     const founder = s.actors.map((a) => founderById(a)).find(Boolean);
-    const founderClause = founder ? `; issuer profile matches ${founder.name}` : "";
     lines.push(
-      `EDGAR <strong>${formLabel}</strong> · ${firmNames} named in <strong>${fil.issuer}</strong>, not on the public portfolio${founderClause}.`
+      <>
+        EDGAR <Accent>{formLabel}</Accent> · {firmNames} named in{" "}
+        <Accent>{fil.issuer}</Accent>, not on the public portfolio
+        {founder && <>; issuer profile matches {founder.name}</>}.
+      </>
     );
   }
 
@@ -86,9 +131,13 @@ function computeBriefing(
       })
       .filter(Boolean) as string[];
     lines.push(
-      `<strong>${convs.length} partner-on-founder convergence event${
-        convs.length === 1 ? "" : "s"
-      }</strong> open${names.length ? ` — ${names.join(", ")}` : ""}.`
+      <>
+        <Accent>
+          {convs.length} partner-on-founder convergence event
+          {convs.length === 1 ? "" : "s"}
+        </Accent>{" "}
+        open{names.length ? ` — ${names.join(", ")}` : ""}.
+      </>
     );
   }
 
@@ -103,21 +152,18 @@ function computeBriefing(
     const top = movers
       .map((m) => `${m.label} ${m.last > 0 ? "+" : ""}${m.last}pts`)
       .join(", ");
-    lines.push(`Theme drift this period — <strong>${top}</strong>.`);
+    lines.push(
+      <>
+        Theme drift this period — <Accent>{top}</Accent>.
+      </>
+    );
   }
 
   const newTopicPartners = PARTNERS.filter(
     (p) => p.newTopic && activeFirms.has(p.firm)
   );
   if (newTopicPartners.length > 0) {
-    const sample = newTopicPartners.slice(0, 3).map((p) => p.name).join(", ");
-    const extra =
-      newTopicPartners.length > 3 ? ` +${newTopicPartners.length - 3} more` : "";
-    lines.push(
-      `<strong>${newTopicPartners.length} partner${
-        newTopicPartners.length === 1 ? "" : "s"
-      }</strong> opened a new topic this period — ${sample}${extra}.`
-    );
+    lines.push(<NewTopicLine partners={newTopicPartners} />);
   }
 
   const watched = sigs.filter((s) => {
@@ -130,9 +176,12 @@ function computeBriefing(
   });
   if (watched.length > 0) {
     lines.push(
-      `<strong>${watched.length} signal${
-        watched.length === 1 ? "" : "s"
-      }</strong> touch your watchlist.`
+      <>
+        <Accent>
+          {watched.length} signal{watched.length === 1 ? "" : "s"}
+        </Accent>{" "}
+        touch your watchlist.
+      </>
     );
   }
 

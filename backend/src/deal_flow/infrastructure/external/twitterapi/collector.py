@@ -29,7 +29,7 @@ class TwitterApiCollector(TwitterCollector):
 
     def __init__(self, api_key: str, cache_dir: Path, refresh: bool = False) -> None:
         if not api_key:
-            raise ValueError("TWITTERAPI_KEY is not set")
+            raise ValueError("TWITTERAPI_IO_KEY is not set")
         self._client = httpx.Client(
             base_url=self.BASE_URL,
             headers={"X-API-Key": api_key},

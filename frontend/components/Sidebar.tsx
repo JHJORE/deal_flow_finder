@@ -158,7 +158,7 @@ export function Sidebar() {
       <div className="mt-7 border-t border-line-faint pt-4">
         <p className="px-1 text-meta text-ink-4">
           Sources: VC firm sites, X, LinkedIn, SEC EDGAR. Partner rosters are real;
-          signal data is illustrative.
+          historic signal data is illustrative.
         </p>
       </div>
     </aside>

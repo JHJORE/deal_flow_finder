@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from deal_flow.application.ports.repositories.board_seat_log import BoardSeatLog
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
@@ -7,6 +8,7 @@ from deal_flow.domain.entities.partner import Partner
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 from deal_flow.interfaces.api.app import app
 from deal_flow.interfaces.api.dependencies import (
+    get_board_seat_log,
     get_extract_firm_partners,
     get_output_store,
     get_sec_filing_searcher,
@@ -19,6 +21,11 @@ class _NoopStore(OutputStore):
 
     def write(self, payload, *parts):  # type: ignore[override]
         return None
+
+
+class _NullLog(BoardSeatLog):
+    def append(self, signal) -> None:
+        pass
 
 
 class _FakePartners:
@@ -53,6 +60,7 @@ def test_edgar_signals_route_returns_filings_for_each_partner():
     app.dependency_overrides[get_extract_firm_partners] = lambda: _FakePartners()
     app.dependency_overrides[get_sec_filing_searcher] = lambda: _FakeSearcher()
     app.dependency_overrides[get_output_store] = lambda: _NoopStore()
+    app.dependency_overrides[get_board_seat_log] = lambda: _NullLog()
     try:
         with TestClient(app) as client:
             response = client.get(
@@ -74,6 +82,7 @@ def test_edgar_signals_route_returns_404_for_unknown_firm():
     app.dependency_overrides[get_extract_firm_partners] = lambda: _FakePartners()
     app.dependency_overrides[get_sec_filing_searcher] = lambda: _FakeSearcher()
     app.dependency_overrides[get_output_store] = lambda: _NoopStore()
+    app.dependency_overrides[get_board_seat_log] = lambda: _NullLog()
     try:
         with TestClient(app) as client:
             response = client.get("/api/firms/unknown.example/edgar-signals")

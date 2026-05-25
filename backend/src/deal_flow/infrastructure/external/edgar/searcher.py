@@ -12,6 +12,7 @@ from deal_flow.application.ports.services.sec_filing_searcher import (
 from deal_flow.infrastructure.cache.file_cache import FileCache
 
 _ENDPOINT = "https://efts.sec.gov/LATEST/search-index"
+_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 _PAGE_SIZE = 100
 _INTER_PAGE_DELAY_S = 0.1
 
@@ -47,6 +48,8 @@ class EdgarFullTextSearcher(SecFilingSearcher):
                 return cached["hits"]
 
         hits = self._fetch_all(query, start, end)
+        for hit in hits:
+            hit.update(self._fetch_filing_detail(hit["issuer_cik"], hit["accession_number"]))
         self._cache.write(key, {"hits": hits})
         return hits
 
@@ -103,6 +106,24 @@ class EdgarFullTextSearcher(SecFilingSearcher):
         response.raise_for_status()
         return response.json()
 
+    def _fetch_filing_detail(self, cik: str, accession: str) -> dict:
+        if not cik or not accession:
+            return _empty_detail()
+        key = FileCache.key_for("edgar.filing_detail", accession=accession)
+        if not self._refresh:
+            cached = self._cache.read(key)
+            if cached is not None:
+                return cached
+        url = (
+            f"{_ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/primary_doc.xml"
+        )
+        response = self._client.get(url)
+        response.raise_for_status()
+        detail = _parse_form_d_xml(response.content)
+        self._cache.write(key, detail)
+        time.sleep(_INTER_PAGE_DELAY_S)
+        return detail
+
 
 def _empty_primary_doc() -> dict:
     return {
@@ -119,26 +140,26 @@ def _parse_primary_doc(xml_text: str) -> dict:
     related: list[dict] = []
     for info in root.findall("relatedPersonsList/relatedPersonInfo"):
         related.append({
-            "first_name": _text(info, "relatedPersonName/firstName"),
-            "last_name": _text(info, "relatedPersonName/lastName"),
+            "first_name": _text_at(info, "relatedPersonName/firstName"),
+            "last_name": _text_at(info, "relatedPersonName/lastName"),
             "relationships": [
                 (r.text or "").strip()
                 for r in info.findall("relatedPersonRelationshipList/relationship")
                 if r.text
             ],
-            "relationship_clarification": _text(info, "relationshipClarification") or None,
+            "relationship_clarification": _text_at(info, "relationshipClarification") or None,
         })
     return {
-        "issuer_name": _text(root, "primaryIssuer/entityName"),
+        "issuer_name": _text_at(root, "primaryIssuer/entityName"),
         "related_persons": related,
-        "industry_group": _text(root, "offeringData/industryGroup/industryGroupType") or None,
-        "is_pooled_investment_fund": _text(
+        "industry_group": _text_at(root, "offeringData/industryGroup/industryGroupType") or None,
+        "is_pooled_investment_fund": _text_at(
             root, "offeringData/typesOfSecuritiesOffered/isPooledInvestmentFundType"
         ).lower() == "true",
     }
 
 
-def _text(node: ET.Element, path: str) -> str:
+def _text_at(node: ET.Element, path: str) -> str:
     found = node.find(path)
     return (found.text or "").strip() if found is not None and found.text else ""
 
@@ -157,9 +178,69 @@ def _normalize(raw_hit: dict) -> dict:
         "issuer_cik": cik,
         "filed_at": src.get("file_date") or "",
         "url": (
-            f"https://www.sec.gov/Archives/edgar/data/{int(cik)}/"
+            f"{_ARCHIVES}/{int(cik)}/"
             f"{adsh.replace('-', '')}/{adsh}-index.htm"
             if cik and adsh
             else ""
         ),
     }
+
+
+def _empty_detail() -> dict:
+    return {
+        "total_offering_amount": None,
+        "total_amount_sold": None,
+        "related_persons": [],
+    }
+
+
+def _parse_form_d_xml(xml_bytes: bytes) -> dict:
+    root = ET.fromstring(xml_bytes)
+    detail = _empty_detail()
+
+    amounts = root.find("offeringData/offeringSalesAmounts")
+    if amounts is not None:
+        detail["total_offering_amount"] = _to_int(
+            _text(amounts.find("totalOfferingAmount"))
+        )
+        detail["total_amount_sold"] = _to_int(
+            _text(amounts.find("totalAmountSold"))
+        )
+
+    persons: list[dict] = []
+    for person in root.findall("relatedPersonsList/relatedPersonInfo"):
+        first = _text(person.find("relatedPersonName/firstName")) or ""
+        last = _text(person.find("relatedPersonName/lastName")) or ""
+        relationships = [
+            (r.text or "").strip()
+            for r in person.findall("relatedPersonRelationshipList/relationship")
+            if r.text and r.text.strip()
+        ]
+        persons.append(
+            {
+                "first_name": first,
+                "last_name": last,
+                "relationships": relationships,
+                "relationship_clarification": _text(
+                    person.find("relationshipClarification")
+                ),
+            }
+        )
+    detail["related_persons"] = persons
+    return detail
+
+
+def _text(node: ET.Element | None) -> str | None:
+    if node is None or node.text is None:
+        return None
+    stripped = node.text.strip()
+    return stripped or None
+
+
+def _to_int(value: str | None) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        return None
