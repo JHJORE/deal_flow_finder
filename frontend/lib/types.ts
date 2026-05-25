@@ -90,12 +90,27 @@ export type SeniorHire = {
   hot: boolean;
 };
 
+export type CompanyFounder = {
+  name: string;
+  role: string | null;
+};
+
 export type Company = {
   id: string;
   name: string;
   firm: FirmId;
-  founder: string;
-  sector: string;
+  founder: string;            // first founder name from JSON (legacy convenience)
+  foundersList: CompanyFounder[]; // full founders list with roles, from JSON
+  sector: string;             // raw sector string from JSON (may contain "A, B, C")
+  description: string | null; // raw description from JSON (may be null)
+  detailUrl: string;          // link to the firm's portfolio page for this company
+  website: string | null;     // raw website URL from JSON
+  linkedinUrl: string | null; // raw LinkedIn URL from JSON
+  photoUrl?: string | null;   // logo URL from JSON
+  // The fields below have no source in the portfolio JSON. They are kept on
+  // the type so legacy consumers (CompanyProfileView modal, WatchlistView,
+  // ConsensusView) keep compiling, but for JSON-derived companies they are
+  // empty/zero. Views should treat them as "no data available".
   stage: string;
   founderTracked: string | null;
   themeKeys: ThemeKey[];
@@ -105,6 +120,7 @@ export type Company = {
   note: string;
   contact: Contact;
   about: string;
+  topics?: TopicRow[];
 };
 
 export type Signal = {

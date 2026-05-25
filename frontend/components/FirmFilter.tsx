@@ -1,12 +1,16 @@
 "use client";
 
-import { FIRMS, PARTNERS, firmColor } from "@/lib/data";
+import { COMPANIES, FIRMS, PARTNERS, firmColor } from "@/lib/data";
 import { useRadar } from "@/lib/state";
 import type { FirmId } from "@/lib/types";
 
 export function FirmFilter() {
-  const { activeFirms, toggleFirm } = useRadar();
+  const { activeFirms, toggleFirm, view } = useRadar();
   const order: FirmId[] = ["sequoia", "a16z", "yc"];
+  const countFor = (id: FirmId) =>
+    view === "portfolio"
+      ? COMPANIES.filter((c) => c.firm === id).length
+      : PARTNERS.filter((p) => p.firm === id).length;
 
   return (
     <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -14,7 +18,7 @@ export function FirmFilter() {
       {order.map((id) => {
         const f = FIRMS[id];
         const isOn = activeFirms.has(id);
-        const count = PARTNERS.filter((p) => p.firm === id).length;
+        const count = countFor(id);
         return (
           <button
             key={id}

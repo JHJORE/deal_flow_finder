@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar } from "@/components/Avatar";
-import { INK_ON_DARK, INK_ON_LIGHT, FOUNDER_AVATAR } from "@/lib/ui";
+import { INK_ON_DARK } from "@/lib/ui";
 import {
   BackButton,
   ContactRows,
@@ -20,14 +20,10 @@ import {
   COMPANY_TOPICS,
   FILINGS,
   FIRMS,
-  PARTNERS,
   SIGNALS,
   companyById,
   firmColor,
-  founderById,
-  initials,
   partnerById,
-  tierName,
 } from "@/lib/data";
 import { useRadar } from "@/lib/state";
 
@@ -37,16 +33,37 @@ export function CompanyProfileView({ id }: { id: string }) {
 
   const { setOpen } = useRadar();
   const base = (company.jobs[0] + company.jobs[1] + company.jobs[2]) / 3;
-  const lift = Math.round(((company.jobs[company.jobs.length - 1] - base) / base) * 100);
-  const dealPartner = partnerById(company.deal.partner);
-  const founder = company.founderTracked ? founderById(company.founderTracked) : null;
+  const lift = base
+    ? Math.round(((company.jobs[company.jobs.length - 1] - base) / base) * 100)
+    : null;
+  const dealPartner = company.deal.partner ? partnerById(company.deal.partner) : null;
   const coTopics = COMPANY_TOPICS[company.id] || [];
 
-  const relatedSignals = SIGNALS.filter((s) => {
-    if (company.founderTracked && s.actors.includes(company.founderTracked)) return true;
-    if (s.filing && FILINGS[s.filing]?.relatedCompany === company.id) return true;
-    return false;
-  });
+  // Only signals we can tie back: ones whose Form D filing names this company.
+  const relatedSignals = SIGNALS.filter(
+    (s) => s.filing && FILINGS[s.filing]?.relatedCompany === company.id
+  );
+
+  const founderHandle =
+    company.foundersList.length === 0
+      ? "founders not listed"
+      : `founders: ${company.foundersList.map((f) => f.name).join(", ")}`;
+
+  const contactRows = [
+    company.contact.linkedin
+      ? { key: "LinkedIn", value: company.contact.linkedin, href: `https://${company.contact.linkedin}` }
+      : null,
+    company.contact.site
+      ? { key: "Website", value: company.contact.site, href: `https://${company.contact.site}` }
+      : null,
+    company.detailUrl
+      ? {
+          key: `${FIRMS[company.firm].name} portfolio`,
+          value: company.detailUrl.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, ""),
+          href: company.detailUrl,
+        }
+      : null,
+  ].filter((r): r is { key: string; value: string; href: string } => r !== null);
 
   return (
     <div className="view-in">
@@ -59,21 +76,22 @@ export function CompanyProfileView({ id }: { id: string }) {
             color={firmColor(company.firm)}
             size="xl"
             textColor={INK_ON_DARK}
+            photoUrl={company.photoUrl}
           />
         }
         name={company.name}
-        role={`${company.sector} · ${company.stage} · backed by ${FIRMS[company.firm].name}`}
-        handle={`founder: ${company.founder}`}
+        role={`${company.sector || "Portfolio company"} · ${company.stage} · backed by ${FIRMS[company.firm].name}`}
+        handle={founderHandle}
         rightSlot={<WatchButton id={company.id} />}
       />
 
       <StatRow>
-        <Stat label="Open roles" value={company.jobs[company.jobs.length - 1]} hint="latest period" />
+        <Stat label="Open roles" value={company.jobs[company.jobs.length - 1] ?? "—"} hint="latest period" />
         <Stat
           label="Hiring vs base"
-          value={`${lift > 0 ? "+" : ""}${lift}%`}
+          value={lift === null ? "—" : `${lift > 0 ? "+" : ""}${lift}%`}
           hint="job-posting volume"
-          tone={lift > 40 ? "warn" : "default"}
+          tone={lift !== null && lift > 40 ? "warn" : "default"}
         />
         <Stat
           label="Senior hires"
@@ -86,25 +104,28 @@ export function CompanyProfileView({ id }: { id: string }) {
 
       <div className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Panel label="About">
-          <p className="t-body text-ink-2">{company.about}</p>
-          <div className="mt-5 border-t border-line-faint pt-4">
-            <span className="eyebrow block">Sector</span>
-            <span className="mt-2 block t-caption text-ink !max-w-none">
-              {company.sector} · {company.stage}
-            </span>
-          </div>
+          {company.description ? (
+            <p className="t-body text-ink-2">{company.description}</p>
+          ) : (
+            <p className="t-body text-ink-4">No description in source data.</p>
+          )}
+          {company.sector && (
+            <div className="mt-5 border-t border-line-faint pt-4">
+              <span className="eyebrow block">Sector</span>
+              <span className="mt-2 block t-caption text-ink !max-w-none">
+                {company.sector}
+              </span>
+            </div>
+          )}
         </Panel>
-        <Panel label="Contact">
-          <ContactRows
-            rows={[
-              { key: "General", value: company.contact.email, href: `mailto:${company.contact.email}` },
-              { key: "Founder", value: company.contact.founderEmail!, href: `mailto:${company.contact.founderEmail}` },
-              { key: "Phone", value: company.contact.phone },
-              { key: "LinkedIn", value: company.contact.linkedin, href: `https://${company.contact.linkedin}` },
-              { key: "X", value: company.contact.x, href: `https://x.com/${company.contact.x.replace("@", "")}` },
-              { key: "Website", value: company.contact.site!, href: `https://${company.contact.site}` },
-            ]}
-          />
+        <Panel label="Links">
+          {contactRows.length === 0 ? (
+            <div className="py-2 font-mono text-meta text-ink-4">
+              No public links in source data.
+            </div>
+          ) : (
+            <ContactRows rows={contactRows} />
+          )}
         </Panel>
       </div>
 
@@ -134,25 +155,26 @@ export function CompanyProfileView({ id }: { id: string }) {
             )}
           </DealCell>
           <DealCell label="Amount invested">
-            <div className="mt-2 n-sm text-ink">{company.deal.invested}</div>
+            <div className="mt-2 n-sm text-ink">{company.deal.invested || "—"}</div>
             <div className="mt-2 font-mono text-meta tabnum text-ink-4">
-              {company.deal.lead ? "led the round" : "participated"} · {company.deal.round}
+              {company.deal.lead ? "led the round" : "participated"}
+              {company.deal.round ? ` · ${company.deal.round}` : ""}
             </div>
           </DealCell>
           <DealCell label="Ownership">
-            <div className="mt-2 n-sm text-ink">{company.deal.ownership}</div>
-            <div className="mt-2 font-mono text-meta tabnum text-ink-4">
-              {company.deal.ownership === "not disclosed" ? "not in public filings" : "estimated from round"}
-            </div>
+            <div className="mt-2 n-sm text-ink">{company.deal.ownership || "—"}</div>
+            <div className="mt-2 font-mono text-meta tabnum text-ink-4">estimated from round</div>
           </DealCell>
           <DealCell label="Valuation">
-            <div className="mt-2 n-sm text-ink">{company.deal.valuation}</div>
-            <div className="mt-2 font-mono text-meta tabnum text-ink-4">as of {company.deal.dealDate}</div>
+            <div className="mt-2 n-sm text-ink">{company.deal.valuation || "—"}</div>
+            <div className="mt-2 font-mono text-meta tabnum text-ink-4">
+              {company.deal.dealDate ? `as of ${company.deal.dealDate}` : "date n/a"}
+            </div>
           </DealCell>
         </div>
       </Panel>
 
-      <Interp>{company.note}</Interp>
+      {company.note && <Interp>{company.note}</Interp>}
 
       <div className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Panel label="Job postings over time">
@@ -175,33 +197,29 @@ export function CompanyProfileView({ id }: { id: string }) {
               }))}
             />
           )}
-          {founder && (
-            <div className="mt-5 border-t border-line-faint pt-4">
-              <div className="mb-2 eyebrow">Founder dossier</div>
-              <button
-                onClick={() => setOpen({ kind: "partner", id: founder.id })}
-                className="flex items-center gap-3 rounded-md border border-line-faint bg-surface-2/40 px-3 py-2 text-left transition-colors hover:border-line-hard"
-              >
-                <Avatar
-                  name={founder.name}
-                  color={FOUNDER_AVATAR}
-                  size="sm"
-                  textColor={INK_ON_LIGHT}
-                />
-                <span className="flex flex-col">
-                  <span className="t-h-sm">{founder.name}</span>
-                  <span className="font-mono text-meta text-ink-4">open founder profile →</span>
-                </span>
-              </button>
-            </div>
-          )}
         </Panel>
       </div>
+
+      {company.foundersList.length > 0 && (
+        <Panel label="Founders" className="mb-6">
+          <ul className="flex flex-col gap-2">
+            {company.foundersList.map((f, i) => (
+              <li
+                key={`${f.name}-${i}`}
+                className="flex items-baseline justify-between gap-3 rounded-md border border-line-faint bg-surface-2/40 px-3 py-2"
+              >
+                <span className="t-h-sm">{f.name}</span>
+                <span className="font-mono text-meta text-ink-4">{f.role || "—"}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
 
       {coTopics.length > 0 && (
         <Panel label={`What ${company.name} is talking about`} pill="orange = newly emphasised" className="mb-6">
           <p className="mb-4 t-caption text-ink-2 !max-w-[68ch]">
-            Topic mix from {company.name}'s public posts, blog and job-listing language. A company
+            Topic mix derived from public posts, blog and job-listing language. A company
             leaning hard into a theme is its own deal-flow signal, separate from what partners say.
           </p>
           <TopicsList topics={coTopics} />

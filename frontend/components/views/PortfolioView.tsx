@@ -7,15 +7,16 @@ import { COMPANIES, FIRMS, firmColor } from "@/lib/data";
 import { useRadar } from "@/lib/state";
 import type { Company } from "@/lib/types";
 
-function hiringLift(c: Company) {
+function hiringLift(c: Company): number | null {
   const base = (c.jobs[0] + c.jobs[1] + c.jobs[2]) / 3;
+  if (!base) return null;
   return Math.round(((c.jobs[c.jobs.length - 1] - base) / base) * 100);
 }
 
 export function PortfolioView() {
   const { activeFirms, setOpen, isWatched } = useRadar();
   const cs = COMPANIES.filter((c) => activeFirms.has(c.firm)).sort(
-    (a, b) => hiringLift(b) - hiringLift(a)
+    (a, b) => a.name.localeCompare(b.name)
   );
 
   return (
@@ -43,6 +44,7 @@ export function PortfolioView() {
 function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: () => void; watched: boolean }) {
   const lift = hiringLift(company);
   const hotHires = company.seniorHires.filter((h) => h.hot).length;
+  const sectorOrStage = company.sector || company.stage;
 
   return (
     <button
@@ -56,17 +58,19 @@ function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: (
           size="md"
           textColor={INK_ON_DARK}
           watched={watched}
+          photoUrl={company.photoUrl}
         />
-        <div>
-          <div className="t-h-sm">{company.name}</div>
-          <div className="t-meta">
-            {FIRMS[company.firm].name} · {company.stage}
+        <div className="min-w-0">
+          <div className="truncate t-h-sm">{company.name}</div>
+          <div className="t-meta truncate">
+            {FIRMS[company.firm].name}
+            {sectorOrStage ? ` · ${sectorOrStage}` : ""}
           </div>
         </div>
       </div>
 
       <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">
-        {company.sector} · founded by {company.founder}
+        {company.description ?? `${company.sector || "Portfolio"} company · founded by ${company.founder || "—"}`}
       </p>
 
       {hotHires > 0 ? (
@@ -78,11 +82,11 @@ function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: (
       )}
 
       <div className="mt-1 grid grid-cols-3 gap-4 border-t border-line-faint pt-4">
-        <Stat label="open roles" value={company.jobs[company.jobs.length - 1]} />
+        <Stat label="open roles" value={company.jobs[company.jobs.length - 1] ?? "—"} />
         <Stat
           label="hiring vs base"
-          value={`${lift > 0 ? "+" : ""}${lift}%`}
-          tone={lift > 40 ? "warn" : "default"}
+          value={lift === null ? "—" : `${lift > 0 ? "+" : ""}${lift}%`}
+          tone={lift !== null && lift > 40 ? "warn" : "default"}
         />
         <Stat
           label="senior hires"

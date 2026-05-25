@@ -5,8 +5,6 @@ import {
   FOLLOWS,
   PARTNERS,
   THEMES,
-  COMPANIES,
-  COMPANY_TOPICS,
   FOUNDERS,
   firmColor,
   founderById,

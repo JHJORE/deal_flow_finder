@@ -98,7 +98,7 @@ export function WatchlistView() {
             key={c.id}
             name={c.name}
             color={firmColor(c.firm)}
-            sub={`${FIRMS[c.firm].name} · ${c.stage}`}
+            sub={`${FIRMS[c.firm].name}${c.sector ? ` · ${c.sector}` : ""} · ${c.stage}`}
             onOpen={() => setOpen({ kind: "company", id: c.id })}
           />
         ))}

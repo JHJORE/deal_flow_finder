@@ -18,7 +18,7 @@ import { MiniBarChart, MiniLineChart } from "@/components/MiniChart";
 import {
   FIRMS,
   FOLLOWS,
-  PARTNER_BELIEFS,
+  getPartnerBeliefs,
   PERIODS,
   TOP_POSTS,
   actorById,
@@ -76,7 +76,7 @@ export function PartnerProfileView({ id }: { id: string }) {
         <Interpretation partnerId={id} liftP={liftP} liftE={liftE} />
       </Interp>
 
-      {isPartner && PARTNER_BELIEFS[id] && <BeliefsPanel partnerId={id} />}
+      {isPartner && getPartnerBeliefs(id) && <BeliefsPanel partnerId={id} />}
 
       {isPartner && TOP_POSTS[id] && <TopPostPanel partnerId={id} />}
 
@@ -155,10 +155,23 @@ function PartnerStats({
 
 function AboutContact({ partnerId }: { partnerId: string }) {
   const p = partnerById(partnerId)!;
+  const [expanded, setExpanded] = useState(false);
+  const isLong = p.about.length > 320;
   return (
     <div className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
       <Panel label="About">
-        <p className="t-body text-ink-2">{p.about}</p>
+        <p className={`t-body text-ink-2 ${isLong && !expanded ? "line-clamp-5" : ""}`}>
+          {p.about}
+        </p>
+        {isLong && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="mt-2 font-mono text-meta text-accent hover:underline"
+          >
+            {expanded ? "Show less" : "Show more"}
+          </button>
+        )}
         <div className="mt-5 border-t border-line-faint pt-4">
           <span className="eyebrow block">Typical deals</span>
           <span className="mt-2 block t-caption text-ink !max-w-none">{p.checkSize}</span>
@@ -238,7 +251,7 @@ function Interpretation({
 function BeliefsPanel({ partnerId }: { partnerId: string }) {
   const { predWindow, setPredWindow, setOpen } = useRadar();
   const partner = partnerById(partnerId)!;
-  const bd = PARTNER_BELIEFS[partnerId];
+  const bd = getPartnerBeliefs(partnerId);
   const pred = computePredictability(partnerId, predWindow);
   if (!bd || !pred) return null;
 

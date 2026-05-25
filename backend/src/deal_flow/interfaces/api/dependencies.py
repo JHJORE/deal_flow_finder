@@ -14,6 +14,9 @@ from deal_flow.application.ports.repositories.partner_directory import (
 from deal_flow.application.ports.repositories.partner_profile_repository import (
     PartnerProfileRepository,
 )
+from deal_flow.application.ports.repositories.portfolio_company_repository import (
+    PortfolioCompanyRepository,
+)
 from deal_flow.application.ports.services.linkedin_collector import LinkedInCollector
 from deal_flow.application.ports.services.llm_structured_output import (
     LlmStructuredOutput,
@@ -38,6 +41,9 @@ from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPo
 from deal_flow.application.use_cases.load_firm_partner_profiles import (
     LoadFirmPartnerProfiles,
 )
+from deal_flow.application.use_cases.load_firm_portfolio_companies import (
+    LoadFirmPortfolioCompanies,
+)
 from deal_flow.application.use_cases.search_partner_form_d_filings import (
     SearchPartnerFormDFilings,
 )
@@ -57,6 +63,9 @@ from deal_flow.infrastructure.persistence.file_partner_directory import (
 )
 from deal_flow.infrastructure.persistence.file_partner_profile_repository import (
     FilePartnerProfileRepository,
+)
+from deal_flow.infrastructure.persistence.file_portfolio_company_repository import (
+    FilePortfolioCompanyRepository,
 )
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 
@@ -195,6 +204,16 @@ def get_summarize_partner_bio(
 
 def get_load_firm_partner_profiles(
     repo: PartnerProfileRepository = Depends(get_partner_profile_repository),
-    summarize_bio: SummarizePartnerBio = Depends(get_summarize_partner_bio),
 ) -> LoadFirmPartnerProfiles:
-    return LoadFirmPartnerProfiles(repo=repo, summarize_bio=summarize_bio)
+    return LoadFirmPartnerProfiles(repo=repo)
+
+
+@lru_cache
+def get_portfolio_company_repository() -> PortfolioCompanyRepository:
+    return FilePortfolioCompanyRepository(data_dir=get_settings().partner_data_dir)
+
+
+def get_load_firm_portfolio_companies(
+    repo: PortfolioCompanyRepository = Depends(get_portfolio_company_repository),
+) -> LoadFirmPortfolioCompanies:
+    return LoadFirmPortfolioCompanies(repo=repo)

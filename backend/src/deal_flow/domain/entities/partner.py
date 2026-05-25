@@ -10,7 +10,6 @@ class Partner:
     profile_url: str
     role: str | None = None
     role_display: str | None = None
-    focus_areas: tuple[str, ...] = field(default_factory=tuple)
     teams: tuple[str, ...] = field(default_factory=tuple)
     bio: str | None = None
     about_short: str | None = None

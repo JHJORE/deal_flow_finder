@@ -1,7 +1,9 @@
 import type { PartnerProfileDTO } from "./api/partners";
+import type { PortfolioCompanyDTO } from "./api/portfolio";
 import type {
   Belief,
   Company,
+  Deal,
   Filing,
   Firm,
   FirmId,
@@ -9,6 +11,7 @@ import type {
   Founder,
   Partner,
   PartnerBeliefs,
+  SeniorHire,
   Signal,
   Theme,
   ThemeKey,
@@ -39,7 +42,7 @@ export const themeColor = (t: Theme) =>
 
 // ---------- partner mapping from backend JSON ----------
 //
-// PARTNERS is populated by <PartnersProvider> after fetching the three firms'
+// PARTNERS is populated by <DataProvider> after fetching the three firms'
 // /api/firms/{domain}/partner-profiles endpoints. We use a live module binding
 // so existing components that `import { PARTNERS, partnerById }` keep working
 // — once the provider sets it, the next render reads the populated array.
@@ -159,7 +162,6 @@ export function buildPartnersFromProfiles(
 ): Partner[] {
   const fm = FIRM_META[firm];
   return profiles.map((p) => {
-    const fallbackAbout = (p.bio || "").trim().slice(0, 220);
     return {
       id: slug(p.name),                           // ✓ from JSON (slug of name)
       name: p.name,                               // ✓ from JSON
@@ -173,14 +175,14 @@ export function buildPartnersFromProfiles(
         x: xHandleFromUrl(p.x_url),               // ✓ from JSON
         phone: fm.phone,                          // • HARDCODED — no phone in source data
       },
-      about: p.about_short || fallbackAbout,      // ✓ from JSON (Gemini-summarized; bio fallback)
+      about: (p.bio || "").trim() || p.about_short || "", // ✓ full bio from JSON; about_short is the 1-2 sentence fallback
       checkSize: checkSizeFor(p.role),            // • HARDCODED — no check-size in source data
       ...mockEngagementFor(p.name),               // ◇ HARDCODED — deterministic mock until we have metrics
     };
   });
 }
 
-// PARTNERS starts empty and is populated by PartnersProvider on mount.
+// PARTNERS starts empty and is populated by DataProvider on mount.
 // Components keep importing PARTNERS / partnerById and re-render once the
 // provider's loaded flag flips (via context) — ES module live bindings.
 export let PARTNERS: Partner[] = [];
@@ -273,121 +275,120 @@ export const FOUNDERS: Founder[] = [
     ] },
 ];
 
-// ---------- companies (raw, then enriched) ----------
-// Deal.partner references use partner slugs (slug(name)) — must match the
-// ids produced by buildPartnersFromProfiles. Same for SIGNALS.actors, FOLLOWS.
-const COMPANIES_RAW: Omit<Company, "contact" | "about">[] = [
-  { id: "c1", name: "Harvey", firm: "sequoia", founder: "Winston Weinberg", sector: "Legal AI",
-    stage: "Series D", founderTracked: null, themeKeys: ["agents", "evals"],
-    deal: { partner: "pat-grady", round: "Series D", invested: "$80M", ownership: "~12%",
-      valuation: "$3.0B post-money", dealDate: "Apr 2026", lead: true },
-    jobs: [18, 19, 22, 21, 38, 57],
-    seniorHires: [
-      { role: "First CFO", name: "hired May 2026", hot: true },
-      { role: "VP Sales", name: "hired Apr 2026", hot: true },
-    ],
-    note: "Job postings up sharply over the last two periods and a first CFO just landed. Both point to an imminent or just-closed round." },
-  { id: "c2", name: "Mistral AI", firm: "a16z", founder: "Arthur Mensch", sector: "Open models",
-    stage: "Series C", founderTracked: null, themeKeys: ["ondevice", "agents"],
-    deal: { partner: "anjney-midha", round: "Series C", invested: "$45M", ownership: "~6%",
-      valuation: "$6.2B post-money", dealDate: "Nov 2025", lead: false },
-    jobs: [40, 42, 44, 43, 46, 49],
-    seniorHires: [{ role: "VP Policy", name: "hired Mar 2026", hot: false }],
-    note: "Steady, healthy hiring with no anomaly. Consistent scale-up, not a fresh-round spike." },
-  { id: "c3", name: "Cursor", firm: "a16z", founder: "Michael Truell", sector: "AI dev tools",
-    stage: "Series B", founderTracked: null, themeKeys: ["agents", "evals"],
-    deal: { partner: "martin-casado", round: "Series B", invested: "$60M", ownership: "~15%",
-      valuation: "$2.5B post-money", dealDate: "Mar 2026", lead: true },
-    jobs: [12, 14, 15, 19, 31, 44],
-    seniorHires: [
-      { role: "First General Counsel", name: "hired May 2026", hot: true },
-      { role: "Head of Enterprise", name: "hired Apr 2026", hot: true },
-    ],
-    note: "A first General Counsel plus a hiring surge is a textbook fundraise-prep pattern." },
-  { id: "c4", name: "Decagon", firm: "a16z", founder: "Jesse Zhang", sector: "Voice / support AI",
-    stage: "Series A", founderTracked: null, themeKeys: ["voice"],
-    deal: { partner: "anish-acharya", round: "Series A", invested: "$18M", ownership: "~18%",
-      valuation: "$120M post-money", dealDate: "May 2026", lead: true },
-    jobs: [8, 9, 9, 11, 16, 24],
-    seniorHires: [{ role: "First VP Sales", name: "hired May 2026", hot: true }],
-    note: "First VP Sales hire and rising postings; an early company stepping on the gas." },
-  { id: "c5", name: "Sierra", firm: "sequoia", founder: "Bret Taylor", sector: "Agent platform",
-    stage: "Series B", founderTracked: null, themeKeys: ["agents"],
-    deal: { partner: "konstantine-buhler", round: "Series B", invested: "$55M", ownership: "~10%",
-      valuation: "$4.5B post-money", dealDate: "Dec 2025", lead: false },
-    jobs: [22, 24, 26, 28, 33, 41],
-    seniorHires: [{ role: "VP Marketing", name: "hired Apr 2026", hot: false }],
-    note: "Gradual hiring acceleration; worth watching but no single-period spike yet." },
-  { id: "c6", name: "Parallax Labs", firm: "a16z", founder: "Arjun Reddy", sector: "Agent dev tools",
-    stage: "Seed (undisclosed)", founderTracked: "f4", themeKeys: ["agents", "evals"],
-    deal: { partner: "martin-casado", round: "Seed", invested: "$3.5M (of $8.5M round)", ownership: "not disclosed",
-      valuation: "~$40M post-money (est.)", dealDate: "Apr 2026", lead: true },
-    jobs: [1, 1, 2, 3, 7, 14],
-    seniorHires: [{ role: "Founding engineers", name: "cluster hired May 2026", hot: true }],
-    note: "Tied to the undisclosed Form D. Hiring from near-zero to a real team in two periods; consistent with a just-closed seed round." },
-  { id: "c7", name: "Cartesia", firm: "yc", founder: "Karan Goel", sector: "Voice AI infra",
-    stage: "Series A", founderTracked: null, themeKeys: ["voice"],
-    deal: { partner: "garry-tan", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
-      valuation: "$25M post-money", dealDate: "W25 batch", lead: false },
-    jobs: [6, 7, 8, 10, 15, 23],
-    seniorHires: [{ role: "First Head of Product", name: "hired May 2026", hot: true }],
-    note: "Voice-infra company hiring fast and bringing on a first Head of Product." },
-  { id: "c8", name: "Lightdash", firm: "yc", founder: "Oliver Laslett", sector: "Data / BI",
-    stage: "Series A", founderTracked: null, themeKeys: ["agents"],
-    deal: { partner: "jared-friedman", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
-      valuation: "$18M post-money", dealDate: "S24 batch", lead: false },
-    jobs: [11, 11, 12, 11, 12, 13],
-    seniorHires: [],
-    note: "Flat hiring, no senior-hire activity. Quiet; no fundraise signal at present." },
-];
+// ---------- companies ----------
+// COMPANIES is populated by <DataProvider> after fetching each firm's
+// /api/firms/{domain}/portfolio-profiles endpoint. We use ONLY what the
+// portfolio JSON gives us (name, sector, description, photo_url, website,
+// linkedin_url, founders, detail_url). Everything else on the Company type
+// (stage, jobs, seniorHires, themeKeys, deal, note) is filled with empty
+// defaults because the portfolio JSON does not carry that information —
+// views must treat those fields as "no data available".
 
-export const COMPANY_TOPICS: Record<string, TopicRow[]> = {
-  c1: [
-    { t: "Agent reliability", w: 42, chg: 14, themeKey: "agents", isNew: false },
-    { t: "Legal workflow automation", w: 33, chg: 6, themeKey: "agents", isNew: false },
-    { t: "Evaluation & accuracy", w: 18, chg: 9, themeKey: "evals", isNew: true },
-    { t: "Enterprise security", w: 7, chg: -2, themeKey: null, isNew: false },
-  ],
-  c2: [
-    { t: "Open-weight models", w: 46, chg: 5, themeKey: "ondevice", isNew: false },
-    { t: "On-device inference", w: 27, chg: 11, themeKey: "ondevice", isNew: true },
-    { t: "Multilingual AI", w: 19, chg: 3, themeKey: null, isNew: false },
-    { t: "Developer tooling", w: 8, chg: 1, themeKey: "agents", isNew: false },
-  ],
-  c3: [
-    { t: "AI coding agents", w: 48, chg: 17, themeKey: "agents", isNew: false },
-    { t: "Codebase context & retrieval", w: 29, chg: 8, themeKey: "agents", isNew: false },
-    { t: "Agent eval & correctness", w: 16, chg: 12, themeKey: "evals", isNew: true },
-    { t: "Enterprise rollout", w: 7, chg: 4, themeKey: null, isNew: false },
-  ],
-  c4: [
-    { t: "Voice support agents", w: 51, chg: 13, themeKey: "voice", isNew: false },
-    { t: "Customer-experience AI", w: 28, chg: 5, themeKey: "voice", isNew: false },
-    { t: "Agent reliability", w: 15, chg: 7, themeKey: "agents", isNew: true },
-    { t: "Analytics", w: 6, chg: -1, themeKey: null, isNew: false },
-  ],
-  c5: [
-    { t: "Agent platforms", w: 44, chg: 9, themeKey: "agents", isNew: false },
-    { t: "Conversational AI", w: 30, chg: 4, themeKey: "voice", isNew: false },
-    { t: "Enterprise deployment", w: 18, chg: 6, themeKey: null, isNew: false },
-    { t: "Agent evaluation", w: 8, chg: 5, themeKey: "evals", isNew: true },
-  ],
-  c6: [
-    { t: "Agent developer tools", w: 55, chg: 22, themeKey: "agents", isNew: true },
-    { t: "Agent evaluation", w: 30, chg: 15, themeKey: "evals", isNew: true },
-    { t: "Open infrastructure", w: 15, chg: 8, themeKey: null, isNew: false },
-  ],
-  c7: [
-    { t: "Voice AI infrastructure", w: 53, chg: 16, themeKey: "voice", isNew: false },
-    { t: "Low-latency speech models", w: 31, chg: 10, themeKey: "voice", isNew: true },
-    { t: "Developer APIs", w: 16, chg: 4, themeKey: "agents", isNew: false },
-  ],
-  c8: [
-    { t: "Data & BI tooling", w: 50, chg: 2, themeKey: null, isNew: false },
-    { t: "Analytics agents", w: 27, chg: 6, themeKey: "agents", isNew: true },
-    { t: "Open-source BI", w: 23, chg: 1, themeKey: null, isNew: false },
-  ],
+const slugCompanyName = (n: string) =>
+  n.toLowerCase().replace(/[^a-z0-9 ]/g, "").trim().replace(/ +/g, "-");
+
+const companyId = (firm: FirmId, name: string) =>
+  `${firm}-${slugCompanyName(name)}`;
+
+// Shared illustrative placeholder applied to every JSON-derived company.
+// The portfolio JSON does not carry stage / hiring / deal / topic data, so
+// these fields use the SAME hardcoded example everywhere — visually demoing
+// what the panels look like without pretending each company is unique.
+// The footer disclaimer ("historic signal data is illustrative") covers it.
+const EXAMPLE_STAGE = "Series B";
+const EXAMPLE_JOBS = [18, 19, 22, 21, 38, 57];
+const EXAMPLE_SENIOR_HIRES: SeniorHire[] = [
+  { role: "First CFO", name: "hired May 2026", hot: true },
+  { role: "VP Sales", name: "hired Apr 2026", hot: true },
+];
+const EXAMPLE_THEME_KEYS: ThemeKey[] = ["agents", "evals"];
+const EXAMPLE_TOPICS: TopicRow[] = [
+  { t: "Agent reliability", w: 42, chg: 14, themeKey: "agents", isNew: false },
+  { t: "Workflow automation", w: 33, chg: 6, themeKey: "agents", isNew: false },
+  { t: "Evaluation & accuracy", w: 18, chg: 9, themeKey: "evals", isNew: true },
+  { t: "Enterprise security", w: 7, chg: -2, themeKey: null, isNew: false },
+];
+const EXAMPLE_NOTE =
+  "Illustrative hiring pattern: job postings up sharply over the last two periods with a CFO and VP Sales just landing — the kind of move that often precedes a fresh round.";
+// Empty partner slug → modal renders firm name as the deal backer rather
+// than picking the wrong person across firms.
+const EXAMPLE_DEAL: Deal = {
+  partner: "",
+  round: "Series B (example)",
+  invested: "$45M (example)",
+  ownership: "~12% (example)",
+  valuation: "$600M post-money (example)",
+  dealDate: "Apr 2026 (example)",
+  lead: true,
 };
+
+// Build the Company list for one firm from its portfolio JSON.
+// Real per-company fields (name, sector, description, photo, founders,
+// website, linkedin) come from JSON. The hiring/deal/topic panels render
+// the same hardcoded illustrative example for every company.
+export function buildCompaniesFromPortfolio(
+  profiles: PortfolioCompanyDTO[],
+  firm: FirmId
+): Company[] {
+  return profiles.map((p) => {
+    const id = companyId(firm, p.name);
+    const founder = p.founders && p.founders[0] ? p.founders[0].name : "";
+    const cleanLi = (u: string | null) =>
+      u ? u.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, "") : "";
+    const cleanHost = (u: string | null) =>
+      u ? u.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/.*$/, "") : "";
+
+    return {
+      id,
+      name: p.name,
+      firm,
+      founder,
+      foundersList: (p.founders || []).map((f) => ({ name: f.name, role: f.role })),
+      sector: p.sector || "",
+      description: p.description,
+      detailUrl: p.detail_url,
+      website: p.website,
+      linkedinUrl: p.linkedin_url,
+      photoUrl: p.photo_url,
+      // Shared illustrative panels (same for every company).
+      stage: EXAMPLE_STAGE,
+      founderTracked: null,
+      themeKeys: EXAMPLE_THEME_KEYS,
+      deal: EXAMPLE_DEAL,
+      jobs: EXAMPLE_JOBS,
+      seniorHires: EXAMPLE_SENIOR_HIRES,
+      note: EXAMPLE_NOTE,
+      contact: {
+        email: "",
+        founderEmail: "",
+        phone: "",
+        linkedin: cleanLi(p.linkedin_url),
+        x: "",
+        site: cleanHost(p.website),
+      },
+      about: p.description ?? "",
+      topics: EXAMPLE_TOPICS,
+    };
+  });
+}
+
+// COMPANIES starts empty and is populated by DataProvider on mount.
+// Same live-binding pattern as PARTNERS — components keep importing COMPANIES
+// and re-render once the provider's loaded flag flips.
+export let COMPANIES: Company[] = [];
+
+// COMPANY_TOPICS is kept as a derived lookup keyed by company id so existing
+// consumers (CompanyProfileView, ConsensusView) don't change. It's rebuilt
+// whenever _setCompanies fires.
+export let COMPANY_TOPICS: Record<string, TopicRow[]> = {};
+
+export function _setCompanies(list: Company[]) {
+  COMPANIES = list;
+  const next: Record<string, TopicRow[]> = {};
+  for (const c of list) next[c.id] = c.topics ?? [];
+  COMPANY_TOPICS = next;
+}
+
 
 // SIGNALS, FOLLOWS, PARTNER_BELIEFS, TOP_POSTS keyed by partner slug
 // (slug(name)) to line up with buildPartnersFromProfiles ids. Founder ids
@@ -398,10 +399,6 @@ export const SIGNALS: Signal[] = [
     headline: "Convergence — 2 partners now follow Maya Okafor within 18 days",
     body: "Anjney Midha (a16z) and Konstantine Buhler (Sequoia) both first-followed Okafor inside an 18-day window. Neither follows famous accounts casually. Earliest social-graph signal of a deal forming.",
     sources: ["X"], actors: ["anjney-midha", "f1"], age: "2d", score: 95 },
-  { id: "s2", tier: 1, conf: "high", firms: ["a16z"],
-    headline: "Undisclosed Form D — agent dev tools startup names a16z",
-    body: "An EDGAR Form D lists a16z as an investor in a startup not yet on the a16z public portfolio page. Issuer profile matches Arjun Reddy’s stealth company.",
-    sources: ["EDGAR"], actors: ["martin-casado", "f4"], age: "3d", score: 92, filing: "fd1" },
   { id: "s9", tier: 1, conf: "high", firms: ["sequoia"],
     headline: "Convergence — Pat Grady and Konstantine Buhler both follow Priya Anand",
     body: "Two Sequoia partners first-followed Anand within the same period. She builds agent eval infrastructure, the exact theme both partners just started writing about. Tight thesis-to-follow match.",
@@ -438,32 +435,114 @@ export const SIGNALS: Signal[] = [
     headline: "Stealth departure — Lena Cho updates LinkedIn to “building something new”",
     body: "Operator-watchlist member changed her LinkedIn title and began engaging agent and voice themes on X. Early, low-confidence pre-company signal.",
     sources: ["LinkedIn", "X"], actors: ["f3"], age: "12d", score: 48 },
+  { id: "s12", tier: 1, conf: "high", firms: ["a16z"],
+    headline: "EDGAR Form D — a16z named in Somo Labs $23M raise",
+    body: "Form D filed May 20 lists a16z’s Anish Acharya as a director of Somo Labs Inc.; full $23.25M offering reported sold. Newest confirmed a16z check pulled straight from SEC.",
+    sources: ["EDGAR"], actors: ["anish-acharya"], age: "5d", score: 91, filing: "fd2" },
+  { id: "s13", tier: 1, conf: "high", firms: ["sequoia"],
+    headline: "EDGAR Form D — Sequoia confirms $200M Mercury check",
+    body: "Mercury Technologies filed Form D on May 20 reporting a fully-subscribed $200M raise; Sonya Huang is listed as a director alongside founder Immad Akhund. Newest confirmed Sequoia check of the cycle.",
+    sources: ["EDGAR"], actors: ["sonya-huang"], age: "5d", score: 90, filing: "fd3" },
+  { id: "s14", tier: 1, conf: "high", firms: ["sequoia"],
+    headline: "EDGAR Form D — Sequoia named in Send Cut Send $110M raise",
+    body: "Andrew Reed listed as a director on a Form D filed May 20 by Send Cut Send, Inc., the on-demand laser-cutting marketplace. Full $110M offering reported sold.",
+    sources: ["EDGAR"], actors: ["andrew-reed"], age: "5d", score: 89, filing: "fd4" },
 ];
 
 export const FILINGS: Record<string, Filing> = {
-  fd1: {
-    issuer: "Parallax Labs, Inc.",
-    relatedFounder: "f4",
-    relatedCompany: "c6",
+  fd2: {
+    issuer: "Somo Labs Inc.",
+    relatedFounder: null,
+    relatedCompany: null,
     formType: "Form D — Notice of Exempt Offering of Securities",
-    filedDate: "May 14, 2026",
-    cik: "0002041883",
+    filedDate: "May 20, 2026",
+    cik: "0002134213",
     exemption: "Rule 506(b)",
-    offeringAmount: "$8,500,000",
-    soldToDate: "$8,500,000",
-    totalInvestors: 6,
-    firstSale: "April 2026",
+    offeringAmount: "$23,249,939",
+    soldToDate: "$22,914,951",
+    totalInvestors: 0,
+    firstSale: "May 2026",
     industry: "Other Technology",
-    state: "Delaware (incorporated) · San Francisco, CA (principal place of business)",
+    state: "Delaware (incorporated)",
     namedInvestor: "a16z",
-    relatedPersons: ["A. Reddy (Director, Executive Officer)", "Anonymous LLC (managing member)"],
-    edgarUrl: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=D",
+    relatedPersons: [
+      "Yuen Fai James Lo (Executive Officer, Director)",
+      "Jaymin Mankowitz (Director)",
+      "Anish Acharya (Director)",
+      "Jeannette zu Furstenberg (Director)",
+    ],
+    edgarUrl:
+      "https://www.sec.gov/Archives/edgar/data/2134213/000213421326000003/0002134213-26-000003-index.htm",
     whyFlagged:
-      "Parallax Labs does not appear on a16z’s public portfolio page or investment list, yet a16z is named as a participating investor in this filing. The issuer’s stated industry and SF base match the stealth profile of Arjun Reddy, a founder already showing follower and posting acceleration. This is a confirmed check ahead of any public announcement.",
+      "Anish Acharya is named as a director on the Form D — confirmation that a16z is on the cap table. The $23.25M raise is fully subscribed, with the filing dated five days ago.",
     timeline: [
-      { d: "April 2026", t: "First sale of securities", s: "Offering opens; first capital wired per the filing." },
-      { d: "May 14, 2026", t: "Form D filed with SEC", s: "Issuer files the exempt-offering notice naming a16z." },
-      { d: "May 14, 2026", t: "Flagged by Dealflow Radar", s: "Issuer cross-checked against a16z portfolio page — no match. Marked undisclosed." },
+      { d: "May 2026", t: "First sale of securities", s: "Offering opens; first capital wired per the filing." },
+      { d: "May 20, 2026", t: "Form D filed with SEC", s: "Issuer files the exempt-offering notice; Anish Acharya listed as a director." },
+      { d: "May 20, 2026", t: "Flagged by Dealflow Radar", s: "EDGAR sweep picked up Acharya’s name in the related-persons list." },
+    ],
+  },
+  fd3: {
+    issuer: "Mercury Technologies, Inc.",
+    relatedFounder: null,
+    relatedCompany: null,
+    formType: "Form D — Notice of Exempt Offering of Securities",
+    filedDate: "May 20, 2026",
+    cik: "0001719932",
+    exemption: "Rule 506(b)",
+    offeringAmount: "$199,999,824",
+    soldToDate: "$199,999,824",
+    totalInvestors: 0,
+    firstSale: "May 2026",
+    industry: "Commercial Banking / FinTech",
+    state: "Delaware (incorporated)",
+    namedInvestor: "Sequoia",
+    relatedPersons: [
+      "Immad Akhund (Executive Officer, Director)",
+      "Jason Zhang (Executive Officer, Director)",
+      "Saar Gur (Director)",
+      "Sonya Huang (Director)",
+      "Tim Mayopoulos (Director)",
+    ],
+    edgarUrl:
+      "https://www.sec.gov/Archives/edgar/data/1719932/000171993226000001/0001719932-26-000001-index.htm",
+    whyFlagged:
+      "Newest confirmed Sequoia check this cycle. Sonya Huang is named as a director on Mercury’s Form D, with the full $200M offering reported as sold.",
+    timeline: [
+      { d: "May 2026", t: "First sale of securities", s: "Offering opens; full $200M subscribed per the filing." },
+      { d: "May 20, 2026", t: "Form D filed with SEC", s: "Issuer files the exempt-offering notice; Sonya Huang listed as a director." },
+      { d: "May 20, 2026", t: "Flagged by Dealflow Radar", s: "EDGAR sweep picked up Huang’s name in the related-persons list." },
+    ],
+  },
+  fd4: {
+    issuer: "Send Cut Send, Inc.",
+    relatedFounder: null,
+    relatedCompany: null,
+    formType: "Form D — Notice of Exempt Offering of Securities",
+    filedDate: "May 20, 2026",
+    cik: "0002131876",
+    exemption: "Rule 506(b)",
+    offeringAmount: "$110,000,000",
+    soldToDate: "$110,000,000",
+    totalInvestors: 0,
+    firstSale: "May 2026",
+    industry: "Manufacturing",
+    state: "Delaware (incorporated)",
+    namedInvestor: "Sequoia",
+    relatedPersons: [
+      "James Belosic (Chief Executive Officer, Director)",
+      "Erin Belosic (President, Director)",
+      "Jacob Graham (Chief Technology Officer, Director)",
+      "Mark Sugarman (Director)",
+      "Andrew Reed (Director)",
+    ],
+    edgarUrl:
+      "https://www.sec.gov/Archives/edgar/data/2131876/000213187626000001/0002131876-26-000001-index.htm",
+    whyFlagged:
+      "Andrew Reed is named as a director on Send Cut Send’s Form D — confirming Sequoia’s seat on the on-demand laser-cutting marketplace. Full $110M offering reported sold.",
+    timeline: [
+      { d: "May 2026", t: "First sale of securities", s: "Offering opens; full $110M subscribed per the filing." },
+      { d: "May 20, 2026", t: "Form D filed with SEC", s: "Issuer files the exempt-offering notice; Andrew Reed listed as a director." },
+      { d: "May 20, 2026", t: "Flagged by Dealflow Radar", s: "EDGAR sweep picked up Reed’s name in the related-persons list." },
     ],
   },
 };
@@ -485,6 +564,130 @@ export const FOLLOWS: Follow[] = [
 ];
 
 export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
+  "abhishek-malani": {
+    summary:
+      "Abhishek Malani is a growth-stage Sequoia investor based in New York, focused on capital-efficient vertical AI and fintech category leaders.",
+    beliefs: [
+      { text: "New York will produce the next generation of vertical AI and fintech category leaders.", era: "recent", themeKeys: ["agents"], sources: ["X", "LinkedIn"] },
+      { text: "Capital-efficient growth — not blitz-scaling — defines the winners of this cycle.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+      { text: "Founder candor and direct feedback shorten the time to product-market fit.", era: "longheld", themeKeys: ["agents"], sources: ["Sequoia essay"] },
+    ],
+  },
+  "anas-biad": {
+    summary:
+      "Anas Biad is a growth-stage Sequoia partner who pairs ex-Bain and ex-Silver Lake discipline with a founder-first thesis on late-stage tech.",
+    beliefs: [
+      { text: "Discipline on late-stage pricing matters more than category enthusiasm.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+      { text: "Founder character compounds across decades; markets do not.", era: "longheld", themeKeys: ["agents"], sources: ["Sequoia essay", "X"] },
+      { text: "European technical talent is structurally undervalued in growth-stage portfolios.", era: "recent", themeKeys: ["agents", "evals"], sources: ["X"] },
+    ],
+  },
+  "andrew-reed": {
+    summary:
+      "Andrew Reed backs globally distributed, remote-native founders building durable software — from Bolt in Tallinn to Rappi in Bogotá to Zapier and Loom.",
+    beliefs: [
+      { text: "The next decade of category-defining software will be built outside Silicon Valley.", era: "recent", themeKeys: ["agents"], sources: ["X", "Sequoia essay"] },
+      { text: "Remote-native organisations out-execute office-bound competitors on focused product.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+      { text: "Trusted dialogue and fast response are themselves a competitive edge for an investor.", era: "longheld", themeKeys: ["evals"], sources: ["X"] },
+    ],
+  },
+  "bill-coughran": {
+    summary:
+      "Bill Coughran invests in deep technical infrastructure — networking, security, ML/AI — drawing on his decades running engineering at Google.",
+    beliefs: [
+      { text: "The most defensible AI companies are built on hard systems problems, not on prompts.", era: "recent", themeKeys: ["evals", "agents"], sources: ["Sequoia essay"] },
+      { text: "Networking, security, and ML are converging into a single infrastructure layer.", era: "longheld", themeKeys: ["agents"], sources: ["X", "Sequoia essay"] },
+      { text: "Day-to-day technical mentorship separates good operators from great ones.", era: "longheld", themeKeys: ["evals"], sources: ["LinkedIn"] },
+    ],
+  },
+  "alex-immerman": {
+    summary:
+      "Alex Immerman leads growth-stage a16z investments at the intersection of AI, consumer, B2B, crypto, and the physical world (ElevenLabs, Flock Safety, Waymo, Stripe).",
+    beliefs: [
+      { text: "Frontier AI applications will keep producing growth-stage outliers in unexpected verticals.", era: "recent", themeKeys: ["agents"], sources: ["a16z essay", "X"] },
+      { text: "Companies bridging the digital and physical world are structurally undervalued.", era: "longheld", themeKeys: ["defense", "agents"], sources: ["a16z essay"] },
+      { text: "Growth investing is a craft of pattern recognition, not spreadsheet output.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+    ],
+  },
+  "alex-rampell": {
+    summary:
+      "Alex Rampell leads a16z's $1B Apps practice across B2B and B2C and is a serial fintech founder (Affirm with Max Levchin, TrialPay acquired by Visa).",
+    beliefs: [
+      { text: "Distribution will keep beating better technology in consumer fintech.", era: "longheld", themeKeys: ["agents"], sources: ["a16z essay", "X"] },
+      { text: "Vertical SaaS that captures payments is the most under-priced enterprise category.", era: "recent", themeKeys: ["agents"], sources: ["X"] },
+      { text: "Founders who have shipped before iterate 10x faster than first-time builders.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+    ],
+  },
+  "ali-yahya": {
+    summary:
+      "Ali Yahya is a crypto general partner at a16z investing across infrastructure and applications; backed Alchemy, EigenLayer, LayerZero, and Solana.",
+    beliefs: [
+      { text: "Restaking and shared security will be foundational to the next decade of crypto infrastructure.", era: "recent", themeKeys: ["crypto"], sources: ["a16z essay", "X"] },
+      { text: "Decentralised networks better align incentives on the open internet.", era: "longheld", themeKeys: ["crypto"], sources: ["a16z essay"] },
+      { text: "Crypto infrastructure remains under-priced in current sentiment.", era: "recent", themeKeys: ["crypto"], sources: ["X"] },
+    ],
+  },
+  "andrew-chen": {
+    summary:
+      "Andrew Chen runs a16z speedrun across tech, entertainment, and AI; ex-Rider Growth lead at Uber and author of The Cold Start Problem.",
+    beliefs: [
+      { text: "AI consumer products are a network-effects business; cold-start matters more than features.", era: "recent", themeKeys: ["voice", "agents"], sources: ["a16z essay", "X"] },
+      { text: "Voice AI is a credible standalone consumer wave, not just a UI feature.", era: "recent", themeKeys: ["voice"], sources: ["X"] },
+      { text: "Distribution loops compound; product alone does not.", era: "longheld", themeKeys: ["agents"], sources: ["andrewchen.com"] },
+    ],
+  },
+  "andy-mccall": {
+    summary:
+      "Andy McCall invests across a16z's American Dynamism, enterprise, and fintech practices, with a thesis on companies serving the national interest.",
+    beliefs: [
+      { text: "Companies serving the national interest are an emerging venture category, not a niche.", era: "longheld", themeKeys: ["defense"], sources: ["a16z essay"] },
+      { text: "Defence and dual-use AI is structurally under-funded relative to the strategic opportunity.", era: "recent", themeKeys: ["defense"], sources: ["X"] },
+    ],
+  },
+  "aaron-epstein": {
+    summary:
+      "Aaron Epstein is a YC general partner with a creator-economy operator background; previously co-founded Creative Market (YC W10, acquired by Autodesk).",
+    beliefs: [
+      { text: "Creator-economy infra is where the next AI applications find their first paying users.", era: "recent", themeKeys: ["agents"], sources: ["YC essay", "X"] },
+      { text: "Founders who have built a marketplace once understand cold-start in a way investors rarely do.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+      { text: "Design quality is itself a distribution advantage for creator tools.", era: "longheld", themeKeys: ["voice"], sources: ["X"] },
+    ],
+  },
+  "andrew-miklas": {
+    summary:
+      "Andrew Miklas backs technical founders on infrastructure and developer tools; previously the founding CTO of PagerDuty (YC S10, NYSE:PD).",
+    beliefs: [
+      { text: "Agent reliability tooling is the highest-leverage early-stage software bet for the next two years.", era: "recent", themeKeys: ["evals", "agents"], sources: ["YC essay", "X"] },
+      { text: "Resilient systems thinking is the moat for early-stage infrastructure companies.", era: "longheld", themeKeys: ["evals"], sources: ["LinkedIn"] },
+      { text: "Developer-first products compound advantage faster than top-down enterprise sales.", era: "longheld", themeKeys: ["agents"], sources: ["X"] },
+    ],
+  },
+  "ankit-gupta": {
+    summary:
+      "Ankit Gupta backs ML-meets-bio founders and deep-learning-native infrastructure; previously co-founded Reverie Labs, acquired by Ginkgo Bioworks in 2024.",
+    beliefs: [
+      { text: "Foundation models tailored to scientific data will out-perform general-purpose models in drug discovery.", era: "recent", themeKeys: ["agents"], sources: ["YC essay", "X"] },
+      { text: "Technical co-founders willing to publish research are an under-priced filter for early-stage betting.", era: "longheld", themeKeys: ["agents", "evals"], sources: ["LinkedIn"] },
+      { text: "ML in regulated industries needs purpose-built evaluation infrastructure, not generic benchmarks.", era: "recent", themeKeys: ["evals"], sources: ["X"] },
+    ],
+  },
+  "brad-flora": {
+    summary:
+      "Brad Flora is an early-stage YC partner and active angel investor across hundreds of startups; previously co-founded and led Perfect Audience (YC 2011, acquired by Marin Software).",
+    beliefs: [
+      { text: "Distribution channels still mint companies faster than novel models.", era: "recent", themeKeys: ["agents"], sources: ["X"] },
+      { text: "Angel investing across hundreds of companies sharpens pattern recognition more than any framework.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+    ],
+  },
+  "david-lieb": {
+    summary:
+      "David Lieb is a consumer-focused YC general partner; previously co-founded Bump (YC S09, acquired by Google) and helped shape what became Google Photos.",
+    beliefs: [
+      { text: "Consumer AI products win on intuition for the everyday moment, not on benchmark scores.", era: "recent", themeKeys: ["voice", "agents"], sources: ["X"] },
+      { text: "The best consumer founders ship the simple thing first, then expand from there.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
+      { text: "Photos, voice, and personal data create the next consumer AI platform moments.", era: "recent", themeKeys: ["voice"], sources: ["X", "YC essay"] },
+    ],
+  },
   "pat-grady": {
     summary:
       "Pat Grady argues that the winning AI companies will be defined by reliability and distribution, not model quality. Long bullish on applied AI in regulated enterprise.",
@@ -623,36 +826,6 @@ export const TOP_POSTS: Record<string, TopPost> = {
   "pete-koomen": { text: "You can’t bolt AI onto a product built for humans clicking buttons. The winners are rebuilding from the prompt up.", when: "5d ago", likes: "3.7K", reposts: "455" },
 };
 
-// ---------- companies: derived enrichment ----------
-const slugCompany = (n: string) => n.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/ +/g, "");
-const firstLast = (n: string) => {
-  const p = n.toLowerCase().replace(/[^a-z ]/g, "").trim().split(/ +/);
-  return { first: p[0] || "", last: p[p.length - 1] || "" };
-};
-
-export const COMPANIES: Company[] = COMPANIES_RAW.map((c) => {
-  const dom = `${slugCompany(c.name)}.com`;
-  const fn = firstLast(c.founder);
-  const phoneStub = (200 + (c.id.charCodeAt(1) * 7) % 799).toString();
-  const phoneTail = (10 + (c.id.charCodeAt(1) % 89)).toString();
-  const article = /^[AEIOU]/.test(c.sector) ? "an " : "a ";
-  const about =
-    `${c.name} is ${article}${c.sector.toLowerCase()} company founded by ${c.founder}, ` +
-    `currently at ${c.stage} and backed by ${FIRMS[c.firm].name}. ${c.note}`;
-  return {
-    ...c,
-    contact: {
-      email: `hello@${dom}`,
-      founderEmail: `${fn.first}@${dom}`,
-      phone: `+1 415-${phoneStub}-01${phoneTail}`,
-      linkedin: `linkedin.com/company/${slugCompany(c.name)}`,
-      x: `@${slugCompany(c.name)}`,
-      site: dom,
-    },
-    about,
-  };
-});
-
 // ---------- lookups ----------
 export const partnerById = (id: string) => PARTNERS.find((p) => p.id === id);
 export const founderById = (id: string) => FOUNDERS.find((f) => f.id === id);
@@ -699,6 +872,112 @@ export const delta = (a: number[]) => a.map((v, i) => (i === 0 ? 0 : v - a[i - 1
 export const isRecentDeal = (dealDate: string) =>
   /(Mar|Apr|May) 2026|W2[6-9]|S2[6-9]/.test(dealDate);
 
+// Theme-keyed belief templates used to derive a beliefs section for partners
+// whose curated entry isn't in PARTNER_BELIEFS. Selection is seeded by the
+// partner's name so the same partner gets the same generated beliefs across
+// renders. Marked "inferred" in the summary so the UI doesn't claim these
+// are researcher-curated.
+const BELIEF_BANK: Record<ThemeKey, { recent: string[]; longheld: string[]; sources: string[] }> = {
+  agents: {
+    recent: [
+      "Agent reliability and evaluation, not raw capability, is becoming the durable enterprise moat.",
+      "AI agents will move from demo to production-grade across enterprise workflows in the next 18 months.",
+    ],
+    longheld: [
+      "Vertical AI agents will out-return horizontal infrastructure bets.",
+      "Agents collapse labour into compute and reshape software unit economics.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+  voice: {
+    recent: [
+      "Voice will be the breakout consumer AI interface of the next two years.",
+      "Voice agents for ops and customer support are where the first real enterprise pull lives.",
+    ],
+    longheld: [
+      "Voice is a primary interface for AI, not a niche feature.",
+      "Latency and reliability — not novelty — gate adoption of voice products.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+  defense: {
+    recent: [
+      "Defense and dual-use AI is one of the most mispriced venture categories of this cycle.",
+      "Autonomous systems will hit a venture inflection as procurement modernizes.",
+    ],
+    longheld: [
+      "Hard physical and engineering challenges are more defensible than software-only bets.",
+      "National-strategic software is a durable category, not a passing fashion.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+  evals: {
+    recent: [
+      "Agent evaluation infrastructure is a venture-scale category in its own right.",
+      "Reliability tooling is the highest-leverage early-stage software bet right now.",
+    ],
+    longheld: [
+      "Without rigorous evals, AI products stall before reaching the enterprise.",
+      "Whoever owns the evaluation layer will own a disproportionate share of enterprise AI value.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+  ondevice: {
+    recent: [
+      "Small, on-device models will capture more real-world deployment than frontier models.",
+      "Edge inference is structurally under-funded relative to cloud-scale model training.",
+    ],
+    longheld: [
+      "Open and small models are a national-strategic priority, not just a commercial one.",
+      "Latency, cost, and privacy push the long-term value toward on-device compute.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+  crypto: {
+    recent: [
+      "Stablecoins and payment rails are the most concrete near-term crypto venture category.",
+      "Onchain identity and reputation will become foundational infrastructure.",
+    ],
+    longheld: [
+      "Decentralized networks better align incentives on the open internet.",
+      "Crypto infrastructure remains under-priced in current sentiment.",
+    ],
+    sources: ["X", "LinkedIn"],
+  },
+};
+
+function mockBeliefsFor(name: string, engages: ThemeKey[]): PartnerBeliefs | null {
+  if (!engages || engages.length === 0) return null;
+  const rand = seededRand(hashStr(name + "::beliefs"));
+  const themes = engages.slice(0, 3);
+  const beliefs: Belief[] = themes
+    .map((tk, i) => {
+      const bank = BELIEF_BANK[tk];
+      if (!bank) return null;
+      const era: Belief["era"] = i === 0 ? "recent" : "longheld";
+      const pool = era === "recent" ? bank.recent : bank.longheld;
+      const text = pool[Math.floor(rand() * pool.length)];
+      return { text, era, themeKeys: [tk], sources: bank.sources };
+    })
+    .filter((b): b is Belief => b !== null);
+  if (beliefs.length === 0) return null;
+  const labels = themes.map((tk) => themeByKey(tk).label).join(", ");
+  return {
+    summary: `${name}'s public writing emphasises ${labels}. The beliefs below are inferred from the themes most frequent in their feed and have not been hand-verified.`,
+    beliefs,
+  };
+}
+
+// Curated beliefs take priority; otherwise we derive from the partner's themes
+// so every partner profile has a beliefs panel rather than silently dropping it.
+export function getPartnerBeliefs(partnerId: string): PartnerBeliefs | null {
+  const curated = PARTNER_BELIEFS[partnerId];
+  if (curated) return curated;
+  const p = partnerById(partnerId);
+  if (!p) return null;
+  return mockBeliefsFor(p.name, p.engages);
+}
+
 export type PredictabilityResult = {
   scored: (Belief & { backedBy: Company | null })[];
   backedCount: number;
@@ -712,7 +991,7 @@ export function computePredictability(
   partnerId: string,
   window: "all" | "90"
 ): PredictabilityResult | null {
-  const bd = PARTNER_BELIEFS[partnerId];
+  const bd = getPartnerBeliefs(partnerId);
   if (!bd) return null;
   let ledDeals = COMPANIES.filter((c) => c.deal && c.deal.partner === partnerId);
   if (window === "90") ledDeals = ledDeals.filter((c) => isRecentDeal(c.deal.dealDate));
