@@ -7,7 +7,7 @@ from deal_flow.application.use_cases.load_firm_partner_profiles import (
 from deal_flow.domain.entities.partner import Partner
 from deal_flow.interfaces.api.dependencies import get_load_firm_partner_profiles
 
-router = APIRouter(prefix="/api/firms", tags=["partner-profiles"])
+router = APIRouter(prefix="/firms", tags=["partner-profiles"])
 
 
 @router.get("/{firm_domain}/partner-profiles")

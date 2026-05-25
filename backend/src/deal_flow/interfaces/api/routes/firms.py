@@ -51,7 +51,7 @@ from deal_flow.interfaces.api.dependencies import (
     get_search_partner_form_d_filings,
 )
 
-router = APIRouter(prefix="/api/firms", tags=["firms"])
+router = APIRouter(prefix="/firms", tags=["firms"])
 
 
 def _resolve(firm_domain: str, registry: dict[str, FirmSources]) -> FirmSources:

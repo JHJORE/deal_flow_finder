@@ -50,7 +50,7 @@ def test_batch_partners_route_enriches_and_returns():
     )
     try:
         with _override({get_enrich_firm_partners_with_linkedin: uc}) as client:
-            r = client.get("/api/firms/a16z.com/partners/linkedin")
+            r = client.get("/firms/a16z.com/partners/linkedin")
         assert r.status_code == 200
         body = r.json()
         assert body[0]["linkedin"]["posts"][0]["id"] == "p1"
@@ -67,7 +67,7 @@ def test_batch_partners_route_404_when_directory_missing():
     uc = EnrichFirmPartnersWithLinkedIn(_Missing(), FakeLinkedInCollector({}))
     try:
         with _override({get_enrich_firm_partners_with_linkedin: uc}) as client:
-            r = client.get("/api/firms/unknown.example/partners/linkedin")
+            r = client.get("/firms/unknown.example/partners/linkedin")
         assert r.status_code == 404
     finally:
         app.dependency_overrides.clear()
@@ -80,7 +80,7 @@ def test_single_partner_route_resolves_by_handle():
     )
     try:
         with _override({get_enrich_firm_partners_with_linkedin: uc}) as client:
-            r = client.get("/api/firms/a16z.com/partners/alice/linkedin")
+            r = client.get("/firms/a16z.com/partners/alice/linkedin")
         assert r.status_code == 200
         assert r.json()["name"] == "Alice Wong"
     finally:
@@ -95,7 +95,7 @@ def test_single_partner_route_404_when_handle_unknown_and_no_apify_call():
     )
     try:
         with _override({get_enrich_firm_partners_with_linkedin: uc}) as client:
-            r = client.get("/api/firms/a16z.com/partners/nobody/linkedin")
+            r = client.get("/firms/a16z.com/partners/nobody/linkedin")
         assert r.status_code == 404
         assert collector.received_urls == []
     finally:
@@ -124,7 +124,7 @@ def test_portfolio_route_extracts_then_enriches():
                 get_enrich_portfolio_companies_with_linkedin: enrich,
             }
         ) as client:
-            r = client.get("/api/firms/a16z.com/portfolio/linkedin")
+            r = client.get("/firms/a16z.com/portfolio/linkedin")
         assert r.status_code == 200
         body = r.json()
         assert body[0]["linkedin"]["posts"][0]["id"] == "p1"

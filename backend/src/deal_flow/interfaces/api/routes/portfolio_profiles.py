@@ -7,7 +7,7 @@ from deal_flow.application.use_cases.load_firm_portfolio_companies import (
 from deal_flow.domain.entities.portfolio_company import PortfolioCompany
 from deal_flow.interfaces.api.dependencies import get_load_firm_portfolio_companies
 
-router = APIRouter(prefix="/api/firms", tags=["portfolio-profiles"])
+router = APIRouter(prefix="/firms", tags=["portfolio-profiles"])
 
 
 @router.get("/{firm_domain}/portfolio-profiles")

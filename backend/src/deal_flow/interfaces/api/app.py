@@ -17,12 +17,12 @@ app.include_router(partner_profiles_router)
 app.include_router(portfolio_profiles_router)
 
 
-@app.get("/api/health")
+@app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
-@app.get("/api/_debug/paths")
+@app.get("/_debug/paths")
 def debug_paths() -> dict:
     data_dir = _BACKEND_ROOT / "data"
     return {

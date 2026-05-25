@@ -64,7 +64,7 @@ def test_edgar_signals_route_returns_filings_for_each_partner():
     try:
         with TestClient(app) as client:
             response = client.get(
-                "/api/firms/a16z.com/edgar-signals", params={"days": 60, "limit": 1}
+                "/firms/a16z.com/edgar-signals", params={"days": 60, "limit": 1}
             )
         assert response.status_code == 200
         body = response.json()
@@ -85,7 +85,7 @@ def test_edgar_signals_route_returns_404_for_unknown_firm():
     app.dependency_overrides[get_board_seat_log] = lambda: _NullLog()
     try:
         with TestClient(app) as client:
-            response = client.get("/api/firms/unknown.example/edgar-signals")
+            response = client.get("/firms/unknown.example/edgar-signals")
         assert response.status_code == 404
     finally:
         app.dependency_overrides.clear()
