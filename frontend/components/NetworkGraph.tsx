@@ -23,12 +23,6 @@ type Mode = "theme" | "follow";
 const SVG_W = 900;
 const SVG_H = 520;
 
-// stagger budgets — total under 800ms regardless of node count
-const EDGE_STEP_MS = 12;
-const NODE_STEP_MS = 24;
-const NODE_BASE_MS = 240; // wait for edges to finish establishing before nodes appear
-const LABEL_BASE_MS = 480;
-
 type Node = {
   id: string;
   type: "theme" | "partner" | "founder";
@@ -134,11 +128,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
             y2={b.y}
             stroke={strokeColor}
             strokeWidth={hovered && touchesHover ? 1.4 : 0.8}
-            style={{
-              animationDelay: `${i * EDGE_STEP_MS}ms`,
-              opacity: baseOpacity,
-              ["--edge-opacity" as any]: baseOpacity,
-            }}
+            style={{ opacity: baseOpacity }}
           />
         );
       })}
@@ -155,10 +145,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
             <g
               key={n.id}
               className={`graph-node cursor-pointer ${flashing === n.id ? "node-click-flash" : ""}`}
-              style={{
-                animationDelay: `${NODE_BASE_MS + i * NODE_STEP_MS}ms`,
-                opacity: dim ? 0.18 : 1,
-              }}
+              style={{ opacity: dim ? 0.18 : 1 }}
               onMouseEnter={() => setHovered(n.id)}
               onMouseLeave={() => setHovered((cur) => (cur === n.id ? null : cur))}
               onClick={() => flashAndRun(n.id, () => onThemeClick(t.key))}
@@ -211,10 +198,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
             <g
               key={n.id}
               className={`graph-node cursor-pointer ${flashing === n.id ? "node-click-flash" : ""}`}
-              style={{
-                animationDelay: `${NODE_BASE_MS + (i + 8) * NODE_STEP_MS}ms`,
-                opacity: dim ? 0.22 : 1,
-              }}
+              style={{ opacity: dim ? 0.22 : 1 }}
               onMouseEnter={() => setHovered(n.id)}
               onMouseLeave={() => setHovered((cur) => (cur === n.id ? null : cur))}
               onClick={() => flashAndRun(n.id, () => setOpen({ kind: "partner", id: p.id }))}
@@ -255,7 +239,6 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
                 y={n.y - n.r - 10}
                 text={p.name}
                 subtle={false}
-                delay={LABEL_BASE_MS + i * NODE_STEP_MS}
                 hidden={!!dim}
               />
             </g>
@@ -273,10 +256,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
             <g
               key={n.id}
               className={`graph-node cursor-pointer ${flashing === n.id ? "node-click-flash" : ""}`}
-              style={{
-                animationDelay: `${NODE_BASE_MS + (i + 16) * NODE_STEP_MS}ms`,
-                opacity: dim ? 0.22 : 1,
-              }}
+              style={{ opacity: dim ? 0.22 : 1 }}
               onMouseEnter={() => setHovered(n.id)}
               onMouseLeave={() => setHovered((cur) => (cur === n.id ? null : cur))}
               onClick={() => flashAndRun(n.id, () => setOpen({ kind: "partner", id: f.id }))}
@@ -317,7 +297,6 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
                 y={n.y - n.r - 10}
                 text={f.name}
                 subtle={false}
-                delay={LABEL_BASE_MS + (i + 8) * NODE_STEP_MS}
                 hidden={!!dim}
               />
             </g>
@@ -332,14 +311,12 @@ function NodeLabel({
   y,
   text,
   subtle,
-  delay = 0,
   hidden = false,
 }: {
   x: number;
   y: number;
   text: string;
   subtle: boolean;
-  delay?: number;
   hidden?: boolean;
 }) {
   const fs = 10.5;
@@ -348,12 +325,7 @@ function NodeLabel({
   return (
     <g
       className="graph-label"
-      style={{
-        animationDelay: `${delay}ms`,
-        opacity: hidden ? 0 : 1,
-        ["--label-opacity" as any]: hidden ? 0 : 1,
-        transition: "opacity 200ms cubic-bezier(0.25, 1, 0.5, 1)",
-      }}
+      style={{ opacity: hidden ? 0 : 1 }}
     >
       <rect
         x={x - w / 2}
