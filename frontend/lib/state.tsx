@@ -39,9 +39,6 @@ type RadarState = {
 
   peopleTab: PeopleTab;
   setPeopleTab: (t: PeopleTab) => void;
-
-  briefingDismissed: boolean;
-  dismissBriefing: () => void;
 };
 
 const RadarCtx = createContext<RadarState | null>(null);
@@ -50,7 +47,7 @@ export function RadarProvider({ children }: { children: React.ReactNode }) {
   const [view, setViewState] = useState<ViewId>("signals");
   const [open, setOpen] = useState<OpenEntity>(null);
   const [activeFirms, setActiveFirms] = useState<Set<FirmId>>(
-    new Set(["sequoia", "a16z", "yc"] as FirmId[])
+    new Set(["sequoia"] as FirmId[])
   );
   const [feedFilter, setFeedFilter] = useState<FeedFilter>("all");
   const [archived, setArchived] = useState<Set<string>>(new Set());
@@ -59,7 +56,6 @@ export function RadarProvider({ children }: { children: React.ReactNode }) {
   const [predWindow, setPredWindow] = useState<PredWindow>("all");
   const [selectedTheme, setSelectedTheme] = useState<string>("agents");
   const [peopleTab, setPeopleTab] = useState<PeopleTab>("partners");
-  const [briefingDismissed, setBriefingDismissed] = useState(false);
 
   const setView = useCallback((v: ViewId) => {
     setOpen(null);
@@ -98,8 +94,6 @@ export function RadarProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const dismissBriefing = useCallback(() => setBriefingDismissed(true), []);
-
   const value = useMemo(
     () => ({
       view, setView,
@@ -112,12 +106,11 @@ export function RadarProvider({ children }: { children: React.ReactNode }) {
       predWindow, setPredWindow,
       selectedTheme, setSelectedTheme,
       peopleTab, setPeopleTab,
-      briefingDismissed, dismissBriefing,
     }),
     [
       view, setView, open, activeFirms, toggleFirm, feedFilter, archived,
       archiveSignal, unarchiveAll, watchlist, isWatched, toggleWatch,
-      graphMode, predWindow, selectedTheme, peopleTab, briefingDismissed, dismissBriefing,
+      graphMode, predWindow, selectedTheme, peopleTab,
     ]
   );
 
