@@ -1,3 +1,4 @@
+import type { PartnerProfileDTO } from "./api/partners";
 import type {
   Belief,
   Company,
@@ -8,7 +9,6 @@ import type {
   Founder,
   Partner,
   PartnerBeliefs,
-  PartnerStage,
   Signal,
   Theme,
   ThemeKey,
@@ -37,212 +37,157 @@ export const themeByKey = (k: ThemeKey) => THEMES.find((t) => t.key === k)!;
 export const themeColor = (t: Theme) =>
   `oklch(72% ${t.chroma ?? 0.14} ${t.hue})`;
 
-// ---------- partners ----------
-const STAGE_ROLE: Record<PartnerStage, string> = {
-  early: "Partner · Seed/Early",
-  growth: "Partner · Growth",
-  both: "Partner · Seed/Early + Growth",
+// ---------- partner mapping from backend JSON ----------
+//
+// PARTNERS is populated by <PartnersProvider> after fetching the three firms'
+// /api/firms/{domain}/partner-profiles endpoints. We use a live module binding
+// so existing components that `import { PARTNERS, partnerById }` keep working
+// — once the provider sets it, the next render reads the populated array.
+//
+// Field-by-field source convention (see buildPartnersFromProfiles below):
+//   ✓ "from JSON"               → backend partner-profiles endpoint
+//   • "HARDCODED — no data"     → static placeholder (firm phone, checkSize copy)
+//   ◇ "HARDCODED — mock"        → deterministic mock from name hash (engagement)
+
+const slug = (n: string) =>
+  n.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/ +/g, "-");
+
+export const FIRM_META: Record<FirmId, { domain: string; phone: string }> = {
+  sequoia: { domain: "sequoiacap.com", phone: "+1 650-854-3927" },
+  a16z: { domain: "a16z.com", phone: "+1 650-561-6750" },
+  yc: { domain: "ycombinator.com", phone: "+1 650-308-9889" },
 };
 
-function stubSequoia(
-  rows: { id: string; name: string; stage: PartnerStage }[]
-): Omit<Partner, "contact" | "about" | "checkSize">[] {
-  return rows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    firm: "sequoia",
-    role: STAGE_ROLE[r.stage],
-    focus: "",
-    stage: r.stage,
-    posts: [0, 0, 0, 0, 0, 0],
-    engageRate: [0, 0, 0, 0, 0, 0],
-    spike: false,
-    engages: [],
-    newTopic: null,
-    topics: [],
-  }));
+const THEME_KEYS: ThemeKey[] = ["agents", "voice", "defense", "evals", "ondevice", "crypto"];
+
+function hashStr(s: string): number {
+  let h = 2166136261 >>> 0; // FNV-1a
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h >>> 0;
 }
 
-const PARTNERS_RAW: Omit<Partner, "contact" | "about" | "checkSize">[] = [
-  { id: "p1", name: "Pat Grady", firm: "sequoia", role: "Co-steward · growth", stage: "growth",
-    focus: "AI, enterprise software. Led OpenAI, Harvey, Snowflake.",
-    posts: [14, 12, 15, 13, 28, 41], engageRate: [20, 22, 19, 24, 55, 78], spike: true,
-    engages: ["agents", "evals"], newTopic: "Agent eval / reliability",
-    topics: [
-      { t: "AI agents", w: 46, chg: 8, isNew: false },
-      { t: "Agent eval / reliability", w: 24, chg: 19, isNew: true },
-      { t: "Enterprise software", w: 18, chg: -11, isNew: false },
-      { t: "Voice AI", w: 12, chg: 5, isNew: false },
-    ] },
-  { id: "p2", name: "Sonya Huang", firm: "sequoia", role: "Partner · AI infrastructure", stage: "growth",
-    focus: "AI infra and apps. Author of Sequoia AI market maps.",
-    posts: [18, 17, 20, 22, 24, 26], engageRate: [30, 32, 34, 33, 38, 44], spike: false,
-    engages: ["agents", "voice"], newTopic: null,
-    topics: [
-      { t: "AI agents", w: 38, chg: 6, isNew: false },
-      { t: "Inference / infra", w: 30, chg: 4, isNew: false },
-      { t: "Voice AI", w: 20, chg: 9, isNew: false },
-      { t: "Open models", w: 12, chg: -7, isNew: false },
-    ] },
-  { id: "p3", name: "Shaun Maguire", firm: "sequoia", role: "Partner · deep tech", stage: "early",
-    focus: "Defense and deep tech. Backed Anduril, SpaceX.",
-    posts: [22, 20, 19, 21, 23, 20], engageRate: [40, 38, 42, 41, 44, 43], spike: false,
-    engages: ["defense"], newTopic: null,
-    topics: [
-      { t: "Defense tech", w: 44, chg: 7, isNew: false },
-      { t: "Space", w: 26, chg: -9, isNew: false },
-      { t: "Hardware", w: 18, chg: 3, isNew: false },
-      { t: "AI agents", w: 12, chg: 5, isNew: false },
-    ] },
-  { id: "p4", name: "Alfred Lin", firm: "sequoia", role: "Co-steward · consumer", stage: "early",
-    focus: "Consumer and marketplaces. Led Airbnb, DoorDash.",
-    posts: [8, 7, 9, 8, 10, 9], engageRate: [14, 15, 13, 16, 18, 17], spike: false,
-    engages: ["agents"], newTopic: null,
-    topics: [
-      { t: "Marketplaces", w: 40, chg: -12, isNew: false },
-      { t: "Consumer AI", w: 30, chg: 8, isNew: false },
-      { t: "Fintech", w: 18, chg: -5, isNew: false },
-      { t: "AI agents", w: 12, chg: 6, isNew: false },
-    ] },
-  { id: "p5", name: "Konstantine Buhler", firm: "sequoia", role: "Partner · AI", stage: "early",
-    focus: "AI and data. Writes Sequoia AI ascent essays.",
-    posts: [11, 10, 13, 16, 21, 29], engageRate: [24, 25, 28, 33, 46, 61], spike: true,
-    engages: ["agents", "evals", "voice"], newTopic: "Agent eval / reliability",
-    topics: [
-      { t: "AI agents", w: 48, chg: 9, isNew: false },
-      { t: "Agent eval / reliability", w: 24, chg: 17, isNew: true },
-      { t: "Data infra", w: 16, chg: -8, isNew: false },
-      { t: "Voice AI", w: 12, chg: 6, isNew: false },
-    ] },
-  { id: "p6", name: "Martin Casado", firm: "a16z", role: "General Partner · infra",
-    focus: "Infrastructure, data systems, AI. Founded Nicira.",
-    posts: [16, 15, 18, 17, 19, 20], engageRate: [28, 30, 29, 31, 34, 36], spike: false,
-    engages: ["agents"], newTopic: null,
-    topics: [
-      { t: "AI infra", w: 42, chg: 8, isNew: false },
-      { t: "Data systems", w: 28, chg: 5, isNew: false },
-      { t: "AI agents", w: 18, chg: 7, isNew: false },
-      { t: "Dev tools", w: 12, chg: -6, isNew: false },
-    ] },
-  { id: "p7", name: "Anish Acharya", firm: "a16z", role: "General Partner · consumer",
-    focus: "Consumer, AI-native products, fintech.",
-    posts: [12, 11, 13, 14, 22, 33], engageRate: [22, 21, 24, 26, 41, 58], spike: true,
-    engages: ["agents", "voice"], newTopic: "Voice AI",
-    topics: [
-      { t: "Consumer AI", w: 44, chg: 9, isNew: false },
-      { t: "AI agents", w: 26, chg: 7, isNew: false },
-      { t: "Voice AI", w: 18, chg: 15, isNew: true },
-      { t: "Fintech", w: 12, chg: -8, isNew: false },
-    ] },
-  { id: "p8", name: "Jennifer Li", firm: "a16z", role: "General Partner · enterprise",
-    focus: "Enterprise, infrastructure, AI dev tools.",
-    posts: [14, 15, 14, 16, 18, 21], engageRate: [26, 27, 28, 30, 33, 38], spike: false,
-    engages: ["agents", "evals"], newTopic: null,
-    topics: [
-      { t: "AI dev tools", w: 40, chg: 6, isNew: false },
-      { t: "Data infra", w: 30, chg: 5, isNew: false },
-      { t: "Agent eval / reliability", w: 18, chg: 9, isNew: false },
-      { t: "Enterprise SaaS", w: 12, chg: -7, isNew: false },
-    ] },
-  { id: "p9", name: "Jonathan Lai", firm: "a16z", role: "General Partner · games + AI",
-    focus: "Games, AI x creative, simulation, speedrun.",
-    posts: [10, 12, 11, 13, 15, 17], engageRate: [20, 22, 21, 24, 27, 31], spike: false,
-    engages: ["voice"], newTopic: null,
-    topics: [
-      { t: "AI x games", w: 46, chg: 8, isNew: false },
-      { t: "Generative media", w: 28, chg: 6, isNew: false },
-      { t: "Simulation", w: 14, chg: 3, isNew: false },
-      { t: "Voice AI", w: 12, chg: 7, isNew: false },
-    ] },
-  { id: "p10", name: "Anjney Midha", firm: "a16z", role: "General Partner · AI",
-    focus: "AI, open models, infrastructure, defense-adjacent.",
-    posts: [9, 11, 13, 15, 24, 35], engageRate: [18, 20, 24, 28, 45, 63], spike: true,
-    engages: ["agents", "defense", "ondevice"], newTopic: "On-device small models",
-    topics: [
-      { t: "Open models", w: 34, chg: 5, isNew: false },
-      { t: "On-device small models", w: 24, chg: 18, isNew: true },
-      { t: "AI agents", w: 24, chg: 7, isNew: false },
-      { t: "Defense tech", w: 18, chg: 9, isNew: false },
-    ] },
-  { id: "p11", name: "Garry Tan", firm: "yc", role: "President & CEO",
-    focus: "Early-stage, high-agency founders. Ex-Initialized.",
-    posts: [28, 30, 32, 29, 34, 38], engageRate: [44, 46, 48, 45, 52, 59], spike: false,
-    engages: ["agents", "voice"], newTopic: null,
-    topics: [
-      { t: "AI agents", w: 40, chg: 7, isNew: false },
-      { t: "Founder agency", w: 26, chg: -6, isNew: false },
-      { t: "Voice AI", w: 20, chg: 9, isNew: false },
-      { t: "Hard tech", w: 14, chg: 4, isNew: false },
-    ] },
-  { id: "p12", name: "Jared Friedman", firm: "yc", role: "Managing Partner · software",
-    focus: "Software startups. Advised 20+ YC unicorns.",
-    posts: [15, 16, 17, 16, 21, 28], engageRate: [26, 27, 29, 28, 40, 53], spike: true,
-    engages: ["agents", "evals"], newTopic: "Agent eval / reliability",
-    topics: [
-      { t: "AI agents", w: 44, chg: 8, isNew: false },
-      { t: "Agent eval / reliability", w: 24, chg: 16, isNew: true },
-      { t: "Dev tools", w: 20, chg: 6, isNew: false },
-      { t: "SaaS", w: 12, chg: -7, isNew: false },
-    ] },
-  { id: "p13", name: "Diana Hu", firm: "yc", role: "General Partner",
-    focus: "AI, AR, technical founders. Ex-Escher Reality CTO.",
-    posts: [12, 13, 12, 14, 16, 19], engageRate: [22, 23, 24, 26, 29, 34], spike: false,
-    engages: ["agents", "voice"], newTopic: null,
-    topics: [
-      { t: "AI agents", w: 38, chg: 7, isNew: false },
-      { t: "Robotics", w: 26, chg: 8, isNew: false },
-      { t: "AR / spatial", w: 22, chg: -9, isNew: false },
-      { t: "Voice AI", w: 14, chg: 6, isNew: false },
-    ] },
-  { id: "p14", name: "Dalton Caldwell", firm: "yc", role: "Managing Director · investments",
-    focus: "Investments, group partner. Ex-imeem, App.net.",
-    posts: [11, 10, 12, 11, 13, 14], engageRate: [20, 19, 21, 20, 23, 25], spike: false,
-    engages: ["agents"], newTopic: null,
-    topics: [
-      { t: "AI agents", w: 36, chg: 6, isNew: false },
-      { t: "B2B SaaS", w: 28, chg: -8, isNew: false },
-      { t: "Founder advice", w: 22, chg: -5, isNew: false },
-      { t: "Vertical AI", w: 14, chg: 4, isNew: false },
-    ] },
-  { id: "p15", name: "Pete Koomen", firm: "yc", role: "Group Partner",
-    focus: "Software, AI applications. Co-founded Optimizely.",
-    posts: [8, 9, 11, 13, 20, 30], engageRate: [16, 18, 22, 27, 42, 60], spike: true,
-    engages: ["agents", "evals"], newTopic: "Agent eval / reliability",
-    topics: [
-      { t: "AI agents", w: 46, chg: 9, isNew: false },
-      { t: "AI-native apps", w: 28, chg: 7, isNew: false },
-      { t: "Agent eval / reliability", w: 16, chg: 13, isNew: true },
-      { t: "SaaS", w: 10, chg: -6, isNew: false },
-    ] },
-  ...stubSequoia([
-    { id: "p16", name: "Bogomil Balkansky", stage: "early" },
-    { id: "p17", name: "Julien Bek", stage: "early" },
-    { id: "p18", name: "Roelof Botha", stage: "both" },
-    { id: "p19", name: "Josephine Chen", stage: "early" },
-    { id: "p20", name: "Liam Corrigan", stage: "early" },
-    { id: "p21", name: "Bill Coughran", stage: "early" },
-    { id: "p22", name: "Jim Goetz", stage: "both" },
-    { id: "p23", name: "Jess Lee", stage: "early" },
-    { id: "p24", name: "Doug Leone", stage: "both" },
-    { id: "p25", name: "Luciana Lixandru", stage: "both" },
-    { id: "p26", name: "Dean Meyer", stage: "early" },
-    { id: "p27", name: "Lauren Reeder", stage: "early" },
-    { id: "p28", name: "George Robson", stage: "early" },
-    { id: "p29", name: "Bryan Schreier", stage: "early" },
-    { id: "p30", name: "Stephanie Zhan", stage: "early" },
-    { id: "p31", name: "Anas Biad", stage: "growth" },
-    { id: "p32", name: "Isaiah Boone", stage: "growth" },
-    { id: "p33", name: "David Cahn", stage: "growth" },
-    { id: "p34", name: "Carl Eschenbach", stage: "growth" },
-    { id: "p35", name: "James Flynn", stage: "growth" },
-    { id: "p36", name: "Ravi Gupta", stage: "growth" },
-    { id: "p37", name: "Brian Halligan", stage: "growth" },
-    { id: "p38", name: "Abhishek Malani", stage: "growth" },
-    { id: "p39", name: "Cole Pergament", stage: "growth" },
-    { id: "p40", name: "Andrew Reed", stage: "growth" },
-    { id: "p41", name: "Sonali Singh", stage: "growth" },
-  ]),
-];
+function seededRand(seed: number): () => number {
+  let s = seed >>> 0;
+  return () => {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 0xffffffff;
+  };
+}
+
+type MockEngagement = Pick<Partner, "posts" | "engageRate" | "spike" | "engages" | "newTopic" | "topics">;
+
+// Deterministic mock engagement so every JSON partner has the same fake
+// metrics across reloads. Replace with real metrics when we have them.
+function mockEngagementFor(name: string): MockEngagement {
+  const rand = seededRand(hashStr(name));
+  const basePosts = 4 + Math.floor(rand() * 18);
+  const trend = rand() > 0.7 ? "spike" : "flat";
+  const posts: number[] = [];
+  let p = basePosts;
+  for (let i = 0; i < 6; i++) {
+    if (trend === "spike" && i >= 4) p = Math.floor(p * (1.4 + rand() * 0.6));
+    else p = Math.max(1, p + Math.floor((rand() - 0.5) * 4));
+    posts.push(p);
+  }
+  const baseEng = 14 + Math.floor(rand() * 30);
+  const engageRate: number[] = [];
+  let e = baseEng;
+  for (let i = 0; i < 6; i++) {
+    if (trend === "spike" && i >= 4) e = Math.floor(e * (1.3 + rand() * 0.5));
+    else e = Math.max(5, e + Math.floor((rand() - 0.5) * 4));
+    engageRate.push(e);
+  }
+  const pickCount = 1 + Math.floor(rand() * 3);
+  const engages: ThemeKey[] = [];
+  while (engages.length < pickCount) {
+    const k = THEME_KEYS[Math.floor(rand() * (THEME_KEYS.length - 1))]; // skip crypto in last slot bias
+    if (!engages.includes(k)) engages.push(k);
+  }
+  const newTopic = trend === "spike" ? themeByKey(engages[0]).label : null;
+  const topics: TopicRow[] = engages.slice(0, 4).map((k, i) => ({
+    t: themeByKey(k).label,
+    w: 40 - i * 8 + Math.floor(rand() * 6),
+    chg: Math.floor((rand() - 0.4) * 18),
+    isNew: i === 0 && trend === "spike",
+  }));
+  return {
+    posts,
+    engageRate,
+    spike: trend === "spike",
+    engages,
+    newTopic,
+    topics,
+  };
+}
+
+function xHandleFromUrl(url: string | null): string {
+  if (!url) return "";
+  const m = url.match(/(?:x\.com|twitter\.com)\/([A-Za-z0-9_]{1,15})/i);
+  return m ? `@${m[1]}` : "";
+}
+
+function linkedinFromUrl(url: string | null): string {
+  if (!url) return "";
+  return url.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/+$/, "");
+}
+
+function checkSizeFor(role: string | null): string {
+  const r = (role || "").toLowerCase();
+  if (r.includes("growth") || r.includes("late")) {
+    return "Growth and late-stage; leads Series C and beyond.";
+  }
+  if (r.includes("partner") || r.includes("director")) {
+    return "Seed through Series B; typically leads or co-leads.";
+  }
+  return "Stage focus varies; see profile and recent deals.";
+}
+
+function focusFrom(profile: PartnerProfileDTO): string {
+  if (profile.focus_areas?.length) return profile.focus_areas.join(" · ");
+  if (profile.teams?.length) return profile.teams.join(" · ");
+  return "";
+}
+
+// Build a UI-shape Partner from one JSON profile + the firm it belongs to.
+// Comments mark which fields are real (✓) vs hardcoded (•) vs mocked (◇).
+export function buildPartnersFromProfiles(
+  profiles: PartnerProfileDTO[],
+  firm: FirmId
+): Partner[] {
+  const fm = FIRM_META[firm];
+  return profiles.map((p) => {
+    const fallbackAbout = (p.bio || "").trim().slice(0, 220);
+    return {
+      id: slug(p.name),                           // ✓ from JSON (slug of name)
+      name: p.name,                               // ✓ from JSON
+      firm,                                       // ✓ from JSON file selection
+      role: p.role_display || p.role || "Partner", // ✓ from JSON
+      focus: focusFrom(p),                        // ✓ from JSON (a16z + sequoia only)
+      photoUrl: p.photo_url,                      // ✓ from JSON
+      contact: {
+        email: p.email ?? "",                     // ✓ from JSON ("" → rendered as em-dash)
+        linkedin: linkedinFromUrl(p.linkedin_url), // ✓ from JSON
+        x: xHandleFromUrl(p.x_url),               // ✓ from JSON
+        phone: fm.phone,                          // • HARDCODED — no phone in source data
+      },
+      about: p.about_short || fallbackAbout,      // ✓ from JSON (Gemini-summarized; bio fallback)
+      checkSize: checkSizeFor(p.role),            // • HARDCODED — no check-size in source data
+      ...mockEngagementFor(p.name),               // ◇ HARDCODED — deterministic mock until we have metrics
+    };
+  });
+}
+
+// PARTNERS starts empty and is populated by PartnersProvider on mount.
+// Components keep importing PARTNERS / partnerById and re-render once the
+// provider's loaded flag flips (via context) — ES module live bindings.
+export let PARTNERS: Partner[] = [];
+
+export function _setPartners(list: Partner[]) {
+  PARTNERS = list;
+}
 
 export const FOUNDERS: Founder[] = [
   { id: "f1", name: "Maya Okafor", handle: "@mayaokafor", role: "Founder, stealth · ex-Stripe ML",
@@ -329,10 +274,12 @@ export const FOUNDERS: Founder[] = [
 ];
 
 // ---------- companies (raw, then enriched) ----------
+// Deal.partner references use partner slugs (slug(name)) — must match the
+// ids produced by buildPartnersFromProfiles. Same for SIGNALS.actors, FOLLOWS.
 const COMPANIES_RAW: Omit<Company, "contact" | "about">[] = [
   { id: "c1", name: "Harvey", firm: "sequoia", founder: "Winston Weinberg", sector: "Legal AI",
     stage: "Series D", founderTracked: null, themeKeys: ["agents", "evals"],
-    deal: { partner: "p1", round: "Series D", invested: "$80M", ownership: "~12%",
+    deal: { partner: "pat-grady", round: "Series D", invested: "$80M", ownership: "~12%",
       valuation: "$3.0B post-money", dealDate: "Apr 2026", lead: true },
     jobs: [18, 19, 22, 21, 38, 57],
     seniorHires: [
@@ -342,14 +289,14 @@ const COMPANIES_RAW: Omit<Company, "contact" | "about">[] = [
     note: "Job postings up sharply over the last two periods and a first CFO just landed. Both point to an imminent or just-closed round." },
   { id: "c2", name: "Mistral AI", firm: "a16z", founder: "Arthur Mensch", sector: "Open models",
     stage: "Series C", founderTracked: null, themeKeys: ["ondevice", "agents"],
-    deal: { partner: "p10", round: "Series C", invested: "$45M", ownership: "~6%",
+    deal: { partner: "anjney-midha", round: "Series C", invested: "$45M", ownership: "~6%",
       valuation: "$6.2B post-money", dealDate: "Nov 2025", lead: false },
     jobs: [40, 42, 44, 43, 46, 49],
     seniorHires: [{ role: "VP Policy", name: "hired Mar 2026", hot: false }],
     note: "Steady, healthy hiring with no anomaly. Consistent scale-up, not a fresh-round spike." },
   { id: "c3", name: "Cursor", firm: "a16z", founder: "Michael Truell", sector: "AI dev tools",
     stage: "Series B", founderTracked: null, themeKeys: ["agents", "evals"],
-    deal: { partner: "p6", round: "Series B", invested: "$60M", ownership: "~15%",
+    deal: { partner: "martin-casado", round: "Series B", invested: "$60M", ownership: "~15%",
       valuation: "$2.5B post-money", dealDate: "Mar 2026", lead: true },
     jobs: [12, 14, 15, 19, 31, 44],
     seniorHires: [
@@ -359,35 +306,35 @@ const COMPANIES_RAW: Omit<Company, "contact" | "about">[] = [
     note: "A first General Counsel plus a hiring surge is a textbook fundraise-prep pattern." },
   { id: "c4", name: "Decagon", firm: "a16z", founder: "Jesse Zhang", sector: "Voice / support AI",
     stage: "Series A", founderTracked: null, themeKeys: ["voice"],
-    deal: { partner: "p7", round: "Series A", invested: "$18M", ownership: "~18%",
+    deal: { partner: "anish-acharya", round: "Series A", invested: "$18M", ownership: "~18%",
       valuation: "$120M post-money", dealDate: "May 2026", lead: true },
     jobs: [8, 9, 9, 11, 16, 24],
     seniorHires: [{ role: "First VP Sales", name: "hired May 2026", hot: true }],
     note: "First VP Sales hire and rising postings; an early company stepping on the gas." },
   { id: "c5", name: "Sierra", firm: "sequoia", founder: "Bret Taylor", sector: "Agent platform",
     stage: "Series B", founderTracked: null, themeKeys: ["agents"],
-    deal: { partner: "p5", round: "Series B", invested: "$55M", ownership: "~10%",
+    deal: { partner: "konstantine-buhler", round: "Series B", invested: "$55M", ownership: "~10%",
       valuation: "$4.5B post-money", dealDate: "Dec 2025", lead: false },
     jobs: [22, 24, 26, 28, 33, 41],
     seniorHires: [{ role: "VP Marketing", name: "hired Apr 2026", hot: false }],
     note: "Gradual hiring acceleration; worth watching but no single-period spike yet." },
   { id: "c6", name: "Parallax Labs", firm: "a16z", founder: "Arjun Reddy", sector: "Agent dev tools",
     stage: "Seed (undisclosed)", founderTracked: "f4", themeKeys: ["agents", "evals"],
-    deal: { partner: "p6", round: "Seed", invested: "$3.5M (of $8.5M round)", ownership: "not disclosed",
+    deal: { partner: "martin-casado", round: "Seed", invested: "$3.5M (of $8.5M round)", ownership: "not disclosed",
       valuation: "~$40M post-money (est.)", dealDate: "Apr 2026", lead: true },
     jobs: [1, 1, 2, 3, 7, 14],
     seniorHires: [{ role: "Founding engineers", name: "cluster hired May 2026", hot: true }],
     note: "Tied to the undisclosed Form D. Hiring from near-zero to a real team in two periods; consistent with a just-closed seed round." },
   { id: "c7", name: "Cartesia", firm: "yc", founder: "Karan Goel", sector: "Voice AI infra",
     stage: "Series A", founderTracked: null, themeKeys: ["voice"],
-    deal: { partner: "p11", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
+    deal: { partner: "garry-tan", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
       valuation: "$25M post-money", dealDate: "W25 batch", lead: false },
     jobs: [6, 7, 8, 10, 15, 23],
     seniorHires: [{ role: "First Head of Product", name: "hired May 2026", hot: true }],
     note: "Voice-infra company hiring fast and bringing on a first Head of Product." },
   { id: "c8", name: "Lightdash", firm: "yc", founder: "Oliver Laslett", sector: "Data / BI",
     stage: "Series A", founderTracked: null, themeKeys: ["agents"],
-    deal: { partner: "p12", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
+    deal: { partner: "jared-friedman", round: "Seed (YC)", invested: "$500K", ownership: "~7%",
       valuation: "$18M post-money", dealDate: "S24 batch", lead: false },
     jobs: [11, 11, 12, 11, 12, 13],
     seniorHires: [],
@@ -442,39 +389,43 @@ export const COMPANY_TOPICS: Record<string, TopicRow[]> = {
   ],
 };
 
+// SIGNALS, FOLLOWS, PARTNER_BELIEFS, TOP_POSTS keyed by partner slug
+// (slug(name)) to line up with buildPartnersFromProfiles ids. Founder ids
+// (f1, f2…) stay unchanged.
+
 export const SIGNALS: Signal[] = [
   { id: "s1", tier: 1, conf: "high", firms: ["a16z", "sequoia"],
     headline: "Convergence — 2 partners now follow Maya Okafor within 18 days",
     body: "Anjney Midha (a16z) and Konstantine Buhler (Sequoia) both first-followed Okafor inside an 18-day window. Neither follows famous accounts casually. Earliest social-graph signal of a deal forming.",
-    sources: ["X"], actors: ["p10", "f1"], age: "2d", score: 95 },
+    sources: ["X"], actors: ["anjney-midha", "f1"], age: "2d", score: 95 },
   { id: "s2", tier: 1, conf: "high", firms: ["a16z"],
     headline: "Undisclosed Form D — agent dev tools startup names a16z",
     body: "An EDGAR Form D lists a16z as an investor in a startup not yet on the a16z public portfolio page. Issuer profile matches Arjun Reddy’s stealth company.",
-    sources: ["EDGAR"], actors: ["p6", "f4"], age: "3d", score: 92, filing: "fd1" },
+    sources: ["EDGAR"], actors: ["martin-casado", "f4"], age: "3d", score: 92, filing: "fd1" },
   { id: "s9", tier: 1, conf: "high", firms: ["sequoia"],
     headline: "Convergence — Pat Grady and Konstantine Buhler both follow Priya Anand",
     body: "Two Sequoia partners first-followed Anand within the same period. She builds agent eval infrastructure, the exact theme both partners just started writing about. Tight thesis-to-follow match.",
-    sources: ["X", "VC sites"], actors: ["p1", "f5"], age: "4d", score: 88 },
+    sources: ["X", "VC sites"], actors: ["pat-grady", "f5"], age: "4d", score: 88 },
   { id: "s4", tier: 4, conf: "high", firms: ["sequoia", "yc"],
     headline: "Cross-firm thesis alignment — agent eval / reliability",
     body: "Pat Grady, Konstantine Buhler (Sequoia) and Jared Friedman, Pete Koomen (YC) all began writing on agent reliability and evals within three weeks. A new theme crossing two firms.",
-    sources: ["VC sites", "X"], actors: ["p1", "p5", "p12"], age: "6d", score: 84 },
+    sources: ["VC sites", "X"], actors: ["pat-grady", "konstantine-buhler", "jared-friedman"], age: "6d", score: 84 },
   { id: "s3", tier: 1, conf: "med", firms: ["yc"],
     headline: "First mutual follow — Pete Koomen and Arjun Reddy",
     body: "First-time mutual follow between a YC group partner and a non-famous founder building agent dev tools. Often precedes a conversation by weeks.",
-    sources: ["X"], actors: ["p15", "f4"], age: "5d", score: 80 },
+    sources: ["X"], actors: ["pete-koomen", "f4"], age: "5d", score: 80 },
   { id: "s10", tier: 4, conf: "med", firms: ["a16z"],
     headline: "Contrarian stance — Anjney Midha argues against the frontier-scale consensus",
     body: "Midha published longform making the case for small on-device models against the prevailing scale-is-everything view, then first-followed Sara Lindqvist, who builds exactly that. A contrarian partner placing an early marker.",
-    sources: ["VC sites", "X"], actors: ["p10", "f9"], age: "7d", score: 74 },
+    sources: ["VC sites", "X"], actors: ["anjney-midha", "f9"], age: "7d", score: 74 },
   { id: "s5", tier: 2, conf: "med", firms: ["a16z"],
     headline: "Founder heat — Anish Acharya engagement spike, +164% in 30 days",
     body: "Acharya’s reply and like activity is up 164% vs his trailing baseline, concentrated on consumer-AI and voice founders. A normally steady partner is suddenly active.",
-    sources: ["X"], actors: ["p7"], age: "7d", score: 71 },
+    sources: ["X"], actors: ["anish-acharya"], age: "7d", score: 71 },
   { id: "s6", tier: 4, conf: "med", firms: ["sequoia", "a16z", "yc"],
     headline: "Theme drift — Voice AI now discussed by partners at all three firms",
     body: "Voice AI mention share across tracked partners is up 6 points this period and now appears in the top topics of partners at Sequoia, a16z and YC.",
-    sources: ["VC sites", "X"], actors: ["p2", "p9", "p11"], age: "8d", score: 67 },
+    sources: ["VC sites", "X"], actors: ["sonya-huang", "jonathan-lai", "garry-tan"], age: "8d", score: 67 },
   { id: "s7", tier: 2, conf: "med", firms: ["a16z"],
     headline: "Founder visibility acceleration — Devin Nunes-Park +180% posting",
     body: "Posting frequency up 180% vs trailing 30-day baseline; voice-agent narrative catching on and getting boosted by larger accounts.",
@@ -518,23 +469,23 @@ export const FILINGS: Record<string, Filing> = {
 };
 
 export const FOLLOWS: Follow[] = [
-  { partner: "p10", founder: "f1", firstSeen: 5 },
-  { partner: "p5", founder: "f1", firstSeen: 5 },
-  { partner: "p6", founder: "f4", firstSeen: 3 },
-  { partner: "p15", founder: "f4", firstSeen: 4 },
-  { partner: "p1", founder: "f4", firstSeen: 5 },
-  { partner: "p7", founder: "f2", firstSeen: 4 },
-  { partner: "p9", founder: "f2", firstSeen: 5 },
-  { partner: "p12", founder: "f3", firstSeen: 5 },
-  { partner: "p1", founder: "f5", firstSeen: 5 },
-  { partner: "p5", founder: "f5", firstSeen: 5 },
-  { partner: "p11", founder: "f6", firstSeen: 5 },
-  { partner: "p3", founder: "f8", firstSeen: 5 },
-  { partner: "p10", founder: "f9", firstSeen: 4 },
+  { partner: "anjney-midha", founder: "f1", firstSeen: 5 },
+  { partner: "konstantine-buhler", founder: "f1", firstSeen: 5 },
+  { partner: "martin-casado", founder: "f4", firstSeen: 3 },
+  { partner: "pete-koomen", founder: "f4", firstSeen: 4 },
+  { partner: "pat-grady", founder: "f4", firstSeen: 5 },
+  { partner: "anish-acharya", founder: "f2", firstSeen: 4 },
+  { partner: "jonathan-lai", founder: "f2", firstSeen: 5 },
+  { partner: "jared-friedman", founder: "f3", firstSeen: 5 },
+  { partner: "pat-grady", founder: "f5", firstSeen: 5 },
+  { partner: "konstantine-buhler", founder: "f5", firstSeen: 5 },
+  { partner: "garry-tan", founder: "f6", firstSeen: 5 },
+  { partner: "shaun-maguire", founder: "f8", firstSeen: 5 },
+  { partner: "anjney-midha", founder: "f9", firstSeen: 4 },
 ];
 
 export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
-  p1: {
+  "pat-grady": {
     summary:
       "Pat Grady argues that the winning AI companies will be defined by reliability and distribution, not model quality. Long bullish on applied AI in regulated enterprise.",
     beliefs: [
@@ -543,7 +494,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Vertical AI applications will out-return horizontal infrastructure bets.", era: "longheld", themeKeys: ["agents", "evals"], sources: ["Sequoia essay"] },
     ],
   },
-  p5: {
+  "konstantine-buhler": {
     summary:
       "Konstantine Buhler frames AI agents as the next computing platform and has recently centred reliability as the gating problem.",
     beliefs: [
@@ -552,7 +503,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Voice will be a primary interface for agents, not a niche.", era: "recent", themeKeys: ["voice"], sources: ["X"] },
     ],
   },
-  p6: {
+  "martin-casado": {
     summary:
       "Martin Casado believes infrastructure and developer tooling capture durable value, and is sceptical of thin application-layer wrappers.",
     beliefs: [
@@ -561,7 +512,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Data systems are still under-invested relative to model hype.", era: "longheld", themeKeys: ["agents"], sources: ["X"] },
     ],
   },
-  p7: {
+  "anish-acharya": {
     summary:
       "Anish Acharya believes consumer AI will be voice-first and that personalisation is the consumer moat.",
     beliefs: [
@@ -569,7 +520,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Consumer AI products win on personalisation, not feature count.", era: "longheld", themeKeys: ["voice"], sources: ["LinkedIn", "X"] },
     ],
   },
-  p10: {
+  "anjney-midha": {
     summary:
       "Anjney Midha is a vocal contrarian on model scale: he argues small, open, on-device models are structurally undervalued.",
     beliefs: [
@@ -578,7 +529,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Defence and dual-use AI is an under-priced venture category.", era: "longheld", themeKeys: ["defense"], sources: ["X", "LinkedIn"] },
     ],
   },
-  p11: {
+  "garry-tan": {
     summary:
       "Garry Tan believes founder agency and speed matter more than market timing, and is broadly bullish on AI agents across verticals.",
     beliefs: [
@@ -587,7 +538,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Voice AI is a credible standalone wave, not a feature.", era: "recent", themeKeys: ["voice"], sources: ["X"] },
     ],
   },
-  p12: {
+  "jared-friedman": {
     summary:
       "Jared Friedman believes AI dev tools and reliability tooling are where early-stage software value is concentrating.",
     beliefs: [
@@ -595,7 +546,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Developer-first products compound advantage faster than top-down sales.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn", "X"] },
     ],
   },
-  p2: {
+  "sonya-huang": {
     summary:
       "Sonya Huang sees AI as a genuine platform shift and maps the application layer as the durable value capture.",
     beliefs: [
@@ -604,7 +555,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Voice interfaces will be central to how agents reach consumers.", era: "recent", themeKeys: ["voice"], sources: ["X"] },
     ],
   },
-  p3: {
+  "shaun-maguire": {
     summary:
       "Shaun Maguire believes deep tech and defence are structurally under-funded by venture and that hard engineering is a moat.",
     beliefs: [
@@ -612,7 +563,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Hard physical and engineering challenges are more defensible than software.", era: "longheld", themeKeys: ["defense"], sources: ["X"] },
     ],
   },
-  p4: {
+  "alfred-lin": {
     summary:
       "Alfred Lin believes consumer behaviour change, not technology, gates outcomes, and that great founders beat great markets.",
     beliefs: [
@@ -620,7 +571,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Founder quality outweighs market timing over a fund’s life.", era: "longheld", themeKeys: ["agents"], sources: ["X"] },
     ],
   },
-  p8: {
+  "jennifer-li": {
     summary:
       "Jennifer Li believes the data and tooling layer underneath agents is where enterprise AI value compounds.",
     beliefs: [
@@ -628,7 +579,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Enterprise AI dev tools will consolidate into a few category leaders.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
     ],
   },
-  p9: {
+  "jonathan-lai": {
     summary:
       "Jonathan Lai believes generative AI will reshape interactive media and that games are the leading edge of AI x creative.",
     beliefs: [
@@ -636,7 +587,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Voice and generative media will merge into new interactive formats.", era: "recent", themeKeys: ["voice"], sources: ["X"] },
     ],
   },
-  p13: {
+  "diana-hu": {
     summary:
       "Diana Hu believes technical founders and hard AI problems (robotics, spatial, agents) produce the most defensible companies.",
     beliefs: [
@@ -644,15 +595,7 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
       { text: "Robotics and embodied AI are approaching a venture inflection point.", era: "recent", themeKeys: ["agents"], sources: ["X"] },
     ],
   },
-  p14: {
-    summary:
-      "Dalton Caldwell believes durable B2B software still wins on fundamentals and is measured about AI-agent hype.",
-    beliefs: [
-      { text: "AI agents will reshape B2B SaaS but not erase the need for sound business fundamentals.", era: "recent", themeKeys: ["agents"], sources: ["X", "YC essay"] },
-      { text: "Vertical, workflow-deep software outlasts horizontal tools.", era: "longheld", themeKeys: ["agents"], sources: ["LinkedIn"] },
-    ],
-  },
-  p15: {
+  "pete-koomen": {
     summary:
       "Pete Koomen believes AI-native applications must be rebuilt from scratch and that prompt-level tooling is a real category.",
     beliefs: [
@@ -664,75 +607,31 @@ export const PARTNER_BELIEFS: Record<string, PartnerBeliefs> = {
 };
 
 export const TOP_POSTS: Record<string, TopPost> = {
-  p1: { text: "Reliability is the new benchmark. The AI companies that win enterprise won’t have the best demos — they’ll have the fewest incidents.", when: "4d ago", likes: "3.1K", reposts: "412" },
-  p2: { text: "Every cycle the app layer gets written off as thin. Every cycle it captures the margin. Agents are no different.", when: "8d ago", likes: "2.4K", reposts: "305" },
-  p3: { text: "The most under-priced thing in venture right now is hard engineering. Anyone can fine-tune. Almost no one can build the physical thing.", when: "6d ago", likes: "5.0K", reposts: "690" },
-  p4: { text: "Markets don’t make founders. Founders make markets. 15 years in and this is still the only pattern that holds.", when: "12d ago", likes: "4.2K", reposts: "520" },
-  p5: { text: "Agent evals are where infra was in 2014: obviously necessary, badly underbuilt, and about to be a category.", when: "3d ago", likes: "2.8K", reposts: "377" },
-  p6: { text: "Hot take that shouldn’t be hot: most of the value in AI agents will accrue to the tooling layer, not the apps.", when: "5d ago", likes: "4.6K", reposts: "603" },
-  p7: { text: "Voice is the first interface where AI is genuinely better than the app it replaces. Consumer is about to feel very different.", when: "7d ago", likes: "3.9K", reposts: "488" },
-  p8: { text: "The data layer under agents is doing all the work and getting none of the credit. That’s usually where I want to invest.", when: "9d ago", likes: "2.1K", reposts: "266" },
-  p9: { text: "Games have always been where new interfaces get proven. Generative AI will be no exception — watch this space.", when: "11d ago", likes: "1.9K", reposts: "231" },
-  p10: { text: "The consensus says scale wins. I think the next decade belongs to small, open, on-device models. Happy to be the contrarian here.", when: "6d ago", likes: "7.4K", reposts: "1.1K" },
-  p11: { text: "High agency beats everything. Not the idea, not the market, not the timing. Find the founder who refuses to lose.", when: "2d ago", likes: "9.8K", reposts: "1.4K" },
-  p12: { text: "If you’re building agent reliability tooling, talk to me. It’s the highest-leverage thing you can build in software right now.", when: "4d ago", likes: "3.3K", reposts: "401" },
-  p13: { text: "The best AI companies I see are started by people who can build the hard part themselves. Technical depth is the moat.", when: "10d ago", likes: "2.6K", reposts: "318" },
-  p14: { text: "Agents will change B2B software. They will not change the fact that you need customers who pay you more than you spend.", when: "13d ago", likes: "2.2K", reposts: "279" },
-  p15: { text: "You can’t bolt AI onto a product built for humans clicking buttons. The winners are rebuilding from the prompt up.", when: "5d ago", likes: "3.7K", reposts: "455" },
+  "pat-grady": { text: "Reliability is the new benchmark. The AI companies that win enterprise won’t have the best demos — they’ll have the fewest incidents.", when: "4d ago", likes: "3.1K", reposts: "412" },
+  "sonya-huang": { text: "Every cycle the app layer gets written off as thin. Every cycle it captures the margin. Agents are no different.", when: "8d ago", likes: "2.4K", reposts: "305" },
+  "shaun-maguire": { text: "The most under-priced thing in venture right now is hard engineering. Anyone can fine-tune. Almost no one can build the physical thing.", when: "6d ago", likes: "5.0K", reposts: "690" },
+  "alfred-lin": { text: "Markets don’t make founders. Founders make markets. 15 years in and this is still the only pattern that holds.", when: "12d ago", likes: "4.2K", reposts: "520" },
+  "konstantine-buhler": { text: "Agent evals are where infra was in 2014: obviously necessary, badly underbuilt, and about to be a category.", when: "3d ago", likes: "2.8K", reposts: "377" },
+  "martin-casado": { text: "Hot take that shouldn’t be hot: most of the value in AI agents will accrue to the tooling layer, not the apps.", when: "5d ago", likes: "4.6K", reposts: "603" },
+  "anish-acharya": { text: "Voice is the first interface where AI is genuinely better than the app it replaces. Consumer is about to feel very different.", when: "7d ago", likes: "3.9K", reposts: "488" },
+  "jennifer-li": { text: "The data layer under agents is doing all the work and getting none of the credit. That’s usually where I want to invest.", when: "9d ago", likes: "2.1K", reposts: "266" },
+  "jonathan-lai": { text: "Games have always been where new interfaces get proven. Generative AI will be no exception — watch this space.", when: "11d ago", likes: "1.9K", reposts: "231" },
+  "anjney-midha": { text: "The consensus says scale wins. I think the next decade belongs to small, open, on-device models. Happy to be the contrarian here.", when: "6d ago", likes: "7.4K", reposts: "1.1K" },
+  "garry-tan": { text: "High agency beats everything. Not the idea, not the market, not the timing. Find the founder who refuses to lose.", when: "2d ago", likes: "9.8K", reposts: "1.4K" },
+  "jared-friedman": { text: "If you’re building agent reliability tooling, talk to me. It’s the highest-leverage thing you can build in software right now.", when: "4d ago", likes: "3.3K", reposts: "401" },
+  "diana-hu": { text: "The best AI companies I see are started by people who can build the hard part themselves. Technical depth is the moat.", when: "10d ago", likes: "2.6K", reposts: "318" },
+  "pete-koomen": { text: "You can’t bolt AI onto a product built for humans clicking buttons. The winners are rebuilding from the prompt up.", when: "5d ago", likes: "3.7K", reposts: "455" },
 };
 
-// ---------- enrichment (contact + about), same shape as the HTML ----------
-const FIRM_META: Record<FirmId, { domain: string; phone: string; site: string }> = {
-  sequoia: { domain: "sequoiacap.com", phone: "+1 650-854-3927", site: "sequoiacap.com" },
-  a16z: { domain: "a16z.com", phone: "+1 650-561-6750", site: "a16z.com" },
-  yc: { domain: "ycombinator.com", phone: "+1 650-308-9889", site: "ycombinator.com" },
-};
-
-const slug = (n: string) => n.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/ +/g, "");
+// ---------- companies: derived enrichment ----------
+const slugCompany = (n: string) => n.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/ +/g, "");
 const firstLast = (n: string) => {
   const p = n.toLowerCase().replace(/[^a-z ]/g, "").trim().split(/ +/);
   return { first: p[0] || "", last: p[p.length - 1] || "" };
 };
 
-export const PARTNERS: Partner[] = PARTNERS_RAW.map((p) => {
-  const fm = FIRM_META[p.firm];
-  const nm = firstLast(p.name);
-  const themeLabels = p.engages.map((k) => themeByKey(k).label);
-  const article = /^[AEIOU]/.test(p.role) ? "an " : "a ";
-  const focusSentence = p.focus ? ` ${p.focus}` : "";
-  const themeSentence = themeLabels.length
-    ? ` Recent investing attention has centred on ${themeLabels.slice(0, 3).join(", ")}.`
-    : "";
-  const about =
-    `${p.name} is ${article}${p.role.replace(/ · /g, ", ")} at ${FIRMS[p.firm].name}.${focusSentence}${themeSentence}`;
-  const stageCheckSize: Record<PartnerStage, string> = {
-    early: "Seed through Series B; typically leads or co-leads.",
-    growth: "Growth and late-stage; leads Series C and beyond.",
-    both: "Seed through growth; leads at any stage.",
-  };
-  const checkSize =
-    p.firm === "yc"
-      ? "Pre-seed and seed; standard YC terms plus follow-on."
-      : p.stage
-      ? stageCheckSize[p.stage]
-      : p.role.toLowerCase().includes("growth")
-      ? "Growth and late-stage; leads Series C and beyond."
-      : "Seed through Series B; typically leads or co-leads.";
-  return {
-    ...p,
-    contact: {
-      email: `${nm.first}.${nm.last}@${fm.domain}`,
-      phone: fm.phone,
-      linkedin: `linkedin.com/in/${slug(p.name)}`,
-      x: `@${slug(p.name)}`,
-    },
-    about,
-    checkSize,
-  };
-});
-
 export const COMPANIES: Company[] = COMPANIES_RAW.map((c) => {
-  const dom = `${slug(c.name)}.com`;
+  const dom = `${slugCompany(c.name)}.com`;
   const fn = firstLast(c.founder);
   const phoneStub = (200 + (c.id.charCodeAt(1) * 7) % 799).toString();
   const phoneTail = (10 + (c.id.charCodeAt(1) % 89)).toString();
@@ -746,8 +645,8 @@ export const COMPANIES: Company[] = COMPANIES_RAW.map((c) => {
       email: `hello@${dom}`,
       founderEmail: `${fn.first}@${dom}`,
       phone: `+1 415-${phoneStub}-01${phoneTail}`,
-      linkedin: `linkedin.com/company/${slug(c.name)}`,
-      x: `@${slug(c.name)}`,
+      linkedin: `linkedin.com/company/${slugCompany(c.name)}`,
+      x: `@${slugCompany(c.name)}`,
       site: dom,
     },
     about,

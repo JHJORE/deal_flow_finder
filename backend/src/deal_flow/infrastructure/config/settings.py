@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     twitterapi_cache_dir: Path = _BACKEND_ROOT / ".twitter"
     twitterapi_cache_refresh: bool = False
 
+    gemini_api_key: str = ""
+    gemini_cache_dir: Path = _BACKEND_ROOT / ".gemini"
+    gemini_cache_refresh: bool = False
+
+    partner_data_dir: Path = _BACKEND_ROOT / "data"
+
     output_dir: Path = _BACKEND_ROOT / ".outputs"
 
 

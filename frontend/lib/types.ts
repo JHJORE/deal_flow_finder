@@ -49,6 +49,7 @@ export type Partner = {
   role: string;
   focus: string;
   stage?: PartnerStage;
+  photoUrl: string | null;
   posts: number[];
   engageRate: number[];
   spike: boolean;
