@@ -1,0 +1,743 @@
+{
+  "firm": "a16z.com",
+  "portfolio_url": "https://a16z.com/portfolio/",
+  "html_json_url": "https://a16z.com/portfolio/",
+  "html_json_attribute": "data-companies",
+  "limit": 50,
+  "count": 50,
+  "companies": [
+    {
+      "name": "Stitch",
+      "detail_url": "https://a16z.com/companies/stitch/",
+      "website": "https://www.stitch.co/",
+      "sector": "Fintech",
+      "description": "The simplest way to build financial products, Stitch is the unified platform to launch and scale, shaping the new age of banking and payments.",
+      "linkedin_url": "https://www.linkedin.com/company/stitch/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/logo_001Up00000TWfaPIAT-20260508200603.svg",
+      "founders": []
+    },
+    {
+      "name": "Ethos",
+      "detail_url": "https://a16z.com/companies/ethos/",
+      "website": "https://agent.askethos.com/",
+      "sector": "Consumer",
+      "description": "Ethos is an AI-driven platform that matches individuals with opportunities. It uses AI to scan hundreds of millions of profiles and match clients with the most relevant experts for insight-driven calls.",
+      "linkedin_url": "https://www.linkedin.com/company/askethos/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/05/logo_001Up00000EQBUQIA5-20260505150417.svg",
+      "founders": []
+    },
+    {
+      "name": "Tessera Labs",
+      "detail_url": "https://a16z.com/companies/tessera-labs/",
+      "website": "https://tesseralabs.ai",
+      "sector": "Fintech",
+      "description": "Tessera builds an AI-native system integrator platform for enterprise ERP transformations, starting with SAP ECC to S/4HANA migrations.",
+      "linkedin_url": "https://www.linkedin.com/company/tesseralabsai/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/04/logo_001Up00000IEcpRIAT-20260428203926.svg",
+      "founders": []
+    },
+    {
+      "name": "Accolade",
+      "detail_url": "https://a16z.com/companies/accolade/",
+      "website": "https://www.accolade.com/",
+      "sector": "Bio + Health",
+      "description": "Accolade is an on-demand healthcare concierge for employers, health plans and health systems. Accolade's team of compassionate, trusted professionals is supported by breakthrough science and technologies to guide people through the healthcare system in a deeply personalized manner. Accolade customers experience industry-leading engagement levels, satisfaction scores unseen in health care, better health outcomes, and substantial medical cost savings of more than 10-percent.",
+      "linkedin_url": "https://www.linkedin.com/company/accolade-inc-/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001PofsqAAB-20230612164927.svg",
+      "founders": []
+    },
+    {
+      "name": "Actifio",
+      "detail_url": "https://a16z.com/companies/actifio/",
+      "website": "https://www.actifio.com/",
+      "sector": "Enterprise",
+      "description": "Protection and Availability Storage platform company, offering data management solutions to small to medium-sized businesses, large enterprises and managed service and cloud service providers.",
+      "linkedin_url": "https://www.linkedin.com/company/actifio/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000iMJk2-20230417193616.svg",
+      "founders": [
+        {
+          "name": "Ash Ashutosh",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "ActionIQ",
+      "detail_url": "https://a16z.com/companies/actioniq/",
+      "website": "https://www.actioniq.com/",
+      "sector": "Enterprise;Infra",
+      "description": "ActionIQ helps companies like Verizon Wireless, Michael Kors, Weight Watchers and HBC/Saks 5th Ave leverage 100x more customer data to develop unique, personalized experiences. As customer data become one of the most valuable assets Enterprises can use to differentiate and compete, most CMOs are frustrated by how long it takes to leverage that asset to develop real-world customer interactions and experiences. ActionIQ can deliver value in months (versus years) and it can make Marketers significantly more self-sufficient and less dependent on IT for their success.",
+      "linkedin_url": "https://www.linkedin.com/company/actioniq/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000001HLILb-20230417193452.svg",
+      "founders": [
+        {
+          "name": "Tasso Argyros",
+          "role": null
+        },
+        {
+          "name": "Nitay Joffe",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Affirm",
+      "detail_url": "https://a16z.com/companies/affirm/",
+      "website": "https://affirm.com",
+      "sector": "Fintech",
+      "description": "Affirm is a next-generation consumer finance company providing shoppers with instant point-of-sale financing for online purchases. Started by PayPal co-founder Max Levchin, Affirm?s data-driven approach looks beyond a standard credit score to reach broader consumer populations. Affirm's transparent financing solutions empower shoppers to buy now and pay later in monthly installments and at reasonable interest rates. These features help to improve sales conversions, boost basket sizes, increase repeat purchase, and maximize customer happiness.",
+      "linkedin_url": "https://www.linkedin.com/company/affirm/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_00180000010QDQx-20230418215955.svg",
+      "founders": [
+        {
+          "name": "Max Levchin",
+          "role": null
+        },
+        {
+          "name": "Jeff Kaditz",
+          "role": null
+        },
+        {
+          "name": "Nathan Gettings",
+          "role": null
+        },
+        {
+          "name": "Alex Rampell",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Airbnb",
+      "detail_url": "https://a16z.com/companies/airbnb/",
+      "website": "https://airbnb.com",
+      "sector": "Consumer",
+      "description": "Airbnb is an online community marketplace for people to list, discover, and book accommodations through mobile phones or the internet.",
+      "linkedin_url": "http://www.linkedin.com/company/airbnb",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000fy5m7-20230417183510.svg",
+      "founders": [
+        {
+          "name": "Nathan Blecharczyk",
+          "role": null
+        },
+        {
+          "name": "Brian Chesky",
+          "role": null
+        },
+        {
+          "name": "Joe Gebbia",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Akita Software",
+      "detail_url": "https://a16z.com/companies/akita-software/",
+      "website": "https://www.akitasoftware.com/",
+      "sector": "Cultural Leadership Fund;Infra",
+      "description": "Akita helps companies see how their software uses data so they can build better products.",
+      "linkedin_url": "https://www.linkedin.com/company/20337186/admin/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001faaBSAAY-20240417160911.svg",
+      "founders": [
+        {
+          "name": "Jean Yang",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Aktis Oncology",
+      "detail_url": "https://a16z.com/companies/aktis-oncology/",
+      "website": "https://aktisoncology.com",
+      "sector": "Bio + Health",
+      "description": "Miniprotein-based alpha radiopharmaceuticals for oncology",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/02/logo_0018b00002OGUriAAH-20260123213705.svg",
+      "founders": []
+    },
+    {
+      "name": "Allset",
+      "detail_url": "https://a16z.com/companies/allset/",
+      "website": "https://allsetnow.com",
+      "sector": "Consumer;Fintech;Seed",
+      "description": "Allset is a marketplace connecting restaurants and local diners. It provides restaurants with online ordering and contactless dining solutions with no high fees.\r\n\r\nCustomers use Allset for fast and easy pickup, discovery of local eats and coffee shops, and saving money. For local companies, we have Allset for Teams to provide employees with company-paid meals at restaurants.",
+      "linkedin_url": "https://www.linkedin.com/company/9421664",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001NNEgl-20230417200726.svg",
+      "founders": []
+    },
+    {
+      "name": "Amiato",
+      "detail_url": "https://a16z.com/companies/amiato/",
+      "website": "https://a16z.com/companies/amiato/",
+      "sector": "Enterprise",
+      "description": "Amiato provides real-time analytics services to enable companies to make sense of data by unlocking silos and future-proofing.",
+      "linkedin_url": "http://www.linkedin.com/company/amiato",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000uS0kr-20230417190656.svg",
+      "founders": []
+    },
+    {
+      "name": "Apptio",
+      "detail_url": "https://a16z.com/companies/apptio/",
+      "website": "https://www.apptio.com/",
+      "sector": "Enterprise",
+      "description": "Apptio's on-demand IT Cost Transparency software is a comprehensive IT Financial Management solution, providing IT and Finance managers the insight, analytics and reporting to optimize the ROI of IT, improve IT operational performance and better communicate the value of IT to business leaders and executives.",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000000WizAD-20230414212744.svg",
+      "founders": [
+        {
+          "name": "Sunny Gupta",
+          "role": null
+        },
+        {
+          "name": "Kurt Shintaffer",
+          "role": null
+        },
+        {
+          "name": "Paul McLachlan",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Arimo",
+      "detail_url": "https://a16z.com/companies/arimo/",
+      "website": "https://arimo.com",
+      "sector": "Enterprise",
+      "description": "Arimo is an information technology company that specializes in the fields of big data, machine learning, business analytics, visualizations, and data intelligence. It harnesses the behaviors of machines, devices, customers, and other entities to provide the most accurate predictions utilizing Deep Learning.",
+      "linkedin_url": "https://www.linkedin.com/company/arimo-inc-",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001BYzKj-20230417190558.svg",
+      "founders": [
+        {
+          "name": "Christopher Nguyen",
+          "role": null
+        },
+        {
+          "name": "Michael Bui",
+          "role": null
+        },
+        {
+          "name": "Tony Do",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Asana",
+      "detail_url": "https://a16z.com/companies/asana/",
+      "website": "https://asana.com",
+      "sector": "Enterprise",
+      "description": "Asana builds enterprise-level collaboration software. It's the shared task list for your team. The place to plan, organize and stay in sync on your efforts. It helps teams orchestrate their work, from small projects to strategic initiatives.",
+      "linkedin_url": "https://www.linkedin.com/company/807257",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000000WizBu-20230417190623.svg",
+      "founders": [
+        {
+          "name": "Dustin Moskovitz",
+          "role": null
+        },
+        {
+          "name": "Justin Rosenstein",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Asserts",
+      "detail_url": "https://a16z.com/companies/asserts/",
+      "website": "https://www.asserts.ai/",
+      "sector": "Enterprise;Seed",
+      "description": "Asserts is an Observability intelligence platform that transforms your Prometheus metrics into root cause insights by adding a layer of intelligence to your native Prometheus ecosystem. There is no need to move your data or incur additional data storage costs.",
+      "linkedin_url": "https://www.linkedin.com/company/asserts/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001jJFMO-20230417200556.svg",
+      "founders": []
+    },
+    {
+      "name": "Authy",
+      "detail_url": "https://a16z.com/companies/authy/",
+      "website": "https://authy.com/",
+      "sector": "Enterprise",
+      "description": "Authy provides an API for developers to customize the user experience when adding two-factor authentication and multiple add-ons for apps.\r\n\r\nAuthy provides a two-factor authentication smartphone application for consumers, a 2FA Rest API for developers, and an authentication platform for enterprises. It enables every user, group, and organization to customize their settings and configure security rules through its platform. Authy achieves and maintains compliance with PCI, HIPAA, FIPS140, and other regulatory mandates worldwide. It offers protection for various apps, including Facebook, Gmail, Dropbox, or any account that supports Google Authenticator. Authy’s login verification options include a unique verification code, a text message, and a singular answer question that appears only on its users’ mobile device.",
+      "linkedin_url": "https://www.linkedin.com/company/authy",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000rsbfV-20230417190857.svg",
+      "founders": []
+    },
+    {
+      "name": "Automatic",
+      "detail_url": "https://a16z.com/companies/automatic-labs-inc/",
+      "website": "https://automatic.com",
+      "sector": "Enterprise;Seed",
+      "description": "Automatic is a Smart Driving Assistant that can save you money on gas, remember where you parked, and even call for help in a crash.\r\n\r\nAutomatic's mission is to empower drivers with knowledge about themselves and their cars so they can be safer and drive smarter. Automatic believes that drivers should not have to buy a new car to have a better driving experience, and that the phone in their pocket can bring the future of driving to today's automobiles.\r\n\r\nAutomatic isbased in San Francisco, California, but its team comes from every corner of the world. The team obsesses about creating beautiful and well-engineered products that make a real difference in people's lives. Its members are big on ideas, low on ego, and love working together.",
+      "linkedin_url": "http://www.linkedin.com/company/automatic-labs",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000r09vi-20230417190449.svg",
+      "founders": []
+    },
+    {
+      "name": "Barefoot Networks",
+      "detail_url": "https://a16z.com/companies/barefoot-networks/",
+      "website": "http://www.barefootnetworks.com",
+      "sector": "Enterprise",
+      "description": "Barefoot Networks creates programmable networking systems for massive scale data center markets.",
+      "linkedin_url": "https://www.linkedin.com/company/barefoot-networks",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001984IK-20230417190838.svg",
+      "founders": [
+        {
+          "name": "Nick McKeown",
+          "role": null
+        },
+        {
+          "name": "Martin Izzard",
+          "role": null
+        },
+        {
+          "name": "Pat Bosshart",
+          "role": null
+        },
+        {
+          "name": "Dan Lenoski",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "BBA Inc",
+      "detail_url": "https://a16z.com/companies/bba-inc/",
+      "website": "https://www.meldium.com/",
+      "sector": null,
+      "description": "Cloud app manager for companies.",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_00180000010P3mk-20230417190852.svg",
+      "founders": []
+    },
+    {
+      "name": "Bebop",
+      "detail_url": "https://a16z.com/companies/bebop/",
+      "website": "https://a16z.com/companies/bebop/",
+      "sector": "Enterprise",
+      "description": "Bebop is a new development platform that makes it easy to build and maintain enterprise applications.\r\n\r\nBebop has developed a platform that enables them to build enterprise applications. Furthermore, its users are capable of maintaining the applications developed.",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001EatwX-20230417190438.svg",
+      "founders": [
+        {
+          "name": "Diane Greene",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "BeReal",
+      "detail_url": "https://a16z.com/companies/bereal-2/",
+      "website": "https://bereal.com",
+      "sector": "Consumer",
+      "description": "BeReal is building the first social network where people spontaneously share their real life. No filters. No followers. Just friends, sharing with each other. On BeReal, you discover your friends' real lives and get closer to them!",
+      "linkedin_url": "https://www.linkedin.com/company/bereal-app",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001opm8MQAQ-20230808152002-1.svg",
+      "founders": [
+        {
+          "name": "Alexis Barreyat",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "BioAge Labs",
+      "detail_url": "https://a16z.com/companies/bioage-labs/",
+      "website": "http://bioagelabs.com/",
+      "sector": "Bio + Health",
+      "description": "Extending healthy human lifespan by developing treatments that target the molecular causes of human aging",
+      "linkedin_url": "https://www.linkedin.com/company/bioage-labs/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000001RSMre-20230417213611.svg",
+      "founders": []
+    },
+    {
+      "name": "Blockspring",
+      "detail_url": "https://a16z.com/companies/blockspring/",
+      "website": "https://www.blockspring.com",
+      "sector": "Enterprise;Seed",
+      "description": "Blockspring connects the tools you use everyday to web services. Blockspring is a place to create, share, and run functions and lets you build visualizations from the most innovative blocks developed by engineers within your organization, and from around the world.",
+      "linkedin_url": "https://www.linkedin.com/company/blockspring",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001DkXQu-20230417190732.svg",
+      "founders": []
+    },
+    {
+      "name": "Boku",
+      "detail_url": "https://a16z.com/companies/boku/",
+      "website": "https://www.boku.com/",
+      "sector": "Fintech",
+      "description": "Boku is a global mobile payments network providing mobile-enhanced payments in e-commerce and at physical point-of-sale.\r\n\r\nBoku Identity is the industry's end-to-end identity verification solution. By combining identity verification and authentication capabilities with the Boku Platform, which aggregates and harmonizes mobile network operator systems across 58 countries worldwide, Boku Identity helps global enterprises across multiple industries effectively reduceidentity fraud, drive conversions, ensure compliance, and deliver a superior customer experience. Boku Identity’s privacy-by-design and tokenized identity architecture enables these businesses to onboard and service their customers worldwide while maintaining security and preserving user privacy.",
+      "linkedin_url": "https://www.linkedin.com/company/boku-inc/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000WizBn-20230414224126.svg",
+      "founders": [
+        {
+          "name": "Mark Britto",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Border0",
+      "detail_url": "https://a16z.com/companies/border0/",
+      "website": "https://border0.com/",
+      "sector": "Enterprise;Seed",
+      "description": "Border0's product helps engineers get easy & secure access to cloud resources (e.g., databases, SSH, and HTTP servers) without needing a VPN and using your existing SSO credentials.",
+      "linkedin_url": "https://www.linkedin.com/company/border0/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001o9SwwQAE-20230718190647.svg",
+      "founders": []
+    },
+    {
+      "name": "Box",
+      "detail_url": "https://a16z.com/companies/box/",
+      "website": "https://box.com",
+      "sector": "Enterprise",
+      "description": "Simple sharing\r\nBox.net's online file storage makes it easy to securely share content as a link or a shared folder with anyone—inside or outside your company.\r\nFull-featured collaboration\r\nCreate an online workspace where you can share project files, add comments, assign tasks, start discussions or create new content\r\nPowerful discovery and access\r\nDiscover new content by viewing all the latest Box activity within your company or by searching the full text of all shared files with no extra investment",
+      "linkedin_url": "https://www.linkedin.com/company/54178",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000fwsmE-20230417190724.svg",
+      "founders": [
+        {
+          "name": "Aaron Levie",
+          "role": null
+        },
+        {
+          "name": "Dylan Smith",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bracket Computing",
+      "detail_url": "https://a16z.com/companies/bracket-computing/",
+      "website": "https://www.brkt.com",
+      "sector": "Enterprise",
+      "description": "Allows companies to have their own private cloud and the security/performance that comes with it, hosted within a public cloud environment.\r\n\r\nAt Bracket, we are re-imagining enterprise computing—not as an incremental extension of what is today, but as radical innovation moving beyond what currently is.",
+      "linkedin_url": "https://www.linkedin.com/company/bracket-computing",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000sV65X-20230417190441.svg",
+      "founders": [
+        {
+          "name": "Tom Gillis",
+          "role": null
+        },
+        {
+          "name": "Jason Lango",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bromium",
+      "detail_url": "https://a16z.com/companies/bromium/",
+      "website": "https://www.bromium.com",
+      "sector": "Enterprise",
+      "description": "A new desktop virtualization solution that runs on existing devices by creating micro-VMs; every time the user initiates a new transaction, they create a thin in-memory clone of a VM state; everything is isolated in its in full-OS container; does not require the install of a native hypervisor on top of the core OS; uVMs are designed to be ephemeral + garbage collected (although you can save a state if you like); solution is completely secure because all transactions run in a uVM and all read/writes to VM0 (your pristine OS state) need to be approved by policy or the user.",
+      "linkedin_url": "https://www.linkedin.com/company/bromium",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000000mujvk-20230417213449.svg",
+      "founders": [
+        {
+          "name": "Gaurav Banga",
+          "role": null
+        },
+        {
+          "name": "Simon Crosby",
+          "role": null
+        },
+        {
+          "name": "Ian Pratt",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bump Technologies",
+      "detail_url": "https://a16z.com/companies/bump/",
+      "website": "https://www.bu.mp",
+      "sector": "Consumer",
+      "description": "Company Overview: provides applications and API's that allows two phones to authenticate.",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000WjoaM-20230417190859.svg",
+      "founders": [
+        {
+          "name": "David Lieb",
+          "role": null
+        },
+        {
+          "name": "Andy Huibers",
+          "role": null
+        },
+        {
+          "name": "Jake Mintz",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "BuzzFeed",
+      "detail_url": "https://a16z.com/companies/buzzfeed/",
+      "website": "https://buzzfeed.com",
+      "sector": "Consumer;Seed",
+      "description": "Media|Publishing|Entertainment BuzzFeed is a company. Focused on delivering reporting, and viral content across subject areas. Our technology detects what is trending on the web, and connects people in realtime with content of the moment. Our site is rapidly growing and reaches more than 60 million monthly unique visitors.",
+      "linkedin_url": "https://www.linkedin.com/company/buzzfeed/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_00180000019z398-20230417213438.svg",
+      "founders": [
+        {
+          "name": "Jonah Peretti",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "CAMP4 Therapeutics",
+      "detail_url": "https://a16z.com/companies/camp4-therapeutics/",
+      "website": "https://www.camp4tx.com/",
+      "sector": "Bio + Health",
+      "description": "RNA medicines for increasing gene dosage in haploinsufficient diseases",
+      "linkedin_url": "https://www.linkedin.com/company/camp4-therapeutics/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000001WpKGm-20230417213441.svg",
+      "founders": []
+    },
+    {
+      "name": "Capital.xyz",
+      "detail_url": "https://a16z.com/companies/capital-xyz/",
+      "website": "https://capital.xyz/",
+      "sector": "Fintech;Seed",
+      "description": "Fundraising platform for startups with vision to create a vertical OS. Capital is a financial technology company that offers software to founders to raise, hold, spend, and send funds.",
+      "linkedin_url": "https://www.linkedin.com/company/capitalxyz/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001pHJOQQA4-20230425162830.svg",
+      "founders": []
+    },
+    {
+      "name": "Cardiogram",
+      "detail_url": "https://a16z.com/companies/cardiogram/",
+      "website": "https://cardiogram.com",
+      "sector": "Bio + Health",
+      "description": "AI for preventative monitoring based on consumer wearables",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001PPY3B-20230417213654.svg",
+      "founders": []
+    },
+    {
+      "name": "Caviar",
+      "detail_url": "https://a16z.com/companies/caviar/",
+      "website": "https://www.trycaviar.com/",
+      "sector": "Consumer;Seed",
+      "description": "Caviar is the easiest way for consumers and businesses to order food from favorite local eateries with the ability to live-track the order on a map. Browse a picture menu, place the order, and we'll deliver within 1 hour.\r\n\r\nCaviar offers restaurants a delivery solution in just a few minutes without any infrastructure, logistical, oroperational costs.",
+      "linkedin_url": "https://www.linkedin.com/company/2980808",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000xWUwVAAW-20230512172922.svg",
+      "founders": []
+    },
+    {
+      "name": "Cazena",
+      "detail_url": "https://a16z.com/companies/cazena/",
+      "website": "https://www.cazena.com/",
+      "sector": "Enterprise",
+      "description": "Big data is too hard and too slow. Enterprises need big data on demand. Cazena was founded by former Netezza leaders with a mission to radically simplify and speed up access to big data, allowing much faster business outcomes at a fraction of the cost. Cazena is backed by Andreessen Horowitz and North Bridge Venture Partners.",
+      "linkedin_url": "https://www.linkedin.com/company/cazena/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_00180000019vWTi-20230417220506.svg",
+      "founders": [
+        {
+          "name": "Prat Moghe",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Census",
+      "detail_url": "https://a16z.com/companies/census/",
+      "website": "https://getcensus.com",
+      "sector": "Enterprise;Seed",
+      "description": "A Data Activation and Reverse ETL platform that delivers trusted data and audiences from your data warehouse into 150+ operational tools. We transform the data warehouse into a hub for marketing and business operations, empowering everyone to take action with trusted, actionable data.",
+      "linkedin_url": "https://www.linkedin.com/company/getcensus",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001iZgPm-20230417220722.svg",
+      "founders": []
+    },
+    {
+      "name": "Character.AI",
+      "detail_url": "https://a16z.com/companies/character-ai/",
+      "website": "https://character.ai/",
+      "sector": "Enterprise;Growth",
+      "description": "Powered by the company's own foundational LLM, Character.AI is a platform that gives consumers access to their own deeply personalized, superintelligent AI dialogue companions that help them live their best lives.",
+      "linkedin_url": "https://www.linkedin.com/company/character-ai/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2026/01/logo_0018b00002IP8U7AAL-20260105160610.svg",
+      "founders": [
+        {
+          "name": "Noam Shazeer",
+          "role": null
+        },
+        {
+          "name": "Daniel De Freitas",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Ciitizen",
+      "detail_url": "https://a16z.com/companies/ciitizen/",
+      "website": "https://www.ciitizen.com/",
+      "sector": "Bio + Health",
+      "description": "Giving patients control over their health records by collecting, summarizing and encoding full medical records for patients, caregivers and researchers",
+      "linkedin_url": "https://www.linkedin.com/company/ciitizen/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001WIUFDAA5-20230712191609.svg",
+      "founders": []
+    },
+    {
+      "name": "CipherCloud",
+      "detail_url": "https://a16z.com/companies/ciphercloud/",
+      "website": "https://www.lookout.com/",
+      "sector": "Enterprise;Seed",
+      "description": "Pravin was a co-founder and VP of Engineering at Arcsight (Now\nHP).  CipherCloud provides award-winning cloud data encryption and tokenization solutions technology to protect sensitive data on the fly before it's sent to the\ncloud.",
+      "linkedin_url": "http://www.linkedin.com/company/ciphercloud",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_0018000000qIGNL-20230417190824.svg",
+      "founders": [
+        {
+          "name": "Pravin Kothari",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "ClearStory Data",
+      "detail_url": "https://a16z.com/companies/clearstory-data/",
+      "website": "https://www.clearstorydata.com",
+      "sector": "Enterprise;Seed",
+      "description": "ClearStory Data provides solutions enabling business users to discover, analyze and consume data at scale from different data sources.\r\n\r\nClearStory Data's solution offers a new way for business users to easily discover, analyze and consume data at scale from corporate, web and premium data sources for combined and up-to-date insights. Data sources include relational databases, Hadoop, Web and social application interfaces, and third-party data providers. ClearStory Data'splatform modernizes data analysis by introducing a new user model for big data analysis. The platform simplifies access to disparate data sources, automatically manages data harmonization, and enables interactive analysis at scale. With ClearStory's solution, organizations can easily converge data from corporate and third-party sources to make business decisions faster and across distributed teams in ways never before possible.",
+      "linkedin_url": "https://www.linkedin.com/company/2527958",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000rr5fz-20230417190505.svg",
+      "founders": [
+        {
+          "name": "Sharmila Mulligan",
+          "role": null
+        },
+        {
+          "name": "Vaibhav Nivargi",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Coinbase",
+      "detail_url": "https://a16z.com/companies/coinbase/",
+      "website": "https://www.coinbase.com/",
+      "sector": "Crypto;Growth",
+      "description": "Coinbase is a digital currency wallet and platform where merchants and consumers can transact with digital currencies like bitcoin, ethereum, and litecoin.",
+      "linkedin_url": "https://www.linkedin.com/company/coinbase/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2023/09/logo_00180000019z35l-20230417190729.svg",
+      "founders": [
+        {
+          "name": "Brian Armstrong",
+          "role": null
+        },
+        {
+          "name": "Fred Ehrsam",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Cumulus Networks",
+      "detail_url": "https://a16z.com/companies/cumulus-networks/",
+      "website": "https://www.cumulusnetworks.com",
+      "sector": "Enterprise",
+      "description": "Cumulus Networks is satisfying the networking needs of large Internet service clusters with high-performance, cost-effective networking equipment.",
+      "linkedin_url": "http://www.linkedin.com/company/cumulus-networks",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000rsdER-20230417220809.svg",
+      "founders": [
+        {
+          "name": "JR Rivers",
+          "role": null
+        },
+        {
+          "name": "Nolan Leake",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "DeepMap",
+      "detail_url": "https://a16z.com/companies/deepmap-ai/",
+      "website": "https://www.deepmap.ai",
+      "sector": "Enterprise;Infra;Seed",
+      "description": "DeepMap is a start-up focusing on solving the high definition mapping problem in the self-driving car business.  We have top-tier engineers from most prominent universities and software companies and are backed by top-ranked VCs.",
+      "linkedin_url": "https://www.linkedin.com/company/deepmap-inc./",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000001RBmhD-20230417220615.svg",
+      "founders": []
+    },
+    {
+      "name": "Delphix",
+      "detail_url": "https://a16z.com/companies/delphix/",
+      "website": "https://www.delphix.com",
+      "sector": "Enterprise",
+      "description": null,
+      "linkedin_url": "https://www.linkedin.com/company/delphix/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000gmUtf-20230417220753.svg",
+      "founders": []
+    },
+    {
+      "name": "DigitalOcean",
+      "detail_url": "https://a16z.com/companies/digitalocean/",
+      "website": "https://digitalocean.com",
+      "sector": "Enterprise",
+      "description": "Digital Ocean provides wi-fi, web, and backup services.",
+      "linkedin_url": "https://www.linkedin.com/company/digitalocean",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_001800000169eAl-20230417190743.svg",
+      "founders": [
+        {
+          "name": "Ben Uretsky",
+          "role": null
+        },
+        {
+          "name": "Moisey Uretsky",
+          "role": null
+        },
+        {
+          "name": "Mitch Wainer",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Dishpatch",
+      "detail_url": "https://a16z.com/companies/dishpatch/",
+      "website": "https://dishpatch.co.uk/",
+      "sector": "Consumer",
+      "description": "Restaurant dining at home. Finish-at-home meal kits from the UK's best chefs.",
+      "linkedin_url": "https://www.linkedin.com/company/dishpatch/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001oASca-20230418073515.svg",
+      "founders": []
+    },
+    {
+      "name": "Dollar Shave Club",
+      "detail_url": "https://a16z.com/companies/dollar-shave-club/",
+      "website": "https://www.dollarshaveclub.com/",
+      "sector": "Consumer;Seed",
+      "description": "The company, backed by technology studio Science, Inc. http://science-inc.com/, delivers razors equipped with stainless steel blades, lubrication strips and a pivoting head. At launch, members will be able to choose from three signature razors—The Humble Twin: a standard two-blade razor ($1/month, plus s+h); The 4x: a four-blade razor perfect for men's or women's hair removal needs ($6/month, shipping included); The Executive: a state-of-the-art six-blade razor ($9/month, shipping included)",
+      "linkedin_url": null,
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0018000000tlGeW-20230417190821.svg",
+      "founders": []
+    },
+    {
+      "name": "Earn.com",
+      "detail_url": "https://a16z.com/companies/earn-com/",
+      "website": "https://earn.com",
+      "sector": "Consumer",
+      "description": "Earn money for replying to emails and completing tasks. We're building a token-based social network, where senders pay users in digital currency to complete tasks and reply to emails. If we're successful, it will be one of the first major applications of digital currency for the regular user.",
+      "linkedin_url": "https://www.linkedin.com/company/earndotcom/",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_00180000011hXVx-20230417190555.svg",
+      "founders": [
+        {
+          "name": "Balaji S. Srinivasan",
+          "role": null
+        },
+        {
+          "name": "Lily Liu",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "EQRx",
+      "detail_url": "https://a16z.com/companies/eqrx/",
+      "website": "https://www.eqrx.com/",
+      "sector": "Bio + Health;Growth",
+      "description": "Developing new medicines with the goal of expanding global access for patients",
+      "linkedin_url": "linkedin.com/company/eqrx",
+      "photo_url": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2024/10/logo_0011E00001jIyf2-20230417190736.svg",
+      "founders": []
+    }
+  ]
+}

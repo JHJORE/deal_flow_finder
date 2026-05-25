@@ -204,8 +204,58 @@ class FirecrawlExtractor(WebExtractor):
         )
 
     def scrape_partner_listing(self, team_url: str) -> list[dict]:
-        payload = self._scrape(team_url, PartnerListingPage, PARTNER_LISTING_PROMPT)
+        # 4s wait — firm team pages are typically React/JS-heavy and the
+        # roster cards aren't in the initial HTML payload.
+        payload = self._scrape(
+            team_url, PartnerListingPage, PARTNER_LISTING_PROMPT, wait_for=4000
+        )
         return payload.get("partners") or []
+
+    def discover_partners_from_payload(
+        self, listing_url: str, attribute_name: str, role_filter: str | None
+    ) -> list[dict]:
+        req = urllib.request.Request(listing_url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            raw = resp.read().decode("utf-8", errors="replace")
+        m = re.search(rf'{re.escape(attribute_name)}="([^"]+)"', raw)
+        if not m:
+            return []
+        data = _json.loads(html_lib.unescape(m.group(1)))
+        members = data.get("members") if isinstance(data, dict) else data
+        out: list[dict] = []
+        for member in members or []:
+            role_display = member.get("role_display") or ""
+            if role_filter and role_filter not in role_display:
+                continue
+            socials = member.get("socials") or []
+            def _match(needle: str) -> str | None:
+                return next(
+                    (s.get("url") for s in socials
+                     if isinstance(s, dict) and needle in (s.get("url") or "").lower()),
+                    None,
+                )
+            linkedin = _match("linkedin.com")
+            twitter = _match("twitter.com") or _match("x.com")
+            farcaster = _match("farcaster") or _match("warpcast")
+            # a16z repeats each focus area many times in focus_areas_label
+            # (e.g. "Growth, Growth, Growth, ..."). Dedupe, preserve order.
+            seen: set[str] = set()
+            focus_areas: list[str] = []
+            for chunk in (c.strip() for c in (member.get("focus_areas_label") or "").split(",")):
+                if chunk and chunk not in seen:
+                    seen.add(chunk)
+                    focus_areas.append(chunk)
+            out.append({
+                "name": member.get("name") or "",
+                "role": role_display or None,
+                "profile_url": member.get("profile_url") or "",
+                "linkedin_url": linkedin,
+                "x_url": twitter,
+                "farcaster_url": farcaster,
+                "focus_areas": tuple(focus_areas),
+                "photo_url": member.get("avatar") or None,
+            })
+        return out
 
     def scrape_partner_details(self, profile_urls: list[str]) -> dict[str, dict]:
         return self._batch(profile_urls, PartnerDetail, PARTNER_DETAIL_PROMPT)

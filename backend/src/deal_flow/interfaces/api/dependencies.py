@@ -11,7 +11,13 @@ from deal_flow.application.ports.repositories.board_seat_log import BoardSeatLog
 from deal_flow.application.ports.repositories.partner_directory import (
     PartnerDirectory,
 )
+from deal_flow.application.ports.repositories.partner_profile_repository import (
+    PartnerProfileRepository,
+)
 from deal_flow.application.ports.services.linkedin_collector import LinkedInCollector
+from deal_flow.application.ports.services.llm_structured_output import (
+    LlmStructuredOutput,
+)
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
@@ -29,9 +35,13 @@ from deal_flow.application.use_cases.enrich_partner_with_twitter import (
 from deal_flow.application.use_cases.extract_firm_blog_posts import ExtractFirmBlogPosts
 from deal_flow.application.use_cases.extract_firm_partners import ExtractFirmPartners
 from deal_flow.application.use_cases.extract_firm_portfolio import ExtractFirmPortfolio
+from deal_flow.application.use_cases.load_firm_partner_profiles import (
+    LoadFirmPartnerProfiles,
+)
 from deal_flow.application.use_cases.search_partner_form_d_filings import (
     SearchPartnerFormDFilings,
 )
+from deal_flow.application.use_cases.summarize_partner_bio import SummarizePartnerBio
 from deal_flow.infrastructure.config.settings import get_settings
 from deal_flow.infrastructure.external.apify.linkedin_posts_collector import (
     HarvestApiLinkedInCollector,
@@ -39,10 +49,14 @@ from deal_flow.infrastructure.external.apify.linkedin_posts_collector import (
 from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearcher
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
+from deal_flow.infrastructure.external.gemini.client import GeminiStructuredOutput
 from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
 from deal_flow.infrastructure.persistence.file_board_seat_log import FileBoardSeatLog
 from deal_flow.infrastructure.persistence.file_partner_directory import (
     FilePartnerDirectory,
+)
+from deal_flow.infrastructure.persistence.file_partner_profile_repository import (
+    FilePartnerProfileRepository,
 )
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 
@@ -95,10 +109,15 @@ def get_sec_filing_searcher() -> SecFilingSearcher:
     )
 
 
-@lru_cache
-def get_board_seat_log() -> BoardSeatLog:
+def get_board_seat_log(firm_domain: str) -> BoardSeatLog:
+    """Per-firm log so each firm gets its own curated output file at
+    ``.outputs/firms/{firm_domain}/board_seats.json``. ``firm_domain`` is
+    pulled from the route's path params by FastAPI.
+    """
     settings = get_settings()
-    return FileBoardSeatLog(path=settings.sec_cache_dir / "board_seats.json")
+    return FileBoardSeatLog(
+        path=settings.output_dir / "firms" / firm_domain / "board_seats.json",
+    )
 
 
 def get_search_partner_form_d_filings(
@@ -151,3 +170,31 @@ def get_enrich_portfolio_companies_with_linkedin(
     collector: LinkedInCollector = Depends(get_linkedin_collector),
 ) -> EnrichPortfolioCompaniesWithLinkedIn:
     return EnrichPortfolioCompaniesWithLinkedIn(collector=collector)
+
+
+@lru_cache
+def get_llm_structured_output() -> LlmStructuredOutput:
+    settings = get_settings()
+    return GeminiStructuredOutput(
+        api_key=settings.gemini_api_key,
+        cache_dir=settings.gemini_cache_dir,
+        refresh=settings.gemini_cache_refresh,
+    )
+
+
+@lru_cache
+def get_partner_profile_repository() -> PartnerProfileRepository:
+    return FilePartnerProfileRepository(data_dir=get_settings().partner_data_dir)
+
+
+def get_summarize_partner_bio(
+    llm: LlmStructuredOutput = Depends(get_llm_structured_output),
+) -> SummarizePartnerBio:
+    return SummarizePartnerBio(llm=llm)
+
+
+def get_load_firm_partner_profiles(
+    repo: PartnerProfileRepository = Depends(get_partner_profile_repository),
+    summarize_bio: SummarizePartnerBio = Depends(get_summarize_partner_bio),
+) -> LoadFirmPartnerProfiles:
+    return LoadFirmPartnerProfiles(repo=repo, summarize_bio=summarize_bio)

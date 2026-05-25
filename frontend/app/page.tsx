@@ -1,10 +1,13 @@
 import { AppShell } from "@/components/AppShell";
+import { PartnersProvider } from "@/lib/partners-context";
 import { RadarProvider } from "@/lib/state";
 
 export default function HomePage() {
   return (
-    <RadarProvider>
-      <AppShell />
-    </RadarProvider>
+    <PartnersProvider>
+      <RadarProvider>
+        <AppShell />
+      </RadarProvider>
+    </PartnersProvider>
   );
 }

@@ -1,0 +1,776 @@
+{
+  "firm": "ycombinator.com",
+  "portfolio_url": "https://www.ycombinator.com/companies",
+  "limit": 50,
+  "count": 40,
+  "companies": [
+    {
+      "name": "Airbnb",
+      "detail_url": "https://www.ycombinator.com/companies/airbnb",
+      "website": "http://airbnb.com",
+      "sector": "Marketplace, Travel",
+      "description": "Airbnb is a trusted community marketplace for people to list, discover, and book unique accommodations around the world — online or from a mobile phone. Whether an apartment for a night, a castle for a week, or a villa for a month, Airbnb connects people to unique travel experiences, at any price point, in more than 33,000 cities and 192 countries. And with world-class customer service and a growing community of users, Airbnb is the easiest way for people to monetize their extra space and showcase it to an audience of millions.",
+      "linkedin_url": "https://www.linkedin.com/company/airbnb/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Brian Chesky",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Nathan Blecharczyk",
+          "role": "Founder/CTO"
+        },
+        {
+          "name": "Joe Gebbia",
+          "role": "Founder/CPO"
+        }
+      ]
+    },
+    {
+      "name": "Algolia",
+      "detail_url": "https://www.ycombinator.com/companies/algolia",
+      "website": "http://www.algolia.com",
+      "sector": "Developer Tools",
+      "description": "Algolia is the leading Search & Discovery API for websites and mobile apps. We help the most innovative companies across e-commerce, media and SaaS industries create powerful, relevant and scalable discovery experiences for their users. Unlike other solutions, our hosted platform reduces the complexities of building and scaling a fast, relevant digital experience and helps teams accelerate development time. More than 9,000 companies like Under Armour, Twitch, Periscope, Medium and Stripe rely on Algolia to manage 50+ billion search queries a month.",
+      "linkedin_url": "https://www.linkedin.com/company/algolia/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Nicolas Dessaigne",
+          "role": "Founder/Board Member"
+        },
+        {
+          "name": "Julien Lemoine",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Amplitude",
+      "detail_url": "https://www.ycombinator.com/companies/amplitude",
+      "website": "https://amplitude.com/",
+      "sector": "Developer Tools, B2B, Analytics, Marketing, Data Visualization",
+      "description": "Since graduating from YC, Amplitude (W12) has made it to IPO and beyond by helping cutting edge startups become category leaders. We’ve pioneered the digital analytics category to become the go-to solution for AI pioneers (Cruise, Midjourney), apps that touch millions of consumers (Doordash, Coinbase), and the best in B2B (Atlassian, Rippling, Canva). With product analytics, experiment, CDP, session replay, and more, Amplitude’s digital analytics platform shows you what your users love, where they’re getting stuck, and what keeps them coming back. You want to build a generational business, and we have the capabilities and pricing plans to guide you every step of the way. Check out our special deal for YC companies and get started on your analytics journey.",
+      "linkedin_url": "https://www.linkedin.com/company/amplitude-analytics/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Spenser Skates",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Curtis Liu",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Bellabeat",
+      "detail_url": "https://www.ycombinator.com/companies/bellabeat",
+      "website": "http://bellabeat.com/",
+      "sector": "Health & Wellness",
+      "description": "Founded in 2014, Bellabeat is a data-centered wellness femtech company behind some of the most fashionably designed tech-powered wellness products and one of the fastest-growing wellness subscription services for women. Throughout the years, Bellabeat built the go-to wellness brand with a compelling ecosystem of solutions and services focused on women’s health.",
+      "linkedin_url": "https://www.linkedin.com/company/bellabeatinc",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Urska Srsen",
+          "role": "Founder/CCO"
+        },
+        {
+          "name": "Sandro Mur",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Benchling",
+      "detail_url": "https://www.ycombinator.com/companies/benchling",
+      "website": "http://benchling.com",
+      "sector": "Biotech",
+      "description": "Unlocking the power of biotech with modern software for modern science. Biotechnology is rewriting life as we know it, from the medicines we take, to the crops we grow, the materials we wear, and the household goods that we rely on every day. Biotech R&D is radically transforming our world, but to move at the new speed of science, scientists need better technology. Benchling’s mission is to unlock the power of biotechnology. The world’s biotech leaders and innovators use our R&D Cloud to power the development of breakthrough products and accelerate time to milestone and market.",
+      "linkedin_url": "https://www.linkedin.com/company/benchling/?viewAsMember=true",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Sajith Wickramasekara",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "BillionToOne",
+      "detail_url": "https://www.ycombinator.com/companies/billiontoone",
+      "website": "https://www.billiontoone.com",
+      "sector": "Diagnostics, Genomics",
+      "description": "The genetic testing platform detecting and measuring disease. BillionToOne has developed a DNA molecular counter that increases the cell-free DNA diagnostics resolution by over 1,000 fold, which unlocks transformative improvements in prenatal screening and liquid biopsy for cancers. Unity Screen, BillionToOne's commercially available non-invasive prenatal test (NIPT), is the only NIPT that can assess fetal risk for both recessive conditions and aneuploidies from maternal blood. UNITY Screen continues to grow exponentially and is on its path to becoming the next standard-of-care, with an increasing number of publications showing its accuracy and advantages over other screening methods. We have also recently used our molecular counting technology to develop liquid biopsy tests, which have the potential to completely transform oncology care.",
+      "linkedin_url": "https://www.linkedin.com/company/billiontoone/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Oguzhan Atay",
+          "role": "Founder"
+        },
+        {
+          "name": "David Tsao",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Bird",
+      "detail_url": "https://www.ycombinator.com/companies/bird",
+      "website": "http://bird.com/",
+      "sector": "Messaging, API",
+      "description": "Bird CRM powers communication between businesses and their customers — across any channel, always with the right context, and on every corner of the planet. Its products and solutions are the foundational building blocks to business communications across preferred channels, like SMS, Voice, WhatsApp, WeChat, Messenger, Email and more. Founded in 2011, Bird connects to billions of devices and is trusted by nearly 20,000 customers worldwide.",
+      "linkedin_url": "https://www.linkedin.com/company/birdhq",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Robert Vis",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Bob Violier",
+          "role": "Founder/CTO"
+        },
+        {
+          "name": "Joey van Ommen",
+          "role": "Founder/Head of Product & Partner"
+        }
+      ]
+    },
+    {
+      "name": "Brex",
+      "detail_url": "https://www.ycombinator.com/companies/brex",
+      "website": "https://www.brex.com/",
+      "sector": "Fintech",
+      "description": "Brex is the AI-powered spend platform for modern companies, from startups to enterprises. Combining corporate cards, expense management, travel, business accounts, and bill pay, Brex makes it easy to control spend before it happens with unprecedented efficiency and accuracy. Our mission is to empower employees anywhere to make better financial decisions, so we designed our platform to make expenses almost effortless with unrivaled automation of manual expense work and real-time tracking. Brex supports more countries and currencies than any other spend solution. Brex has tens of thousands of customers, including some of the most successful, high-growth companies, such as DoorDash, SeatGeek, Coinbase, ScaleAI, MasterClass, Indeed, Allbirds, and Superhuman. Brex offers: - Corporate cards with 10-20x higher limits - Business accounts with easy wires, same-day liquidity, fast global payments, and $6M in FDIC insurance - Reward options that include billboards, offsites, and coaching - Founder-friendly financial modeling tools - Special events and masterclasses for founders - Advanced spend management software as startups grow that includes global capabilities, travel, bill pay and more.",
+      "linkedin_url": "https://www.linkedin.com/company/brexhq/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Henrique Dubugras",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Pedro Franceschi",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Casetext",
+      "detail_url": "https://www.ycombinator.com/companies/casetext",
+      "website": "http://casetext.com",
+      "sector": "Artificial Intelligence, Legal",
+      "description": "Casetext, the most widely used A.I. legal research technology, has been adopted across the legal market from the largest Am Law 100 law firms to solo practices. Its award-winning technology offers both conventional search functionality and its CARA A.I. powered contextual search, focuses on the context of your research to help you find on-point authorities faster. Founded by a team of former litigators from top law firms, as well as Ph.D. data scientists and leading A.I. engineers, Casetext helps legal researchers find the best cases, faster, including many that they would otherwise miss.",
+      "linkedin_url": "https://www.linkedin.com/in/jakeheller/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Jake Heller",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Checkr",
+      "detail_url": "https://www.ycombinator.com/companies/checkr",
+      "website": "http://www.checkr.com",
+      "sector": "Artificial Intelligence, Compliance, HR Tech, API, Enterprise Software",
+      "description": "Checkr builds people infrastructure for the future of work. And we believe everyone should have a fair chance to work. That's why we've designed a faster—and fairer—way to screen job seekers. For more information on our mission and products, visit https://checkr.com.",
+      "linkedin_url": "https://www.linkedin.com/company/checkr-com/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Daniel Yanisse",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Jonathan Perichon",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Clipboard",
+      "detail_url": "https://www.ycombinator.com/companies/clipboard",
+      "website": "https://www.clipboardworks.com/careers",
+      "sector": "Health Tech",
+      "description": "Clipboard is an app-based marketplace where workplaces post calls for help and workers answer. Every year, we help hundreds of thousands of workers fill millions of shifts across the U.S. We’re the leader in Long-Term Care staffing and are rapidly expanding into Home Health, Hospitals, and more.",
+      "linkedin_url": "https://www.linkedin.com/company/clipboard/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Wei Deng",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Codecademy",
+      "detail_url": "https://www.ycombinator.com/companies/codecademy",
+      "website": "http://codecademy.com",
+      "sector": "Education",
+      "description": "The leading online learning platform for technical skills. Working professionals are experiencing their jobs changing amidst the rise of technology and automation threatens over 800 million jobs. At the same time, software is eating the world, disrupting every major industry, and creating millions of new technology jobs that companies are eager to fill. This is the skills gap. Our mission is closing it. In 2011, we changed the face of education by creating free interactive coding courses explored by over 45 million people. As we look to the future, we're focused on helping anyone get the skills they need for the jobs they want. We aim to bridge the gap: between companies and the workforce, people and their dream jobs. Join one of the most dynamic technology companies in New York that is changing the way the world learns.",
+      "linkedin_url": "https://www.linkedin.com/in/zacharysims",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Zach Sims",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Coinbase",
+      "detail_url": "https://www.ycombinator.com/companies/coinbase",
+      "website": "https://www.coinbase.com",
+      "sector": "Crypto / Web3",
+      "description": "Founded in June of 2012, Coinbase is a digital currency wallet and platform where merchants and consumers can transact with new digital currencies like bitcoin, ethereum, and litecoin. Our vision is to bring more innovation, efficiency, and equality of opportunity to the world by building an open financial system. Our first step on that journey is making digital currency accessible and approachable for everyone. Two principles guide our efforts. First, be the most trusted company in our domain. Second, create user-focused products that are easier and more intuitive to use.",
+      "linkedin_url": "https://www.linkedin.com/in/barmstrong/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Brian Armstrong",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Cruise",
+      "detail_url": "https://www.ycombinator.com/companies/cruise",
+      "website": "http://getcruise.com",
+      "sector": "Self-Driving Vehicles",
+      "description": "Cruise is building the world’s most advanced, all-electric, self-driving car technology to safely connect people with the places, things, and experiences they care about. Self-driving cars will help save lives, reimagine cities, redefine time in transit, and restore freedom of movement for individuals who live in dense urban settings. Acquired by GM in 2016.",
+      "linkedin_url": "https://www.linkedin.com/company/getcruise/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Kyle Vogt",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Daniel Kan",
+          "role": "Founder/COO"
+        }
+      ]
+    },
+    {
+      "name": "Deel",
+      "detail_url": "https://www.ycombinator.com/companies/deel",
+      "website": "https://www.deel.com/",
+      "sector": "Fintech, SaaS, B2B, HR Tech, Payroll",
+      "description": "Deel is the all-in-one payroll and HR platform for global teams. Built for the way the world works today, Deel combines HRIS, payroll, compliance, benefits, performance, and equipment management into one seamless platform. With AI-powered tools and a fully owned payroll infrastructure, Deel supports every worker type in 120+ countries—helping businesses scale smarter, faster, and more compliantly. Discover how Deel makes global work simple at deel.com.",
+      "linkedin_url": "https://www.linkedin.com/company/deel",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Alex Bouaziz",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Shuo Wang",
+          "role": "Founder/CRO"
+        }
+      ]
+    },
+    {
+      "name": "DoorDash",
+      "detail_url": "https://www.ycombinator.com/companies/doordash",
+      "website": "http://doordash.com",
+      "sector": "Marketplace, E-commerce",
+      "description": "Founded in 2013, DoorDash is a San Francisco-based technology company passionate about transforming local businesses and dedicated to enabling new ways of working, earning, and living. Today, DoorDash connects customers with their favorite local and national restaurants in more than 600 cities across the United States and Canada. By building intelligent, last-mile delivery technology for local cities, DoorDash aims to connect people with the things they care about — one dash at a time.",
+      "linkedin_url": "https://www.linkedin.com/company/doordash/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Tony Xu",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Andy Fang",
+          "role": "Founder"
+        },
+        {
+          "name": "Stanley Tang",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Dropbox",
+      "detail_url": "https://www.ycombinator.com/companies/dropbox",
+      "website": "http://dropbox.com/",
+      "sector": "B2B",
+      "description": "Dropbox is building the world’s first smart workspace. Back in 2007, making work better for people meant designing a simpler way to keep files in sync. Today, it means designing products that reduce busywork so you can focus on the work that matters. Most “productivity tools” get in your way. They constantly ping, distract, and disrupt your team’s flow, so you spend your days switching between apps and tracking down feedback. It’s busywork, not the meaningful stuff. We want to change this. We believe there’s a more enlightened way to work. Dropbox helps people be organized, stay focused, and get in sync with their teams.",
+      "linkedin_url": "https://www.linkedin.com/company/dropbox/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Drew Houston",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Arash Ferdowsi",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Embark Trucks",
+      "detail_url": "https://www.ycombinator.com/companies/embark-trucks",
+      "website": "http://embarktrucks.com/",
+      "sector": "Autonomous Trucking",
+      "description": "Embark Technology develops self-driving truck software. Embark was the first self-driving truck company to achieve an autonomous coast-to-coast drive, the first to reach 100,000 miles driven on public roads, and the first to open a network of transfer points. Embark went public on NASDAQ in 2021 and was acquired by Applied Intuition in 2023.",
+      "linkedin_url": "https://www.linkedin.com/company/embarktrucks/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Alex Rodrigues",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Brandon Moak",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "EquipmentShare",
+      "detail_url": "https://www.ycombinator.com/companies/equipmentshare",
+      "website": "https://www.equipmentshare.com",
+      "sector": "Construction",
+      "description": "EquipmentShare delivers cloud solutions for the construction industry. We provide a better equipment rental experience, fleet tracking software and hardware security solutions to help contractors work smarter.",
+      "linkedin_url": "https://www.linkedin.com/company/equipmentshare/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Brad Siegler",
+          "role": "Founder"
+        },
+        {
+          "name": "Jeff Lowe",
+          "role": "Founder"
+        },
+        {
+          "name": "Jabbok Schlacks",
+          "role": "Founder"
+        },
+        {
+          "name": "William Schlacks",
+          "role": "Founder/President"
+        }
+      ]
+    },
+    {
+      "name": "Ginkgo Bioworks",
+      "detail_url": "https://www.ycombinator.com/companies/ginkgo-bioworks",
+      "website": "http://ginkgobioworks.com/",
+      "sector": "Synthetic Biology, Diagnostics, Automation",
+      "description": "Ginkgo Bioworks is the organism company. We design custom organisms for customers across multiple markets. We build our foundries to scale the process of organism engineering using software and hardware automation. Organism engineers at Ginkgo learn from nature to develop new organisms that replace technology with biology.",
+      "linkedin_url": "https://www.linkedin.com/company/ginkgo-bioworks/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Barry Canton",
+          "role": "Founder"
+        },
+        {
+          "name": "Austin Che",
+          "role": "Founder"
+        },
+        {
+          "name": "Jason Kelly",
+          "role": "Founder"
+        },
+        {
+          "name": "Tom Knight",
+          "role": "Founder"
+        },
+        {
+          "name": "Reshma Shetty",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "GitLab",
+      "detail_url": "https://www.ycombinator.com/companies/gitlab",
+      "website": "http://gitlab.com/",
+      "sector": "Developer Tools",
+      "description": "A complete DevOps platform delivered as a single application.",
+      "linkedin_url": "https://www.linkedin.com/company/gitlab-com",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Sid Sijbrandij",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Dmytro Zaporozhets",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Groww",
+      "detail_url": "https://www.ycombinator.com/companies/groww",
+      "website": "https://groww.in/",
+      "sector": "Investing",
+      "description": "Groww aims to empower people in India by making financial services simple, transparent and delightful. By leveraging technology, we build reliable and accessible financial services. Groww is India's largest stock broker (in terms of active NSE clients) and the largest distributor of mutual fund SIPs.",
+      "linkedin_url": "https://www.linkedin.com/company/groww.in/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Lalit Keshre",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Ishan Bansal",
+          "role": "Founder"
+        },
+        {
+          "name": "Harsh Jain",
+          "role": "Founder/COO"
+        },
+        {
+          "name": "Neeraj Singh",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Heap",
+      "detail_url": "https://www.ycombinator.com/companies/heap",
+      "website": "https://heap.io/",
+      "sector": "SaaS, Analytics",
+      "description": "Heap automates away the annoying parts of user analytics. No manual event tracking. No messy tracking plans. No custom ETL pipelines. Just insights. For everyone on your team.",
+      "linkedin_url": "https://www.linkedin.com/company/heap-inc-/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Matin Movassate",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Instacart",
+      "detail_url": "https://www.ycombinator.com/companies/instacart",
+      "website": "https://www.instacart.com/",
+      "sector": "E-commerce",
+      "description": "Instacart is the North American leader in online grocery and one of the fastest-growing companies in e-commerce. Instacart’s same-day delivery and pickup services bring fresh groceries and everyday essentials to busy people and families across the U.S. and Canada in as fast as an hour. Since its founding in 2012, Instacart has become an essential service for millions of families, while also serving as an immediate, flexible earnings opportunity for hundreds of thousands of shoppers across North America. The company partners with more than 350 retailers and delivers from more than 25,000 stores across more than 5,500 cities in North America. Today, Instacart is accessible to more than 85% of households in the U.S. and more than 70% of households in Canada.",
+      "linkedin_url": "https://www.linkedin.com/company/instacart/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Apoorva Mehta",
+          "role": "Founder/Chairman & Founding CEO"
+        },
+        {
+          "name": "Brandon Leonardo",
+          "role": "Founder"
+        },
+        {
+          "name": "Max Mullen",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Lever",
+      "detail_url": "https://www.ycombinator.com/companies/lever",
+      "website": "https://www.lever.co/",
+      "sector": "Human Resources",
+      "description": "Lever is one of the most recognized brands in talent acquisition software for high growth companies. We enable teams to post jobs, source, interview, and hire top talent. We've combined ATS & CRM into a single platform, Lever TRM. Our Talent Acquisition Suite also includes tools for recruitment marketing and analytics: Lever Nurture, Lever Advanced Analytics, and Lever Data Warehouse Sync. Our customers include Netflix, KPMG, Spotify, Talend, Cirque du Soleil, and over 5000 other customers.",
+      "linkedin_url": "https://www.linkedin.com/company/lever-/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Nate Smith",
+          "role": "Founder/CEO/CTO"
+        },
+        {
+          "name": "Sarah Nahm",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Brian Noguchi",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Lucira Health",
+      "detail_url": "https://www.ycombinator.com/companies/lucira-health",
+      "website": "https://www.lucirahealth.com/",
+      "sector": "Health Tech",
+      "description": "Diassess Inc. is revolutionizing the way infectious diseases are prevented, diagnosed, and monitored by developing the tools necessary to empower people to become knowledgeable about their health. We produce inexpensive, disposable health diagnostic hardware that transforms any smartphone into a portable, real-time health-monitoring device for rapid, accessible, multiplexed analysis of bodily fluids anywhere in the world.",
+      "linkedin_url": "https://www.linkedin.com/company/lucira-health/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Debkishore Mitra",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Matterport",
+      "detail_url": "https://www.ycombinator.com/companies/matterport",
+      "website": "http://matterport.com/",
+      "sector": "Computer Vision",
+      "description": "Matterport is an immersive media technology company that is shaking up the 3D / VR world. Our team has built the first end-to-end system for creating, modifying, distributing, and navigating immersive 3D and virtual reality (VR) versions of real-world spaces on web and mobile devices. Matterport offers the world's most inexpensive and simplest way to capture 3D spaces.",
+      "linkedin_url": "https://www.linkedin.com/in/david-gausebeck-ab23015",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "David Gausebeck",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Meesho",
+      "detail_url": "https://www.ycombinator.com/companies/meesho",
+      "website": "http://www.meesho.com",
+      "sector": "E-commerce, Retail",
+      "description": "Meesho is India’s only true online marketplace, altering the status quo to make e-commerce inclusive and accessible for the next billion users. With a vision to enable 100 million small businesses, including individual entrepreneurs, to succeed online, Meesho is democratising internet commerce and bringing a range of products and new customers online. The Meesho marketplace provides sellers access to millions of customers, selections from over 30 categories, pan-India logistics, payment services and customer support capabilities to efficiently run their businesses.",
+      "linkedin_url": "https://www.linkedin.com/company/meesho/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Vidit Aatrey",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Sanjeev Barnwal",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Momentus",
+      "detail_url": "https://www.ycombinator.com/companies/momentus",
+      "website": "https://momentus.space",
+      "sector": "Commercial Space Launch",
+      "description": "Momentus is a space infrastructure services company. As a first mover, Momentus will offer the most basic, foundational services that enable businesses to flourish in space. With their experienced team of aerospace, propulsion, and robotics engineers, Momentus makes and operates cost-effective and energy-efficient in-space transport and service vehicles that utilize water plasma propulsion technology. Momentus has service agreements in place with numerous private satellite companies, government agencies, and research organizations.",
+      "linkedin_url": "https://www.linkedin.com/company/momentusinc/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Mikhail Kokorich",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Oklo",
+      "detail_url": "https://www.ycombinator.com/companies/oklo",
+      "website": "http://oklo.com/",
+      "sector": "Industrials",
+      "description": "Oklo Inc. (Oklo) is developing advanced fission power plants to provide emission-free, reliable, and affordable energy.",
+      "linkedin_url": "https://www.linkedin.com/company/oklo/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Jacob DeWitte",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Caroline Cochran",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "PagerDuty",
+      "detail_url": "https://www.ycombinator.com/companies/pagerduty",
+      "website": "http://pagerduty.com/",
+      "sector": "DevOps",
+      "description": "PagerDuty is an operations performance platform delivering visibility and actionable intelligence across the entire incident lifecycle. Their SaaS-based solution empowers over 10,000 small, mid-size and enterprise global customers such as Comcast, eHarmony, Slack and Lululemon with the insight to intelligently respond to critical disruptions for exceptional customer experience. PagerDuty was founded to deliver a new and innovative approach to increase business response and efficiency. When brand reputation depends on customer satisfaction, PagerDuty arms businesses with the insight to proactively manage incidents and events that may impact customers across their IT environment.",
+      "linkedin_url": "https://www.linkedin.com/in/alexsolo",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Alex Solomon",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Pardes Biosciences",
+      "detail_url": "https://www.ycombinator.com/companies/pardes-bio",
+      "website": "http://www.pardesbio.com/",
+      "sector": "Biotech",
+      "description": "We make oral drugs to treat and prevent viral infections - like COVID-19.",
+      "linkedin_url": "https://linkedin.com/in/urilopatin",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Uri Lopatin",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "PlanGrid",
+      "detail_url": "https://www.ycombinator.com/companies/plangrid",
+      "website": "http://plangrid.com/",
+      "sector": "Construction",
+      "description": "PlanGrid is the leader in construction productivity software, used on more than one million projects in 84 countries. PlanGrid's cloud-based platform empowers contractors and owners in commercial, heavy civil, and other industries to collaborate easily from their mobile devices and desktop, managing blueprints, specs, photos, RFIs, field reports, and punch lists. With over 100 million digital blueprints on its platform, PlanGrid is also the largest digital blueprint repository in the world.",
+      "linkedin_url": "https://www.linkedin.com/in/tracy-young-0a17441",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Tracy Young",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Ralph Gootee",
+          "role": "Founder/CTO"
+        },
+        {
+          "name": "Ryan Sutton-Gee",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Rigetti Computing",
+      "detail_url": "https://www.ycombinator.com/companies/rigetti-computing",
+      "website": "http://rigetti.com/",
+      "sector": "Quantum Computing",
+      "description": "Rigetti Computing is building the world’s most powerful computers to help solve humanity’s most pressing and important problems. These systems will perform computations that today’s fastest supercomputers are incapable of — unlocking entirely new classes of problems and offering a direct path to solutions. We are scientists, engineers, builders, and visionaries. We believe quantum computing is going to significantly affect health care, how we treat disease, how we generate energy, and how we feed humanity. Rigetti is the only company deploying full-stack solutions for hybrid classical/quantum computing. Our 19-qubit quantum computer is available online through our Forest platform, and the first commercially useful applications are already under exploration.",
+      "linkedin_url": "https://www.linkedin.com/in/chad-rigetti-9891562",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Chad Rigetti",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "Segment",
+      "detail_url": "https://www.ycombinator.com/companies/segment",
+      "website": "http://segment.com",
+      "sector": "SaaS",
+      "description": "Software and APIs to collect, clean, and control customer data.",
+      "linkedin_url": "https://www.linkedin.com/company/segment-io/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Ilya Volodarsky",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Sendwave",
+      "detail_url": "https://www.ycombinator.com/companies/sendwave",
+      "website": "https://www.sendwave.com/",
+      "sector": "Fintech, Payments",
+      "description": "Sendwave's mission is to make sending money as easy and affordable as sending a text. Our app sends transfers securely from North America and Europe to Africa, Asia, and the Americas at great rates.",
+      "linkedin_url": "https://www.linkedin.com/in/drew-durbin-52517614/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Drew Durbin",
+          "role": "Founder/CEO"
+        }
+      ]
+    },
+    {
+      "name": "The Athletic",
+      "detail_url": "https://www.ycombinator.com/companies/the-athletic",
+      "website": "https://theathletic.com/",
+      "sector": "Media",
+      "description": "The Athletic is a direct-to-consumer digital sports media company committed to helping subscribers experience storytelling in a whole new way. Founded in 2016 and headquartered in San Francisco, The Athletic has over 600 full-time employees and covers more than 250 professional sports and collegiate teams in the US, Canada and the UK. The Athletic’s newsroom has produced thousands of in-depth articles along with more than 120 podcasts and premium video content. The Athletic is a remote-friendly company as we have offices in San Francisco, Los Angeles, London, and Melbourne.",
+      "linkedin_url": "https://www.linkedin.com/company/the-athletic-media-company/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Alex Mather",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Adam Hansmann",
+          "role": "Founder/COO"
+        }
+      ]
+    },
+    {
+      "name": "Truebill",
+      "detail_url": "https://www.ycombinator.com/companies/truebill",
+      "website": "https://www.truebill.com/",
+      "sector": "Fintech",
+      "description": "Rocket Money (formerly Truebill) is a leading personal finance app that analyzes members' spending habits, identifies inefficiencies, and offers immediate methods to improve their financial health. It enables people to optimize their spending, manage subscriptions, lower their bills, and automatically set aside money to reach their savings goals. Truebill has saved members more than $100 million since 2016 and is headquartered in Silver Spring, Maryland, with offices in San Francisco. Truebill's mission is to empower people to live their best financial lives. Truebill offers members a unique understanding of their finances and a suite of valuable services that save them time and money - ultimately giving them a leg up on their financial journey.",
+      "linkedin_url": "https://www.linkedin.com/company/rocketmoney/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Yahya Mokhtarzada",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Haroon Mokhtarzada",
+          "role": "Founder"
+        },
+        {
+          "name": "Idris Mokhtarzada",
+          "role": "Founder/CTO"
+        }
+      ]
+    },
+    {
+      "name": "Twitch",
+      "detail_url": "https://www.ycombinator.com/companies/twitch",
+      "website": "http://twitch.com/",
+      "sector": "Consumer",
+      "description": "A global community creating the future of live entertainment.",
+      "linkedin_url": "https://www.linkedin.com/company/twitch-tv/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Emmett Shear",
+          "role": "Founder"
+        },
+        {
+          "name": "Justin Kan",
+          "role": "Founder"
+        },
+        {
+          "name": "Kyle Vogt",
+          "role": "Founder"
+        }
+      ]
+    },
+    {
+      "name": "Weave",
+      "detail_url": "https://www.ycombinator.com/companies/weave",
+      "website": "http://getweave.com",
+      "sector": "SaaS",
+      "description": "Customer communication and payments platform.",
+      "linkedin_url": "https://www.linkedin.com/in/brandonrodman",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Brandon Rodman",
+          "role": "Founder/CEO"
+        },
+        {
+          "name": "Jared Rodman",
+          "role": "Founder/CCO"
+        },
+        {
+          "name": "Clint Berry",
+          "role": "Founder/CTO"
+        }
+      ]
+    }
+  ]
+}

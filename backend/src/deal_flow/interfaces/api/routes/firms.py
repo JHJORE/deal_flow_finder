@@ -73,11 +73,14 @@ def list_partners(
     outputs: OutputStore = Depends(get_output_store),
 ) -> list[Partner]:
     sources = _resolve(firm_domain, registry)
-    if not sources.team_url:
+    if not sources.team_urls and not sources.team_payload_url:
         return []
     partners = use_case.execute(
         ExtractFirmPartnersInput(
-            team_url=sources.team_url,
+            team_urls=sources.team_urls,
+            payload_url=sources.team_payload_url,
+            payload_attribute=sources.team_payload_attribute,
+            payload_role_filter=sources.team_payload_role_filter,
             limit=limit,
             firm_name=firm_domain.split(".")[0],
         )
@@ -265,15 +268,18 @@ def get_partner_with_twitter(
     spending any twitterapi.io credits.
     """
     sources = _resolve(firm_domain, registry)
-    if not sources.team_url:
+    if not sources.team_urls and not sources.team_payload_url:
         raise HTTPException(
             status_code=404,
-            detail=f"firm '{firm_domain}' has no team_url in firms.yaml",
+            detail=f"firm '{firm_domain}' has no team listing in firms.yaml",
         )
     needle = handle.lower().lstrip("@")
     partners = extract.execute(
         ExtractFirmPartnersInput(
-            team_url=sources.team_url,
+            team_urls=sources.team_urls,
+            payload_url=sources.team_payload_url,
+            payload_attribute=sources.team_payload_attribute,
+            payload_role_filter=sources.team_payload_role_filter,
             limit=50,
             firm_name=firm_domain.split(".")[0],
         )
@@ -333,11 +339,14 @@ def list_edgar_signals(
     outputs: OutputStore = Depends(get_output_store),
 ) -> list[PartnerFormDSignal]:
     sources = _resolve(firm_domain, registry)
-    if not sources.team_url:
+    if not sources.team_urls and not sources.team_payload_url:
         return []
     partners = extract_partners.execute(
         ExtractFirmPartnersInput(
-            team_url=sources.team_url,
+            team_urls=sources.team_urls,
+            payload_url=sources.team_payload_url,
+            payload_attribute=sources.team_payload_attribute,
+            payload_role_filter=sources.team_payload_role_filter,
             limit=limit,
             firm_name=firm_domain.split(".")[0],
         )

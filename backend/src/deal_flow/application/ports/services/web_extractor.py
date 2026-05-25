@@ -15,6 +15,17 @@ class WebExtractor(ABC):
         ...
 
     @abstractmethod
+    def discover_partners_from_payload(
+        self, listing_url: str, attribute_name: str, role_filter: str | None
+    ) -> list[dict]:
+        """Some firms (e.g. a16z) embed their entire roster as JSON in a
+        ``data-*`` attribute on the team page. Returns listing-shaped dicts
+        (``name``, ``role``, ``profile_url``, ``linkedin_url``, ``x_url``,
+        ``photo_url``). If ``role_filter`` is set, only members whose
+        ``role_display`` contains that substring are returned. No LLM,
+        no Firecrawl call — pure HTTP GET + JSON parse."""
+
+    @abstractmethod
     def scrape_partner_details(self, profile_urls: list[str]) -> dict[str, dict]:
         """Keyed by the URL actually scraped. A URL may be absent if the
         backing scraper couldn't enrich it."""

@@ -1,0 +1,934 @@
+{
+  "firm": "sequoiacap.com",
+  "portfolio_url": "https://sequoiacap.com/our-companies/#all-panel",
+  "sitemap_url": "https://sequoiacap.com/company-sitemap.xml",
+  "limit": 50,
+  "count": 50,
+  "companies": [
+    {
+      "name": "100 Thieves",
+      "detail_url": "https://sequoiacap.com/companies/100-thieves/",
+      "website": "https://100thieves.com/",
+      "sector": "Consumer",
+      "description": "100 Thieves is a lifestyle brand for gamers. It fields esports teams, hosts live events and produces themed apparel.",
+      "linkedin_url": null,
+      "photo_url": null,
+      "founders": []
+    },
+    {
+      "name": "210664",
+      "detail_url": "https://sequoiacap.com/companies/210664/",
+      "website": "https://www.aspora.com/",
+      "sector": "Fintech",
+      "description": "Aspora is building full stack banking for diaspora populations starting with the Indian diaspora. They enable non-resident Indians to move money seamlessly across borders at the lowest costs.",
+      "linkedin_url": "https://www.linkedin.com/company/get-aspora",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Parth Garg",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "247",
+      "detail_url": "https://sequoiacap.com/companies/247/",
+      "website": "https://www.247.ai/",
+      "sector": null,
+      "description": "[24]7.ai uses AI technology to help businesses attract and retain customers with a personalized, predictive and effortless experience. [24]7.ai gives companies the ability to know and act on consumer intent in milliseconds.",
+      "linkedin_url": "https://www.linkedin.com/company/24-7-inc",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "PV Kannan",
+          "role": null
+        },
+        {
+          "name": "Shanmugam \"Nags\" Nagarajan",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Abby Care",
+      "detail_url": "https://sequoiacap.com/companies/abby-care/",
+      "website": "https://www.abbycare.org/",
+      "sector": "Consumer, Healthcare",
+      "description": "Abby Care trains family members to become paid caregivers for loved ones with disabilities or special needs. It provides training and community support to deliver better care at lower cost.",
+      "linkedin_url": "https://www.linkedin.com/company/abbycareorg/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Havi Nguyen",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Admob",
+      "detail_url": "https://sequoiacap.com/companies/admob/",
+      "website": "https://www.admob.com/",
+      "sector": null,
+      "description": "AdMob built a pay-per click marketplace for mobile apps. Now part of Google, AdMob continues to help businesses gain user insights and drive in-app purchases.",
+      "linkedin_url": "https://www.linkedin.com/company/admob",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Omar Hamoui",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Agency",
+      "detail_url": "https://sequoiacap.com/companies/agency/",
+      "website": "https://agency.inc/",
+      "sector": "AI",
+      "description": "Agency is an AI agent for customer success teams.",
+      "linkedin_url": "https://www.linkedin.com/company/agency-inc/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Elias Torres",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Airbnb",
+      "detail_url": "https://sequoiacap.com/companies/airbnb/",
+      "website": "https://www.airbnb.com/",
+      "sector": "Consumer",
+      "description": "Airbnb brought consumers into the sharing economy with its revolutionary peer-to-peer travel marketplace. Today the company connects people around the world with its unique homes and unforgettable experiences.",
+      "linkedin_url": "https://www.linkedin.com/company/airbnb",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Nathan Blecharczyk",
+          "role": null
+        },
+        {
+          "name": "Brian Chesky",
+          "role": null
+        },
+        {
+          "name": "Joe Gebbia",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Airtime",
+      "detail_url": "https://sequoiacap.com/companies/airtime/",
+      "website": "https://www.airtimetools.com/",
+      "sector": "Productivity",
+      "description": "Airtime (FKA mmhmm) is a new and better way to create clear, compelling video communications. With Airtime, companies and individuals can define their style and coordinate how they show up on camera so that everyone can work better together.",
+      "linkedin_url": "https://linkedin.com/company/airtimetools",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Phil Libin",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Airtop",
+      "detail_url": "https://sequoiacap.com/companies/airtop/",
+      "website": "https://www.airtop.ai/",
+      "sector": "AI",
+      "description": "Airtop (fka Switchboard) provides intelligent browser automation for AI agents, enabling seamless web interaction with any site, even those requiring complex authentication processes. Airtop simplifies the development and deployment of AI-powered agents, making it an essential tool for AI-driven projects that require dynamic web interaction.",
+      "linkedin_url": "https://www.linkedin.com/company/airtop-ai/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Amir Ashkenazi",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Alkira",
+      "detail_url": "https://sequoiacap.com/companies/alkira/",
+      "website": "https://www.alkira.com/",
+      "sector": "Infrastructure",
+      "description": "Alkira equips its users with the first on-demand, multi-cloud network. Akira’s solution allows customers to build and deploy global secure cloud networks in minutes.",
+      "linkedin_url": "https://www.linkedin.com/company/alkiranet/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Atif Khan",
+          "role": null
+        },
+        {
+          "name": "Amir Khan",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Alpha Omega Semiconductor",
+      "detail_url": "https://sequoiacap.com/companies/alpha-omega-semiconductor/",
+      "website": "https://www.aosmd.com/",
+      "sector": "Hardware",
+      "description": "Alpha & Omega Semiconductor is a designer, developer and global supplier of a broad range of power semiconductors.",
+      "linkedin_url": null,
+      "photo_url": null,
+      "founders": []
+    },
+    {
+      "name": "Amp Robotics",
+      "detail_url": "https://sequoiacap.com/companies/amp-robotics/",
+      "website": "https://www.amprobotics.com/",
+      "sector": "Climate, Hardware",
+      "description": "AMP Robotics is changing the face of recycling with high-speed guided robotics. Powered by advanced computer vision and machine learning, the company’s robotics system automates the identification, sorting and processing done by recycling businesses.",
+      "linkedin_url": "https://www.linkedin.com/company/amp-robotics/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Matanya Horowitz",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Amplitude",
+      "detail_url": "https://sequoiacap.com/companies/amplitude/",
+      "website": "https://amplitude.com/",
+      "sector": "Data & Analytics",
+      "description": "Amplitude helps companies optimize the business value of digital product innovation. Its Behavioral Graph is the largest database of customer behavior and the industry’s first Digital Optimization System.",
+      "linkedin_url": "https://www.linkedin.com/company/amplitude-analytics",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Curtis Liu",
+          "role": null
+        },
+        {
+          "name": "Spenser Skates",
+          "role": null
+        },
+        {
+          "name": "Jeffrey Wang",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Anrok",
+      "detail_url": "https://sequoiacap.com/companies/anrok/",
+      "website": "https://anrok.com/",
+      "sector": "Fintech",
+      "description": "Anrok is an end-to-end compliance solution for finance leaders of SaaS businesses. With a Supreme Court ruling increasing the paperwork required for software companies, Anrok allows them to track state nexus thresholds, taxability rules and tax rates, all in real time.",
+      "linkedin_url": "https://www.linkedin.com/company/anrok",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Bradley Silicani",
+          "role": null
+        },
+        {
+          "name": "Kannan Goundan",
+          "role": null
+        },
+        {
+          "name": "Michelle Valentine",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Anterior",
+      "detail_url": "https://sequoiacap.com/companies/anterior/",
+      "website": "https://www.anterior.com/",
+      "sector": "AI, Healthcare",
+      "description": "Anterior is alleviating the $950B administrative burden in the U.S. healthcare industry by supercharging health plans with AI co:pilots for complex and manual workflows.",
+      "linkedin_url": "https://www.linkedin.com/company/96348269",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Zahid Mahmood",
+          "role": null
+        },
+        {
+          "name": "Abdel Mahmoud",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Anthropic",
+      "detail_url": "https://sequoiacap.com/companies/anthropic/",
+      "website": "https://www.anthropic.com/",
+      "sector": "AI",
+      "description": "Anthropic is an AI safety and research company that builds reliable, interpretable and steerable AI systems. Anthropic’s flagship product is Claude, a large language model trusted by millions of users and thousands of businesses worldwide.",
+      "linkedin_url": "https://www.linkedin.com/company/anthropicresearch/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Dario Amodei",
+          "role": null
+        },
+        {
+          "name": "Daniela Amodei",
+          "role": null
+        },
+        {
+          "name": "Jack Clark",
+          "role": null
+        },
+        {
+          "name": "Jared Kaplan",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Apex",
+      "detail_url": "https://sequoiacap.com/companies/apex/",
+      "website": "https://www.apexhq.ai/",
+      "sector": "AI, Security",
+      "description": "Apex is a Security Platform for generative AI and LLMs that helps companies remediate AI risks from any source. Apex provides a robust foundation for companies to safely boost their business with AI.",
+      "linkedin_url": "https://www.linkedin.com/company/apexhq-ai/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Tomer Avni",
+          "role": null
+        },
+        {
+          "name": "Matan Derman",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Apollo",
+      "detail_url": "https://sequoiacap.com/companies/apollo/",
+      "website": "https://www.apollo.io/",
+      "sector": null,
+      "description": "Apollo is an end-to-end AI sales platform to help companies grow their business. Its integrated GTM suite builds pipeline, enriches data and assists with sales calls.",
+      "linkedin_url": "https://www.linkedin.com/company/apolloio/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Ray Li",
+          "role": null
+        },
+        {
+          "name": "Tim Zheng",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Apple",
+      "detail_url": "https://sequoiacap.com/companies/apple/",
+      "website": "https://www.apple.com/",
+      "sector": "Consumer, Hardware",
+      "description": "Apple revolutionized personal technology with the Macintosh in 1984. It has repeatedly transformed the way humans interact with computers with the iPhone, iPod, MacBook, iMac and other products. Today it is the largest publicly traded company and one of the world’s most recognizable brands. Its forays into the worlds of cloud storage, wearables, music streaming and electric vehicles have proven the company continues to innovate.",
+      "linkedin_url": "https://www.linkedin.com/company/162479",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Steve Jobs",
+          "role": null
+        },
+        {
+          "name": "Steve Wozniak",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Arcwise",
+      "detail_url": "https://sequoiacap.com/companies/arcwise/",
+      "website": "https://arcwise.app",
+      "sector": "AI, Data & Analytics",
+      "description": "Arcwise is a platform for analytical but non-technical business users to build, publish, and maintain data and ML applications, all from their spreadsheet. They’re building a collaborative workspace to bridge the gap between business operators and technical data experts — 'arcing' the divide between notebooks and spreadsheets. Arcwise is the missing tool that would have saved years of person-hours at Flexport, where business-critical data applications repeatedly took months to move from spreadsheets to Python.",
+      "linkedin_url": "https://www.linkedin.com/company/arcwisedata/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Rahul Bali",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Armis Security",
+      "detail_url": "https://sequoiacap.com/companies/armis-security/",
+      "website": "https://armis.com/",
+      "sector": "Security",
+      "description": "Armis is the first agentless, enterprise-class security platform for unmanaged and IoT devices. With Armis, companies can adopt new connected devices without fear of comprise.",
+      "linkedin_url": "https://www.linkedin.com/company/armis-security/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Yevgeny Dibrov",
+          "role": null
+        },
+        {
+          "name": "Nadir Izrael",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Arq",
+      "detail_url": "https://sequoiacap.com/companies/arq/",
+      "website": "https://www.arqfinance.com/",
+      "sector": "Fintech",
+      "description": "ARQ opens the world’s strongest assets and markets to travelers, investors and professionals across the Americas—so they can spend, receive, send and grow their money wherever they are.",
+      "linkedin_url": "https://www.linkedin.com/company/79356857/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Álvaro Correa",
+          "role": null
+        },
+        {
+          "name": "Zach Garman",
+          "role": null
+        },
+        {
+          "name": "Fernando Terrés",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Astrocade",
+      "detail_url": "https://sequoiacap.com/companies/astrocade/",
+      "website": "https://www.astrocade.com/",
+      "sector": "Consumer",
+      "description": "Astrocade is a social entertainment platform where creators of all backgrounds and skills create games and playable content, and millions of players discover endless things to play.",
+      "linkedin_url": "https://linkedin.com/company/astrocade",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Fei-Fei Li",
+          "role": null
+        },
+        {
+          "name": "Amir Sadeghian",
+          "role": null
+        },
+        {
+          "name": "Ali Sadeghian",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Atari",
+      "detail_url": "https://sequoiacap.com/companies/atari/",
+      "website": "https://www.atari.com/",
+      "sector": "Consumer",
+      "description": "Atari is the original video game pioneer. Its portfolio of more than 200 games includes hits like Asteroids, Centipede and Pong. Under its brand and franchises, Atari has expanded into the worlds of mobile gaming, merchandising and publishing.",
+      "linkedin_url": "https://www.linkedin.com/company/atari",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Nolan Bushnell",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Attentive",
+      "detail_url": "https://sequoiacap.com/companies/attentive/",
+      "website": "https://attentivemobile.com/",
+      "sector": "AI",
+      "description": "Attentive is a personalized text messaging platform for innovative brands. Using real-time behavioral data, Attentive automatically sends engaging text messages to each subscriber at every step of their customer journey.",
+      "linkedin_url": "https://www.linkedin.com/company/attentivemobile/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Andrew Jones",
+          "role": null
+        },
+        {
+          "name": "Brian Long",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Auctor",
+      "detail_url": "https://sequoiacap.com/companies/auctor/",
+      "website": "https://www.getauctor.com/",
+      "sector": "AI",
+      "description": "Auctor is the AI-native system of action for the entire software implementation lifecycle. It enables professional services teams and system integrators to deliver faster, more consistently and smarter with every project. Despite the massive scale and growing complexity of enterprise software, the way implementations are executed has remained largely unchanged. Auctor is built for how this work actually happens. It curates execution-ready artifacts like rough orders of magnitude, resource plans, process flows, user stories and much more.",
+      "linkedin_url": "https://www.linkedin.com/company/getauctor/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Matthew Blackburn",
+          "role": null
+        },
+        {
+          "name": "Sky Ng-Thow-Hing",
+          "role": null
+        },
+        {
+          "name": "William Sun",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Aurora",
+      "detail_url": "https://sequoiacap.com/companies/aurora/",
+      "website": "https://aurora.tech/",
+      "sector": "AI, Hardware",
+      "description": "Aurora delivers the benefits of self-driving technology safely and efficiently. Aurora is solving today’s most complex AI, automation and engineering challenges to catalyze the self-driving revolution.",
+      "linkedin_url": "https://www.linkedin.com/company/aurora-inc./",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Sterling Anderson",
+          "role": null
+        },
+        {
+          "name": "Drew Bagnell",
+          "role": null
+        },
+        {
+          "name": "Chris Urmson",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Avelios",
+      "detail_url": "https://sequoiacap.com/companies/avelios/",
+      "website": "https://en.avelios.com/",
+      "sector": "Healthcare",
+      "description": "Avelios is a modern and modular hospital information system, including documentation (EHR, medication, operating room management); administration (billing, staff, clinic management); patient portals; AI solutions, and more.",
+      "linkedin_url": "https://www.linkedin.com/company/avelios-medical",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Christian Albrecht",
+          "role": null
+        },
+        {
+          "name": "Nicolas Jakob",
+          "role": null
+        },
+        {
+          "name": "Sebastian Krammer",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Barracuda Networks",
+      "detail_url": "https://sequoiacap.com/companies/barracuda-networks/",
+      "website": "https://www.barracuda.com/",
+      "sector": "Security",
+      "description": "Barracuda provides email protection, application and cloud security, network security and data protection solutions.",
+      "linkedin_url": "https://www.linkedin.com/company/barracuda-networks",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Dean Drako",
+          "role": null
+        },
+        {
+          "name": "Zach Levow",
+          "role": null
+        },
+        {
+          "name": "Michael Perone",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bigeye",
+      "detail_url": "https://sequoiacap.com/companies/bigeye/",
+      "website": "https://www.bigeye.com/",
+      "sector": "Data & Analytics",
+      "description": "Bigeye is the leading data quality engineering platform. It combines automatic instrumentation, robust anomaly detection, and extensive customization to give insight on each piece of data.",
+      "linkedin_url": "https://www.linkedin.com/company/bigeye-data/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Eleanor Treharne-Jones",
+          "role": null
+        },
+        {
+          "name": "Egor Gryaznov",
+          "role": null
+        },
+        {
+          "name": "Kyle Kirwan",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bigpanda",
+      "detail_url": "https://sequoiacap.com/companies/bigpanda/",
+      "website": "https://bigpanda.io/",
+      "sector": "Infrastructure",
+      "description": "BigPanda improves how IT teams manage data. It analyzes IT alerts from fragmented clouds, applications and systems, and turns them into actionable insights.",
+      "linkedin_url": "https://www.linkedin.com/company/2598034",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Elik Eizenberg",
+          "role": null
+        },
+        {
+          "name": "Assaf Resnick",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Biomodal",
+      "detail_url": "https://sequoiacap.com/companies/biomodal/",
+      "website": "https://www.biomodal.com/",
+      "sector": "Healthcare",
+      "description": "biomodal is an omics based life-sciences technology and analytics company delivering products that bring the dynamism of our ever-changing biology into focus. Their duet multiomics solution enables more epigenetic information from a single, low input DNA library without complex, resource intensive bioinformatics or harsh chemical treatment. Their single-base-resolution, phased sequencing approach unlocks the combinatorial power of genetic and epigenetic information in one workflow, elucidating greater biological insight within the fields of cancer, neurodegenerative disease, and ageing.",
+      "linkedin_url": "https://www.linkedin.com/company/biomodal",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Peter Fromen",
+          "role": null
+        },
+        {
+          "name": "Shankar Balasubramanian",
+          "role": null
+        },
+        {
+          "name": "Bobby Yerramilli-Rao",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bird",
+      "detail_url": "https://sequoiacap.com/companies/bird/",
+      "website": "https://www.bird.co/",
+      "sector": "Consumer, Hardware",
+      "description": "Bird is an electric vehicle maker and bike-sharing network focused on sustainability. Its products make cities more livable by reducing car usage, traffic and carbon emissions.",
+      "linkedin_url": "https://www.linkedin.com/company/birdapp/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Travis VanderZanden",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Block",
+      "detail_url": "https://sequoiacap.com/companies/block/",
+      "website": "https://block.xyz/",
+      "sector": "Consumer, Fintech",
+      "description": "Block is Square, Cash App, Spiral, TIDAL, TBD, and other foundational teams. It is one company built from many blocks, all united by the same purpose of economic empowerment.",
+      "linkedin_url": "https://www.linkedin.com/company/square--",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Jack Dorsey",
+          "role": null
+        },
+        {
+          "name": "Jim McKelvey",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Blockaid",
+      "detail_url": "https://sequoiacap.com/companies/blockaid/",
+      "website": "https://www.blockaid.io/",
+      "sector": "Crypto, Security",
+      "description": "Blockaid provides security tools to web3 builders and protects users from scams, phishing, and hacks. Built by a team of engineers out of Israeli cyberintelligence, Blockaid is trusted by some of the biggest names in crypto.",
+      "linkedin_url": "https://www.linkedin.com/company/blockaid/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Ido Ben-Natan",
+          "role": null
+        },
+        {
+          "name": "Raz Niv",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Blockit Ai",
+      "detail_url": "https://sequoiacap.com/companies/blockit-ai/",
+      "website": "https://www.blockit.com/",
+      "sector": "AI",
+      "description": "Blockit is the first AI scheduling agent that actually understands time. The calendar is the last untouched social network—and AI finally unlocks it. When two Blockit users meet in the wild, the agent sees both calendars and instantly finds the best time. No back-and-forth. Scheduling accelerates from days to minutes. Come for the agent, stay for the network.",
+      "linkedin_url": "https://www.linkedin.com/company/blockit-ai/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "John Han",
+          "role": null
+        },
+        {
+          "name": "Kais Khimji",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Blues",
+      "detail_url": "https://sequoiacap.com/companies/blues/",
+      "website": "https://blues.io/",
+      "sector": "Hardware, Infrastructure",
+      "description": "Blues helps physical product makers transform their offerings into data-driven intelligent services. Blues solves the biggest challenges associated with IoT connectivity, making it easy to securely cloud-connect any physical product.",
+      "linkedin_url": "https://in.linkedin.com/company/blues-wireless",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Ian Small",
+          "role": null
+        },
+        {
+          "name": "Ray Ozzie",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bolt",
+      "detail_url": "https://sequoiacap.com/companies/bolt/",
+      "website": "https://bolt.eu/",
+      "sector": "Consumer",
+      "description": "Bolt is a European mobility platform that makes urban travel more affordable and sustainable. Services include ridesharing, scooter rentals and food delivery.",
+      "linkedin_url": "https://www.linkedin.com/company/bolt-eu/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Oliver Leisalu",
+          "role": null
+        },
+        {
+          "name": "Markus Villig",
+          "role": null
+        },
+        {
+          "name": "Martin Villig",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Breeze",
+      "detail_url": "https://sequoiacap.com/companies/breeze/",
+      "website": "https://breeze.cash/",
+      "sector": "Crypto, Fintech",
+      "description": "Breeze.cash unlocks new revenue for businesses by helping them accept and manage crypto payments. With best-in-class compliance, accounting, analytics, and insights, Breeze brings the best of web2 into the world of web3.",
+      "linkedin_url": "https://www.linkedin.com/company/breeze-cash/about/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Peng Du",
+          "role": null
+        },
+        {
+          "name": "Millie Yang",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Breezebio",
+      "detail_url": "https://sequoiacap.com/companies/breezebio/",
+      "website": "https://breezebio.com/",
+      "sector": "Healthcare",
+      "description": "BreezeBio is a genetic medicines company pioneering precision-delivered therapies for autoimmune disease and oncology. Powered by its proprietary NanoGalaxy® platform, BreezeBio delivers genetic medicines to the right targets to precisely modulate immune responses at their source. By restoring immune balance, the company aims to move beyond symptom management toward durable, potentially curative therapies—starting with Type 1 Diabetes and expanding into a broad range of immune-mediated diseases and cancer.",
+      "linkedin_url": "https://www.linkedin.com/company/breezebio/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Kunwoo Lee",
+          "role": null
+        },
+        {
+          "name": "Niren Murthy",
+          "role": null
+        },
+        {
+          "name": "Hyo Min Park",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Brewbird",
+      "detail_url": "https://sequoiacap.com/companies/brewbird/",
+      "website": "https://www.brewbird.com/",
+      "sector": "Operations",
+      "description": "Brewbird provides coffee machines and sustainable whole-bean pods for the workplace.",
+      "linkedin_url": null,
+      "photo_url": null,
+      "founders": []
+    },
+    {
+      "name": "Bridge",
+      "detail_url": "https://sequoiacap.com/companies/bridge/",
+      "website": "https://www.bridge.xyz/",
+      "sector": "Crypto",
+      "description": "Bridge, now a part of Stripe, is building critical infrastructure to support stablecoin payments enabling companies to move money at internet speed.",
+      "linkedin_url": "https://www.linkedin.com/company/bridge-apis/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Zach Abrams",
+          "role": null
+        },
+        {
+          "name": "Sean Yu",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bridgebio",
+      "detail_url": "https://sequoiacap.com/companies/bridgebio/",
+      "website": "https://bridgebio.com/",
+      "sector": "Healthcare",
+      "description": "BridgeBio develops breakthrough medicines for genetic diseases. Its portfolio of more than 15 drugs, all in various stages of development, addresses everything from genetic skin, cancer- and heart-related issues to renal disease.",
+      "linkedin_url": "https://www.linkedin.com/company/bridgebio/about/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Neil Kumar",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bruce",
+      "detail_url": "https://sequoiacap.com/companies/bruce/",
+      "website": "https://www.bruce.bot/",
+      "sector": "AI",
+      "description": "Bruce is the trust infrastructure platform for professional services. As an AI-native reputation and discovery layer, it converts real-world relationships and verified performance into structured trust data that powers intelligent search and matching. By scaling trust beyond individual networks, it establishes the system of record for professional trust, aligning market success with real credibility.",
+      "linkedin_url": "https://www.linkedin.com/company/brucebotai",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Jesse Chor",
+          "role": null
+        },
+        {
+          "name": "Mike Emery",
+          "role": null
+        },
+        {
+          "name": "Glen Wong",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Bunkerhill Health",
+      "detail_url": "https://sequoiacap.com/companies/bunkerhill-health/",
+      "website": "https://www.bunkerhillhealth.com/",
+      "sector": "Healthcare",
+      "description": "Bunkerhill Health brings AI algorithms—built by researchers around the world—to widespread adoption in healthcare, helping hospitals find at-risk patients and close critical gaps in care. Its platform scans medical images and EHRs, flags patients for follow-up, and automates care coordination. Bunkerhill improves outcomes, streamlines workflows, and boosts revenue—without adding work for clinicians.",
+      "linkedin_url": "https://www.linkedin.com/company/bunkerhill-health/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "David Eng",
+          "role": null
+        },
+        {
+          "name": "Nishith Khandwala",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Cadence Design Systems",
+      "detail_url": "https://sequoiacap.com/companies/cadence-design-systems/",
+      "website": "https://www.cadence.com/",
+      "sector": "AI, Hardware",
+      "description": "Cadence is a leader in electronic systems design, building upon more than 30 years of computational software expertise. The company applies its underlying Intelligent System Design strategy to deliver software, hardware, and IP that turn design concepts into reality.",
+      "linkedin_url": null,
+      "photo_url": null,
+      "founders": []
+    },
+    {
+      "name": "Cafepress",
+      "detail_url": "https://sequoiacap.com/companies/cafepress/",
+      "website": "https://www.cafepress.com/",
+      "sector": "Consumer",
+      "description": "CafePress works with designers to bring the world millions of designs on hundreds of different products.",
+      "linkedin_url": null,
+      "photo_url": null,
+      "founders": []
+    },
+    {
+      "name": "Caldera",
+      "detail_url": "https://sequoiacap.com/companies/caldera/",
+      "website": "https://caldera.xyz/",
+      "sector": "Crypto, Infrastructure",
+      "description": "Caldera specializes in building high-performance, customizable, and application-specific layer-two blockchains. These custom-built blockchains (Caldera Chains) offer high throughput, low latency, and customizable features for optimizing the performance and user experience of decentralized applications, with the ability to process hundreds of transactions per second and sub-second confirmation times.",
+      "linkedin_url": "https://www.linkedin.com/company/calderaxyz/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Parker Jou",
+          "role": null
+        },
+        {
+          "name": "Matt Katz",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Captions",
+      "detail_url": "https://sequoiacap.com/companies/captions/",
+      "website": "https://www.captions.ai/",
+      "sector": "AI",
+      "description": "Captions is an AI-powered creative studio. Their goal is to enable anyone, anywhere to produce studio-quality videos with just a few quick taps.",
+      "linkedin_url": "https://www.linkedin.com/company/captionsapp/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Gaurav Misra",
+          "role": null
+        }
+      ]
+    },
+    {
+      "name": "Captivateiq",
+      "detail_url": "https://sequoiacap.com/companies/captivateiq/",
+      "website": "https://www.captivateiq.com/",
+      "sector": null,
+      "description": "CaptivateIQ helps enterprise companies make their sales commissions transparent. With CaptivateIQ, businesses can design and measure incentive plans so their teams feel more connected and motivated to work together.",
+      "linkedin_url": "https://www.linkedin.com/company/captivateiq/",
+      "photo_url": null,
+      "founders": [
+        {
+          "name": "Mark Schopmeyer",
+          "role": null
+        },
+        {
+          "name": "Conway Teng",
+          "role": null
+        },
+        {
+          "name": "Hubert Wong",
+          "role": null
+        }
+      ]
+    }
+  ]
+}

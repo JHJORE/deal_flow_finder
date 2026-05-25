@@ -87,6 +87,7 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
           size="md"
           textColor={INK_ON_DARK}
           watched={watched}
+          photoUrl={partner.photoUrl}
         />
         <div>
           <div className="t-h-sm">{partner.name}</div>

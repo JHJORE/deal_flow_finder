@@ -60,40 +60,65 @@ def _build_extractor(refresh: bool) -> FirecrawlExtractor:
 
 
 def step0(firm: str, refresh: bool) -> None:
-    """Smoke: load registry, print URLs, scrape the team listing."""
+    """Smoke: load registry, print URLs, scrape the first team URL listing."""
     sources = _resolve(firm)
     _dump(f"firm sources for {firm}", sources)
-    if not sources.team_url:
-        print("[step0] firm has no team_url; nothing to scrape.", file=sys.stderr)
+    if sources.team_payload_url:
+        extractor = _build_extractor(refresh)
+        listings = extractor.discover_partners_from_payload(
+            sources.team_payload_url,
+            sources.team_payload_attribute or "data-payload",
+            sources.team_payload_role_filter,
+        )[:10]
+        _dump(f"smoke listing — {len(listings)} partners (payload)", listings)
+        return
+    if not sources.team_urls:
+        print("[step0] firm has no team listing.", file=sys.stderr)
         return
     extractor = _build_extractor(refresh)
-    listings = extractor.scrape_partner_listing(sources.team_url)[:10]
+    listings = extractor.scrape_partner_listing(sources.team_urls[0])[:10]
     _dump(f"smoke listing — {len(listings)} partners", listings)
 
 
 def step1(firm: str, refresh: bool) -> None:
-    """Partners — listing only."""
+    """Partners — listing only (uses every team URL or the payload)."""
     sources = _resolve(firm)
-    if not sources.team_url:
-        print("[step1] firm has no team_url.", file=sys.stderr)
-        return
     extractor = _build_extractor(refresh)
-    listings = extractor.scrape_partner_listing(sources.team_url)[:10]
-    _dump(f"partner listing — {len(listings)}", listings)
+    if sources.team_payload_url:
+        listings = extractor.discover_partners_from_payload(
+            sources.team_payload_url,
+            sources.team_payload_attribute or "data-payload",
+            sources.team_payload_role_filter,
+        )
+    elif sources.team_urls:
+        listings = [
+            item
+            for url in sources.team_urls
+            for item in extractor.scrape_partner_listing(url)
+        ]
+    else:
+        print("[step1] firm has no team listing.", file=sys.stderr)
+        return
+    _dump(f"partner listing — {len(listings)}", listings[:20])
 
 
 def step2(firm: str, refresh: bool) -> None:
-    """Partners — full two-stage (listing + detail batch + merge)."""
+    """Partners — full two-stage (listing + detail batch + merge), uncapped."""
     sources = _resolve(firm)
-    if not sources.team_url:
-        print("[step2] firm has no team_url.", file=sys.stderr)
+    if not sources.team_urls and not sources.team_payload_url:
+        print("[step2] firm has no team listing.", file=sys.stderr)
         return
     extractor = _build_extractor(refresh)
     partners = ExtractFirmPartners(extractor).execute(
-        ExtractFirmPartnersInput(team_url=sources.team_url, limit=10)
+        ExtractFirmPartnersInput(
+            team_urls=sources.team_urls,
+            payload_url=sources.team_payload_url,
+            payload_attribute=sources.team_payload_attribute,
+            payload_role_filter=sources.team_payload_role_filter,
+        )
     )
     socials = sum(1 for p in partners if p.linkedin_url or p.x_url)
-    _dump(f"partners — {len(partners)}, {socials} with socials", partners)
+    _dump(f"partners — {len(partners)}, {socials} with socials", partners[:20])
     if partners and socials == 0:
         print("\n[FAIL] Batch-wide zero socials — schema/prompt is broken.", file=sys.stderr)
         sys.exit(4)

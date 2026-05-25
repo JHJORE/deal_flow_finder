@@ -55,6 +55,7 @@ export function PartnerProfileView({ id }: { id: string }) {
             color={isPartner ? firmColor(partner!.firm) : FOUNDER_AVATAR}
             size="xl"
             textColor={isPartner ? INK_ON_DARK : INK_ON_LIGHT}
+            photoUrl={isPartner ? partner!.photoUrl : null}
           />
         }
         name={entity.name}
@@ -166,10 +167,16 @@ function AboutContact({ partnerId }: { partnerId: string }) {
       <Panel label="Contact">
         <ContactRows
           rows={[
-            { key: "Email", value: p.contact.email, href: `mailto:${p.contact.email}` },
+            p.contact.email !== ""
+              ? { key: "Email", value: p.contact.email, href: `mailto:${p.contact.email}` }
+              : { key: "Email", value: "—" },
             { key: "Phone", value: p.contact.phone },
-            { key: "LinkedIn", value: p.contact.linkedin, href: `https://${p.contact.linkedin}` },
-            { key: "X", value: p.contact.x, href: `https://x.com/${p.contact.x.replace("@", "")}` },
+            p.contact.linkedin !== ""
+              ? { key: "LinkedIn", value: p.contact.linkedin, href: `https://${p.contact.linkedin}` }
+              : { key: "LinkedIn", value: "—" },
+            p.contact.x !== ""
+              ? { key: "X", value: p.contact.x, href: `https://x.com/${p.contact.x.replace("@", "")}` }
+              : { key: "X", value: "—" },
           ]}
         />
       </Panel>
@@ -405,6 +412,7 @@ function TopPostPanel({ partnerId }: { partnerId: string }) {
           color={firmColor(p.firm)}
           size="md"
           textColor={INK_ON_DARK}
+          photoUrl={p.photoUrl}
         />
         <div className="grow">
           <div className="flex flex-wrap items-baseline gap-2">

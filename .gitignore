@@ -28,6 +28,9 @@ backend/.twitter/
 # Apify response cache (LinkedIn posts)
 backend/.apify/
 
+# Gemini response cache
+backend/.gemini/
+
 # Processed-entity output sidecar (partners.json, edgar.json, twitter.json)
 backend/.outputs/
 
