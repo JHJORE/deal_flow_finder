@@ -29,7 +29,7 @@ dev = [
 where = ["src"]
 
 [tool.vercel]
-entrypoint = "deal_flow.interfaces.api.app:app"
+entrypoint = "src.deal_flow.interfaces.api.app:app"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

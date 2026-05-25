@@ -10,7 +10,8 @@
       "entrypoint": "backend",
       "routePrefix": "/api",
       "framework": "fastapi",
-      "includeFiles": ["firms.yaml", "data/**"]
+      "includeFiles": ["firms.yaml", "data/**"],
+      "excludeFiles": ["tests/**", "scripts/**"]
     }
   }
 }
