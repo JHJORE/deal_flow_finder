@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     twitterapi_cache_dir: Path = _BACKEND_ROOT / ".twitter"
     twitterapi_cache_refresh: bool = False
 
+    apify_api_token: str = ""
+    apify_cache_dir: Path = _BACKEND_ROOT / ".apify"
+    apify_cache_refresh: bool = False
+    apify_linkedin_actor_id: str = "harvestapi~linkedin-profile-posts"
+
     gemini_api_key: str = ""
     gemini_cache_dir: Path = _BACKEND_ROOT / ".gemini"
     gemini_cache_refresh: bool = False

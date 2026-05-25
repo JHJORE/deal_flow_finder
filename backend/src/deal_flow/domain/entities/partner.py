@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+from deal_flow.domain.entities.linkedin.linkedin_snapshot import LinkedInSnapshot
 from deal_flow.domain.entities.twitter.twitter_snapshot import TwitterSnapshot
 
 
@@ -18,10 +19,7 @@ class Partner:
     farcaster_url: str | None = None
     email: str | None = None
     photo_url: str | None = None
-    # Sector / stage tags the firm publishes for this partner — e.g.
-    # ("Seed/Early",), ("Growth", "Bio + Health"). Comes from the firm's
-    # own labelling on the team page; empty when the firm doesn't tag.
-    focus_areas: tuple[str, ...] = field(default_factory=tuple)
     education: tuple[str, ...] = field(default_factory=tuple)
     prior_experience: tuple[str, ...] = field(default_factory=tuple)
     twitter: TwitterSnapshot | None = None
+    linkedin: LinkedInSnapshot | None = None

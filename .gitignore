@@ -25,6 +25,9 @@ backend/.edgar/
 # twitterapi.io response cache
 backend/.twitter/
 
+# Apify response cache (LinkedIn posts)
+backend/.apify/
+
 # Gemini response cache
 backend/.gemini/
 
