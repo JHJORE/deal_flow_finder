@@ -70,7 +70,7 @@ export function PartnerProfileView({ id }: { id: string }) {
 
       <PartnerStats partnerId={id} isPartner={isPartner} liftP={liftP} liftE={liftE} />
 
-      {isPartner && <AboutContact partnerId={id} />}
+      {isPartner ? <AboutContact partnerId={id} /> : <FounderContact founderId={id} />}
 
       <Interp>
         <Interpretation partnerId={id} liftP={liftP} liftE={liftE} />
@@ -190,6 +190,27 @@ function AboutContact({ partnerId }: { partnerId: string }) {
             p.contact.x !== ""
               ? { key: "X", value: p.contact.x, href: `https://x.com/${p.contact.x.replace("@", "")}` }
               : { key: "X", value: "—" },
+          ]}
+        />
+      </Panel>
+    </div>
+  );
+}
+
+function FounderContact({ founderId }: { founderId: string }) {
+  const f = founderById(founderId)!;
+  const handle = f.handle.replace(/^@/, "");
+  return (
+    <div className="mb-6">
+      <Panel label="Contact" pill="coming soon">
+        <ContactRows
+          rows={[
+            handle
+              ? { key: "X", value: f.handle, href: `https://x.com/${handle}` }
+              : { key: "X", value: "—" },
+            { key: "Email", value: "—" },
+            { key: "Phone", value: "—" },
+            { key: "LinkedIn", value: "—" },
           ]}
         />
       </Panel>

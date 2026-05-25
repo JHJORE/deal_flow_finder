@@ -1,11 +1,21 @@
 "use client";
 
 import { Avatar } from "@/components/Avatar";
+import { StarToggle } from "@/components/DetailUI";
 import { INK_ON_DARK, INK_ON_LIGHT, FOUNDER_AVATAR } from "@/lib/ui";
 import { PageHeader } from "@/components/PageHeader";
 import { FIRMS, FOUNDERS, PARTNERS, firmColor } from "@/lib/data";
 import { useRadar } from "@/lib/state";
 import type { Founder, Partner } from "@/lib/types";
+
+function cardKeyActivate(onOpen: () => void) {
+  return (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onOpen();
+    }
+  };
+}
 
 export function PeopleView() {
   const { activeFirms, setOpen, isWatched, peopleTab, setPeopleTab } = useRadar();
@@ -80,9 +90,12 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
   const liftDisplay = hasActivity ? `${lift > 0 ? "+" : ""}${lift}%` : "—";
   const postsDisplay = hasActivity ? partner.posts[partner.posts.length - 1] : "—";
   return (
-    <button
+    <article
+      role="button"
+      tabIndex={0}
       onClick={onOpen}
-      className="group card-lift flex flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard"
+      onKeyDown={cardKeyActivate(onOpen)}
+      className="group card-lift flex cursor-pointer flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard focus:outline-none focus-visible:border-line-hard focus-visible:ring-2 focus-visible:ring-accent/40"
     >
       <div className="flex items-center gap-3">
         <Avatar
@@ -93,12 +106,13 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
           watched={watched}
           photoUrl={partner.photoUrl}
         />
-        <div>
-          <div className="t-h-sm">{partner.name}</div>
-          <div className="t-meta">
+        <div className="min-w-0 flex-1">
+          <div className="truncate t-h-sm">{partner.name}</div>
+          <div className="t-meta truncate">
             {FIRMS[partner.firm].name} · {partner.role}
           </div>
         </div>
+        <StarToggle id={partner.id} label={partner.name} />
       </div>
 
       <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">
@@ -122,7 +136,7 @@ function PartnerCard({ partner, onOpen, watched }: { partner: Partner; onOpen: (
         />
         <Stat label="spiking" value={partner.spike ? "Yes" : "No"} tone={partner.spike ? "warn" : "default"} />
       </div>
-    </button>
+    </article>
   );
 }
 
@@ -135,9 +149,12 @@ function FounderCard({ founder, onOpen, watched }: { founder: Founder; onOpen: (
   const growthNum = parseInt(founder.followerGrowth.replace(/[^0-9-]/g, ""), 10);
   const growthHot = !Number.isNaN(growthNum) && growthNum >= 100;
   return (
-    <button
+    <article
+      role="button"
+      tabIndex={0}
       onClick={onOpen}
-      className="group card-lift flex flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard"
+      onKeyDown={cardKeyActivate(onOpen)}
+      className="group card-lift flex cursor-pointer flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard focus:outline-none focus-visible:border-line-hard focus-visible:ring-2 focus-visible:ring-accent/40"
     >
       <div className="flex items-center gap-3">
         <Avatar
@@ -147,12 +164,13 @@ function FounderCard({ founder, onOpen, watched }: { founder: Founder; onOpen: (
           textColor={INK_ON_LIGHT}
           watched={watched}
         />
-        <div>
-          <div className="t-h-sm">{founder.name}</div>
-          <div className="t-meta">
+        <div className="min-w-0 flex-1">
+          <div className="truncate t-h-sm">{founder.name}</div>
+          <div className="t-meta truncate">
             {founder.handle} · {founder.role} · {founder.company}
           </div>
         </div>
+        <StarToggle id={founder.id} label={founder.name} />
       </div>
 
       <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">
@@ -180,7 +198,7 @@ function FounderCard({ founder, onOpen, watched }: { founder: Founder; onOpen: (
           tone={growthHot ? "warn" : "default"}
         />
       </div>
-    </button>
+    </article>
   );
 }
 

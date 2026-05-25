@@ -1,6 +1,7 @@
 "use client";
 
 import { Avatar } from "@/components/Avatar";
+import { StarToggle } from "@/components/DetailUI";
 import { INK_ON_DARK } from "@/lib/ui";
 import { PageHeader } from "@/components/PageHeader";
 import { COMPANIES, FIRMS, firmColor } from "@/lib/data";
@@ -11,6 +12,11 @@ function hiringLift(c: Company): number | null {
   const base = (c.jobs[0] + c.jobs[1] + c.jobs[2]) / 3;
   if (!base) return null;
   return Math.round(((c.jobs[c.jobs.length - 1] - base) / base) * 100);
+}
+
+function careersUrl(c: Company): string | null {
+  if (!c.website) return null;
+  return `${c.website.replace(/\/+$/, "")}/careers`;
 }
 
 export function PortfolioView() {
@@ -45,11 +51,20 @@ function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: (
   const lift = hiringLift(company);
   const hotHires = company.seniorHires.filter((h) => h.hot).length;
   const sectorOrStage = company.sector || company.stage;
+  const careers = careersUrl(company);
 
   return (
-    <button
+    <article
+      role="button"
+      tabIndex={0}
       onClick={onOpen}
-      className="group card-lift flex flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      className="group card-lift flex cursor-pointer flex-col gap-3 rounded-lg border border-line-faint bg-surface-1 px-5 py-5 text-left hover:border-line-hard focus:outline-none focus-visible:border-line-hard focus-visible:ring-2 focus-visible:ring-accent/40"
     >
       <div className="flex items-center gap-3">
         <Avatar
@@ -60,26 +75,40 @@ function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: (
           watched={watched}
           photoUrl={company.photoUrl}
         />
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="truncate t-h-sm">{company.name}</div>
           <div className="t-meta truncate">
             {FIRMS[company.firm].name}
             {sectorOrStage ? ` · ${sectorOrStage}` : ""}
           </div>
         </div>
+        <StarToggle id={company.id} label={company.name} />
       </div>
 
       <p className="t-caption !max-w-none line-clamp-2 min-h-[3em] text-ink-2">
         {company.description ?? `${company.sector || "Portfolio"} company · founded by ${company.founder || "—"}`}
       </p>
 
-      {hotHires > 0 ? (
-        <div className="font-mono text-meta tabnum text-accent">
-          + {hotHires} fundraise-signal hire{hotHires > 1 ? "s" : ""}
-        </div>
-      ) : (
-        <div className="font-mono text-meta text-ink-4">— steady on hires</div>
-      )}
+      <div className="flex items-center justify-between gap-3">
+        {hotHires > 0 ? (
+          <div className="font-mono text-meta tabnum text-accent">
+            + {hotHires} fundraise-signal hire{hotHires > 1 ? "s" : ""}
+          </div>
+        ) : (
+          <div className="font-mono text-meta text-ink-4">— steady on hires</div>
+        )}
+        {careers && (
+          <a
+            href={careers}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="font-mono text-meta text-ink-3 underline-offset-2 hover:text-ink hover:underline"
+          >
+            careers ↗
+          </a>
+        )}
+      </div>
 
       <div className="mt-1 grid grid-cols-3 gap-4 border-t border-line-faint pt-4">
         <Stat label="open roles" value={company.jobs[company.jobs.length - 1] ?? "—"} />
@@ -94,7 +123,7 @@ function CompanyCard({ company, onOpen, watched }: { company: Company; onOpen: (
           tone={hotHires > 0 ? "warn" : "default"}
         />
       </div>
-    </button>
+    </article>
   );
 }
 

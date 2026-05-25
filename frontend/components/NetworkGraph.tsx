@@ -141,6 +141,14 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
           const isHovered = hovered === n.id;
           const dim = connectedSet && !connectedSet.has(n.id);
           const breathing = breathingHubId === n.id;
+          const clusterTopY = layout.links.reduce((min, l) => {
+            const other = l.a === n.id ? byId[l.b] : l.b === n.id ? byId[l.a] : null;
+            if (!other) return min;
+            // partner/founder nodes carry a label box (~20px tall) above the circle
+            const labelOffset = other.type === "theme" ? 0 : 20;
+            return Math.min(min, other.y - other.r - labelOffset);
+          }, n.y - n.r);
+          const labelY = Math.max(18, clusterTopY - 8);
           return (
             <g
               key={n.id}
@@ -170,7 +178,7 @@ export function NetworkGraph({ mode }: { mode: Mode }) {
               <circle cx={n.x} cy={n.y} r={5} fill={themeColor(t)} />
               <text
                 x={n.x}
-                y={n.y + n.r + 18}
+                y={labelY}
                 textAnchor="middle"
                 fontFamily="var(--font-display)"
                 fontSize="12.5"
@@ -394,7 +402,7 @@ function computeThemeGraph(activeFirms: Set<string>) {
     });
   });
 
-  forceLayout(nodes, links, { W: SVG_W, H: SVG_H, charge: 5400, pad: 50, labelSpace: 30 });
+  forceLayout(nodes, links, { W: SVG_W, H: SVG_H, charge: 5400, pad: 50, labelSpace: 54 });
 
   return { nodes, links };
 }

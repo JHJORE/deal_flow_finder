@@ -142,21 +142,27 @@ export function ConsensusView() {
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
           <Column
             count={usage[theme.key].partners.length}
-            label="partners engaging"
+            prefix="partners engaging"
+            themeName={theme.label}
+            themeAccent={themeColor(theme)}
             entries={usage[theme.key].partners}
             type="partner"
             empty="No partners in current firm filter."
           />
           <Column
             count={usage[theme.key].founders.length}
-            label="tracked founders building here"
+            prefix="tracked founders building"
+            themeName={theme.label}
+            themeAccent={themeColor(theme)}
             entries={usage[theme.key].founders}
             type="founder"
             empty="No tracked founders yet."
           />
           <Column
             count={usage[theme.key].companies.length}
-            label="portfolio companies talking about this"
+            prefix="portfolio companies on"
+            themeName={theme.label}
+            themeAccent={themeColor(theme)}
             entries={usage[theme.key].companies}
             type="company"
             empty="No portfolio companies on this theme."
@@ -187,13 +193,17 @@ function Legend() {
 
 function Column({
   count,
-  label,
+  prefix,
+  themeName,
+  themeAccent,
   entries,
   type,
   empty,
 }: {
   count: number;
-  label: string;
+  prefix: string;
+  themeName: string;
+  themeAccent: string;
   entries: string[];
   type: "partner" | "founder" | "company";
   empty: string;
@@ -204,7 +214,10 @@ function Column({
     <div>
       <div className="mb-4 flex items-baseline gap-2">
         <span className="n-sm text-ink">{count}</span>
-        <span className="eyebrow">{label}</span>
+        <span className="eyebrow">
+          {prefix}{" "}
+          <span style={{ color: themeAccent }}>{themeName}</span>
+        </span>
       </div>
       <div className="flex flex-col gap-1.5">
         {entries.length === 0 ? (

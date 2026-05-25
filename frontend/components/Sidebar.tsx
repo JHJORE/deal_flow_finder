@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { RadarMark } from "./RadarMark";
 import { useRadar } from "@/lib/state";
 import type { ViewId } from "@/lib/types";
@@ -74,7 +75,12 @@ export function Sidebar() {
 
   return (
     <aside className="sticky top-0 flex h-screen w-[244px] shrink-0 flex-col gap-1 border-r border-line-faint bg-surface-0 px-5 py-7">
-      <div className="mb-10 px-1">
+      <button
+        type="button"
+        onClick={() => setView("signals")}
+        aria-label="Go to Signal feed"
+        className="-mx-1 rounded-md px-1 py-1 text-left transition-colors hover:bg-surface-1"
+      >
         <div className="flex items-center gap-3">
           <RadarMark size={22} className="text-accent shrink-0" />
           <div className="flex items-baseline gap-1.5 leading-[1]">
@@ -82,8 +88,25 @@ export function Sidebar() {
             <span className="font-display text-h-md font-bold text-accent">Radar</span>
           </div>
         </div>
-        <div className="mt-3 pl-[34px] t-mono-cap">intelligence brief</div>
-      </div>
+      </button>
+
+      <a
+        href="https://launch.co"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="by Launch"
+        className="group mb-10 ml-[34px] inline-flex w-fit items-center gap-2 rounded-full border border-line-faint bg-[#000] px-3 py-[6px] transition-colors hover:border-line hover:bg-[#0a0a0a]"
+      >
+        <span className="eyebrow !text-ink-2 group-hover:!text-ink">by</span>
+        <Image
+          src="/launch.png"
+          alt="Launch"
+          width={418}
+          height={121}
+          priority
+          className="h-[15px] w-auto"
+        />
+      </a>
 
       <div className="eyebrow mb-2 px-1">Views</div>
       <nav className="flex flex-col gap-[2px]">
@@ -137,7 +160,7 @@ export function Sidebar() {
             ref={popoverRef}
             role="dialog"
             aria-label={active.title}
-            className="absolute left-full top-0 z-30 ml-3 w-[280px] rounded-lg border border-line bg-surface-1 px-4 py-4 shadow-xl"
+            className="absolute left-full top-0 z-50 ml-3 w-[280px] rounded-lg border border-line bg-surface-1 px-4 py-4 shadow-xl"
           >
             <div className="mb-2 flex items-start justify-between gap-3">
               <div className="t-h-sm">{active.title}</div>

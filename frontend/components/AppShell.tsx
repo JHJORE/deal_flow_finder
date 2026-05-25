@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Sidebar } from "./Sidebar";
+import { LoginPill } from "./LoginPill";
 import { useRadar } from "@/lib/state";
 import { SignalsView } from "./views/SignalsView";
 import { PeopleView } from "./views/PeopleView";
@@ -69,6 +70,7 @@ export function AppShell() {
       <main className="max-w-[1240px] px-10 py-8 pb-24">
         {open ? <Drilldown /> : <RootView view={view} />}
       </main>
+      <LoginPill />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { PERIODS, THEMES, themeColor } from "@/lib/data";
 import { useRadar } from "@/lib/state";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Theme } from "@/lib/types";
 
 const PAD = { l: 36, r: 18, t: 12, b: 28 };
@@ -12,6 +12,7 @@ export function DriftChart() {
   const { setSelectedTheme, selectedTheme } = useRadar();
   const [hover, setHover] = useState<{ i: number; t: Theme } | null>(null);
   const [drawn, setDrawn] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   // animate the lines in on first mount only — subsequent prop changes don't replay
   useEffect(() => {
@@ -37,9 +38,41 @@ export function DriftChart() {
       .join(" ");
   }
 
+  function pointAt(theme: Theme, i: number) {
+    const x = PAD.l + (i / (PERIODS.length - 1)) * innerW;
+    const y = PAD.t + (1 - theme.share[i] / max) * innerH;
+    return { x, y };
+  }
+
+  function handlePointerMove(e: React.PointerEvent<SVGRectElement>) {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const mx = ((e.clientX - rect.left) / rect.width) * W;
+    const my = ((e.clientY - rect.top) / rect.height) * H;
+
+    const ratio = (mx - PAD.l) / innerW;
+    const i = Math.max(0, Math.min(PERIODS.length - 1, Math.round(ratio * (PERIODS.length - 1))));
+
+    let best: Theme | null = null;
+    let bestDist = Infinity;
+    for (const theme of THEMES) {
+      const ty = PAD.t + (1 - theme.share[i] / max) * innerH;
+      const dist = Math.abs(my - ty);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = theme;
+      }
+    }
+    if (best) setHover({ i, t: best });
+  }
+
+  const activePoint = hover ? pointAt(hover.t, hover.i) : null;
+
   return (
     <div className="relative">
       <svg
+        ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
         className="block w-full h-[320px]"
         role="img"
@@ -107,9 +140,9 @@ export function DriftChart() {
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className={`cursor-pointer ${baseDash ? "" : "line-draw"}`}
+                className={baseDash ? "" : "line-draw"}
                 style={{ transitionDelay: `${idx * 90}ms` }}
-                onClick={() => setSelectedTheme(theme.key)}
+                pointerEvents="none"
               />
               {theme.share.map((v, i) => {
                 const x = PAD.l + (i / (PERIODS.length - 1)) * innerW;
@@ -122,10 +155,7 @@ export function DriftChart() {
                     r={isSelected ? 3.2 : 2.4}
                     fill={themeColor(theme)}
                     fillOpacity={isSelected ? 1 : 0.7}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedTheme(theme.key)}
-                    onMouseEnter={() => setHover({ i, t: theme })}
-                    onMouseLeave={() => setHover(null)}
+                    pointerEvents="none"
                   />
                 );
               })}
@@ -145,11 +175,56 @@ export function DriftChart() {
             </g>
           );
         })}
+
+        {/* active indicator — smoothly tracks nearest theme/period */}
+        {activePoint && hover && (
+          <g pointerEvents="none">
+            <line
+              x1={activePoint.x}
+              x2={activePoint.x}
+              y1={PAD.t}
+              y2={H - PAD.b}
+              stroke={themeColor(hover.t)}
+              strokeOpacity={0.25}
+              strokeWidth={1}
+              strokeDasharray="2 3"
+              className="drift-active-line"
+            />
+            <circle
+              cx={activePoint.x}
+              cy={activePoint.y}
+              r={9}
+              fill={themeColor(hover.t)}
+              fillOpacity={0.14}
+              className="drift-active-ring"
+            />
+            <circle
+              cx={activePoint.x}
+              cy={activePoint.y}
+              r={4.2}
+              fill={themeColor(hover.t)}
+              className="drift-active-dot"
+            />
+          </g>
+        )}
+
+        {/* capture layer — single overlay finds nearest theme to cursor */}
+        <rect
+          x={PAD.l}
+          y={PAD.t}
+          width={innerW}
+          height={innerH}
+          fill="transparent"
+          style={{ cursor: "pointer" }}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={() => setHover(null)}
+          onClick={() => hover && setSelectedTheme(hover.t.key)}
+        />
       </svg>
 
       {hover && (
         <div
-          className="pointer-events-none absolute rounded-md border border-line bg-surface-3 px-3 py-2 shadow-2xl"
+          className="drift-tooltip pointer-events-none absolute rounded-md border border-line bg-surface-3 px-3 py-2 shadow-2xl"
           style={{
             left: `${(PAD.l + (hover.i / (PERIODS.length - 1)) * innerW) / W * 100}%`,
             top: 4,

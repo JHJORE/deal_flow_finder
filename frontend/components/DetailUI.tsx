@@ -75,6 +75,35 @@ export function WatchButton({ id }: { id: string }) {
   );
 }
 
+export function StarToggle({ id, label }: { id: string; label?: string }) {
+  const { isWatched, toggleWatch } = useRadar();
+  const on = isWatched(id);
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      aria-label={
+        on
+          ? `Remove ${label ?? "item"} from watchlist`
+          : `Add ${label ?? "item"} to watchlist`
+      }
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleWatch(id);
+      }}
+      className={`shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-md border text-[15px] leading-none transition-colors ${
+        on
+          ? "border-accent text-accent hover:bg-accent/10"
+          : "border-line-faint text-ink-4 hover:border-line-hard hover:text-ink"
+      }`}
+    >
+      <span key={on ? "on" : "off"} aria-hidden className="watch-pop">
+        {on ? "★" : "☆"}
+      </span>
+    </button>
+  );
+}
+
 export function StatRow({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-6 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line-faint bg-line-faint md:grid-cols-4">
