@@ -1,8 +1,16 @@
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import date, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from deal_flow.application.use_cases.analyze_partner_linkedin_signals import (
+    AnalyzePartnerLinkedInSignals,
+)
+from deal_flow.application.use_cases.analyze_partner_twitter_signals import (
+    AnalyzePartnerTwitterSignals,
+    AnalyzePartnerTwitterSignalsInput,
+    PreviousFollowings,
+)
 from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
     EnrichFirmPartnersWithLinkedIn,
     EnrichFirmPartnersWithLinkedInInput,
@@ -40,6 +48,8 @@ from deal_flow.domain.value_objects.date_range import DateRange
 from deal_flow.infrastructure.external.firms_registry import FirmSources
 from deal_flow.infrastructure.persistence.output_store import OutputStore, slugify
 from deal_flow.interfaces.api.dependencies import (
+    get_analyze_partner_linkedin_signals,
+    get_analyze_partner_twitter_signals,
     get_enrich_firm_partners_with_linkedin,
     get_enrich_partner_with_twitter,
     get_enrich_portfolio_companies_with_linkedin,
@@ -216,11 +226,19 @@ def get_partner_with_linkedin(
     max_reactions: int = 5,
     max_comments: int = 5,
     posted_limit: str | None = None,
+    analyze: bool = True,
     use_case: EnrichFirmPartnersWithLinkedIn = Depends(
         get_enrich_firm_partners_with_linkedin
     ),
+    analyzer: AnalyzePartnerLinkedInSignals = Depends(
+        get_analyze_partner_linkedin_signals
+    ),
     outputs: OutputStore = Depends(get_output_store),
 ) -> Partner:
+    """Enrich one partner with LinkedIn posts and (by default) run the
+    two-stage Gemini analysis to extract per-post themes and a
+    partner-level theme summary. Pass ``?analyze=false`` to skip the LLM
+    step (raw posts only)."""
     try:
         enriched = use_case.execute(
             EnrichFirmPartnersWithLinkedInInput(
@@ -242,6 +260,11 @@ def get_partner_with_linkedin(
             detail=f"no partner with linkedin handle '{handle}' in {firm_domain}",
         )
     target = enriched[0]
+    if analyze and target.linkedin is not None:
+        analysis = analyzer.execute(target.linkedin)
+        target = replace(
+            target, linkedin=replace(target.linkedin, analysis=analysis)
+        )
     outputs.write(
         asdict(target),
         "firms", firm_domain, "partners", slugify(target.name or handle), "linkedin.json",
@@ -256,16 +279,24 @@ def get_partner_with_twitter(
     max_tweets: int = 100,
     max_followings: int = 200,
     max_mentions: int = 40,
+    analyze: bool = True,
     registry: dict[str, FirmSources] = Depends(get_firms_registry),
     extract: ExtractFirmPartners = Depends(get_extract_firm_partners),
     enrich: EnrichPartnerWithTwitter = Depends(get_enrich_partner_with_twitter),
+    analyzer: AnalyzePartnerTwitterSignals = Depends(
+        get_analyze_partner_twitter_signals
+    ),
     outputs: OutputStore = Depends(get_output_store),
 ) -> Partner:
-    """Enrich one named partner with their raw Twitter signals.
+    """Enrich one named partner with their raw Twitter signals, then run the
+    LLM thematisation + newly-following diff against the previously persisted
+    snapshot.
 
     The handle is matched against the partner's Firecrawl-extracted ``x_url``;
     if no partner on the firm's team page has that handle, we 404 *before*
     spending any twitterapi.io credits.
+
+    Pass ``?analyze=false`` to skip the LLM step (raw signals only).
     """
     sources = _resolve(firm_domain, registry)
     if not sources.team_urls and not sources.team_payload_url:
@@ -296,6 +327,10 @@ def get_partner_with_twitter(
                 f"{firm_domain}'s team page"
             ),
         )
+    target_slug = slugify(target.name or handle)
+    previous = _load_previous_followings(
+        outputs, firm_domain, target_slug,
+    )
     enriched = enrich.execute(
         EnrichPartnerWithTwitterInput(
             partner=target,
@@ -304,11 +339,49 @@ def get_partner_with_twitter(
             max_mentions=max_mentions,
         )
     )
+    if analyze and enriched.twitter is not None:
+        analysis = analyzer.execute(
+            AnalyzePartnerTwitterSignalsInput(
+                snapshot=enriched.twitter,
+                previous=previous,
+            )
+        )
+        enriched = replace(
+            enriched, twitter=replace(enriched.twitter, analysis=analysis)
+        )
     outputs.write(
         asdict(enriched),
-        "firms", firm_domain, "partners", slugify(target.name or handle), "twitter.json",
+        "firms", firm_domain, "partners", target_slug, "twitter.json",
     )
     return enriched
+
+
+def _load_previous_followings(
+    outputs: OutputStore, firm_domain: str, partner_slug: str
+) -> PreviousFollowings:
+    """Read the previously persisted ``twitter.json`` for this partner and
+    pull just the followings list. Returns an empty baseline on first run."""
+    raw = outputs.read(
+        "firms", firm_domain, "partners", partner_slug, "twitter.json"
+    )
+    if not isinstance(raw, dict):
+        return PreviousFollowings.empty()
+    twitter = raw.get("twitter") or {}
+    followings = twitter.get("followings") or []
+    user_ids: set[str] = set()
+    handles: set[str] = set()
+    for entry in followings:
+        if not isinstance(entry, dict):
+            continue
+        uid = entry.get("user_id")
+        if isinstance(uid, str) and uid:
+            user_ids.add(uid)
+        h = entry.get("handle")
+        if isinstance(h, str) and h:
+            handles.add(h)
+    return PreviousFollowings(
+        user_ids=frozenset(user_ids), handles=frozenset(handles)
+    )
 
 
 @router.get("/{firm_domain}/blog-posts")
