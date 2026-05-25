@@ -48,6 +48,17 @@ class OutputStore:
         )
         return path
 
+    def read(self, *parts: str) -> Any | None:
+        """Return the parsed JSON at ``parts`` or ``None`` if the file is
+        missing or unreadable. Used to diff against a prior snapshot."""
+        path = self._dir.joinpath(*parts)
+        if not path.exists():
+            return None
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return None
+
 
 def slugify(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-") or "unknown"

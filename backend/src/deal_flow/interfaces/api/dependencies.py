@@ -26,6 +26,15 @@ from deal_flow.application.ports.services.sec_filing_searcher import (
 )
 from deal_flow.application.ports.services.twitter_collector import TwitterCollector
 from deal_flow.application.ports.services.web_extractor import WebExtractor
+from deal_flow.application.use_cases.aggregate_item_themes import (
+    AggregateItemThemes,
+)
+from deal_flow.application.use_cases.analyze_partner_linkedin_signals import (
+    AnalyzePartnerLinkedInSignals,
+)
+from deal_flow.application.use_cases.analyze_partner_twitter_signals import (
+    AnalyzePartnerTwitterSignals,
+)
 from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
     EnrichFirmPartnersWithLinkedIn,
 )
@@ -48,6 +57,7 @@ from deal_flow.application.use_cases.search_partner_form_d_filings import (
     SearchPartnerFormDFilings,
 )
 from deal_flow.application.use_cases.summarize_partner_bio import SummarizePartnerBio
+from deal_flow.application.use_cases.thematize_items import ThematizeItems
 from deal_flow.infrastructure.config.settings import get_settings
 from deal_flow.infrastructure.external.apify.linkedin_posts_collector import (
     HarvestApiLinkedInCollector,
@@ -200,6 +210,32 @@ def get_summarize_partner_bio(
     llm: LlmStructuredOutput = Depends(get_llm_structured_output),
 ) -> SummarizePartnerBio:
     return SummarizePartnerBio(llm=llm)
+
+
+def get_thematize_items(
+    llm: LlmStructuredOutput = Depends(get_llm_structured_output),
+) -> ThematizeItems:
+    return ThematizeItems(llm=llm)
+
+
+def get_aggregate_item_themes(
+    llm: LlmStructuredOutput = Depends(get_llm_structured_output),
+) -> AggregateItemThemes:
+    return AggregateItemThemes(llm=llm)
+
+
+def get_analyze_partner_twitter_signals(
+    thematize: ThematizeItems = Depends(get_thematize_items),
+    aggregate: AggregateItemThemes = Depends(get_aggregate_item_themes),
+) -> AnalyzePartnerTwitterSignals:
+    return AnalyzePartnerTwitterSignals(thematize=thematize, aggregate=aggregate)
+
+
+def get_analyze_partner_linkedin_signals(
+    thematize: ThematizeItems = Depends(get_thematize_items),
+    aggregate: AggregateItemThemes = Depends(get_aggregate_item_themes),
+) -> AnalyzePartnerLinkedInSignals:
+    return AnalyzePartnerLinkedInSignals(thematize=thematize, aggregate=aggregate)
 
 
 def get_load_firm_partner_profiles(

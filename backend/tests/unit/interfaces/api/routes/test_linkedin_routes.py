@@ -1,8 +1,11 @@
-from _fakes import FakeLinkedInCollector, FakePartnerDirectory, make_partner
 from fastapi.testclient import TestClient
 
+from _fakes import FakeLinkedInCollector, FakePartnerDirectory, make_partner
 from deal_flow.application.ports.repositories.partner_directory import (
     PartnerDirectory,
+)
+from deal_flow.application.use_cases.analyze_partner_linkedin_signals import (
+    AnalyzePartnerLinkedInSignals,
 )
 from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
     EnrichFirmPartnersWithLinkedIn,
@@ -10,16 +13,38 @@ from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
 from deal_flow.application.use_cases.enrich_firm_portfolio_with_linkedin import (
     EnrichPortfolioCompaniesWithLinkedIn,
 )
+from deal_flow.domain.entities.linkedin.linkedin_analysis import LinkedInAnalysis
+from deal_flow.domain.entities.linkedin.linkedin_snapshot import LinkedInSnapshot
 from deal_flow.domain.entities.partner import Partner
 from deal_flow.domain.entities.portfolio_company import PortfolioCompany
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 from deal_flow.interfaces.api.app import app
 from deal_flow.interfaces.api.dependencies import (
+    get_analyze_partner_linkedin_signals,
     get_enrich_firm_partners_with_linkedin,
     get_enrich_portfolio_companies_with_linkedin,
     get_extract_firm_portfolio,
     get_output_store,
 )
+
+
+class _NoopAnalyzer(AnalyzePartnerLinkedInSignals):
+    """Stand-in for the LLM-backed analyzer in route tests that aren't
+    exercising analysis behaviour. Returns a deterministic empty analysis
+    so the route's persist+respond path still runs."""
+
+    def __init__(self) -> None:  # noqa: D401  — stub
+        pass
+
+    def execute(self, snapshot: LinkedInSnapshot) -> LinkedInAnalysis:
+        from datetime import UTC, datetime
+
+        return LinkedInAnalysis(
+            general_theme="",
+            topics=(),
+            item_themes=(),
+            analyzed_at=datetime.now(UTC),
+        )
 
 
 class _NoopStore(OutputStore):
@@ -32,6 +57,12 @@ class _NoopStore(OutputStore):
 
 def _override(overrides: dict) -> TestClient:
     app.dependency_overrides[get_output_store] = lambda: _NoopStore()
+    # Default the LinkedIn analyzer to a no-op so existing tests aren't
+    # forced to wire the LLM port. Tests that exercise analysis behaviour
+    # can override this key explicitly.
+    app.dependency_overrides[get_analyze_partner_linkedin_signals] = (
+        lambda: _NoopAnalyzer()
+    )
     for key, value in overrides.items():
         app.dependency_overrides[key] = lambda v=value: v
     return TestClient(app)
