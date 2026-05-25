@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+from deal_flow.domain.entities.linkedin.linkedin_snapshot import LinkedInSnapshot
 from deal_flow.domain.entities.twitter.twitter_snapshot import TwitterSnapshot
 
 
@@ -16,3 +17,4 @@ class Partner:
     education: tuple[str, ...] = field(default_factory=tuple)
     prior_experience: tuple[str, ...] = field(default_factory=tuple)
     twitter: TwitterSnapshot | None = None
+    linkedin: LinkedInSnapshot | None = None

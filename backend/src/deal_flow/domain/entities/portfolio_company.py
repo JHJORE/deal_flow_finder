@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 
 from deal_flow.domain.entities.founder import Founder
+from deal_flow.domain.entities.linkedin.linkedin_snapshot import LinkedInSnapshot
 
 
 @dataclass(frozen=True)
@@ -13,3 +14,4 @@ class PortfolioCompany:
     linkedin_url: str | None = None
     photo_url: str | None = None
     founders: tuple[Founder, ...] = field(default_factory=tuple)
+    linkedin: LinkedInSnapshot | None = None

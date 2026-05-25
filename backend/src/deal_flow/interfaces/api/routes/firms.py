@@ -3,6 +3,14 @@ from datetime import date, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
+    EnrichFirmPartnersWithLinkedIn,
+    EnrichFirmPartnersWithLinkedInInput,
+)
+from deal_flow.application.use_cases.enrich_firm_portfolio_with_linkedin import (
+    EnrichPortfolioCompaniesWithLinkedIn,
+    EnrichPortfolioCompaniesWithLinkedInInput,
+)
 from deal_flow.application.use_cases.enrich_partner_with_twitter import (
     EnrichPartnerWithTwitter,
     EnrichPartnerWithTwitterInput,
@@ -32,7 +40,9 @@ from deal_flow.domain.value_objects.date_range import DateRange
 from deal_flow.infrastructure.external.firms_registry import FirmSources
 from deal_flow.infrastructure.persistence.output_store import OutputStore, slugify
 from deal_flow.interfaces.api.dependencies import (
+    get_enrich_firm_partners_with_linkedin,
     get_enrich_partner_with_twitter,
+    get_enrich_portfolio_companies_with_linkedin,
     get_extract_firm_blog_posts,
     get_extract_firm_partners,
     get_extract_firm_portfolio,
@@ -89,6 +99,151 @@ def list_portfolio(
     return use_case.execute(
         ExtractFirmPortfolioInput(portfolio_url=sources.portfolio_url, limit=limit)
     )
+
+
+@router.get("/{firm_domain}/partners/linkedin")
+def list_partners_with_linkedin(
+    firm_domain: str,
+    max_posts: int = 20,
+    include_reactions: bool = False,
+    include_comments: bool = False,
+    max_reactions: int = 5,
+    max_comments: int = 5,
+    posted_limit: str | None = None,
+    use_case: EnrichFirmPartnersWithLinkedIn = Depends(
+        get_enrich_firm_partners_with_linkedin
+    ),
+    outputs: OutputStore = Depends(get_output_store),
+) -> list[Partner]:
+    """Batch-enrich every partner in the firm's directory with LinkedIn
+    activity. One Apify run per call (the adapter caches per-URL so repeat
+    calls don't re-spend credits).
+    """
+    try:
+        enriched = use_case.execute(
+            EnrichFirmPartnersWithLinkedInInput(
+                firm_domain=firm_domain,
+                max_posts=max_posts,
+                include_reactions=include_reactions,
+                include_comments=include_comments,
+                max_reactions=max_reactions,
+                max_comments=max_comments,
+                posted_limit=posted_limit,
+            )
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    outputs.write(
+        [asdict(p) for p in enriched],
+        "firms", firm_domain, "partners-linkedin.json",
+    )
+    for p in enriched:
+        if p.linkedin is not None:
+            outputs.write(
+                asdict(p),
+                "firms", firm_domain, "partners", slugify(p.name), "linkedin.json",
+            )
+    return enriched
+
+
+@router.get("/{firm_domain}/portfolio/linkedin")
+def list_portfolio_with_linkedin(
+    firm_domain: str,
+    limit: int = 50,
+    max_posts: int = 20,
+    include_reactions: bool = False,
+    include_comments: bool = False,
+    max_reactions: int = 5,
+    max_comments: int = 5,
+    posted_limit: str | None = None,
+    registry: dict[str, FirmSources] = Depends(get_firms_registry),
+    extract: ExtractFirmPortfolio = Depends(get_extract_firm_portfolio),
+    enrich: EnrichPortfolioCompaniesWithLinkedIn = Depends(
+        get_enrich_portfolio_companies_with_linkedin
+    ),
+    outputs: OutputStore = Depends(get_output_store),
+) -> list[PortfolioCompany]:
+    """Discover the firm's portfolio (live Firecrawl) and batch-enrich
+    companies that already carry a ``linkedin_url`` with their LinkedIn
+    activity. Companies without a LinkedIn URL pass through unchanged.
+    """
+    sources = _resolve(firm_domain, registry)
+    if not sources.portfolio_url:
+        return []
+    companies = extract.execute(
+        ExtractFirmPortfolioInput(
+            portfolio_url=sources.portfolio_url,
+            limit=limit,
+            sitemap_url=sources.portfolio_sitemap_url,
+            html_json_url=sources.portfolio_html_json_url,
+            html_json_attribute=sources.portfolio_html_json_attribute,
+        )
+    )
+    enriched = enrich.execute(
+        EnrichPortfolioCompaniesWithLinkedInInput(
+            companies=companies,
+            max_posts=max_posts,
+            include_reactions=include_reactions,
+            include_comments=include_comments,
+            max_reactions=max_reactions,
+            max_comments=max_comments,
+            posted_limit=posted_limit,
+        )
+    )
+    outputs.write(
+        [asdict(c) for c in enriched],
+        "firms", firm_domain, "portfolio-linkedin.json",
+    )
+    for c in enriched:
+        if c.linkedin is not None:
+            outputs.write(
+                asdict(c),
+                "firms", firm_domain, "portfolio", slugify(c.name), "linkedin.json",
+            )
+    return enriched
+
+
+@router.get("/{firm_domain}/partners/{handle}/linkedin")
+def get_partner_with_linkedin(
+    firm_domain: str,
+    handle: str,
+    max_posts: int = 20,
+    include_reactions: bool = False,
+    include_comments: bool = False,
+    max_reactions: int = 5,
+    max_comments: int = 5,
+    posted_limit: str | None = None,
+    use_case: EnrichFirmPartnersWithLinkedIn = Depends(
+        get_enrich_firm_partners_with_linkedin
+    ),
+    outputs: OutputStore = Depends(get_output_store),
+) -> Partner:
+    try:
+        enriched = use_case.execute(
+            EnrichFirmPartnersWithLinkedInInput(
+                firm_domain=firm_domain,
+                max_posts=max_posts,
+                include_reactions=include_reactions,
+                include_comments=include_comments,
+                max_reactions=max_reactions,
+                max_comments=max_comments,
+                posted_limit=posted_limit,
+                target_handle=handle,
+            )
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    if not enriched:
+        raise HTTPException(
+            status_code=404,
+            detail=f"no partner with linkedin handle '{handle}' in {firm_domain}",
+        )
+    target = enriched[0]
+    outputs.write(
+        asdict(target),
+        "firms", firm_domain, "partners", slugify(target.name or handle), "linkedin.json",
+    )
+    return target
 
 
 @router.get("/{firm_domain}/partners/{handle}/twitter")

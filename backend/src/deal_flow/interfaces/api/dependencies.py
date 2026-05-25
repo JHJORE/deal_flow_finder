@@ -8,11 +8,21 @@ from functools import lru_cache
 from fastapi import Depends
 
 from deal_flow.application.ports.repositories.board_seat_log import BoardSeatLog
+from deal_flow.application.ports.repositories.partner_directory import (
+    PartnerDirectory,
+)
+from deal_flow.application.ports.services.linkedin_collector import LinkedInCollector
 from deal_flow.application.ports.services.sec_filing_searcher import (
     SecFilingSearcher,
 )
 from deal_flow.application.ports.services.twitter_collector import TwitterCollector
 from deal_flow.application.ports.services.web_extractor import WebExtractor
+from deal_flow.application.use_cases.enrich_firm_partners_with_linkedin import (
+    EnrichFirmPartnersWithLinkedIn,
+)
+from deal_flow.application.use_cases.enrich_firm_portfolio_with_linkedin import (
+    EnrichPortfolioCompaniesWithLinkedIn,
+)
 from deal_flow.application.use_cases.enrich_partner_with_twitter import (
     EnrichPartnerWithTwitter,
 )
@@ -23,11 +33,17 @@ from deal_flow.application.use_cases.search_partner_form_d_filings import (
     SearchPartnerFormDFilings,
 )
 from deal_flow.infrastructure.config.settings import get_settings
+from deal_flow.infrastructure.external.apify.linkedin_posts_collector import (
+    HarvestApiLinkedInCollector,
+)
 from deal_flow.infrastructure.external.edgar.searcher import EdgarFullTextSearcher
 from deal_flow.infrastructure.external.firecrawl.extractor import FirecrawlExtractor
 from deal_flow.infrastructure.external.firms_registry import FirmSources, load_registry
 from deal_flow.infrastructure.external.twitterapi.collector import TwitterApiCollector
 from deal_flow.infrastructure.persistence.file_board_seat_log import FileBoardSeatLog
+from deal_flow.infrastructure.persistence.file_partner_directory import (
+    FilePartnerDirectory,
+)
 from deal_flow.infrastructure.persistence.output_store import OutputStore
 
 
@@ -106,3 +122,32 @@ def get_enrich_partner_with_twitter(
     collector: TwitterCollector = Depends(get_twitter_collector),
 ) -> EnrichPartnerWithTwitter:
     return EnrichPartnerWithTwitter(collector=collector)
+
+
+@lru_cache
+def get_linkedin_collector() -> LinkedInCollector:
+    settings = get_settings()
+    return HarvestApiLinkedInCollector(
+        api_token=settings.apify_api_token,
+        actor_id=settings.apify_linkedin_actor_id,
+        cache_dir=settings.apify_cache_dir,
+        refresh=settings.apify_cache_refresh,
+    )
+
+
+@lru_cache
+def get_partner_directory() -> PartnerDirectory:
+    return FilePartnerDirectory(data_dir=get_settings().partner_data_dir)
+
+
+def get_enrich_firm_partners_with_linkedin(
+    directory: PartnerDirectory = Depends(get_partner_directory),
+    collector: LinkedInCollector = Depends(get_linkedin_collector),
+) -> EnrichFirmPartnersWithLinkedIn:
+    return EnrichFirmPartnersWithLinkedIn(directory=directory, collector=collector)
+
+
+def get_enrich_portfolio_companies_with_linkedin(
+    collector: LinkedInCollector = Depends(get_linkedin_collector),
+) -> EnrichPortfolioCompaniesWithLinkedIn:
+    return EnrichPortfolioCompaniesWithLinkedIn(collector=collector)

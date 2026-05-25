@@ -25,6 +25,9 @@ backend/.edgar/
 # twitterapi.io response cache
 backend/.twitter/
 
+# Apify response cache (LinkedIn posts)
+backend/.apify/
+
 # Processed-entity output sidecar (partners.json, edgar.json, twitter.json)
 backend/.outputs/
 
