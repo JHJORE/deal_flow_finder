@@ -20,20 +20,48 @@ type Props = {
   textColor?: string;
   className?: string;
   watched?: boolean;
+  photoUrl?: string | null;
 };
 
-export function Avatar({ name, color, size = "md", textColor, className = "", watched }: Props) {
+export function Avatar({
+  name,
+  color,
+  size = "md",
+  textColor,
+  className = "",
+  watched,
+  photoUrl,
+}: Props) {
   const cfg = sizeMap[size];
+  const baseClass = `inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-display font-bold ${cfg.dim} ${cfg.text} ${className}`;
+  const ringStyle = watched
+    ? { boxShadow: "0 0 0 2px var(--surface-1), 0 0 0 3.5px var(--accent)" }
+    : undefined;
+  if (photoUrl) {
+    return (
+      <span
+        className={baseClass}
+        style={{ background: color, ...ringStyle }}
+        aria-hidden
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={photoUrl}
+          alt=""
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </span>
+    );
+  }
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-full font-display font-bold ${cfg.dim} ${cfg.text} ${className}`}
+      className={baseClass}
       style={{
         background: color,
         color: textColor ?? INK_ON_LIGHT,
         letterSpacing: "-0.01em",
-        boxShadow: watched
-          ? "0 0 0 2px var(--surface-1), 0 0 0 3.5px var(--accent)"
-          : undefined,
+        ...ringStyle,
       }}
       aria-hidden
     >
